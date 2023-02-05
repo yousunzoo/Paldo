@@ -1,124 +1,156 @@
 <!DOCTYPE html>
 <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="./scss/reset.css" />
+    <link rel="stylesheet" href="./scss/styles.scss" />
+    <!-- swiper -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
-    rel="stylesheet" />
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
-  <link rel="stylesheet" href="./css/style.scss" />
-  <title>Document</title>
-</head>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script defer src="./js/main.js"></script>
+    <title>Document</title>
+  </head>
 
-<body>
-  <div id="wrap">
-    <header>
-      <div class="inner__wrapper">
-        <div class="header__top">
-          <ul class="header__menu">
-            <li class="header__menu-item">
-              <a href="javascript:void(0)">회원가입</a>
-            </li>
-            <li class="header__menu-item">
-              <a href="login.html">로그인</a>
-            </li>
-          </ul>
-          <div class="header__items">
-            <a class="logo" href="javascript:void(0)">
-              <img src="./static/images/logo.png" alt="오뚜기 몰" />
-            </a>
-            <div class="search">
-              <input type="text" id="gnbSearch" placeholder="검색어를 입력해주세요" required />
-              <button class="search_btn"></button>
+  <body>
+    <div id="wrap">
+      <header>
+        <div class="inner__wrapper">
+          <div class="header__top">
+            <ul class="header__menu">
+              <li class="header__menu-item">
+                <a href="javascript:void(0)">회원가입</a>
+              </li>
+              <li class="header__menu-item">
+                <a href="javascript:void(0)">로그인</a>
+              </li>
+            </ul>
+            <div class="header__items">
+              <a class="logo" href="javascript:void(0)">
+                <img src="./static/images/logo.png" alt="오뚜기 몰" />
+              </a>
+              <div class="search">
+                <input
+                  type="text"
+                  id="gnbSearch"
+                  placeholder="검색어를 입력해주세요"
+                  required />
+                <button class="search_btn"></button>
+              </div>
+              <ul class="header__icon_menus">
+                <li><a href="javascript:void(0)" aria-label="찜목록"></a></li>
+                <li><a href="javascript:void(0)" aria-label="장바구니"></a></li>
+              </ul>
             </div>
-            <ul class="header__icon_menus">
-              <li><a href="javascript:void(0)" aria-label="찜목록"></a></li>
-              <li><a href="javascript:void(0)" aria-label="장바구니"></a></li>
+          </div>
+          <div class="header__bottom">
+            <ul class="header__tablist">
+              <li class="header__tablist-item">
+                <a href="#">신상품</a>
+              </li>
+              <li class="header__tablist-item">
+                <a href="#">베스트</a>
+              </li>
+              <li class="header__tablist-item">
+                <a href="#">알뜰쇼핑</a>
+              </li>
+              <li class="header__tablist-item">
+                <a href="#">특가/혜택</a>
+              </li>
             </ul>
           </div>
         </div>
-        <div class="header__bottom">
-          <ul class="header__tablist">
-            <li class="header__tablist-item">
-              <a href="#">신상품</a>
-            </li>
-            <li class="header__tablist-item">
-              <a href="#">베스트</a>
-            </li>
-            <li class="header__tablist-item">
-              <a href="#">알뜰쇼핑</a>
-            </li>
-            <li class="header__tablist-item">
-              <a href="#">특가/혜택</a>
-            </li>
-          </ul>
+      </header>
+      <section id="main">
+        <!-- banner swiper -->
+        <div class="main__banner">
+          <div class="swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">slide 1</div>
+              <div class="swiper-slide">slide 2</div>
+              <div class="swiper-slide">slide 3</div>
+            </div>
+            <button class="swiper-button-prev"></button>
+            <button class="swiper-button-next"></button>
+          </div>
         </div>
-      </div>
-    </header>
-    <section id="main">
-      <!-- banner swiper -->
-      <div class="main__banner"></div>
-      <div class="inner__wrapper">
-        <section class="prd-list1">
-          <h2 class="main__title">이 상품 어때요?</h2>
-          <!-- product swiper -->
-          <div class="main__product-swiper"></div>
-        </section>
-        <section class="prd-list2">
-          <h2 class="main__title">이 상품 어때요?</h2>
-          <!-- product swiper -->
-          <div class="main__product-swiper"></div>
-        </section>
-        <section class="main__coupon-banner">
-          <div class="coupon-banner">
-            <p class="banner-tit">신규 회원은 쿠폰을 드려요!</p>
-            <a class="banner-more-btn" href="javascript:void(0)">자세히 보기</a>
-          </div>
-        </section>
-        <section class="main__recommend">
-          <div class="main__recommend-top">
-            <div class="recommend-thumbnail">
-              <img src="./static/images/recommand_banner.png" alt="당 충전" class="thumbnail" />
+        <div class="inner__wrapper">
+          <section class="prd-list1">
+            <h2 class="main__title">이 상품 어때요?</h2>
+            <!-- product swiper -->
+            <div class="main__product-swiper"></div>
+          </section>
+          <section class="prd-list2">
+            <h2 class="main__title">이 상품 어때요?</h2>
+            <!-- product swiper -->
+            <div class="main__product-swiper"></div>
+          </section>
+          <section class="main__coupon-banner">
+            <div class="coupon-banner">
+              <p class="banner-tit">신규 회원은 쿠폰을 드려요!</p>
+              <a class="banner-more-btn" href="javascript:void(0)"
+                >자세히 보기</a
+              >
             </div>
-            <div class="recommend-description">
-              <h3 class="description-tit">지금은 당 충전 타임! 🍬</h3>
-              <p class="description-text">
-                오늘 하루, 일에 치이고 사람에 치여 힘든 당신을 위해 오뚜기에서
-                준비한 컬렉션! 언제 어디서든 간편하게 챙겨드세요. 초콜릿부터
-                단내 가득한 음료까지 무엇을 좋아하실 지 몰라 이것 저것 다
-                준비해봤어요. 그 다음에 무슨 말을 쓰지? 소재 고갈.. 아무튼
-                열심히 사는 여러분들 모두모두 화이팅입니다. 많이 많이
-                이용해주시고 좋은 피드백 남겨주시면 감사드리겠습니다.
-              </p>
+          </section>
+          <section class="main__recommend">
+            <div class="main__recommend-top">
+              <div class="recommend-thumbnail">
+                <img
+                  src="./static/images/recommand_banner.png"
+                  alt="당 충전"
+                  class="thumbnail" />
+              </div>
+              <div class="recommend-description">
+                <h3 class="description-tit">지금은 당 충전 타임! 🍬</h3>
+                <p class="description-text">
+                  오늘 하루, 일에 치이고 사람에 치여 힘든 당신을 위해 오뚜기에서
+                  준비한 컬렉션! 언제 어디서든 간편하게 챙겨드세요. 초콜릿부터
+                  단내 가득한 음료까지 무엇을 좋아하실 지 몰라 이것 저것 다
+                  준비해봤어요. 그 다음에 무슨 말을 쓰지? 소재 고갈.. 아무튼
+                  열심히 사는 여러분들 모두모두 화이팅입니다. 많이 많이
+                  이용해주시고 좋은 피드백 남겨주시면 감사드리겠습니다.
+                </p>
+              </div>
             </div>
-          </div>
-          <div class="main__recommend-bottom">
-            <ul class="recommend-list">
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-            </ul>
-            <a href="javascript:void(0)" class="recommend-more-btn">전체 보기</a>
-          </div>
-        </section>
-      </div>
-    </section>
-    <footer>
-      <div class="inner__wrapper">
-        <div class="footer__team-info1">
-          <div class="team-name">
-            <img src="./static/images/team_logo.png" alt="전국팔도" />
-            <div class="team-name-desc">
-              <p>팀) 전국팔도</p>
-              <a href="https://github.com/KDT4-team6/Ottogi"
-                class="github-link">https://github.com/KDT4-team6/Ottogi</a>
+            <div class="main__recommend-bottom">
+              <ul class="recommend-list">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+              <a href="javascript:void(0)" class="recommend-more-btn"
+                >전체 보기</a
+              >
+            </div>
+          </section>
+        </div>
+      </section>
+      <footer>
+        <div class="inner__wrapper">
+          <div class="footer__team-info1">
+            <div class="team-name">
+              <img src="./static/images/team_logo.png" alt="전국팔도" />
+              <div class="team-name-desc">
+                <p>팀) 전국팔도</p>
+                <a
+                  href="https://github.com/KDT4-team6/Ottogi"
+                  class="github-link"
+                  >https://github.com/KDT4-team6/Ottogi</a
+                >
+              </div>
             </div>
             <ul class="team-members">
               <li class="team-member">
