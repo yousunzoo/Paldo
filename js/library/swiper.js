@@ -1,4 +1,5 @@
 const mainbanner = document.querySelector(".main__banner .swiper");
+const prdList1 = document.querySelector(".prd-list1 .swiper");
 
 new Swiper(mainbanner, {
   slidesPerView: 1,
@@ -9,4 +10,9 @@ new Swiper(mainbanner, {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
   },
+});
+
+new Swiper(prdList1, {
+  slidesPerView: 4,
+  spaceBetween: 18,
 });
