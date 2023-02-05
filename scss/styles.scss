@@ -74,7 +74,7 @@ header {
         align-items: center;
         img {
           width: 180px;
-          height: 100%;
+          height: auto;
           margin-right: 20px;
         }
       }
@@ -183,18 +183,104 @@ header {
     margin-bottom: 27px;
   }
   .main__banner {
-    width: 100%;
-    height: 370px;
     margin-bottom: 40px;
-    background-color: $color_primary;
+    .swiper {
+      position: relative;
+      width: 100%;
+      max-width: 1900px;
+      height: 370px;
+      .swiper-slide {
+        width: 100%;
+        height: 370px;
+      }
+      button {
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        border: none;
+        width: 52px;
+        height: 52px;
+        &::after {
+          display: none;
+        }
+      }
+      .swiper-button-prev {
+        left: auto;
+        right: 50%;
+        margin: auto 590px auto 0px;
+        background: url("../static/images/next-btn.svg") 50% 50% no-repeat;
+        transform: rotate(180deg);
+      }
+
+      .swiper-button-next {
+        right: auto;
+        left: 50%;
+        margin: auto 0px auto 590px;
+        background: url("../static/images/next-btn.svg") 50% 50% no-repeat;
+      }
+    }
   }
   .inner__wrapper {
     section {
       padding: 40px 0;
 
       .main__product-swiper {
-        height: 450px;
-        background-color: #eee;
+        position: relative;
+        .swiper-slide {
+          height: 450px;
+          .image-container {
+            background-color: #eee;
+            height: 320px;
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+          .product-info {
+            position: relative;
+            padding: 14px 10px 0px 0px;
+            box-sizing: border-box;
+            .product-name {
+              font-size: 16px;
+              line-height: 1.45;
+              font-weight: 400;
+              margin-bottom: 8px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              letter-spacing: normal;
+              word-break: break-word;
+              overflow-wrap: break-word;
+            }
+          }
+        }
+        button {
+          position: absolute;
+          top: 0px;
+          bottom: 0px;
+          margin: auto;
+          border: none;
+          width: 52px;
+          height: 52px;
+          &::after {
+            display: none;
+          }
+        }
+        .swiper-button-prev {
+          left: auto;
+          background: url("../static/images/product-next-btn.svg") 50% 50%
+            no-repeat;
+          transform: rotate(180deg);
+        }
+
+        .swiper-button-next {
+          right: auto;
+          background: url("../static/images/product-next-btn.svg") 50% 50%
+            no-repeat;
+        }
       }
     }
     .main__coupon-banner {
