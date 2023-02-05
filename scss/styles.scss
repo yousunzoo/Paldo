@@ -205,6 +205,7 @@ header {
         }
       }
       .swiper-button-prev {
+        left: auto;
         right: 50%;
         margin: auto 590px auto 0px;
         background: url("../static/images/next-btn.svg") 50% 50% no-repeat;
@@ -212,6 +213,7 @@ header {
       }
 
       .swiper-button-next {
+        right: auto;
         left: 50%;
         margin: auto 0px auto 590px;
         background: url("../static/images/next-btn.svg") 50% 50% no-repeat;
