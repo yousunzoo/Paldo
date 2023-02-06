@@ -1,0 +1,64 @@
+// 변수
+/* Color styles */
+$color_product_tag: #999999;
+$color_black: #333333;
+$color_discount_rate: #fa622f;
+$color_original_price: #b5b5b5;
+$color_primary: #414141;
+$color_btn_border: rgb(221, 221, 221);
+$color_incorrect: #f03f40;
+$color_white: #ffffff;
+$color_copyright: rgb(247, 247, 247);
+$color_banner_btn: #fbcd57;
+
+.product_banner {
+  height: 400px;
+  background-color: #eee;
+}
+
+.product_title {
+  margin-top: 50px;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 35px;
+  letter-spacing: -1px;
+  text-align: center;
+}
+
+.product_wrapper {
+  position: relative;
+  display: flex;
+  width: 1050px;
+  margin-top: 50px;
+  margin-bottom: 75px;
+  .product_tab {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    .sort_tab {
+      display: flex;
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-left: 8px;
+        font-size: 14px;
+        color: $color_product_tag;
+        &::before {
+          content: "";
+          display: flex;
+          width: 1px;
+          height: 10px;
+          margin-right: 8px;
+          background-color: $color_product_tag;
+        }
+        &:first-child::before {
+          display: none;
+        }
+        &.selected {
+          color: $color_primary;
+        }
+      }
+    }
+  }
+}
