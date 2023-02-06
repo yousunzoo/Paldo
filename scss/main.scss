@@ -20,26 +20,26 @@ a {
   letter-spacing: -0.3px;
 }
 
-.inner__wrapper {
+.inner-wrapper {
   width: 1050px;
   margin: 0 auto;
 }
 header {
   padding-top: 42px;
   background-color: $color_white;
-  .header__top {
+  .header-top {
     position: relative;
     height: 100px;
     padding-top: 36px;
     box-sizing: border-box;
     letter-spacing: -0.3px;
-    .header__menu {
+    .header-menu {
       position: absolute;
       right: 0px;
       top: 0px;
       z-index: 20;
       display: flex;
-      .header__menu-item {
+      .header-menu-item {
         padding: 0 12px;
         font-size: 12px;
         font-weight: 500;
@@ -62,7 +62,7 @@ header {
         }
       }
     }
-    .header__items {
+    .header-items {
       position: relative;
       display: flex;
       justify-content: space-between;
@@ -123,7 +123,7 @@ header {
           cursor: pointer;
         }
       }
-      .header__icon_menus {
+      .header-icon-menus {
         display: flex;
         li {
           a {
@@ -145,15 +145,15 @@ header {
       }
     }
   }
-  .header__bottom {
+  .header-bottom {
     margin-top: 20px;
     height: 56px;
-    .header__tablist {
+    .header-tablist {
       width: min-content;
       margin: auto;
       height: 100%;
       display: flex;
-      .header__tablist-item {
+      .header-tablist-item {
         width: 150px;
         height: 100%;
         display: flex;
@@ -174,7 +174,7 @@ header {
 
 #main {
   padding-bottom: 40px;
-  .main__title {
+  .main-title {
     font-size: 28px;
     line-height: 1.15;
     font-weight: 500;
@@ -182,7 +182,7 @@ header {
     text-align: center;
     margin-bottom: 27px;
   }
-  .main__banner {
+  .main-banner {
     margin-bottom: 40px;
     .swiper {
       position: relative;
@@ -220,11 +220,11 @@ header {
       }
     }
   }
-  .inner__wrapper {
+  .inner-wrapper {
     section {
       padding: 40px 0;
 
-      .main__product-swiper {
+      .main-product-swiper {
         position: relative;
         .swiper-slide {
           height: 450px;
@@ -308,7 +308,7 @@ header {
         }
       }
     }
-    .main__coupon-banner {
+    .main-coupon-banner {
       .coupon-banner {
         height: 200px;
         display: flex;
@@ -341,8 +341,8 @@ header {
         }
       }
     }
-    .main__recommend {
-      .main__recommend-top {
+    .main-recommend {
+      .main-recommend-top {
         display: flex;
         height: 310px;
         justify-content: space-between;
@@ -373,7 +373,7 @@ header {
           }
         }
       }
-      .main__recommend-bottom {
+      .main-recommend-bottom {
         .recommend-list {
           padding-top: 12px;
           padding-bottom: 20px;
@@ -454,11 +454,11 @@ header {
 footer {
   border-top: 1px solid $color_btn_border;
   padding-top: 40px;
-  .inner__wrapper {
+  .inner-wrapper {
     display: flex;
     justify-content: space-between;
     padding-bottom: 30px;
-    .footer__team-info1 {
+    .footer-team-info1 {
       width: 50%;
       .team-name {
         display: flex;
@@ -500,7 +500,7 @@ footer {
         flex-wrap: wrap;
         @for $i from 1 through 5 {
           .team-member:nth-child(#{$i}) {
-            .profile_thumbnail {
+            .profile-thumbnail {
               background-image: url("../static/images/member_0#{$i}.png");
             }
           }
@@ -509,7 +509,7 @@ footer {
           display: flex;
           width: 50%;
           margin-bottom: 20px;
-          .profile_thumbnail {
+          .profile-thumbnail {
             width: 50px;
             height: 50px;
             margin-right: 20px;
@@ -518,13 +518,13 @@ footer {
             background-repeat: no-repeat;
             background-position: center;
           }
-          .profile_info {
+          .profile-info {
             display: flex;
             flex-direction: column;
             justify-content: center;
-            .profile_info_title {
+            .profile-info-title {
               display: flex;
-              .profile_tag {
+              .profile-tag {
                 width: 30px;
                 height: 20px;
                 background-color: $color_primary;
@@ -550,7 +550,7 @@ footer {
         }
       }
     }
-    .footer__team-info2 {
+    .footer-team-info2 {
       width: 45%;
       .footer-title {
         font-size: 20px;
@@ -609,7 +609,7 @@ footer {
 }
 
 // login page
-.login__inner__wrapper {
+.login-inner-wrapper {
   margin: auto;
   margin-top: 90px;
   width: 340px;
