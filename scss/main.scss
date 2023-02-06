@@ -381,9 +381,60 @@ header {
           display: flex;
           flex-wrap: wrap;
           li {
+            padding-top: 24px;
             width: 50%;
             height: 96px; // 임시 설정
-            background-color: #eee; // 임시 설정
+            .recommend-product {
+              display: flex;
+              .thumbnail {
+                margin-right: 20px;
+                background-color: #eee;
+                img {
+                  height: 72px;
+                  width: 72px;
+                }
+              }
+              .product-info {
+                width: 310px;
+                .product-name {
+                  width: 295px;
+                  padding-top: 9px;
+                  font-size: 16px;
+                  line-height: 23px;
+                  cursor: pointer;
+                  display: -webkit-box;
+                  overflow: hidden;
+                  word-break: break-all;
+                  white-space: normal;
+                  -webkit-line-clamp: 1;
+                  -webkit-box-orient: vertical;
+                }
+                .product-price {
+                  padding-top: 7px;
+                  font-weight: bold;
+                  font-size: 16px;
+                  line-height: 24px;
+                }
+              }
+              .add-cart-btn {
+                margin-top: 18px;
+                width: 104px;
+                height: 36px;
+                text-align-last: left;
+                padding: 0px 0px 1px 49px;
+                border: 1px solid $color_btn_border;
+                border-radius: 4px;
+                box-sizing: border-box;
+                background: url("../static/images/add-cart-btn.svg") 29px 50%
+                  no-repeat;
+
+                &::after {
+                  content: "담기";
+                  font-size: 13px;
+                  line-height: 20px;
+                }
+              }
+            }
           }
         }
         .recommend-more-btn {
