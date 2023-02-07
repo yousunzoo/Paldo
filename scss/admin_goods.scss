@@ -1,0 +1,181 @@
+// 변수
+/* Color styles */
+$color_product_tag: #999999;
+$color_black: #333333;
+$color_discount_rate: #fa622f;
+$color_original_price: #b5b5b5;
+$color_primary: #414141;
+$color_btn_border: rgb(221, 221, 221);
+$color_incorrect: #f03f40;
+$color_white: #ffffff;
+$color_copyright: rgb(247, 247, 247);
+
+.right-nav-bar {
+  padding: 25px;
+  width: 100%;
+  min-width: 300px;
+  background-color: #e8ecef;
+  .goods-list-wrapper {
+    width: 100%;
+    height: 100%;
+    background-color: $color_white;
+    .title-header {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 0 10px 0;
+      .title {
+        padding: 20px 40px;
+        font-size: 20px;
+        font-weight: 600;
+      }
+      .search-wrapper {
+        display: flex;
+        padding: 10px;
+        font-size: 14px;
+        .btn-category {
+          width: 120px;
+          height: 20px;
+          border-radius: 8px;
+          border: 1px solid #b5b5b5;
+          padding: 10px;
+        }
+        .category-list {
+          height: 0;
+          overflow: hidden;
+          li {
+            width: 120px;
+            height: 20px;
+            border-radius: 8px;
+            border: 1px solid #b5b5b5;
+            padding: 10px;
+          }
+        }
+        .search-goodsname {
+          width: 300px;
+          height: 40px;
+          font-size: 14px;
+          border-radius: 8px;
+          border: 1px solid #b5b5b5;
+          padding-left: 10px;
+        }
+      }
+    }
+    .goods-list {
+      margin: 0 20px;
+      .item-tag {
+        background-color: #f7f7f7;
+        height: 60px;
+        display: flex;
+        color: #3c3c3c;
+        font-size: 14px;
+        font-weight: 500;
+        .info {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          line-height: 12px;
+          padding: 5px;
+          border-top: 2px solid #cdcdcd;
+          border-bottom: 2px solid #cdcdcd;
+          border-right: 1px solid #e7e6e6;
+        }
+        .item-check {
+          width: 40px;
+          border-left: 1px solid #e7e6e6;
+        }
+        .item-no {
+          width: 30px;
+        }
+        .item-number {
+          width: 120px;
+        }
+        .item-thumbnail {
+          width: 70px;
+        }
+        .item-name {
+          width: 420px;
+        }
+        .item-category {
+          width: 80px;
+        }
+        .item-price {
+          width: 80px;
+        }
+        .item-sale {
+          width: 60px;
+        }
+        .item-outstock {
+          width: 60px;
+        }
+      }
+      .item {
+        height: 60px;
+        display: flex;
+        color: #3c3c3c;
+        font-size: 14px;
+        font-weight: 500;
+        .info {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          line-height: 12px;
+          padding: 5px;
+          border-bottom: 1px solid #e7e6e6;
+          border-right: 1px solid #e7e6e6;
+        }
+        .item-check {
+          width: 40px;
+          border-left: 1px solid #e7e6e6;
+        }
+        .item-no {
+          width: 30px;
+        }
+        .item-number {
+          width: 120px;
+        }
+        .item-thumbnail {
+          width: 70px;
+          img {
+            width: 60px;
+            height: 60px;
+          }
+        }
+        .item-name {
+          width: 420px;
+        }
+        .item-category {
+          width: 80px;
+        }
+        .item-price {
+          width: 80px;
+        }
+        .item-sale {
+          width: 60px;
+        }
+        .item-outstock {
+          width: 60px;
+        }
+      }
+    }
+    .pagination {
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 20px;
+    }
+    .btn-area {
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      .btn {
+        width: 70px;
+        height: 40px;
+        font-size: 14px;
+        color: $color-white;
+        border-radius: 5px;
+        background-color: $color_primary;
+      }
+    }
+  }
+}
