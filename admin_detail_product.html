@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OttogiAdmin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet" />
+    <!-- chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="./scss/admin_common.scss" />
+    <link rel="stylesheet" href="./scss/admin_detail_product.scss" />
+    <script defer src="./js/main.js"></script>
+  </head>
+  <body>
+    <header class="admin-header">
+      <div class="header-wrapper">
+        <a class="logo" href="javascript:void(0)">
+          <img src="./static/images/logo-white.png" alt="오뚜기 몰" />
+        </a>
+        <div class="admin-info">
+          <a href="javascript:void(0)" class="info-name">관리자</a>
+          <a href="javascript:void(0)" class="info-logout">로그아웃</a>
+        </div>
+      </div>
+    </header>
+    <section class="container">
+      <div class="left-nav-bar">
+        <div class="side-menu-wrapper">
+          <a href="javascript:void(0)" class="side-menu report">
+            <div class="menu-title">보고서</div>
+          </a>
+          <a href="javascript:void(0)" class="side-menu management">
+            <div class="menu-title">상품 관리</div>
+          </a>
+          <a href="javascript:void(0)" class="side-menu transaction-history">
+            <div class="menu-title">거래 내역 관리</div>
+          </a>
+        </div>
+      </div>
+      <div class="right-nav-bar">
+        <div class="all-wrapper">
+          <div class="goods-title-wrapper">
+            <div class="title-header">
+              <div class="title">상품 상세페이지</div>
+            </div>
+            <div class="btn-wrapper">
+              <div class="edit">
+                <button class="edit-btn">수정</button>
+              </div>
+              <div class="delete">
+                <button class="delete-btn">삭제</button>
+              </div>
+            </div>
+          </div>
+          <div class="goods-list-wrapper">
+            <div class="bar"></div>
+            <div class="goods-info">
+              <div class="goods-info-wrapper">
+                <div class="goods-thumbnail">
+                  <img src="/감자깡.png" alt="" />
+                </div>
+                <div class="goods-info-text">
+                  <div class="category">
+                    <div class="title">카테고리</div>
+                    <div class="val">스낵</div>
+                  </div>
+                  <div class="name">
+                    <div class="title">상품명</div>
+                    <div class="val">감자깡</div>
+                  </div>
+                  <div class="price">
+                    <div class="title">가격</div>
+                    <div class="val">50,000원</div>
+                  </div>
+                  <div class="sale">
+                    <div class="title">할인율</div>
+                    <div class="val">10%</div>
+                  </div>
+                  <div class="tag">
+                    <div class="title">태그</div>
+                    <div class="val">인기</div>
+                  </div>
+                </div>
+              </div>
+              <div class="bar"></div>
+              <div class="detail-img">
+                <img src="/감자깡-상세페이지.jpeg" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

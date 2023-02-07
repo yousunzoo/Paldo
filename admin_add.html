@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OttogiAdmin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet" />
+    <!-- chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="./scss/admin_common.scss" />
+    <link rel="stylesheet" href="./scss/admin_add.scss" />
+    <script defer src="./js/main.js"></script>
+  </head>
+  <body>
+    <header class="admin-header">
+      <div class="header-wrapper">
+        <a class="logo" href="javascript:void(0)">
+          <img src="./static/images/logo-white.png" alt="오뚜기 몰" />
+        </a>
+        <div class="admin-info">
+          <a href="javascript:void(0)" class="info-name">관리자</a>
+          <a href="javascript:void(0)" class="info-logout">로그아웃</a>
+        </div>
+      </div>
+    </header>
+    <section class="container">
+      <div class="left-nav-bar">
+        <div class="side-menu-wrapper">
+          <a href="javascript:void(0)" class="side-menu report">
+            <div class="menu-title">보고서</div>
+          </a>
+          <a href="javascript:void(0)" class="side-menu management">
+            <div class="menu-title">상품 관리</div>
+          </a>
+          <a href="javascript:void(0)" class="side-menu transaction-history">
+            <div class="menu-title">거래 내역 관리</div>
+          </a>
+        </div>
+      </div>
+      <div class="right-nav-bar">
+        <div class="goods-wrapper">
+          <div class="title-header">
+            <div class="title">상품 등록</div>
+          </div>
+          <div class="bar"></div>
+          <div class="form-wrapper">
+            <fieldset>
+              <div class="form-item">
+                <label for="name">상품명</label>
+                <input id="name" type="text" class="goods-name" />
+              </div>
+              <div class="form-item">
+                <label for="price">판매가</label>
+                <input id="price" type="text" class="goods-price" />
+                <div class="price-desc">원</div>
+              </div>
+              <div class="form-item">
+                <label for="sale">할인율</label>
+                <input id="sale" type="text" class="goods-sale" />
+                <div class="sale-desc">%</div>
+              </div>
+              <div class="form-item">
+                <label for="description">제품상세설명</label>
+                <input id="description" type="text" class="goods-description" />
+              </div>
+              <div class="form-item">
+                <label for="tag">태그</label>
+                <input id="tag" type="text" class="goods-tag" />
+              </div>
+              <div class="form-item">
+                <label for="thumbnail">썸네일 등록</label>
+                <input id="thumbnail" type="file" class="goods-thumbnail" />
+              </div>
+              <div class="form-item">
+                <label for="detail">상세이미지 등록</label>
+                <input id="detail" type="file" class="goods-detail" />
+              </div>
+            </fieldset>
+          </div>
+          <div class="res-btn">
+            <button>등록</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
