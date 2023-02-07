@@ -9,51 +9,56 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
+    <link rel="stylesheet" href="./scss/reset.css" />
+    <link rel="stylesheet" href="./scss/main.scss" />
+    <!-- swiper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
 
-    <link rel="stylesheet" href="./scss/styles.scss" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script defer src="./js/main.js"></script>
+    <script defer src="./js/library/swiper.js"></script>
     <title>Document</title>
   </head>
 
   <body>
     <div id="wrap">
       <header>
-        <div class="inner__wrapper">
-          <div class="header__top">
-            <ul class="header__menu">
-              <li class="header__menu-item">
-                <a href="./signup.html">회원가입</a>
+        <div class="inner-wrapper">
+          <div class="header-top">
+            <ul class="header-menu">
+              <li class="header-menu-item">
+                <a href="javascript:void(0)">회원가입</a>
               </li>
-              <li class="header__menu-item">
+              <li class="header-menu-item">
                 <a href="javascript:void(0)">로그인</a>
               </li>
             </ul>
-            <div class="header__items">
+            <div class="header-items">
               <a class="logo" href="javascript:void(0)">
                 <img src="./static/images/logo.png" alt="오뚜기 몰" />
               </a>
               <div class="search">
                 <input type="text" id="gnbSearch" placeholder="검색어를 입력해주세요" required />
-                <button class="search_btn"></button>
+                <button class="search-btn"></button>
               </div>
-              <ul class="header__icon_menus">
+              <ul class="header-icon-menus">
                 <li><a href="javascript:void(0)" aria-label="찜목록"></a></li>
-                <li><a href="./cart.html" aria-label="장바구니"></a></li>
+                <li><a href="javascript:void(0)" aria-label="장바구니"></a></li>
               </ul>
             </div>
           </div>
-          <div class="header__bottom">
-            <ul class="header__tablist">
-              <li class="header__tablist-item">
-                <a href="#">신상품</a>
+          <div class="header-bottom">
+            <ul class="header-tablist">
+              <li class="header-tablist-item">
+                <a href="./products.html">신상품</a>
               </li>
-              <li class="header__tablist-item">
+              <li class="header-tablist-item">
                 <a href="#">베스트</a>
               </li>
-              <li class="header__tablist-item">
+              <li class="header-tablist-item">
                 <a href="#">알뜰쇼핑</a>
               </li>
-              <li class="header__tablist-item">
+              <li class="header-tablist-item">
                 <a href="#">특가/혜택</a>
               </li>
             </ul>
@@ -62,26 +67,263 @@
       </header>
       <section id="main">
         <!-- banner swiper -->
-        <div class="main__banner"></div>
-        <div class="inner__wrapper">
+        <div class="main-banner">
+          <div class="swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <img src="./static/images/main_banner_01.png" alt="main banner 1" />
+              </div>
+              <div class="swiper-slide">
+                <img src="./static/images/main_banner_02.png" alt="main banner 2" />
+              </div>
+              <div class="swiper-slide">
+                <img src="./static/images/main_banner_03.png" alt="main banner 3" />
+              </div>
+            </div>
+            <button class="swiper-button-prev"></button>
+            <button class="swiper-button-next"></button>
+          </div>
+        </div>
+        <div class="inner-wrapper">
           <section class="prd-list1">
-            <h2 class="main__title">이 상품 어때요?</h2>
+            <h2 class="main-title">이 상품 어때요?</h2>
             <!-- product swiper -->
-            <div class="main__product-swiper"></div>
+            <div class="main-product-swiper">
+              <div class="swiper">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <div class="image-container">
+                      <img src="./static/images/product/감자깡.png" alt="" />
+                    </div>
+                    <div class="product-info">
+                      <h3 class="product-name">감자깡(75g*1)</h3>
+                      <div class="product-price">
+                        <div>
+                          <span class="discount-rate">10%</span>
+                          <span class="sales-price">9,000원</span>
+                        </div>
+                        <div>
+                          <span class="dimmed-price"> 10,000원 </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="image-container">
+                      <img src="./static/images/product/감자면.png" alt="" />
+                    </div>
+                    <div class="product-info">
+                      <h3 class="product-name">감자면(75g*1)</h3>
+                      <div class="product-price">
+                        <div>
+                          <span class="discount-rate">15%</span>
+                          <span class="sales-price">10,000원</span>
+                        </div>
+                        <div>
+                          <span class="dimmed-price"> 11,500원 </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="image-container">
+                      <img src="./static/images/product/감튀레드칠리맛.png" alt="" />
+                    </div>
+                    <div class="product-info">
+                      <h3 class="product-name">감튀 레드칠리맛</h3>
+                      <div class="product-price">
+                        <div>
+                          <span class="discount-rate">8%</span>
+                          <span class="sales-price">5,000원</span>
+                        </div>
+                        <div>
+                          <span class="dimmed-price"> 5,400원 </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="image-container">
+                      <img src="./static/images/product/고구마깡.png" alt="" />
+                    </div>
+                    <div class="product-info">
+                      <h3 class="product-name">고구마깡(75g*1)</h3>
+                      <div class="product-price">
+                        <div>
+                          <span class="discount-rate">10%</span>
+                          <span class="sales-price">9,000원</span>
+                        </div>
+                        <div>
+                          <span class="dimmed-price"> 10,000원 </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="image-container">
+                      <img src="./static/images/product/김치사발면.png" alt="" />
+                    </div>
+                    <div class="product-info">
+                      <h3 class="product-name">김치 사발면</h3>
+                      <div class="product-price">
+                        <div>
+                          <span class="discount-rate">10%</span>
+                          <span class="sales-price">9,000원</span>
+                        </div>
+                        <div>
+                          <span class="dimmed-price"> 10,000원 </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="image-container">
+                      <img src="./static/images/product/꿀꽈배기.png" alt="" />
+                    </div>
+                    <div class="product-info">
+                      <h3 class="product-name">꿀꽈배기(75g*1)</h3>
+                      <div class="product-price">
+                        <div>
+                          <span class="discount-rate">10%</span>
+                          <span class="sales-price">9,000원</span>
+                        </div>
+                        <div>
+                          <span class="dimmed-price"> 10,000원 </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-buttons">
+                <button class="swiper-button-prev"></button>
+                <button class="swiper-button-next"></button>
+              </div>
+            </div>
           </section>
           <section class="prd-list2">
-            <h2 class="main__title">이 상품 어때요?</h2>
+            <h2 class="main-title">이 상품 어때요?</h2>
             <!-- product swiper -->
-            <div class="main__product-swiper"></div>
+            <div class="main-product-swiper">
+              <div class="swiper">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <div class="image-container">
+                      <img src="./static/images/product/감자깡.png" alt="" />
+                    </div>
+                    <div class="product-info">
+                      <h3 class="product-name">감자깡(75g*1)</h3>
+                      <div class="product-price">
+                        <div>
+                          <span class="discount-rate">10%</span>
+                          <span class="sales-price">9,000원</span>
+                        </div>
+                        <div>
+                          <span class="dimmed-price"> 10,000원 </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="image-container">
+                      <img src="./static/images/product/감자면.png" alt="" />
+                    </div>
+                    <div class="product-info">
+                      <h3 class="product-name">감자면(75g*1)</h3>
+                      <div class="product-price">
+                        <div>
+                          <span class="discount-rate">15%</span>
+                          <span class="sales-price">10,000원</span>
+                        </div>
+                        <div>
+                          <span class="dimmed-price"> 11,500원 </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="image-container">
+                      <img src="./static/images/product/감튀레드칠리맛.png" alt="" />
+                    </div>
+                    <div class="product-info">
+                      <h3 class="product-name">감튀 레드칠리맛</h3>
+                      <div class="product-price">
+                        <div>
+                          <span class="discount-rate">8%</span>
+                          <span class="sales-price">5,000원</span>
+                        </div>
+                        <div>
+                          <span class="dimmed-price"> 5,400원 </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="image-container">
+                      <img src="./static/images/product/고구마깡.png" alt="" />
+                    </div>
+                    <div class="product-info">
+                      <h3 class="product-name">고구마깡(75g*1)</h3>
+                      <div class="product-price">
+                        <div>
+                          <span class="discount-rate">10%</span>
+                          <span class="sales-price">9,000원</span>
+                        </div>
+                        <div>
+                          <span class="dimmed-price"> 10,000원 </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="image-container">
+                      <img src="./static/images/product/김치사발면.png" alt="" />
+                    </div>
+                    <div class="product-info">
+                      <h3 class="product-name">김치 사발면</h3>
+                      <div class="product-price">
+                        <div>
+                          <span class="discount-rate">10%</span>
+                          <span class="sales-price">9,000원</span>
+                        </div>
+                        <div>
+                          <span class="dimmed-price"> 10,000원 </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="image-container">
+                      <img src="./static/images/product/꿀꽈배기.png" alt="" />
+                    </div>
+                    <div class="product-info">
+                      <h3 class="product-name">꿀꽈배기(75g*1)</h3>
+                      <div class="product-price">
+                        <div>
+                          <span class="discount-rate">10%</span>
+                          <span class="sales-price">9,000원</span>
+                        </div>
+                        <div>
+                          <span class="dimmed-price"> 10,000원 </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-buttons">
+                <button class="swiper-button-prev"></button>
+                <button class="swiper-button-next"></button>
+              </div>
+            </div>
           </section>
-          <section class="main__coupon-banner">
+          <section class="main-coupon-banner">
             <div class="coupon-banner">
-              <p class="banner-tit">신규 회원은 쿠폰을 드려요!</p>
               <a class="banner-more-btn" href="javascript:void(0)">자세히 보기</a>
             </div>
           </section>
-          <section class="main__recommend">
-            <div class="main__recommend-top">
+          <section class="main-recommend">
+            <div class="main-recommend-top">
               <div class="recommend-thumbnail">
                 <img src="./static/images/recommand_banner.png" alt="당 충전" class="thumbnail" />
               </div>
@@ -93,12 +335,56 @@
                 </p>
               </div>
             </div>
-            <div class="main__recommend-bottom">
+            <div class="main-recommend-bottom">
               <ul class="recommend-list">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
+                <li>
+                  <a href="javascript:void(0)" class="recommend-product">
+                    <div class="thumbnail">
+                      <img src="./static/images/product/후르트텔라병.png" alt="후르트텔라병" />
+                    </div>
+                    <div class="product-info">
+                      <p class="product-name">후르트텔라 병</p>
+                      <p class="product-price"><span class="sales-price">20,000</span>원</p>
+                    </div>
+                    <button class="add-cart-btn"></button>
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript:void(0)" class="recommend-product">
+                    <div class="thumbnail">
+                      <img src="./static/images/product/후르트텔라병.png" alt="후르트텔라병" />
+                    </div>
+                    <div class="product-info">
+                      <p class="product-name">후르트텔라 병</p>
+                      <p class="product-price"><span class="sales-price">20,000</span>원</p>
+                    </div>
+                    <button class="add-cart-btn"></button>
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript:void(0)" class="recommend-product">
+                    <div class="thumbnail">
+                      <img src="./static/images/product/후르트텔라병.png" alt="후르트텔라병" />
+                    </div>
+                    <div class="product-info">
+                      <p class="product-name">후르트텔라 병</p>
+                      <p class="product-price"><span class="sales-price">20,000</span>원</p>
+                    </div>
+                    <button class="add-cart-btn"></button>
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript:void(0)" class="recommend-product">
+                    <div class="thumbnail">
+                      <img src="./static/images/product/후르트텔라병.png" alt="후르트텔라병" />
+                    </div>
+                    <div class="product-info">
+                      <p class="product-name">후르트텔라 병</p>
+                      <p class="product-price"><span class="sales-price">20,000</span>원</p>
+                    </div>
+                    <button class="add-cart-btn"></button>
+                  </a>
+                </li>
               </ul>
               <a href="javascript:void(0)" class="recommend-more-btn">전체 보기</a>
             </div>
@@ -106,54 +392,72 @@
         </div>
       </section>
       <footer>
-        <div class="inner__wrapper">
-          <div class="footer__team-info1">
+        <div class="inner-wrapper">
+          <div class="footer-team-info1">
             <div class="team-name">
               <img src="./static/images/team_logo.png" alt="전국팔도" />
               <div class="team-name-desc">
-                <p>팀) 전국팔도</p>
+                <div class="team-title-area">
+                  <p class="team-title">Team</p>
+                  <p class="team-desc">전국팔도</p>
+                </div>
                 <a href="https://github.com/KDT4-team6/Ottogi" class="github-link">https://github.com/KDT4-team6/Ottogi</a>
               </div>
             </div>
             <ul class="team-members">
               <li class="team-member">
-                <div class="profile_thumbnail"></div>
-                <div class="profile_info">
-                  <p class="member-name">조장) 권범준</p>
+                <div class="profile-thumbnail"></div>
+                <div class="profile-info">
+                  <div class="profile-info-title">
+                    <p class="profile-tag">팀장</p>
+                    <p class="member-name">권범준</p>
+                  </div>
                   <a href="https://github.com/kjungit" class="member-github">https://github.com/kjungit</a>
                 </div>
               </li>
               <li class="team-member">
-                <div class="profile_thumbnail"></div>
-                <div class="profile_info">
-                  <p class="member-name">조원) 고봉석</p>
+                <div class="profile-thumbnail"></div>
+                <div class="profile-info">
+                  <div class="profile-info-title">
+                    <p class="profile-tag">팀원</p>
+                    <p class="member-name">고봉석</p>
+                  </div>
                   <a href="https://github.com/bongsee" class="member-github">https://github.com/bongsee</a>
                 </div>
               </li>
               <li class="team-member">
-                <div class="profile_thumbnail"></div>
-                <div class="profile_info">
-                  <p class="member-name">조원) 유선주</p>
+                <div class="profile-thumbnail"></div>
+                <div class="profile-info">
+                  <div class="profile-info-title">
+                    <p class="profile-tag">팀원</p>
+                    <p class="member-name">유선주</p>
+                  </div>
                   <a href="https://github.com/yousunzoo" class="member-github">https://github.com/yousunzoo</a>
                 </div>
               </li>
               <li class="team-member">
-                <div class="profile_thumbnail"></div>
-                <div class="profile_info">
-                  <p class="member-name">조원) 조성민</p>
+                <div class="profile-thumbnail"></div>
+                <div class="profile-info">
+                  <div class="profile-info-title">
+                    <p class="profile-tag">팀원</p>
+                    <p class="member-name">조성민</p>
+                  </div>
                   <a href="https://github.com/FranzCho" class="member-github">https://github.com/FranzCho</a>
                 </div>
               </li>
               <li class="team-member">
-                <div class="profile_thumbnail"></div>
-                <div class="profile_info">
-                  <p class="member-name">조원) 김재도</p>
+                <div class="profile-thumbnail"></div>
+                <div class="profile-info">
+                  <div class="profile-info-title">
+                    <p class="profile-tag">팀원</p>
+                    <p class="member-name">김재도</p>
+                  </div>
                   <a href="https://github.com/KJDsports" class="member-github">https://github.com/KJDsports</a>
                 </div>
               </li>
             </ul>
           </div>
-          <div class="footer__team-info2">
+          <div class="footer-team-info2">
             <div class="team-skillset">
               <p class="footer-title">Our skills</p>
               <div class="skill-list">
