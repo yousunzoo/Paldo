@@ -1,255 +1,219 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"
-    />
-    <link rel="stylesheet" href="./scss/styles.scss" />
-    <title>Document</title>
-  </head>
 
-  <body>
-    <div id="wrap">
-      <header>
-        <div class="inner__wrapper">
-          <div class="header__top">
-            <ul class="header__menu">
-              <li class="header__menu-item">
-                <a href="javascript:void(0)">회원가입</a>
-              </li>
-              <li class="header__menu-item">
-                <a href="javascript:void(0)">로그인</a>
-              </li>
-            </ul>
-            <div class="header__items">
-              <a class="logo" href="javascript:void(0)">
-                <img src="./static/images/logo.png" alt="오뚜기 몰" />
-              </a>
-              <div class="search">
-                <input
-                  type="text"
-                  id="gnbSearch"
-                  placeholder="검색어를 입력해주세요"
-                  required
-                />
-                <button class="search_btn"></button>
-              </div>
-              <ul class="header__icon_menus">
-                <li><a href="javascript:void(0)" aria-label="찜목록"></a></li>
-                <li><a href="javascript:void(0)" aria-label="장바구니"></a></li>
-              </ul>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+    rel="stylesheet" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
+  <link rel="stylesheet" href="./scss/styles.scss" />
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="wrap">
+    <header>
+      <div class="inner__wrapper">
+        <div class="header__top">
+          <ul class="header__menu">
+            <li class="header__menu-item">
+              <a href="javascript:void(0)">회원가입</a>
+            </li>
+            <li class="header__menu-item">
+              <a href="javascript:void(0)">로그인</a>
+            </li>
+          </ul>
+          <div class="header__items">
+            <a class="logo" href="javascript:void(0)">
+              <img src="./static/images/logo.png" alt="오뚜기 몰" />
+            </a>
+            <div class="search">
+              <input type="text" id="gnbSearch" placeholder="검색어를 입력해주세요" required />
+              <button class="search_btn"></button>
             </div>
-          </div>
-          <div class="header__bottom">
-            <ul class="header__tablist">
-              <li class="header__tablist-item">
-                <a href="#">신상품</a>
-              </li>
-              <li class="header__tablist-item">
-                <a href="#">베스트</a>
-              </li>
-              <li class="header__tablist-item">
-                <a href="#">알뜰쇼핑</a>
-              </li>
-              <li class="header__tablist-item">
-                <a href="#">특가/혜택</a>
-              </li>
+            <ul class="header__icon_menus">
+              <li><a href="javascript:void(0)" aria-label="찜목록"></a></li>
+              <li><a href="javascript:void(0)" aria-label="장바구니"></a></li>
             </ul>
           </div>
         </div>
-      </header>
-      <section id="main">
-        <!-- banner swiper -->
-        <div class="main__banner"></div>
-        <div class="inner__wrapper">
-          <section class="prd-list1">
-            <h2 class="main__title">이 상품 어때요?</h2>
-            <!-- product swiper -->
-            <div class="main__product-swiper"></div>
-          </section>
-          <section class="prd-list2">
-            <h2 class="main__title">이 상품 어때요?</h2>
-            <!-- product swiper -->
-            <div class="main__product-swiper"></div>
-          </section>
-          <section class="main__coupon-banner">
-            <div class="coupon-banner">
-              <p class="banner-tit">신규 회원은 쿠폰을 드려요!</p>
-              <a class="banner-more-btn" href="javascript:void(0)"
-                >자세히 보기</a
-              >
-            </div>
-          </section>
-          <section class="main__recommend">
-            <div class="main__recommend-top">
-              <div class="recommend-thumbnail">
-                <img
-                  src="./static/images/recommand_banner.png"
-                  alt="당 충전"
-                  class="thumbnail"
-                />
-              </div>
-              <div class="recommend-description">
-                <h3 class="description-tit">지금은 당 충전 타임! 🍬</h3>
-                <p class="description-text">
-                  오늘 하루, 일에 치이고 사람에 치여 힘든 당신을 위해 오뚜기에서
-                  준비한 컬렉션! 언제 어디서든 간편하게 챙겨드세요. 초콜릿부터
-                  단내 가득한 음료까지 무엇을 좋아하실 지 몰라 이것 저것 다
-                  준비해봤어요. 그 다음에 무슨 말을 쓰지? 소재 고갈.. 아무튼
-                  열심히 사는 여러분들 모두모두 화이팅입니다. 많이 많이
-                  이용해주시고 좋은 피드백 남겨주시면 감사드리겠습니다.
-                </p>
-              </div>
-            </div>
-            <div class="main__recommend-bottom">
-              <ul class="recommend-list">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-              </ul>
-              <a href="javascript:void(0)" class="recommend-more-btn"
-                >전체 보기</a
-              >
-            </div>
-          </section>
+        <div class="header__bottom">
+          <ul class="header__tablist">
+            <li class="header__tablist-item">
+              <a href="#">신상품</a>
+            </li>
+            <li class="header__tablist-item">
+              <a href="#">베스트</a>
+            </li>
+            <li class="header__tablist-item">
+              <a href="#">알뜰쇼핑</a>
+            </li>
+            <li class="header__tablist-item">
+              <a href="#">특가/혜택</a>
+            </li>
+          </ul>
         </div>
-      </section>
-      <footer>
-        <div class="inner__wrapper">
-          <div class="footer__team-info1">
-            <div class="team-name">
-              <img src="./static/images/team_logo.png" alt="전국팔도" />
-              <div class="team-name-desc">
-                <div class="team-title-area">
-                  <p class="team-title">Team</p>
-                  <p class="team-desc">전국팔도</p>
-                </div>
-                <a
-                  href="https://github.com/KDT4-team6/Ottogi"
-                  class="github-link"
-                  >https://github.com/KDT4-team6/Ottogi</a
-                >
-              </div>
+      </div>
+    </header>
+    <section id="main">
+      <!-- banner swiper -->
+      <div class="main__banner"></div>
+      <div class="inner__wrapper">
+        <section class="prd-list1">
+          <h2 class="main__title">이 상품 어때요?</h2>
+          <!-- product swiper -->
+          <div class="main__product-swiper"></div>
+        </section>
+        <section class="prd-list2">
+          <h2 class="main__title">이 상품 어때요?</h2>
+          <!-- product swiper -->
+          <div class="main__product-swiper"></div>
+        </section>
+        <section class="main__coupon-banner">
+          <div class="coupon-banner">
+            <p class="banner-tit">신규 회원은 쿠폰을 드려요!</p>
+            <a class="banner-more-btn" href="javascript:void(0)">자세히 보기</a>
+          </div>
+        </section>
+        <section class="main__recommend">
+          <div class="main__recommend-top">
+            <div class="recommend-thumbnail">
+              <img src="./static/images/recommand_banner.png" alt="당 충전" class="thumbnail" />
             </div>
-            <ul class="team-members">
-              <li class="team-member">
-                <div class="profile_thumbnail"></div>
-                <div class="profile_info">
-                  <div class="profile_info_title">
-                    <p class="profile_tag">팀장</p>
-                    <p class="member-name">권범준</p>
-                  </div>
-                  <a href="https://github.com/kjungit" class="member-github"
-                    >https://github.com/kjungit</a
-                  >
-                </div>
-              </li>
-              <li class="team-member">
-                <div class="profile_thumbnail"></div>
-                <div class="profile_info">
-                  <div class="profile_info_title">
-                    <p class="profile_tag">팀원</p>
-                    <p class="member-name">고봉석</p>
-                  </div>
-                  <a href="https://github.com/bongsee" class="member-github"
-                    >https://github.com/bongsee</a
-                  >
-                </div>
-              </li>
-              <li class="team-member">
-                <div class="profile_thumbnail"></div>
-                <div class="profile_info">
-                  <div class="profile_info_title">
-                    <p class="profile_tag">팀원</p>
-                    <p class="member-name">유선주</p>
-                  </div>
-                  <a href="https://github.com/yousunzoo" class="member-github"
-                    >https://github.com/yousunzoo</a
-                  >
-                </div>
-              </li>
-              <li class="team-member">
-                <div class="profile_thumbnail"></div>
-                <div class="profile_info">
-                  <div class="profile_info_title">
-                    <p class="profile_tag">팀원</p>
-                    <p class="member-name">조성민</p>
-                  </div>
-                  <a href="https://github.com/FranzCho" class="member-github"
-                    >https://github.com/FranzCho</a
-                  >
-                </div>
-              </li>
-              <li class="team-member">
-                <div class="profile_thumbnail"></div>
-                <div class="profile_info">
-                  <div class="profile_info_title">
-                    <p class="profile_tag">팀원</p>
-                    <p class="member-name">김재도</p>
-                  </div>
-                  <a href="https://github.com/KJDsports" class="member-github"
-                    >https://github.com/KJDsports</a
-                  >
-                </div>
-              </li>
+            <div class="recommend-description">
+              <h3 class="description-tit">지금은 당 충전 타임! 🍬</h3>
+              <p class="description-text">
+                오늘 하루, 일에 치이고 사람에 치여 힘든 당신을 위해 오뚜기에서
+                준비한 컬렉션! 언제 어디서든 간편하게 챙겨드세요. 초콜릿부터
+                단내 가득한 음료까지 무엇을 좋아하실 지 몰라 이것 저것 다
+                준비해봤어요. 그 다음에 무슨 말을 쓰지? 소재 고갈.. 아무튼
+                열심히 사는 여러분들 모두모두 화이팅입니다. 많이 많이
+                이용해주시고 좋은 피드백 남겨주시면 감사드리겠습니다.
+              </p>
+            </div>
+          </div>
+          <div class="main__recommend-bottom">
+            <ul class="recommend-list">
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
             </ul>
+            <a href="javascript:void(0)" class="recommend-more-btn">전체 보기</a>
           </div>
-          <div class="footer__team-info2">
-            <div class="team-skillset">
-              <p class="footer-title">Our skills</p>
-              <div class="skill-list">
-                <img src="./static/images/icon-html.svg" alt="HTML5" />
-                <img src="./static/images/icon-css.svg" alt="CSS3" />
-                <img
-                  src="./static/images/icon-javascript.svg"
-                  alt="JavaScript"
-                />
-                <img src="./static/images/icon-sass.svg" alt="Sass" />
+        </section>
+      </div>
+    </section>
+    <footer>
+      <div class="inner__wrapper">
+        <div class="footer__team-info1">
+          <div class="team-name">
+            <img src="./static/images/team_logo.png" alt="전국팔도" />
+            <div class="team-name-desc">
+              <div class="team-title-area">
+                <p class="team-title">Team</p>
+                <p class="team-desc">전국팔도</p>
               </div>
-              <div class="tool-list">
-                <img src="./static/images/icon-figma.svg" alt="Figma" />
-                <img src="./static/images/icon-vscode.svg" alt="VSCode" />
-                <img src="./static/images/icon-github.svg" alt="Github" />
-                <img src="./static/images/icon-psd.svg" alt="Photoshop" />
-              </div>
+              <a href="https://github.com/KDT4-team6/Ottogi"
+                class="github-link">https://github.com/KDT4-team6/Ottogi</a>
             </div>
-            <div class="team-inquiry">
-              <p class="footer-title">1:1 문의</p>
-              <div class="inquiry-area">
-                <a
-                  class="inquiry-btn"
-                  href="https://github.com/KDT4-team6/Ottogi"
-                  >문의하기</a
-                >
-                <p class="inquiry-text">
-                  365일<br />
-                  고객센터 운영시간에 순차적으로 답변드리겠습니다.
-                </p>
+          </div>
+          <ul class="team-members">
+            <li class="team-member">
+              <div class="profile_thumbnail"></div>
+              <div class="profile_info">
+                <div class="profile_info_title">
+                  <p class="profile_tag">팀장</p>
+                  <p class="member-name">권범준</p>
+                </div>
+                <a href="https://github.com/kjungit" class="member-github">https://github.com/kjungit</a>
               </div>
-              <div class="inquiry-email">
-                <p>비회원 문의 : help1@jeongukpaldo.com</p>
-                <p>비회원 대량주문 문의 : help2@jeongukpaldo.com</p>
+            </li>
+            <li class="team-member">
+              <div class="profile_thumbnail"></div>
+              <div class="profile_info">
+                <div class="profile_info_title">
+                  <p class="profile_tag">팀원</p>
+                  <p class="member-name">고봉석</p>
+                </div>
+                <a href="https://github.com/bongsee" class="member-github">https://github.com/bongsee</a>
               </div>
+            </li>
+            <li class="team-member">
+              <div class="profile_thumbnail"></div>
+              <div class="profile_info">
+                <div class="profile_info_title">
+                  <p class="profile_tag">팀원</p>
+                  <p class="member-name">유선주</p>
+                </div>
+                <a href="https://github.com/yousunzoo" class="member-github">https://github.com/yousunzoo</a>
+              </div>
+            </li>
+            <li class="team-member">
+              <div class="profile_thumbnail"></div>
+              <div class="profile_info">
+                <div class="profile_info_title">
+                  <p class="profile_tag">팀원</p>
+                  <p class="member-name">조성민</p>
+                </div>
+                <a href="https://github.com/FranzCho" class="member-github">https://github.com/FranzCho</a>
+              </div>
+            </li>
+            <li class="team-member">
+              <div class="profile_thumbnail"></div>
+              <div class="profile_info">
+                <div class="profile_info_title">
+                  <p class="profile_tag">팀원</p>
+                  <p class="member-name">김재도</p>
+                </div>
+                <a href="https://github.com/KJDsports" class="member-github">https://github.com/KJDsports</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="footer__team-info2">
+          <div class="team-skillset">
+            <p class="footer-title">Our skills</p>
+            <div class="skill-list">
+              <img src="./static/images/icon-html.svg" alt="HTML5" />
+              <img src="./static/images/icon-css.svg" alt="CSS3" />
+              <img src="./static/images/icon-javascript.svg" alt="JavaScript" />
+              <img src="./static/images/icon-sass.svg" alt="Sass" />
+            </div>
+            <div class="tool-list">
+              <img src="./static/images/icon-figma.svg" alt="Figma" />
+              <img src="./static/images/icon-vscode.svg" alt="VSCode" />
+              <img src="./static/images/icon-github.svg" alt="Github" />
+              <img src="./static/images/icon-psd.svg" alt="Photoshop" />
+            </div>
+          </div>
+          <div class="team-inquiry">
+            <p class="footer-title">1:1 문의</p>
+            <div class="inquiry-area">
+              <a class="inquiry-btn" href="https://github.com/KDT4-team6/Ottogi">문의하기</a>
+              <p class="inquiry-text">
+                365일<br />
+                고객센터 운영시간에 순차적으로 답변드리겠습니다.
+              </p>
+            </div>
+            <div class="inquiry-email">
+              <p>비회원 문의 : help1@jeongukpaldo.com</p>
+              <p>비회원 대량주문 문의 : help2@jeongukpaldo.com</p>
             </div>
           </div>
         </div>
-        <div class="copyright">
-          <p>© 2023. JeonGukPaldo All rights reserved.</p>
-        </div>
-      </footer>
-    </div>
-  </body>
+      </div>
+      <div class="copyright">
+        <p>© 2023. JeonGukPaldo All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+</body>
+
 </html>
