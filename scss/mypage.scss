@@ -20,7 +20,7 @@ body {
 
 /* SIDE BAR */
 #main {
-  > .inner__wrapper {
+  > .inner-wrapper {
     display : flex;
     justify-content: space-between;
     padding : 50px 0px 80px;
@@ -93,7 +93,7 @@ body {
   padding: 50px 0px;
   margin-bottom: -20px;
   background-color: rgb(247, 247, 247);
-  .inner__wrapper {
+  .inner-wrapper {
     display: flex;
     gap : 4px;
     height: 210px;
