@@ -5,7 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "parcel index.html",
+    "dev_main": "parcel admin_main.html",
+    "dev_goods": "parcel admin_goods.html",
+    "dev_add": "parcel admin_add.html",
+    "dev_list": "parcel admin_list.html",
+    "dev_history": "parcel admin_detail_history.html",
+    "dev_product": "parcel admin_detail_product.html",
+    "dev_edit": "parcel admin_detail_edit.html",
     "build": "parcel build index.html"
   },
   "repository": {
