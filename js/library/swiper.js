@@ -1,4 +1,4 @@
-const mainbanner = document.querySelector(".main__banner .swiper");
+const mainbanner = document.querySelector(".main-banner .swiper");
 const prdList1 = document.querySelector(".prd-list1 .swiper");
 const prdList2 = document.querySelector(".prd-list2 .swiper");
 
