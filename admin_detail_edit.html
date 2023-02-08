@@ -24,7 +24,7 @@
           <img src="./static/images/logo-white.png" alt="오뚜기 몰" />
         </a>
         <div class="admin-info">
-          <a href="javascript:void(0)" class="info-name">관리자</a>
+          <div class="info-name">관리자</div>
           <a href="javascript:void(0)" class="info-logout">로그아웃</a>
         </div>
       </div>
@@ -45,8 +45,13 @@
       </div>
       <div class="right-nav-bar">
         <div class="goods-wrapper">
-          <div class="title-header">
-            <div class="title">상품 수정</div>
+          <div class="title-wrapper">
+            <div class="title-header">
+              <div class="title">상품 수정</div>
+            </div>
+            <div class="res-btn">
+              <button>수정</button>
+            </div>
           </div>
           <div class="bar"></div>
           <div class="form-wrapper">
@@ -64,6 +69,7 @@
                 <label for="sale">할인율</label>
                 <input id="sale" type="text" class="goods-sale" />
                 <div class="sale-desc">%</div>
+                <div class="sale-reflection">000</div>
               </div>
               <div class="form-item">
                 <label for="description">제품상세설명</label>
@@ -82,9 +88,6 @@
                 <input id="detail" type="file" class="goods-detail" />
               </div>
             </fieldset>
-          </div>
-          <div class="res-btn">
-            <button>수정</button>
           </div>
         </div>
       </div>
