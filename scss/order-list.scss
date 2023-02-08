@@ -266,12 +266,17 @@ body {
               width: 100%;
               height: 36px;
               color: $color_primary;
-              background-color: rgb(255, 255, 255);
+              background-color: #fff;
               border: 1px solid $color_primary;
               cursor: pointer;
+              transition : .3s ease;
               span {
                 font-size: 12px;
                 font-weight: 600;
+              }
+              &:hover {
+                background-color: $color_primary;
+                color : #fff;
               }
             }
           }
