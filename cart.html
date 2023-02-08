@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
     <link rel="stylesheet" href="./scss/reset.css" />
-    <link rel="stylesheet" href="./scss/cart.scss" />
+    <link rel="stylesheet" href="/scss/cart.scss" />
     <title>Document</title>
   </head>
 
@@ -22,7 +22,7 @@
           <div class="header__top">
             <ul class="header__menu">
               <li class="header__menu-item">
-                <a href="./signup.html">회원가입</a>
+                <a href="/signup.html">회원가입</a>
               </li>
               <li class="header__menu-item">
                 <a href="javascript:void(0)">로그인</a>
@@ -37,7 +37,7 @@
                 <button class="search_btn"></button>
               </div>
               <ul class="header__icon_menus">
-                <li><a href="javascript:void(0)" aria-label="찜목록"></a></li>
+                <li><a href="/like.html" aria-label="찜목록"></a></li>
                 <li><a href="javascript:void(0)" aria-label="장바구니"></a></li>
               </ul>
             </div>
@@ -66,11 +66,27 @@
           <div class="cart-left">
             <div class="cart-left-head">
               <div class="cart-left-container">
-                <label for="">
+                <label for="" class="cart-optionbox">
                   <input type="checkbox" class="left-container-check" />
-                  <img src="./dist/images/cart-checkbox.svg" alt="check" />
-                  <span class="left-container-txt">전체선택</span>
+                  <img src="/static/images/cart-checkbox.svg" alt="check" />
+                  <span class="left-container-text">전체선택</span>
                 </label>
+                <span class="option-middle"></span>
+                <button class="option-left">선택삭제</button>
+              </div>
+            </div>
+            <div class="cart-left-center">
+              <p class="center-text-box">장바구니에 담긴 상품이 없습니다.</p>
+            </div>
+            <div class="cart-left-head">
+              <div class="cart-left-container">
+                <label for="" class="cart-optionbox">
+                  <input type="checkbox" class="left-container-check" />
+                  <img src="/static/images/cart-checkbox.svg" alt="check" />
+                  <span class="left-container-text">전체선택</span>
+                </label>
+                <span class="option-middle"></span>
+                <button class="option-left">선택삭제</button>
               </div>
             </div>
           </div>
@@ -94,21 +110,21 @@
                 </div>
               </div>
               <div class="cart-bills-main">
-                <div class="price-wrapper">
+                <div class="price-wrapper cart-bills-line">
                   <span class="price-text">상품금액</span>
-                  <span class="price-money">0원</span>
+                  <span class="price-money"><span>0</span>원</span>
                 </div>
-                <div class="discount-wrapper">
+                <div class="discount-wrapper cart-bills-line">
                   <span class="price-text">상품할인금액</span>
-                  <span class="price-money">0원</span>
+                  <span class="price-money"><span>0</span>원</span>
                 </div>
-                <div class="delivery-wrapper">
+                <div class="delivery-wrappe cart-bills-line">
                   <span class="price-text">배송비</span>
-                  <span class="price-money">0원</span>
+                  <span class="price-money"><span>0</span>원</span>
                 </div>
-                <div class="pay-wrapper">
+                <div class="pay-wrapper cart-bills-line">
                   <span class="price-text">결제예정금액</span>
-                  <span class="price-money">0원</span>
+                  <span class="price-money"><span>0</span>원</span>
                 </div>
               </div>
               <div class="cart-bills-push">
