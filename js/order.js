@@ -14,8 +14,8 @@ function toggleOrderList() {
   let isActive = false;
   return function (event) {
     const btnEl = event.currentTarget;
-    const ulEl = $('.order-list > ul')
-    const summaryEl = $('.order-list > .summary')
+    const ulEl = $('.order-list-area > ul')
+    const summaryEl = $('.order-list-area > .summary')
     if(!isActive) {
       ulEl.innerHTML = '활성화 상태입니다.'
       btnEl.alt = "펼치기"
