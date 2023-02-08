@@ -500,9 +500,6 @@ $color_copyright: rgb(247, 247, 247);
               span:first-child {
                 font-weight: bold;
               }
-              span:last-child {
-
-              }
             }
             &:last-child {
               display: flex;
@@ -578,6 +575,44 @@ $color_copyright: rgb(247, 247, 247);
       height: 24px;
       margin-right: 12px;
       stroke : black;
+    }
+  }
+  .sub-info {
+    padding: 20px 0px 0px 16px;
+    font-size: 12px;
+    line-height: 16px;
+    color: rgb(102, 102, 102);
+    &::before {
+      display: inline-block;
+      width: 16px;
+      margin-left: -16px;
+      content: "※";
+    }
+  }
+  .pay-btn-area {
+    text-align: center;
+    button {
+      display: block;
+      padding: 0px 10px;
+      text-align: center;
+      overflow: hidden;
+      width: 240px;
+      height: 56px;
+      border-radius: 3px;
+      color: rgb(255, 255, 255);
+      background-color: $color_primary;
+      border: 0px none;
+      margin: 40px auto 30px;
+      font-weight: bold;
+      span {
+        display: inline-block;
+        font-size: 16px;
+      }
+    }
+    .pay-sub-info {
+      font-size: 14px;
+      line-height: 20px;
+      color: rgb(102, 102, 102);
     }
   }
 }
