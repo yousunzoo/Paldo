@@ -9,6 +9,7 @@ $color_btn_border: rgb(221, 221, 221);
 $color_incorrect: #f03f40;
 $color_white: #ffffff;
 $color_copyright: rgb(247, 247, 247);
+$color_devide_line: rgb(244, 244, 244);
 
 a {
   text-decoration: none;
@@ -194,7 +195,6 @@ header {
     .cart-left {
       width: 742px;
       box-sizing: border-box;
-      background-color: #b5b5b5;
       .cart-left-head {
         display: flex;
         justify-content: space-between;
@@ -203,7 +203,60 @@ header {
         font-size: 14px;
         line-height: 26px;
         font-weight: 500;
-
+        box-sizing: border-box;
+        .cart-left-container {
+          display: flex;
+          box-sizing: border-box;
+          margin: 0;
+          .cart-optionbox {
+            display: inline-flex;
+            font-size: 14px;
+            line-height: 26px;
+            padding: 0px;
+            color: rgb(51, 51, 51);
+            .left-container-check {
+              display: none;
+              box-sizing: border-box;
+              padding: 0;
+            }
+            img {
+              display: inline-block;
+              width: 24px;
+              height: 24px;
+              margin-right: 12px;
+            }
+            .left-container-text {
+              box-sizing: border-box;
+              margin: 0;
+            }
+          }
+          .option-middle {
+            display: inline-block;
+            width: 1px;
+            height: 14px;
+            background: rgb(221, 221, 221);
+            margin: 6px 21px 0px 22px;
+            vertical-align: top;
+          }
+          .option-left {
+            font-size: 14px;
+            color: #333;
+            overflow: visible;
+            background-color: transparent;
+            border: none;
+          }
+        }
+      }
+      .cart-left-center {
+        border-bottom: 1px solid $color_devide_line;
+        .center-text-box {
+          padding: 115px 0px;
+          border-top: 1px solid rgb(51, 51, 51);
+          font-size: 16px;
+          line-height: 24px;
+          text-align: center;
+          color: $color_original_price;
+        }
       }
     }
     .cart-right {
@@ -273,36 +326,21 @@ header {
           padding: 19px 18px 18px 20px;
           border: 1px solid #f2f2f2;
           background-color: #fafafa;
-          .price-wrapper {
-            font-size: 16px;
-            justify-content: space-between;
-            display: flex;
-            padding-top: 0;
-            .price-text {
-              width: 100px;
-              font-size: 18px;
+          .cart-bills-line {
+              font-size: 16px;
+              justify-content: space-between;
+              display: flex;
               line-height: 24px;
-              white-space: nowrap;
-            }
-            .price-money {
-              font-size: 18px;
-              line-height: 24px;
-              text-align: right;
-            }
-          }
-          .discount-wrapper {
-            display: flex;
-            justify-content: space-between;
-            padding-top: 12px;
-          }
-          .delivery-wrapper {
-            display: flex;
-            justify-content: space-between;
-            padding-top: 12px;
+              padding: 4px 0;
+              .price-text {
+                width: 100px;
+                white-space: nowrap;
+              }
+              .price-money {
+                text-align: right;
+              }
           }
           .pay-wrapper {
-            display: flex;
-            justify-content: space-between;
             margin-top: 16px;
             padding-top: 18px;
             border-top: 1px solid #f4f4f4;
