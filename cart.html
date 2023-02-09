@@ -76,18 +76,39 @@
               </div>
             </div>
             <div class="cart-left-center">
-              <p class="center-text-box">장바구니에 담긴 상품이 없습니다.</p>
-            </div>
-            <div class="cart-left-head">
-              <div class="cart-left-container">
-                <label for="" class="cart-optionbox">
-                  <input type="checkbox" class="left-container-check" />
-                  <img src="/static/images/cart-checkbox.svg" alt="check" />
-                  <span class="left-container-text">전체선택</span>
-                </label>
-                <span class="option-middle"></span>
-                <button class="option-left">선택삭제</button>
-              </div>
+              <ul>
+                <li class="product-list">
+                  <label class="checkbox">
+                    <input type="checkbox" class="push-checkbox" />
+                    <img
+                      src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGc+CiAgICAgICAgICAgIDxnPgogICAgICAgICAgICAgICAgPGc+CiAgICAgICAgICAgICAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE3Ni4wMDAwMDAsIC0xMDkwLjAwMDAwMCkgdHJhbnNsYXRlKDEwMC4wMDAwMDAsIDkzNi4wMDAwMDApIHRyYW5zbGF0ZSg2MC4wMDAwMDAsIDE0Mi4wMDAwMDApIHRyYW5zbGF0ZSgxNi4wMDAwMDAsIDEyLjAwMDAwMCkiPgogICAgICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSIxMiIgZmlsbD0iIzVGMDA4MCIvPgogICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBzdHJva2U9IiNGRkYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik03IDEyLjY2N0wxMC4zODUgMTYgMTggOC41Ii8+CiAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICA8L2c+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4K"
+                      alt="checkbox"
+                    />
+                    <span class="push-checkbox-span"></span>
+                  </label>
+                  <a href="" class="product-image-box">
+                    <span class="product-image"></span>
+                  </a>
+                  <div class="product-detail-title">
+                    <a href="" class="product-title">
+                      <p class="product-title-text">[파스키에] 마칼롱 딜리스</p>
+                    </a>
+                    <div class="product-title-space"></div>
+                  </div>
+                  <div class="product-detail-count">
+                    <button type="button" aria-label="수량내리기" class="product-count-button minus"></button>
+                    <div class="product-count-number">1</div>
+                    <button type="button" aria-label="수량올리기" class="product-count-button plus"></button>
+                  </div>
+                  <div class="product-detail-price">
+                    <span aria-label="권장 소비자 가격" data-testid="" class="product-price"> <span>11,500</span>원 </span>
+                  </div>
+                  <button class="product-delete-button" type="button" data-testid="">
+                    <span class="delete-button"></span>
+                  </button>
+                </li>
+              </ul>
+              <!-- <p class="center-text-box">장바구니에 담긴 상품이 없습니다.</p> -->
             </div>
           </div>
           <div class="cart-right">
@@ -111,11 +132,11 @@
               </div>
               <div class="cart-bills-main">
                 <div class="price-wrapper cart-bills-line">
-                  <span class="price-text">상품금액</span>
+                  <span class="price-text">상품 금액</span>
                   <span class="price-money"><span>0</span>원</span>
                 </div>
                 <div class="discount-wrapper cart-bills-line">
-                  <span class="price-text">상품할인금액</span>
+                  <span class="price-text">상품 할인 금액</span>
                   <span class="price-money"><span>0</span>원</span>
                 </div>
                 <div class="delivery-wrappe cart-bills-line">
@@ -123,7 +144,7 @@
                   <span class="price-money"><span>0</span>원</span>
                 </div>
                 <div class="pay-wrapper cart-bills-line">
-                  <span class="price-text">결제예정금액</span>
+                  <span class="price-text">결제 예정 금액</span>
                   <span class="price-money"><span>0</span>원</span>
                 </div>
               </div>
@@ -133,7 +154,7 @@
                 </button>
                 <ul class="description">
                   <li class="description-option">[주문완료] 상태일 경우에만 주문 취소 가능합니다.</li>
-                  <li class="description-option">[마이컬리 > 주문내역 상세페이지] 에서 직접 취소하실 수 있습니다.</li>
+                  <li class="description-option">[마이페이지 > 주문내역 상세페이지] 에서 직접 취소하실 수 있습니다.</li>
                 </ul>
               </div>
             </div>
