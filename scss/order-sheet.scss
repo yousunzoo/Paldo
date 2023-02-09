@@ -84,7 +84,7 @@ $color_copyright: rgb(247, 247, 247);
             position: absolute;
             top: 14px;
             right: 14px;
-            // background-image: url("../static/images/ico_tooltip_close.svg");
+            background-image: url("../static/images/ico_tooltip_close.svg");
             background-repeat: no-repeat;
             width: 16px;
             height: 17px;
@@ -123,6 +123,7 @@ $color_copyright: rgb(247, 247, 247);
     .list {
       .item {
         display: flex;
+        justify-content: center;
         align-items: center;
         padding: 25px 0px;
         border-bottom: 1px solid rgb(244, 244, 244);
@@ -138,7 +139,6 @@ $color_copyright: rgb(247, 247, 247);
         .title-wrapper {
           width: 720px;
           padding: 0px 20px;
-          flex: 1 1 0%;
           .title {
             display: -webkit-box;
             overflow: hidden;
@@ -162,7 +162,6 @@ $color_copyright: rgb(247, 247, 247);
         .price-wrapper {
           display : flex;
           align-items: center;
-          width: 126px;
           text-align: right;
           font-weight: 700;
           font-size: 16px;
@@ -268,10 +267,17 @@ $color_copyright: rgb(247, 247, 247);
             overflow: hidden;
             width: 60px;
             height: 30px;
-            border-radius: 3px;
             color: rgb(51, 51, 51);
             background-color: rgb(255, 255, 255);
             border: 1px solid rgb(221, 221, 221);
+            cursor: pointer;
+            transition : .3s ease;
+            &:hover {
+              box-sizing: border-box;
+              border : 1px solid $color_primary;
+              background-color: $color_primary;
+              color : #fff;
+            }
             span {
               font-size: 12px;
               line-height: 28px;
@@ -593,15 +599,22 @@ $color_copyright: rgb(247, 247, 247);
       overflow: hidden;
       width: 240px;
       height: 56px;
-      border-radius: 3px;
       color: rgb(255, 255, 255);
       background-color: $color_primary;
       border: 0px none;
       margin: 40px auto 30px;
       font-weight: bold;
+      cursor: pointer;
+      transition : .3s ease;
       span {
         display: inline-block;
         font-size: 16px;
+      }
+      &:hover {
+        box-sizing: border-box;
+        border : 1px solid $color_primary;
+        background-color: #fff;
+        color : $color-primary;
       }
     }
     .pay-sub-info {
