@@ -215,15 +215,17 @@ header {
               display: flex;
               width: 139px;
               height: 48px;
-              align-items: center;
+              align-items: flex-start;
+              padding-left: 15px;
+              padding-top: 10px;
 
 
               button {
                 width: 333px;
                 height: 44px;
-                border-radius: 4px;
                 box-sizing: border-box;
                 border: 1px solid #dddddd;
+                
               }
 
               .label-id{
@@ -231,6 +233,7 @@ header {
                 font-size: 14px;
                 font-weight: 500;
                 line-height: 20px;
+                
                 #ico {
                   padding-right: 2px;
                   color: #ee6a7b;
@@ -243,7 +246,7 @@ header {
               input {
                 width: 333px;
                 height: 44px;
-                border-radius: 4px;
+                padding: 0 20px;
                 box-sizing: border-box;
                 border: 1px solid #dddddd;
               }
@@ -251,13 +254,19 @@ header {
                 display: block;
                 width: 333px;
                 height: 44px;
-                border-radius: 4px;
                 box-sizing: border-box;
-                background-color: $color_white;
+                background-color: $color_primary;
                 border: 1px solid $color_primary;
-                color: $color_primary;
+                color: $color_white;
                 font-weight: normal;
                 box-sizing: border-box;
+                transition : .3s ease;
+              }
+              button:hover {
+                border: 1px solid $color-primary;
+                box-sizing: border-box;
+                background-color: $color-white;
+                color: $color-primary;
               }
             }
             .signup-doubleCheck {
@@ -265,9 +274,16 @@ header {
               button {
                 width: 120px;
                 height: 44px;
-                background-color: #fff;
-                border-radius: 4px;
+                background-color: $color_primary;
+                color: $color_white;
                 border: 1px solid #333333;
+                transition : .3s ease;
+              }
+              button:hover {
+                border: 1px solid $color-primary;
+                box-sizing: border-box;
+                background-color: $color-white;
+                color: $color-primary;
               }
             }
           }
@@ -277,7 +293,6 @@ header {
             width: 240px;
             height: 56px;
             font-size: 14px;
-            border-radius: 3px;
             background-color: $color_primary;
             color: $color_white;
             font-weight: 500;
@@ -285,6 +300,14 @@ header {
             align-items: center;
             justify-content: center;
             box-sizing: border-box;
+            transition : .3s ease;
+            border: 1px solid transparent;
+          }
+          .register-push:hover {
+            border: 1px solid $color-primary;
+            box-sizing: border-box;
+            background-color: $color-white;
+            color: $color-primary;
           }
         }
       }
