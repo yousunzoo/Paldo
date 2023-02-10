@@ -12,14 +12,29 @@ toggleCouponListEl.addEventListener('click', toggleCouponList);
 
 /* GLOBAL LOGIC */
 setMockData();
-
+initPage();
 // 주문 상품 섹션 초기 렌더링 작업 (Summary)
 
 
 
 
 
+
+
 /* FUNCTIONS */
+
+function initPage() {
+  /* 주문 상품 섹션 Summary 출력 */
+  const summaryTextEl = $('.order-list-area > .summary span');
+
+  const json = localStorage.getItem('cartProduct');
+  const cartProduct = JSON.parse(json);
+
+  summaryTextEl.innerText = `${cartProduct[0].title} 외 ${cartProduct.length -1}개`
+
+  /* 다음 기능 */
+
+}
 
 /**
  * localStorage Mock Data Setting
@@ -82,7 +97,8 @@ function toggleOrderList() {
       btnEl.alt = "펼치기";
       btnEl.style.transform = 'rotateX(0)';
       summaryEl.style.display = 'block';
-      summaryEl
+      let summaryTextEl = summaryEl.firstElementChild;
+      summaryTextEl.innerText = `${cartProduct[0].title} 외 ${cartProduct.length -1}개`
     }
 
     // toggle state of flag variable
