@@ -11,5 +11,4 @@ loginForm.addEventListener("submit", async (event) => {
     password,
   };
   const result = await logInFn(data);
-  console.log(result.accessToken);
 });

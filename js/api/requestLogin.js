@@ -10,10 +10,23 @@ export async function logInFn(data) {
     }
   )
     .then((response) => {
+      if (!response.ok) {
+        throw new Error(response.status);
+      }
+      console.log(response);
       return response.json();
     })
     .then((result) => {
-      return result;
+      console.log(result);
+    })
+    .catch((error) => {
+      // 400 에러 시 pw 확인
+      Swal.fire({
+        icon: "error",
+        text: "아이디 및 비밀번호를 확인해주세요!",
+      });
+      // 401 에러 시 유효한 사용자 X
     });
+  history.back();
   return res;
 }
