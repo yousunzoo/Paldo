@@ -1,0 +1,100 @@
+// 변수
+/* Color styles */
+$color_product_tag: #999999;
+$color_black: #333333;
+$color_discount_rate: #fa622f;
+$color_original_price: #b5b5b5;
+$color_primary: #414141;
+$color_btn_border: rgb(221, 221, 221);
+$color_incorrect: #f03f40;
+$color_white: #ffffff;
+$color_copyright: rgb(247, 247, 247);
+
+.right-nav-bar {
+  padding: 25px;
+  width: 1100px;
+  min-width: 300px;
+  background-color: #e8ecef;
+  .all-wrapper {
+    background-color: $color_white;
+    .goods-title-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .title-header {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 0 10px 0;
+        .title {
+          padding: 20px 40px;
+          font-size: 20px;
+          font-weight: 600;
+        }
+      }
+      .btn-wrapper {
+        display: flex;
+        justify-content: end;
+        padding: 0 35px;
+
+        button {
+          width: 120px;
+          height: 50px;
+          background-color: $color_primary;
+          color: $color-white;
+          font-size: 16px;
+          margin: 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        button:hover {
+          border: 1px solid $color-primary;
+          box-sizing: border-box;
+          background-color: $color-white;
+          color: $color-primary;
+        }
+      }
+    }
+    .goods-list-wrapper {
+      width: 1085px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      .bar {
+        margin: 0 20px;
+        border: 0.25px solid #dadce0;
+      }
+      .goods-info {
+        display: flex;
+        flex-direction: column;
+        .goods-info-wrapper {
+          display: flex;
+          .goods-thumbnail img {
+            margin-top: 40px;
+            margin-left: 40px;
+            width: 500px;
+            height: 500px;
+            border: 0.1px solid rgb(184, 184, 184);
+          }
+          .goods-info-text {
+            padding: 40px;
+            .title {
+              font-size: 18px;
+              font-weight: 600;
+              padding: 15px 0;
+            }
+            .val {
+              padding: 0 0 40px;
+            }
+          }
+        }
+        .detail-img {
+          display: flex;
+          justify-content: center;
+          padding-top: 60px;
+        }
+      }
+    }
+  }
+}

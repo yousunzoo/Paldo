@@ -1,0 +1,85 @@
+// 변수
+/* Color styles */
+$color_product_tag: #999999;
+$color_black: #333333;
+$color_discount_rate: #fa622f;
+$color_original_price: #b5b5b5;
+$color_primary: #414141;
+$color_btn_border: rgb(221, 221, 221);
+$color_incorrect: #f03f40;
+$color_white: #ffffff;
+$color_copyright: rgb(247, 247, 247);
+$color_banner_btn: #fbcd57;
+
+.sub-title {
+  padding-top: 160px;
+  text-align: center;
+
+  margin-bottom: 16px;
+  font-size: 30px;
+  color: #aaa;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 55px;
+  font-size: 42px;
+  color: #000;
+}
+
+.coupon {
+  text-align: center;
+  img {
+    margin-bottom: 60px;
+  }
+  .get-coupon-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 530px;
+    height: 80px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    background-color: transparent;
+    border: 1px solid $color_primary;
+    font-size: 26px;
+    font-weight: normal;
+    color: $color_primary;
+    line-height: 80px;
+    vertical-align: top;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    &:hover {
+      background-color: $color_primary;
+      color: $color_white;
+    }
+  }
+}
+
+.coupon-notice {
+  width: 514px;
+  margin: 160px auto;
+  .notice-title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .notice-list {
+    margin-top: 30px;
+    li {
+      position: relative;
+      padding-bottom: 8px;
+      padding-left: 12px;
+      line-height: 22px;
+      color: $color_product_tag;
+      &::before {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        content: "-";
+      }
+    }
+  }
+}

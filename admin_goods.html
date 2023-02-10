@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OttogiAdmin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet" />
+    <!-- chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="./scss/admin_common.scss" />
+    <link rel="stylesheet" href="./scss/admin_goods.scss" />
+    <script defer src="./js/main.js"></script>
+  </head>
+  <body>
+    <header class="admin-header">
+      <div class="header-wrapper">
+        <a class="logo" href="javascript:void(0)">
+          <img src="./static/images/logo-white.png" alt="오뚜기 몰" />
+        </a>
+        <div class="admin-info">
+          <div class="info-name">관리자</div>
+          <a href="javascript:void(0)" class="info-logout">로그아웃</a>
+        </div>
+      </div>
+    </header>
+    <section class="container">
+      <div class="left-nav-bar">
+        <div class="side-menu-wrapper">
+          <a href="javascript:void(0)" class="side-menu report">
+            <div class="menu-title">보고서</div>
+          </a>
+          <a href="javascript:void(0)" class="side-menu management">
+            <div class="menu-title">상품 관리</div>
+          </a>
+          <a href="javascript:void(0)" class="side-menu transaction-history">
+            <div class="menu-title">거래 내역 관리</div>
+          </a>
+        </div>
+      </div>
+      <div class="right-nav-bar">
+        <div class="goods-list-wrapper">
+          <div class="title-header">
+            <div class="title">상품 관리</div>
+            <div class="search-wrapper">
+              <div class="category-wrapper">
+                <button class="btn-category">카테고리</button>
+                <ul class="search-category">
+                  <ul class="category-list">
+                    <li><button>스낵</button></li>
+                    <li><button>음료수</button></li>
+                  </ul>
+                </ul>
+              </div>
+              <div class="category-wrapper">
+                <button class="btn-soldout">품절여부</button>
+                <ul class="search-soldout">
+                  <ul class="soldout-list">
+                    <li><button>Y</button></li>
+                    <li><button>N</button></li>
+                  </ul>
+                </ul>
+              </div>
+              <input type="text" class="search-goodsname" placeholder="상품명을 입력해 주세요..." />
+            </div>
+          </div>
+
+          <ul class="goods-list">
+            <li class="item-tag">
+              <div class="info item-check">
+                <input type="checkbox" />
+              </div>
+              <div class="info item-no">NO</div>
+              <div class="info item-number">상품ID</div>
+              <div class="info item-thumbnail">썸네일</div>
+              <div class="info item-name">상품명</div>
+              <div class="info item-category">카테고리</div>
+              <div class="info item-price">가격</div>
+              <div class="info item-sale">할인율</div>
+              <div class="info item-outstock">품절여부</div>
+            </li>
+            <li class="item">
+              <div class="info item-check">
+                <input type="checkbox" />
+              </div>
+              <div class="info item-no">NO</div>
+              <div class="info item-number">상품ID</div>
+              <div class="info item-thumbnail">
+                <img src="/감자깡.png" alt="" />
+              </div>
+              <div class="info item-name">상품명</div>
+              <div class="info item-category">카테고리</div>
+              <div class="info item-price">가격</div>
+              <div class="info item-sale">할인율</div>
+              <div class="info item-outstock">품절여부</div>
+            </li>
+            <li class="item">
+              <div class="info item-check">
+                <input type="checkbox" />
+              </div>
+              <div class="info item-no">NO</div>
+              <div class="info item-number">상품ID</div>
+              <div class="info item-thumbnail">
+                <img src="/감자깡.png" alt="" />
+              </div>
+              <div class="info item-name">상품명</div>
+              <div class="info item-category">카테고리</div>
+              <div class="info item-price">가격</div>
+              <div class="info item-sale">할인율</div>
+              <div class="info item-outstock">품절여부</div>
+            </li>
+            <li class="item">
+              <div class="info item-check">
+                <input type="checkbox" />
+              </div>
+              <div class="info item-no">NO</div>
+              <div class="info item-number">상품ID</div>
+              <div class="info item-thumbnail">
+                <img src="/감자깡.png" alt="" />
+              </div>
+              <div class="info item-name">상품명</div>
+              <div class="info item-category">카테고리</div>
+              <div class="info item-price">가격</div>
+              <div class="info item-sale">할인율</div>
+              <div class="info item-outstock">품절여부</div>
+            </li>
+            <li class="item">
+              <div class="info item-check">
+                <input type="checkbox" />
+              </div>
+              <div class="info item-no">NO</div>
+              <div class="info item-number">상품ID</div>
+              <div class="info item-thumbnail">
+                <img src="/감자깡.png" alt="" />
+              </div>
+              <div class="info item-name">상품명</div>
+              <div class="info item-category">카테고리</div>
+              <div class="info item-price">가격</div>
+              <div class="info item-sale">할인율</div>
+              <div class="info item-outstock">품절여부</div>
+            </li>
+            <li class="item">
+              <div class="info item-check">
+                <input type="checkbox" />
+              </div>
+              <div class="info item-no">NO</div>
+              <div class="info item-number">상품ID</div>
+              <div class="info item-thumbnail">
+                <img src="/감자깡.png" alt="" />
+              </div>
+              <div class="info item-name">상품명</div>
+              <div class="info item-category">카테고리</div>
+              <div class="info item-price">가격</div>
+              <div class="info item-sale">할인율</div>
+              <div class="info item-outstock">품절여부</div>
+            </li>
+            <li class="item">
+              <div class="info item-check">
+                <input type="checkbox" />
+              </div>
+              <div class="info item-no">NO</div>
+              <div class="info item-number">상품ID</div>
+              <div class="info item-thumbnail">
+                <img src="/감자깡.png" alt="" />
+              </div>
+              <div class="info item-name">상품명</div>
+              <div class="info item-category">카테고리</div>
+              <div class="info item-price">가격</div>
+              <div class="info item-sale">할인율</div>
+              <div class="info item-outstock">품절여부</div>
+            </li>
+            <li class="item">
+              <div class="info item-check">
+                <input type="checkbox" />
+              </div>
+              <div class="info item-no">NO</div>
+              <div class="info item-number">상품ID</div>
+              <div class="info item-thumbnail">
+                <img src="/감자깡.png" alt="" />
+              </div>
+              <div class="info item-name">상품명</div>
+              <div class="info item-category">카테고리</div>
+              <div class="info item-price">가격</div>
+              <div class="info item-sale">할인율</div>
+              <div class="info item-outstock">품절여부</div>
+            </li>
+            <li class="item">
+              <div class="info item-check">
+                <input type="checkbox" />
+              </div>
+              <div class="info item-no">NO</div>
+              <div class="info item-number">상품ID</div>
+              <div class="info item-thumbnail">
+                <img src="/감자깡.png" alt="" />
+              </div>
+              <div class="info item-name">상품명</div>
+              <div class="info item-category">카테고리</div>
+              <div class="info item-price">가격</div>
+              <div class="info item-sale">할인율</div>
+              <div class="info item-outstock">품절여부</div>
+            </li>
+            <li class="item">
+              <div class="info item-check">
+                <input type="checkbox" />
+              </div>
+              <div class="info item-no">NO</div>
+              <div class="info item-number">상품ID</div>
+              <div class="info item-thumbnail">
+                <img src="/감자깡.png" alt="" />
+              </div>
+              <div class="info item-name">상품명</div>
+              <div class="info item-category">카테고리</div>
+              <div class="info item-price">가격</div>
+              <div class="info item-sale">할인율</div>
+              <div class="info item-outstock">품절여부</div>
+            </li>
+            <li class="item">
+              <div class="info item-check">
+                <input type="checkbox" />
+              </div>
+              <div class="info item-no">NO</div>
+              <div class="info item-number">상품ID</div>
+              <div class="info item-thumbnail">
+                <img src="/감자깡.png" alt="" />
+              </div>
+              <div class="info item-name">상품명</div>
+              <div class="info item-category">카테고리</div>
+              <div class="info item-price">가격</div>
+              <div class="info item-sale">할인율</div>
+              <div class="info item-outstock">품절여부</div>
+            </li>
+          </ul>
+          <div class="pagination">페이지네이션</div>
+          <div class="btn-area">
+            <button class="delete-btn btn">삭제</button>
+            <button class="registration-btn btn">등록</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

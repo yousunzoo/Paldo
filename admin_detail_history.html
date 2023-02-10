@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OttogiAdmin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet" />
+    <!-- chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="./scss/admin_common.scss" />
+    <link rel="stylesheet" href="./scss/admin_detail_history.scss" />
+    <script defer src="./js/main.js"></script>
+  </head>
+  <body>
+    <header class="admin-header">
+      <div class="header-wrapper">
+        <a class="logo" href="javascript:void(0)">
+          <img src="./static/images/logo-white.png" alt="오뚜기 몰" />
+        </a>
+        <div class="admin-info">
+          <div class="info-name">관리자</div>
+          <a href="javascript:void(0)" class="info-logout">로그아웃</a>
+        </div>
+      </div>
+    </header>
+    <section class="container">
+      <div class="left-nav-bar">
+        <div class="side-menu-wrapper">
+          <a href="javascript:void(0)" class="side-menu report">
+            <div class="menu-title">보고서</div>
+          </a>
+          <a href="javascript:void(0)" class="side-menu management">
+            <div class="menu-title">상품 관리</div>
+          </a>
+          <a href="javascript:void(0)" class="side-menu transaction-history">
+            <div class="menu-title">거래 내역 관리</div>
+          </a>
+        </div>
+      </div>
+      <div class="right-nav-bar">
+        <div class="goods-list-wrapper">
+          <div class="goods-title-wrapper">
+            <div class="title-header">
+              <div class="title">개별 거래 내역 관리</div>
+            </div>
+            <div class="btn-wrapper">
+              <div class="cancel">
+                <button class="cancel-btn">거래 취소</button>
+                <button class="active-cancel-btn">거래 취소 해제</button>
+              </div>
+              <div class="completed">
+                <button class="completed-btn">거래 완료</button>
+                <button class="active-completed-btn">거래 완료 해제</button>
+              </div>
+            </div>
+          </div>
+          <div class="bar"></div>
+          <div class="goods-info">
+            <div class="goods-info-left">
+              <div class="goods-thumbnail">
+                <img src="/감자깡.png" alt="" />
+              </div>
+              <div class="goods-info-title">상품정보</div>
+              <div class="goods-id"><span class="tag">거래상품 ID : </span><span class="id-val">123456789</span></div>
+              <div class="goods-name"><span class="tag">상품 이름 : </span><span class="name-val">123456789</span></div>
+              <div class="goods-price"><span class="tag">상품 가격 : </span><span class="price-val">123456789</span></div>
+            </div>
+            <div class="goods-info-right">
+              <div class="info-customer">
+                <div class="info-customer-title">구매자 정보</div>
+                <div class="customer-email"><span class="tag">고객 메일 : </span><span class="id-val">123456789</span></div>
+                <div class="customer-name"><span class="tag">고객 이름 : </span><span class="id-val">123456789</span></div>
+              </div>
+              <div class="info-account">
+                <div class="account-title">계좌 정보</div>
+                <div class="customer-account"><span class="tag">계좌 은행 : </span><span class="id-val">123456789</span></div>
+                <div class="customer-bankcode"><span class="tag">은행 코드 : </span><span class="id-val">123456789</span></div>
+                <div class="customer-accountnum"><span class="tag">계좌 번호 : </span><span class="id-val">123456789</span></div>
+              </div>
+              <div class="info-transaction">
+                <div class="transaction-title">거래 정보</div>
+                <div class="transaction-time"><span class="tag">거래 일시 : </span><span class="id-val">123456789</span></div>
+                <div class="transaction-calcel"><span class="tag">취소 여부 : </span><span class="id-val">123456789</span></div>
+                <div class="transaction-confirm"><span class="tag">완료 여부 : </span><span class="id-val">123456789</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
