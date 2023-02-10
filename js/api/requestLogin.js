@@ -13,20 +13,36 @@ export async function logInFn(data) {
       if (!response.ok) {
         throw new Error(response.status);
       }
-      console.log(response);
       return response.json();
     })
     .then((result) => {
-      console.log(result);
+      setUserInfo(result, data);
+      history.back();
     })
-    .catch((error) => {
-      // 400 에러 시 pw 확인
+    .catch(() => {
       Swal.fire({
         icon: "error",
         text: "아이디 및 비밀번호를 확인해주세요!",
       });
-      // 401 에러 시 유효한 사용자 X
     });
-  history.back();
-  return res;
+}
+
+function setUserInfo(result, data) {
+  // localStorage에 loginInfoData 세팅
+  let loginInfoData = localStorage.getItem("loginInfo");
+  if (!loginInfoData) {
+    loginInfoData = { accessToken: "", loginId: "" };
+  } else {
+    loginInfoData = JSON.parse(loginInfoData);
+  }
+  loginInfoData.accessToken = result.accessToken;
+  loginInfoData.loginId = data.email;
+  localStorage.setItem("loginInfo", JSON.stringify(loginInfoData));
+
+  // localStorage에 userEmail 데이터 세팅
+  let userEmail = localStorage.getItem(data.email);
+  let userData = result.user;
+  console.log(userData);
+  if (!userEmail)
+    localStorage.setItem(data.email, JSON.stringify({ userInfo: userData }));
 }
