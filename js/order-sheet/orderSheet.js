@@ -1,3 +1,5 @@
+import { login, me } from './orderSheetApi.js';
+
 /* COMMON */
 const $ = selector => document.querySelector(selector)
 
@@ -23,7 +25,18 @@ initPage();
 
 /* FUNCTIONS */
 
-function initPage() {
+/**
+ * initialize page
+ */
+async function initPage() {
+  /* 사용자 인증 확인 */
+  try {
+    console.log(await me());
+
+  } catch(err) {
+    location.assign('https://github.com/KDT1-FE/KDT4-Theory-JS/blob/main/builtins.md')
+  }
+
   /* 주문 상품 섹션 Summary 출력 */
   const summaryTextEl = $('.order-list-area > .summary span');
 
@@ -45,15 +58,17 @@ function setMockData () {
     { productId : 1, title : "감자깡", price : 7000, quantity : 1, thumbnailImage : "/images/product/감자깡.png" },
     { productId : 2, title : "감자면", price : 6000, quantity : 1, thumbnailImage : "/images/product/감자면.png" },
     { productId : 3, title : "고구마깡", price : 5000, quantity : 1, thumbnailImage : "/images/product/고구마깡.png" },
-    { productId : 4, title : "둥지냉면동치미물냉면", price : 4000, quantity : 1, thumbnailImage : "/images/product/둥지냉면동치미물냉면.png" },
+    { productId : 4, title : "둥지냉면 동치미 물냉면", price : 4000, quantity : 1, thumbnailImage : "/images/product/둥지냉면동치미물냉면.png" },
   ]
   localStorage.setItem('cartProduct', JSON.stringify(cartProduct))
 }
 
 function toggleOrderList() {
   let isActive = false;
+  // closure
   return function (event) {
     const btnEl = event.currentTarget;
+
     const ulEl = $('.order-list-area > ul');
     const summaryEl = $('.order-list-area > .summary');
 
@@ -94,9 +109,11 @@ function toggleOrderList() {
     // open -> close
     if(isActive) {
       ulEl.innerHTML = '';
+
       btnEl.alt = "펼치기";
       btnEl.style.transform = 'rotateX(0)';
       summaryEl.style.display = 'block';
+
       let summaryTextEl = summaryEl.firstElementChild;
       summaryTextEl.innerText = `${cartProduct[0].title} 외 ${cartProduct.length -1}개`
     }
@@ -109,8 +126,4 @@ function toggleOrderList() {
 function toggleCouponList() {
   const couponListEl = $('.coupon-list');
   couponListEl.classList.toggle('opened');
-}
-
-function createProductListEl() {
-
 }
