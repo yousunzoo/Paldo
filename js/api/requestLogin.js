@@ -1,5 +1,6 @@
 import { headers } from "./headers";
-import { setUserInfo } from "../localStorage/setIoginData";
+import { setUserInfo } from "../localStorage/setLoginData";
+import { checkAuthorization } from "./checkAuthorization";
 
 export async function logInFn(data) {
   await fetch(
@@ -18,7 +19,8 @@ export async function logInFn(data) {
     })
     .then((result) => {
       setUserInfo(result, data.email);
-      history.back();
+      checkAuthorization(result.accessToken);
+      // history.back();
     })
     .catch(() => {
       Swal.fire({
