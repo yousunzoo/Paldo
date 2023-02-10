@@ -17,10 +17,9 @@ export async function logInFn(data) {
       }
       return response.json();
     })
-    .then((result) => {
+    .then(async (result) => {
       setUserInfo(result, data.email);
-      checkAuthorization(result.accessToken);
-      // history.back();
+      history.back();
     })
     .catch(() => {
       Swal.fire({
