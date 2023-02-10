@@ -1,10 +1,4 @@
-import { headers } from "./headers";
-
-const headers = {
-  "content-type": "application/json",
-  apikey: "FcKdtJs202301",
-  username: "KDT4_Team6",
-}
+import { headers } from "../api/headers.js";
 
 export async function login() {
   const res = await fetch('https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/login', {

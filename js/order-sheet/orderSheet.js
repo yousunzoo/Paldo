@@ -31,10 +31,10 @@ initPage();
 async function initPage() {
   /* 사용자 인증 확인 */
   try {
-    console.log(await me());
+    // console.log(await me());
 
   } catch(err) {
-    location.assign('https://github.com/KDT1-FE/KDT4-Theory-JS/blob/main/builtins.md')
+    // location.assign('https://github.com/KDT1-FE/KDT4-Theory-JS/blob/main/builtins.md')
   }
 
   /* 주문 상품 섹션 Summary 출력 */
