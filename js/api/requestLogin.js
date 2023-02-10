@@ -1,5 +1,6 @@
 import { headers } from "./headers";
-import { setUserInfo } from "../localStorage/setIoginData";
+import { setUserInfo } from "../localStorage/setLoginData";
+import { checkAuthorization } from "./checkAuthorization";
 
 export async function logInFn(data) {
   await fetch(
@@ -16,7 +17,7 @@ export async function logInFn(data) {
       }
       return response.json();
     })
-    .then((result) => {
+    .then(async (result) => {
       setUserInfo(result, data.email);
       history.back();
     })

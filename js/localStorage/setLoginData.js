@@ -13,7 +13,6 @@ export function setUserInfo(result, email) {
   // localStorage에 userEmail 데이터 세팅
   let userEmail = localStorage.getItem(email);
   let userData = result.user;
-  console.log(userData);
   if (!userEmail)
     localStorage.setItem(email, JSON.stringify({ userInfo: userData }));
 }
