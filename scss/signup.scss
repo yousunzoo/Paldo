@@ -242,16 +242,26 @@ header {
 
           .signup-box {
             input {
+              &.error {
+                border: 1px solid $color_incorrect;
+              }
+              display: block;
               width: 333px;
               height: 44px;
               padding: 0 20px;
+              outline: none;
               box-sizing: border-box;
               border: 1px solid #dddddd;
-              &#user-thumbnail {
+              margin-bottom: 4px;
+              &#userThumbnail {
                 border: none;
                 padding: 0;
                 padding-top: 10px;
               }
+            }
+            .error-message {
+              color: $color_incorrect;
+              font-size: 12px;
             }
             figure {
               margin-top: 10px;

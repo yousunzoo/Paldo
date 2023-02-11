@@ -15,6 +15,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
     <link rel="stylesheet" href="./scss/signup.scss" />
+    <script defer src="./js/signup/signup.js"></script>
     <title>Document</title>
   </head>
 
@@ -85,9 +86,10 @@
                   </div>
                   <div class="signup-box">
                     <input
-                      type="email"
+                      type="text"
                       id="email"
-                      placeholder="이메일을 입력해주세요." />
+                      placeholder="이메일을 입력해주세요."
+                      required />
                   </div>
                 </div>
                 <div class="signup-section">
@@ -100,38 +102,41 @@
                     <input
                       type="password"
                       id="password"
-                      placeholder="비밀번호를 입력해주세요." />
+                      placeholder="비밀번호를 입력해주세요."
+                      required />
                   </div>
                 </div>
                 <div class="signup-section">
                   <div class="signup-text">
-                    <label class="label-id" for="password-check"
+                    <label class="label-id" for="passwordCheck"
                       >비밀번호확인<span id="ico">*</span></label
                     >
                   </div>
                   <div class="signup-box">
                     <input
                       type="password"
-                      id="password-check"
-                      placeholder="비밀번호를 다시 입력해주세요." />
+                      id="passwordCheck"
+                      placeholder="비밀번호를 다시 입력해주세요."
+                      required />
                   </div>
                 </div>
                 <div class="signup-section">
                   <div class="signup-text">
-                    <label class="label-id" for="user-name"
+                    <label class="label-id" for="userName"
                       >이름<span id="ico">*</span></label
                     >
                   </div>
                   <div class="signup-box">
                     <input
                       type="text"
-                      id="user-name"
-                      placeholder="이름을 입력해주세요." />
+                      id="userName"
+                      placeholder="이름을 입력해주세요."
+                      required />
                   </div>
                 </div>
                 <div class="signup-section">
                   <div class="signup-text">
-                    <label class="label-id">주소<span id="ico">*</span></label>
+                    <label class="label-id">주소</label>
                   </div>
                   <div class="signup-box">
                     <button>주소검색</button>
@@ -139,12 +144,10 @@
                 </div>
                 <div class="signup-section">
                   <div class="signup-text">
-                    <label class="label-id"
-                      >프로필<span id="ico">*</span></label
-                    >
+                    <label class="label-id">프로필</label>
                   </div>
                   <div class="signup-box">
-                    <input id="user-thumbnail" type="file" />
+                    <input id="userThumbnail" type="file" />
                     <figure class="check-thumbnail"></figure>
                   </div>
                 </div>
