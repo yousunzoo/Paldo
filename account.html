@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="./scss/main.scss" />
   <link rel="stylesheet" href="./scss/account.scss" />
   <title>My Ottogi</title>
+  <script defer type="module" src="./js/account/account.js"></script>
 </head>
 
 <body>
@@ -181,13 +182,13 @@
           <!-- 계좌 등록 모달창 -->
           <input type="checkbox" id="modal" />
           <label for="modal" class="add-account-btn">계좌 추가</label>
-          <div class="modal d-none">
+          <div class="modal">
             <label for="modal" class="modal-overlay"></label>
             <div class="modal-contents">
               <h2>계좌 추가</h2>
-              <form>
+              <form id="accountAddForm">
                 <ul class="bank-list">
-                  <li class="item">
+                  <!-- <li class="item">
                     <input type="radio" name="bank" id="004">
                     <label for="004">KB국민은행 [3-2-4-3]</label>
                   </li>
@@ -210,7 +211,7 @@
                   <li class="item">
                     <input type="radio" name="bank" id="090">
                     <label for="090">카카오뱅크 [4-2-7]</label>
-                  </li>
+                  </li> -->
                 </ul>
                 <div class="input-wrapper">
                   <label for="accountNumber">계좌 번호</label>

@@ -15,7 +15,7 @@ toggleCouponListEl.addEventListener('click', toggleCouponList);
 /* GLOBAL LOGIC */
 setMockData();
 initPage();
-// 주문 상품 섹션 초기 렌더링 작업 (Summary)
+
 
 /* FUNCTIONS */
 
@@ -25,10 +25,12 @@ initPage();
 async function initPage() {
   /* 사용자 인증 확인 */
   try {
-    // console.log(await me());
+    // 인증 확인
 
   } catch(err) {
-    // location.assign('https://github.com/KDT1-FE/KDT4-Theory-JS/blob/main/builtins.md')
+    // 인증 실패 시 
+    // alert !
+    // 로그인 페이지로 Redirect ! (location.assign ?)
   }
 
   /* 주문 상품 섹션 Summary 출력 */

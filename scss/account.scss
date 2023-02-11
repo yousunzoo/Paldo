@@ -26,14 +26,9 @@ body {
   }
 }
 
-.d-none {
-  display : none;
-}
-
 /* SIDE BAR */
 .side-bar {
   width : 200px;
-  // background-color: wheat;
   h2 {
     padding: 5px 0px 35px 1px;
     font-weight: 500;
@@ -266,8 +261,8 @@ body {
   #modal {
     display : none;
     &:checked ~ .modal{
-      opacity : 0;
-      visibility : hidden;
+      opacity : 1;
+      visibility : visible;
     }
     + .add-account-btn {
       display :block;
@@ -291,6 +286,8 @@ body {
         }
     }
     ~ .modal {
+      opacity : 0;
+      visibility : hidden;
       position : fixed;
       width : 100vw;
       height : 100vh;
