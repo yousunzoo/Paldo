@@ -174,141 +174,132 @@ header {
 
 #main {
   border-bottom: 1px solid #f7f7f7;
-  #content {
-    min-width: 1050px;
-    padding-bottom: 170px;
-    .main-page-wrapper {
-      width: 1050px;
+  padding-bottom: 170px;
+  .inner-wrapper {
+    width: 1050px;
+    margin: 0 auto;
+    .signup-form {
+      width: 640px;
       margin: 0 auto;
-      .signup-form {
-        width: 640px;
-        margin: 0 auto;
-        .main_title {
-          padding-top: 64px;
-          font-weight: 500;
-          font-size: 28px;
-          color: $color_black;
-          line-height: 35px;
-          text-align: center;
-          letter-spacing: -1px;
+      .main_title {
+        padding-top: 64px;
+        font-weight: 500;
+        font-size: 28px;
+        color: $color_black;
+        line-height: 35px;
+        text-align: center;
+        letter-spacing: -1px;
+      }
+      .sub {
+        padding: 23px 0px 10px;
+        font-size: 12px;
+        color: #666;
+        line-height: 17px;
+        text-align: right;
+        border-bottom: 2px solid black;
+        margin-bottom: 20px;
+        #ico {
+          padding-right: 2px;
+          color: #ee6a7b;
         }
-        .sub {
-          padding: 23px 0px 10px;
-          font-size: 12px;
-          color: #666;
-          line-height: 17px;
-          text-align: right;
-          border-bottom: 2px solid black;
-          margin-bottom:20px;
-          #ico {
-            padding-right: 2px;
-            color: #ee6a7b;
-          }
-        }
-        form {
-          .signup-section{
+      }
+      form {
+        width: fit-content;
+        margin: auto;
+        padding-top: 10px;
+        .signup-section {
+          display: flex;
+          min-height: 68px;
+          padding-top: 12px;
+
+          .signup-text {
             display: flex;
-            height: 68px;
-            padding-top: 12px;
-            
-            .signup-text{
-              display: flex;
-              width: 139px;
-              height: 48px;
-              align-items: flex-start;
-              padding-left: 15px;
-              padding-top: 10px;
+            width: 150px;
+            height: 48px;
+            align-items: flex-start;
+            padding-left: 15px;
+            padding-top: 10px;
 
-
-              button {
-                width: 333px;
-                height: 44px;
-                box-sizing: border-box;
-                border: 1px solid #dddddd;
-                
-              }
-
-              .label-id{
-                padding: 0 10px;
-                font-size: 14px;
-                font-weight: 500;
-                line-height: 20px;
-                
-                #ico {
-                  padding-right: 2px;
-                  color: #ee6a7b;
-                }
-              }
+            button {
+              width: 333px;
+              height: 44px;
+              box-sizing: border-box;
+              border: 1px solid #dddddd;
             }
 
-
-            .signup-box {
-              input {
-                width: 333px;
-                height: 44px;
-                padding: 0 20px;
-                box-sizing: border-box;
-                border: 1px solid #dddddd;
-              }
-              button {
-                display: block;
-                width: 333px;
-                height: 44px;
-                box-sizing: border-box;
-                background-color: $color_primary;
-                border: 1px solid $color_primary;
-                color: $color_white;
-                font-weight: normal;
-                box-sizing: border-box;
-                transition : .3s ease;
-              }
-              button:hover {
-                border: 1px solid $color-primary;
-                box-sizing: border-box;
-                background-color: $color-white;
-                color: $color-primary;
-              }
-            }
-            .signup-doubleCheck {
+            .label-id {
               padding: 0 10px;
-              button {
-                width: 120px;
-                height: 44px;
-                background-color: $color_primary;
-                color: $color_white;
-                border: 1px solid #333333;
-                transition : .3s ease;
-              }
-              button:hover {
-                border: 1px solid $color-primary;
-                box-sizing: border-box;
-                background-color: $color-white;
-                color: $color-primary;
+              font-size: 14px;
+              font-weight: 500;
+              line-height: 20px;
+
+              #ico {
+                padding-right: 2px;
+                color: #ee6a7b;
               }
             }
           }
-          .register-push{
-            margin: 0 auto;
-            display: flex;
-            width: 240px;
-            height: 56px;
-            font-size: 14px;
-            background-color: $color_primary;
-            color: $color_white;
-            font-weight: 500;
-            margin-top: 100px;
-            align-items: center;
-            justify-content: center;
-            box-sizing: border-box;
-            transition : .3s ease;
-            border: 1px solid transparent;
+
+          .signup-box {
+            input {
+              width: 333px;
+              height: 44px;
+              padding: 0 20px;
+              box-sizing: border-box;
+              border: 1px solid #dddddd;
+              &#user-thumbnail {
+                border: none;
+                padding: 0;
+                padding-top: 10px;
+              }
+            }
+            figure {
+              margin-top: 10px;
+              width: 150px;
+              height: 150px;
+              border: 1px solid $color_btn_border;
+            }
+            button {
+              display: block;
+              width: 333px;
+              height: 44px;
+              box-sizing: border-box;
+              background-color: $color_primary;
+              border: 1px solid $color_primary;
+              color: $color_white;
+              font-weight: normal;
+              box-sizing: border-box;
+              transition: 0.3s ease;
+            }
+            button:hover {
+              border: 1px solid $color-primary;
+              box-sizing: border-box;
+              background-color: $color-white;
+              color: $color-primary;
+            }
           }
-          .register-push:hover {
-            border: 1px solid $color-primary;
-            box-sizing: border-box;
-            background-color: $color-white;
-            color: $color-primary;
-          }
+        }
+        .register-push {
+          margin: 0 auto;
+          display: flex;
+          width: 240px;
+          height: 56px;
+          font-size: 14px;
+          background-color: $color_primary;
+          color: $color_white;
+          font-weight: 500;
+          margin-top: 100px;
+          align-items: center;
+          justify-content: center;
+          box-sizing: border-box;
+          transition: 0.3s ease;
+          border: 1px solid transparent;
+        }
+        .register-push:hover {
+          border: 1px solid $color-primary;
+          box-sizing: border-box;
+          background-color: $color-white;
+          color: $color-primary;
         }
       }
     }
