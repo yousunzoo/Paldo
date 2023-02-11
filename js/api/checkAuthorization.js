@@ -4,7 +4,7 @@ export async function checkAuthorization() {
   const loginInfo = localStorage.getItem("loginInfo");
   if (loginInfo) {
     const accessToken = JSON.parse(loginInfo).accessToken;
-    return await checkAuthorizationAPI(accessToken);
+    return await checkAuthorizationAPI(accessToken, JSON.parse(loginInfo));
   }
   return false;
 }
