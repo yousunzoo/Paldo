@@ -207,7 +207,73 @@ body {
     align-items: center;
     border-bottom: 2px solid $color_primary;
   }
+  .no-list {
+    height : 75px;
+    margin : 40px 0;
+    text-align: center;
+    letter-spacing: 0.3px;
+    line-height: 75px;
+  }
   .account-list {
-    
+    margin-top : 30px;
+    > .item {
+      height : 75px;
+      box-sizing: border-box;
+      display : flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: #fafafa;
+      border: 1px solid #eee;
+      margin-bottom : 20px;
+      .account-info {
+        > span {
+          display :inline-block;
+          margin-right : 10px;
+          &:not(:first-child)::before {
+            content: "";
+            display : inline-block;
+            width : 1px;
+            height : 12px;
+            background-color: #dadce0;
+            margin-right : 10px;
+          }
+        }
+
+      }
+      .account-delete-btn {
+        background-color: $color_primary;
+        padding : 6px 11px;
+        border : 1px solid $color_primary;
+        color : #fff;
+        cursor: pointer;
+        transition : .3s ease;
+        &:hover {
+          box-sizing: border-box;
+          color : $color_primary;
+          border : 1px solid $color_primary;
+          background-color: #fff;
+        }
+      }
+    }
+  }
+  .add-account-btn {
+    display :block;
+    margin: 40px auto 0; // top : margin-collapse
+    box-sizing: border-box;
+    width : 120px;
+    height : 40px;
+    border : 1px solid $color_primary;
+    border-radius: 0;
+    background-color: $color_primary;
+    color : #fff;
+    cursor:pointer;
+    transition : .3s ease;
+      &:hover {
+        box-sizing: border-box;
+        color : $color_primary;
+        border : 1px solid $color_primary;
+        background-color: #fff;
+      }
   }
 }
