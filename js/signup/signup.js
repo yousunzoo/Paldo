@@ -7,6 +7,7 @@ const passwordInput = document.querySelector("#password");
 const passwordCheckInput = document.querySelector("#passwordCheck");
 const userNameInput = document.querySelector("#userName");
 const thumbnailInput = document.querySelector("#userThumbnail");
+const thumbnailFigure = document.querySelector(".check-thumbnail");
 
 // 유효성 오류 시 보여질 메세지 span
 const errorMessageSpan = makeDOMwithProperties("span", {
@@ -30,6 +31,18 @@ passwordCheckInput.addEventListener("keyup", (event) => {
 // 사용자 이름 유효성 검사
 userNameInput.addEventListener("keyup", (event) => {
   validUserNameCheck(event.target.value);
+});
+
+// 썸네일 파일 업로드 시 썸네일 보이도록
+thumbnailInput.addEventListener("change", (event) => {
+  const file = thumbnailInput.files[0];
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  const profileImgBase64 = reader.addEventListener("load", (e) => {
+    const profileImgBase64 = e.target.result;
+    thumbnailFigure.innerHTML = `<img src=${profileImgBase64} alt="선택한 사진" />`;
+    return profileImgBase64;
+  });
 });
 
 function validEmailCheck(email) {
