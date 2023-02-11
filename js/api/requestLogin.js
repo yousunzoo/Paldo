@@ -1,16 +1,12 @@
-import { headers } from "./headers";
+import { headers, url } from "./headers";
 import { setUserInfo } from "../localStorage/setLoginData";
-import { checkAuthorization } from "./checkAuthorization";
 
 export async function logInFn(data) {
-  await fetch(
-    "https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/login",
-    {
-      method: "POST",
-      headers,
-      body: JSON.stringify(data),
-    }
-  )
+  await fetch(`${url}auth/login`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(data),
+  })
     .then((response) => {
       if (!response.ok) {
         throw new Error(response.status);

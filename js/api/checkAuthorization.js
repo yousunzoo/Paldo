@@ -15,7 +15,6 @@ async function checkAuthorizationAPI(accessToken) {
     headers: {
       ...headers,
       Authorization: `Bearer ${accessToken}`,
-      masterKey: true,
     },
   })
     .then((response) => {
@@ -26,6 +25,9 @@ async function checkAuthorizationAPI(accessToken) {
     })
     .then((result) => {
       return result ? true : false;
+    })
+    .catch((error) => {
+      return null;
     });
   return res;
 }
