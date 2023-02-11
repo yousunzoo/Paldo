@@ -17,12 +17,6 @@ setMockData();
 initPage();
 // 주문 상품 섹션 초기 렌더링 작업 (Summary)
 
-
-
-
-
-
-
 /* FUNCTIONS */
 
 /**
