@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
   <link rel="stylesheet" href="./scss/main.scss" />
-  <link rel="stylesheet" href="./scss/personal-info-modify.scss" />
+  <link rel="stylesheet" href="./scss/order-list.scss" />
   <title>My Ottogi</title>
 </head>
 
@@ -65,6 +65,7 @@
       </div>
     </header>
 
+
     <section id="main">
 
       <!-- USER INFO -->
@@ -109,9 +110,15 @@
         <aside class="side-bar">
           <h2>마이페이지</h2>
           <ul class="menu">
-            <li class="item">
+            <li class="item active">
               <a href="javascript:void(0)">
                 주문 내역
+                <i class="bi bi-chevron-right"></i>
+              </a>
+            </li>
+            <li class="item">
+              <a href="javascript:void(0)">
+                계좌 관리
                 <i class="bi bi-chevron-right"></i>
               </a>
             </li>
@@ -121,7 +128,7 @@
                 <i class="bi bi-chevron-right"></i>
               </a>
             </li>
-            <li class="item active">
+            <li class="item">
               <a href="javascript:void(0)">
                 개인 정보 수정
                 <i class="bi bi-chevron-right"></i>
@@ -140,84 +147,135 @@
         <!-- MAIN SECTION -->
         <div class="main">
 
-          <!-- SECTION HEADER -->
           <div class="header">
-            <h2>개인 정보 수정</h2>
+            <div class="wrapper">
+              <h2>주문 내역</h2>
+              <p>최대 지난 3년간의 주문 내역까지 확인할 수 있어요</p>
+            </div>
+            <div class="selector">
+              <!-- 드롭다운 메뉴 -->
+            </div>
           </div>
 
-          <!-- SECTION CONTENT -->
-          <div class="content">
-            <form action="" method="POST" onsubmit="return on_submit_check();">
-              <fieldset>
-                <div class="content-section">
-                  <div class="content-text">
-                    <label class="label-id">이메일</label>
-                  </div>
-                  <div class="content-box">
-                    <input type="email" disabled />
-                  </div>
-                  <div class="content-doubleCheck"></div>
-                </div>
-                <div class="content-section">
-                  <div class="content-text">
-                    <label class="label-id">현재 비밀번호</label>
-                  </div>
-                  <div class="content-box">
-                    <input type="password" placeholder="비밀번호를 입력해주세요." />
-                  </div>
-                  <div class="content-doubleCheck"></div>
-                </div>
-                <div class="content-section">
-                  <div class="content-text">
-                    <label class="label-id">새 비밀번호</label>
-                  </div>
-                  <div class="content-box">
-                    <input type="password" placeholder="새 비밀번호를 입력해주세요." />
-                  </div>
-                </div>
-                <div class="content-section">
-                  <div class="content-text">
-                    <label class="label-id">새 비밀번호 확인</label>
-                  </div>
-                  <div class="content-box">
-                    <input type="password" placeholder="비밀번호 확인을 입력해주세요." />
-                  </div>
-                </div>
-                <div class="content-section">
-                  <div class="content-text">
-                    <label class="label-id">이름</label>
-                  </div>
-                  <div class="content-box">
-                    <input type="text" placeholder="이름을 입력해주세요." />
-                  </div>
-                </div>
-                <div class="content-section">
-                  <div class="content-text">
-                    <label class="label-id">주소</label>
-                  </div>
-                  <div class="content-box">
-                    <button>주소 검색</button>
-                  </div>
-                </div>
-                <div class="content-section">
-                  <div class="content-text">
-                    <label class="label-id">프로필</label>
-                  </div>
-                  <div class="content-box">
-                    <button>프로필 추가</button>
-                  </div>
-                </div>
+          <div class="divider"></div>
 
-                <button class="register-push">수정하기</button>
-              </fieldset>
-            </form>
+          <ul class="order-list">
+            <li class="item">
+              <div class="wrapper">
+                <span>2023.01.18 (20시 10분)</span>
+                <a href="javascript:void(0)">주문내역 상세보기</a>
+              </div>
+              <div class="order-area">
+                <div class="info">
+                  <img class="thumbnail" src="./static/images/product/감자깡.png" alt="감자깡" height="60px" />
+                  <div class="info-list">
+                    <dl>
+                      <dt>상품명</dt>
+                      <dd>[선물세트] 태우1+한우 실속 구이세트 (냉장)</dd>
+                    </dl>
+                    <dl>
+                      <dt>주문번호</dt>
+                      <dd>2293920100221</dd>
+                    </dl>
+                    <dl>
+                      <dt>결제방법</dt>
+                      <dd>신용카드</dd>
+                    </dl>
+                    <dl>
+                      <dt>결제금액</dt>
+                      <dd>131,000원</dd>
+                    </dl>
+                  </div>
+                </div>
+                <div class="side-info">
+                  <span>배송완료</span>
+                  <div>
+                    <button type="button" height="36" radius="3">
+                      <span>1:1 문의</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="item">
+              <div class="wrapper">
+                <span>2023.01.18 (20시 10분)</span>
+                <a href="javascript:void(0)">주문내역 상세보기</a>
+              </div>
+              <div class="order-area">
+                <div class="info">
+                  <img class="thumbnail" src="./static/images/product/감자깡.png" alt="감자깡" height="60px" />
+                  <div class="info-list">
+                    <dl>
+                      <dt>상품명</dt>
+                      <dd>[선물세트] 태우1+한우 실속 구이세트 (냉장)</dd>
+                    </dl>
+                    <dl>
+                      <dt>주문번호</dt>
+                      <dd>2293920100221</dd>
+                    </dl>
+                    <dl>
+                      <dt>결제방법</dt>
+                      <dd>신용카드</dd>
+                    </dl>
+                    <dl>
+                      <dt>결제금액</dt>
+                      <dd>131,000원</dd>
+                    </dl>
+                  </div>
+                </div>
+                <div class="side-info">
+                  <span>배송완료</span>
+                  <div>
+                    <button type="button" height="36" radius="3">
+                      <span>1:1 문의</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="item">
+              <div class="wrapper">
+                <span>2023.01.18 (20시 10분)</span>
+                <a href="javascript:void(0)">주문내역 상세보기</a>
+              </div>
+              <div class="order-area">
+                <div class="info">
+                  <img class="thumbnail" src="./static/images/product/감자깡.png" alt="감자깡" height="60px" />
+                  <div class="info-list">
+                    <dl>
+                      <dt>상품명</dt>
+                      <dd>[선물세트] 태우1+한우 실속 구이세트 (냉장)</dd>
+                    </dl>
+                    <dl>
+                      <dt>주문번호</dt>
+                      <dd>2293920100221</dd>
+                    </dl>
+                    <dl>
+                      <dt>결제방법</dt>
+                      <dd>신용카드</dd>
+                    </dl>
+                    <dl>
+                      <dt>결제금액</dt>
+                      <dd>131,000원</dd>
+                    </dl>
+                  </div>
+                </div>
+                <div class="side-info">
+                  <span>배송완료</span>
+                  <div>
+                    <button type="button" height="36" radius="3">
+                      <span>1:1 문의</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </li>
 
-          </div>
+          </ul>
 
         </div>
-
       </div>
-
     </section>
 
     <footer>
