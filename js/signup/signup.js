@@ -1,6 +1,20 @@
-// input에 입력 시 유효성 체크
-
 import { makeDOMwithProperties } from "../utils/dom";
+
+// input에 입력 시 유효성 체크
+// 회원가입 정보 input 만들어서 서버 제출 및 localStorage 세팅
+const userInfo = {
+  email: "",
+  password: "",
+  displayName: "",
+  profileImgBase64: "",
+};
+
+const validCheck = {
+  email: false,
+  password: false,
+  passwordCheck: false,
+  displayName: false,
+};
 
 const emailInput = document.querySelector("#email");
 const passwordInput = document.querySelector("#password");
@@ -8,6 +22,19 @@ const passwordCheckInput = document.querySelector("#passwordCheck");
 const userNameInput = document.querySelector("#userName");
 const thumbnailInput = document.querySelector("#userThumbnail");
 const thumbnailFigure = document.querySelector(".check-thumbnail");
+const signupButton = document.querySelector(".signup-button");
+
+// 제출 버튼 클릭
+signupButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  const isInvalid = Object.values(validCheck).includes(false);
+  if (isInvalid) {
+    Swal.fire({
+      icon: "error",
+      text: "입력하신 정보를 확인해주세요.",
+    });
+  }
+});
 
 // 유효성 오류 시 보여질 메세지 span
 const errorMessageSpan = makeDOMwithProperties("span", {
@@ -16,7 +43,7 @@ const errorMessageSpan = makeDOMwithProperties("span", {
 
 // 이메일 유효성 검사
 emailInput.addEventListener("keyup", (event) => {
-  validEmailCheck(event.target.value);
+  return validEmailCheck(event.target.value);
 });
 
 // 패스워드 유효성 검사
@@ -34,7 +61,7 @@ userNameInput.addEventListener("keyup", (event) => {
 });
 
 // 썸네일 파일 업로드 시 썸네일 보이도록
-thumbnailInput.addEventListener("change", (event) => {
+thumbnailInput.addEventListener("change", () => {
   const file = thumbnailInput.files[0];
   const reader = new FileReader();
   reader.readAsDataURL(file);
@@ -52,13 +79,13 @@ function validEmailCheck(email) {
     if (emailInput.parentElement.querySelector(".error-message")) {
       emailInput.parentElement.removeChild(errorMessageSpan);
       emailInput.classList.remove("error");
+      validCheck.email = true;
     }
-    return true;
   } else {
     errorMessageSpan.textContent = "올바른 이메일 형식을 입력해주세요";
     emailInput.parentElement.append(errorMessageSpan);
     emailInput.classList.add("error");
-    return false;
+    validCheck.email = false;
   }
 }
 
@@ -71,21 +98,22 @@ function validpassWordCheck(password) {
       "비밀번호를 8자리 이상 20자리 이하로 입력해주세요.";
     passwordInput.parentElement.append(errorMessageSpan);
     passwordInput.classList.add("error");
-    return false;
+    validCheck.password = false;
   } else if (password.search(/\s/) != -1) {
     errorMessageSpan.textContent = "비밀번호는 공백 없이 입력해주세요.";
     passwordInput.parentElement.append(errorMessageSpan);
     passwordInput.classList.add("error");
-    return false;
+    validCheck.password = false;
   } else if (num < 0 || eng < 0) {
     errorMessageSpan.textContent = "영문,숫자를 혼합하여 입력해주세요.";
     passwordInput.parentElement.append(errorMessageSpan);
     passwordInput.classList.add("error");
-    return false;
+    validCheck.password = false;
   } else {
     if (passwordInput.parentElement.querySelector(".error-message")) {
       passwordInput.parentElement.removeChild(errorMessageSpan);
       passwordInput.classList.remove("error");
+      validCheck.password = true;
     }
   }
 }
@@ -96,13 +124,14 @@ function samePasswordCheck(password) {
     errorMessageSpan.textContent = "비밀번호가 일치하지 않습니다.";
     passwordCheckInput.parentElement.append(errorMessageSpan);
     passwordCheckInput.classList.add("error");
-    return false;
+    validCheck.passwordCheck = false;
   } else {
     if (passwordCheckInput.parentElement.querySelector(".error-message")) {
       passwordCheckInput.parentElement.removeChild(errorMessageSpan);
       passwordCheckInput.classList.remove("error");
     }
-    return true;
+
+    validCheck.passwordCheck = true;
   }
 }
 
@@ -111,12 +140,12 @@ function validUserNameCheck(userName) {
     errorMessageSpan.textContent = "사용자 이름은 20자 이하여야 합니다.";
     userNameInput.parentElement.append(errorMessageSpan);
     userNameInput.classList.add("error");
-    return false;
+    validCheck.displayName = false;
   } else {
     if (userNameInput.parentElement.querySelector(".error-message")) {
       userNameInput.parentElement.removeChild(errorMessageSpan);
       userNameInput.classList.remove("error");
     }
-    return true;
+    validCheck.displayName = true;
   }
 }
