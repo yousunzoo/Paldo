@@ -28,7 +28,9 @@ passwordCheckInput.addEventListener("keyup", (event) => {
   samePasswordCheck(event.target.value);
 });
 // 사용자 이름 유효성 검사
-userNameInput;
+userNameInput.addEventListener("keyup", (event) => {
+  validUserNameCheck(event.target.value);
+});
 
 function validEmailCheck(email) {
   const pattern =
@@ -38,10 +40,12 @@ function validEmailCheck(email) {
       emailInput.parentElement.removeChild(errorMessageSpan);
       emailInput.classList.remove("error");
     }
+    return true;
   } else {
     errorMessageSpan.textContent = "올바른 이메일 형식을 입력해주세요";
     emailInput.parentElement.append(errorMessageSpan);
     emailInput.classList.add("error");
+    return false;
   }
 }
 
@@ -85,5 +89,21 @@ function samePasswordCheck(password) {
       passwordCheckInput.parentElement.removeChild(errorMessageSpan);
       passwordCheckInput.classList.remove("error");
     }
+    return true;
+  }
+}
+
+function validUserNameCheck(userName) {
+  if (userName.length > 20) {
+    errorMessageSpan.textContent = "사용자 이름은 20자 이하여야 합니다.";
+    userNameInput.parentElement.append(errorMessageSpan);
+    userNameInput.classList.add("error");
+    return false;
+  } else {
+    if (userNameInput.parentElement.querySelector(".error-message")) {
+      userNameInput.parentElement.removeChild(errorMessageSpan);
+      userNameInput.classList.remove("error");
+    }
+    return true;
   }
 }
