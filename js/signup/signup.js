@@ -13,23 +13,77 @@ const errorMessageSpan = makeDOMwithProperties("span", {
   className: "error-message",
 });
 
+// 이메일 유효성 검사
 emailInput.addEventListener("keyup", (event) => {
-  validEmail(event.target.value);
+  validEmailCheck(event.target.value);
 });
 
-function validEmail(email) {
-  if (validEmailCheck(email) == false) {
+// 패스워드 유효성 검사
+passwordInput.addEventListener("keyup", (event) => {
+  validpassWordCheck(event.target.value);
+});
+
+// 패스워드 확인 유효성 검사
+passwordCheckInput.addEventListener("keyup", (event) => {
+  samePasswordCheck(event.target.value);
+});
+// 사용자 이름 유효성 검사
+userNameInput;
+
+function validEmailCheck(email) {
+  const pattern =
+    /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+  if (email.match(pattern) != null) {
+    if (emailInput.parentElement.querySelector(".error-message")) {
+      emailInput.parentElement.removeChild(errorMessageSpan);
+      emailInput.classList.remove("error");
+    }
+  } else {
     errorMessageSpan.textContent = "올바른 이메일 형식을 입력해주세요";
     emailInput.parentElement.append(errorMessageSpan);
     emailInput.classList.add("error");
-  } else {
-    emailInput.parentElement.removeChild(errorMessageSpan);
-    emailInput.classList.remove("error");
   }
 }
 
-function validEmailCheck(email) {
-  var pattern =
-    /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-  return email.match(pattern) != null;
+function validpassWordCheck(password) {
+  const num = password.search(/[0-9]/g);
+  const eng = password.search(/[a-z]/gi);
+
+  if (password.length < 8 || password.length > 20) {
+    errorMessageSpan.textContent =
+      "비밀번호를 8자리 이상 20자리 이하로 입력해주세요.";
+    passwordInput.parentElement.append(errorMessageSpan);
+    passwordInput.classList.add("error");
+    return false;
+  } else if (password.search(/\s/) != -1) {
+    errorMessageSpan.textContent = "비밀번호는 공백 없이 입력해주세요.";
+    passwordInput.parentElement.append(errorMessageSpan);
+    passwordInput.classList.add("error");
+    return false;
+  } else if (num < 0 || eng < 0) {
+    errorMessageSpan.textContent = "영문,숫자를 혼합하여 입력해주세요.";
+    passwordInput.parentElement.append(errorMessageSpan);
+    passwordInput.classList.add("error");
+    return false;
+  } else {
+    if (passwordInput.parentElement.querySelector(".error-message")) {
+      passwordInput.parentElement.removeChild(errorMessageSpan);
+      passwordInput.classList.remove("error");
+    }
+  }
+}
+
+function samePasswordCheck(password) {
+  const enteredPassword = passwordInput.value;
+  if (password != enteredPassword) {
+    errorMessageSpan.textContent = "비밀번호가 일치하지 않습니다.";
+    passwordCheckInput.parentElement.append(errorMessageSpan);
+    passwordCheckInput.classList.add("error");
+    return false;
+  } else {
+    if (passwordCheckInput.parentElement.querySelector(".error-message")) {
+      passwordCheckInput.parentElement.removeChild(errorMessageSpan);
+      passwordCheckInput.classList.remove("error");
+    }
+  }
 }
