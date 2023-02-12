@@ -1,3 +1,5 @@
+import { requestSignup } from "../api/requestSignup";
+import { setUserInfo } from "../localStorage/setLoginData";
 import { makeDOMwithProperties } from "../utils/dom";
 
 // input에 입력 시 유효성 체크
@@ -6,7 +8,6 @@ const userInfo = {
   email: "",
   password: "",
   displayName: "",
-  profileImgBase64: "",
 };
 
 const validCheck = {
@@ -25,7 +26,7 @@ const thumbnailFigure = document.querySelector(".check-thumbnail");
 const signupButton = document.querySelector(".signup-button");
 
 // 제출 버튼 클릭
-signupButton.addEventListener("click", (event) => {
+signupButton.addEventListener("click", async (event) => {
   event.preventDefault();
   const isInvalid = Object.values(validCheck).includes(false);
   if (isInvalid) {
@@ -33,7 +34,14 @@ signupButton.addEventListener("click", (event) => {
       icon: "error",
       text: "입력하신 정보를 확인해주세요.",
     });
+    return;
   }
+
+  // 회원가입 요청
+  const result = await requestSignup(userInfo);
+
+  // localStorage에 회원정보 저장
+  setUserInfo(result, userInfo.email);
 });
 
 // 이메일 유효성 검사
@@ -73,6 +81,7 @@ function validEmailCheck(email) {
         .classList.remove("active");
       emailInput.classList.remove("error");
       validCheck.email = true;
+      userInfo.email = email;
     }
   } else {
     // errorMessageSpan.textContent = "올바른 이메일 형식을 입력해주세요";
@@ -112,6 +121,7 @@ function validpassWordCheck(password) {
       passwordErrorMesssage.classList.remove("active");
       passwordInput.classList.remove("error");
       validCheck.password = true;
+      userInfo.password = password;
     }
   }
 }
@@ -148,6 +158,7 @@ function validUserNameCheck(userName) {
       userNameInput.classList.remove("error");
     }
     validCheck.displayName = true;
+    userInfo.displayName = userName;
   }
 }
 
@@ -163,23 +174,26 @@ function validThumbnailCheck(file) {
   ];
   const errorMessageSpan =
     thumbnailInput.parentElement.querySelector(".error-message");
-  console.log(file.type);
   // 파일 크기 1MB 이하
   if (file.size > MAXIMUM_SIZE) {
     errorMessageSpan.textContent = "파일 크기는 1MB 이하여야 합니다.";
     errorMessageSpan.classList.add("active");
+    validCheck.thumbnail = false;
     return;
   } else if (!validFileType.includes(file.type)) {
     errorMessageSpan.textContent = "유효한 파일 형식이 아닙니다.";
     !errorMessageSpan.classList.contains("active") &&
       errorMessageSpan.classList.add("active");
+    validCheck.thumbnail = false;
+    return;
   } else {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.addEventListener("load", (e) => {
       const profileImgBase64 = e.target.result;
       thumbnailFigure.innerHTML = `<img src=${profileImgBase64} alt="선택한 사진" />`;
-      return profileImgBase64;
+      validCheck.thumbnail = true;
+      userInfo.profileImgBase64 = profileImgBase64;
     });
   }
 }
