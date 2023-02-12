@@ -361,6 +361,15 @@ body {
             margin-top : 20px;
             font-size: 13px;
             color : #b0afaf;
+            p {
+              display : flex;
+              line-height: 16px;
+              &::before {
+                content: "※";
+                display : inline-block;
+                margin-right : 3px;
+              }
+            }
           }
           .confirm-btn {
             display : block;
