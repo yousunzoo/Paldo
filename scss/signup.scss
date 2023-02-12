@@ -262,6 +262,10 @@ header {
             .error-message {
               color: $color_incorrect;
               font-size: 12px;
+              display: none;
+              &.active {
+                display: inline;
+              }
             }
             figure {
               margin-top: 10px;
