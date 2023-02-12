@@ -1,10 +1,10 @@
 import { checkAuthorization } from "./api/checkAuthorization";
 import { changeHeader } from "./main/changeHeader";
 
-window.onload = async function () {
+document.addEventListener("DOMContentLoaded", async () => {
   const isLogin = await checkAuthorization();
 
   if (isLogin) {
     changeHeader();
   }
-};
+});
