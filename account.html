@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="./scss/main.scss" />
   <link rel="stylesheet" href="./scss/account.scss" />
   <title>My Ottogi</title>
+
+  <!-- scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script defer type="module" src="./js/account/account.js"></script>
 </head>
 
@@ -186,7 +189,7 @@
             <label for="modal" class="modal-overlay"></label>
             <div class="modal-contents">
               <h2>계좌 추가</h2>
-              <form id="accountAddForm">
+              <form id="accountForm">
                 <ul class="bank-list">
                   <!-- <li class="item">
                     <input type="radio" name="bank" id="004">
@@ -219,7 +222,8 @@
                 </div>
                 <div class="input-wrapper">
                   <label for="phoneNumber">전화 번호</label>
-                  <input type="text" id="phoneNumber" required placeholder="사용자 전화번호를 입력해주세요." />
+                  <input type="text" id="phoneNumber" required placeholder="사용자 전화번호를 입력해주세요." minlength="11"
+                    maxlength="11" />
                 </div>
                 <div class="account-info">
                   <p>은행 옆의 []안의 숫자를 모두 더하면 각 은행의 유효한 계좌번호 길이가 됩니다.</p>
