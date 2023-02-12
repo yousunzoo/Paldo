@@ -16,6 +16,8 @@
     <script defer src="./js/signup/signup.js"></script>
     <!-- sweetAlert2 -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- postcode.map -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <title>Document</title>
   </head>
 
@@ -148,8 +150,19 @@
                   <div class="signup-text">
                     <label class="label-id">주소</label>
                   </div>
-                  <div class="signup-box">
-                    <button>주소검색</button>
+                  <div class="signup-box address-box">
+                    <div class="inline-div">
+                      <input type="text" id="postcode" placeholder="우편번호" />
+                      <button class="find-address">우편번호 찾기</button>
+                    </div>
+                    <input
+                      type="text"
+                      id="roadAddress"
+                      placeholder="도로명주소" />
+                    <input
+                      type="text"
+                      id="detailAddress"
+                      placeholder="상세주소" />
                   </div>
                 </div>
                 <div class="signup-section">

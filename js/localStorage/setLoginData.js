@@ -1,4 +1,4 @@
-export function setUserInfo(result, email) {
+export function setUserInfo(result, email, userAddress = "") {
   // localStorage에 loginInfoData 세팅
   let loginInfoData = localStorage.getItem("loginInfo");
   if (!loginInfoData) {
@@ -14,5 +14,8 @@ export function setUserInfo(result, email) {
   let userEmail = localStorage.getItem(email);
   let userData = result.user;
   if (!userEmail)
-    localStorage.setItem(email, JSON.stringify({ userInfo: userData }));
+    localStorage.setItem(
+      email,
+      JSON.stringify({ userInfo: userData, userAddress })
+    );
 }

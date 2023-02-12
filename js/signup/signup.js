@@ -1,6 +1,5 @@
 import { requestSignup } from "../api/requestSignup";
-import { setUserInfo } from "../localStorage/setLoginData";
-import { makeDOMwithProperties } from "../utils/dom";
+import getAddress from "../library/postcode";
 
 // input에 입력 시 유효성 체크
 // 회원가입 정보 input 만들어서 서버 제출 및 localStorage 세팅
@@ -17,6 +16,8 @@ const validCheck = {
   displayName: false,
 };
 
+const userAddress = {};
+
 const emailInput = document.querySelector("#email");
 const passwordInput = document.querySelector("#password");
 const passwordCheckInput = document.querySelector("#passwordCheck");
@@ -24,7 +25,7 @@ const userNameInput = document.querySelector("#userName");
 const thumbnailInput = document.querySelector("#userThumbnail");
 const thumbnailFigure = document.querySelector(".check-thumbnail");
 const signupButton = document.querySelector(".signup-button");
-
+const findAddresssButton = document.querySelector(".find-address");
 // 제출 버튼 클릭
 signupButton.addEventListener("click", async (event) => {
   event.preventDefault();
@@ -36,8 +37,9 @@ signupButton.addEventListener("click", async (event) => {
     });
     return;
   }
-  // 회원가입 요청
-  await requestSignup(userInfo);
+  // 주소 체크
+  addressCheck();
+  await requestSignup(userInfo, userAddress);
 });
 
 // 이메일 유효성 검사
@@ -63,6 +65,12 @@ userNameInput.addEventListener("input", (event) => {
 thumbnailInput.addEventListener("change", () => {
   const file = thumbnailInput.files[0];
   validThumbnailCheck(file);
+});
+
+// 주소 검색
+findAddresssButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  getAddress();
 });
 
 function validEmailCheck(email) {
@@ -192,4 +200,16 @@ function validThumbnailCheck(file) {
       userInfo.profileImgBase64 = profileImgBase64;
     });
   }
+}
+
+function addressCheck() {
+  // 주소 값 변경되는 것 탐색
+  const addressInputs = document
+    .querySelector(".address-box")
+    .querySelectorAll("input");
+
+  addressInputs.forEach((input) => {
+    const inputId = input.id;
+    userAddress[inputId] = input.value;
+  });
 }

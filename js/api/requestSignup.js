@@ -1,7 +1,8 @@
+import { setUserInfo } from "../localStorage/setLoginData";
 import { headers, url } from "./headers";
 
-export async function requestSignup(signupData) {
-  const res = await fetch(`${url}auth/signup`, {
+export async function requestSignup(signupData, userAddress) {
+  await fetch(`${url}auth/signup`, {
     method: "POST",
     headers,
     body: JSON.stringify(signupData),
@@ -13,7 +14,7 @@ export async function requestSignup(signupData) {
       return response.json();
     })
     .then((result) => {
-      setUserInfo(result, signupData.email);
+      setUserInfo(result, signupData.email, userAddress);
       history.back();
     })
     .catch((error) => {
