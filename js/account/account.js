@@ -3,12 +3,33 @@ import { getBankList, connectBankAccount, getUserAccounts, deleteAccount } from 
 import { $ } from './utils/dom.js';
 import { makeDOMwithProperties } from '../utils/dom.js';
 
-/* DOM */
-const modalTrigger = $('.add-account-btn');
+/* GLOBAL LOGIC */
 
-/**
- * 계좌 추가를 위한 모달창 작업
- */
+/* 
+토큰 만료 시 실행 (로그인 기능 fetch 시 삭제 예정)
+  logInFn({
+    email : "testuser@gmail.com",
+    password : "12345678"
+  }) 
+*/
+
+// IIFE
+;(async function () {
+  const isValidUser = await checkAuthorization();
+  if(isValidUser) {
+    initPage();
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: '사용자 세션이 만료되었습니다.',
+      text: '로그인 페이지로 이동합니다.',
+    })
+    // 로그인 페이지로 redirect
+    // location.assign('로그인 페이지 경로')
+  }
+})()
+
+const modalTrigger = $('.add-account-btn');
 modalTrigger.addEventListener('click', async () => {
   // 계좌 목록 조회 API !
   let bankList = await getBankList();
@@ -28,7 +49,7 @@ modalTrigger.addEventListener('click', async () => {
   const accountFormEl = $('#accountForm');
   accountFormEl.addEventListener('submit', submitAccountForm)
 
-  // FUNCTIONS
+  // MODAL FUNCTIONS
   function createBankList(bankList) {
     bankList = bankList.filter(bank => {
       return bank.name !== "케이뱅크" // 케이뱅크는 목록에서 제외합니다.
@@ -118,31 +139,6 @@ modalTrigger.addEventListener('click', async () => {
     }
   }
 })
-
-
-
-/* GLOBAL LOGIC */
-
-// 토큰 만료 시 실행 (로그인 기능 fetch 시 삭제 예정)
-// logInFn({
-//   email : "testuser@gmail.com",
-//   password : "12345678"
-// })
-;(async function () {
-  const isValidUser = await checkAuthorization();
-  if(isValidUser) {
-    initPage();
-  } else {
-    Swal.fire({
-      icon: 'error',
-      title: '사용자 세션이 만료되었습니다.',
-      text: '로그인 페이지로 이동합니다.',
-    })
-    // 로그인 페이지로 redirect
-    // location.assign('로그인 페이지 경로')
-  }
-})()
-
 
 // FUNCTIONS
 async function initPage() {
@@ -252,7 +248,7 @@ function renderAccountList (accountList) {
 function renderEmptyList () {
   const ulEl = $('.account-list');
   ulEl.innerHTML = '';
-  
+
   const noListEl = $('.no-list');
   noListEl.classList.remove('d-none');
 }
