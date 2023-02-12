@@ -1,22 +1,18 @@
-import { getBankList, connectBankAccount } from './accountApi.js';
-
-/* COMMON */
-const $ = selector => document.querySelector(selector)
+import { logInFn } from '../api/requestLogin.js'
+import { checkAuthorization } from '../api/checkAuthorization.js'
+import { getBankList, connectBankAccount, getUserAccounts } from './accountApi.js';
+import { getAccessTokenFromLocalStorage } from './utils/localStorage.js';
+import { $ } from './utils/dom.js'
 
 /* DOM */
 const modalTrigger = $('.add-account-btn');
-const accountFormEl = $('#accountForm');
-
-/* EVENT HANDLER */
 
 /**
  * 계좌 추가를 위한 모달창 작업
  */
 modalTrigger.addEventListener('click', async () => {
-  // localStroage Get !
-  const json = localStorage.getItem('loginInfo');
-  const loginInfo = JSON.parse(json);
-  const { accessToken } = loginInfo;
+  // accessToken Get !
+  const accessToken = getAccessTokenFromLocalStorage();
 
   // 계좌 목록 조회 API !
   let bankList = await getBankList(accessToken);
@@ -57,6 +53,7 @@ modalTrigger.addEventListener('click', async () => {
   }
 
   // 이벤트 핸들러 : 폼 submit
+  const accountFormEl = $('#accountForm');
   accountFormEl.addEventListener('submit', submitAccountForm)
 
   function submitAccountForm(event) {
@@ -85,12 +82,12 @@ modalTrigger.addEventListener('click', async () => {
     try {
       connectBankAccount(accessToken, submitData)
     } catch(err) {
-      console.error(err);
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: '계좌 등록에 실패했습니다.',
       })
+      console.error(err);
     }
 
     const modalEl = $('input[type="checkbox"]#modal');
@@ -105,4 +102,67 @@ modalTrigger.addEventListener('click', async () => {
 
 
 /* GLOBAL LOGIC */
-// 사용자 인증 확인
+
+// 토큰 만료 시 실행 (로그인 기능 fetch 시 삭제 예정)
+// logInFn({
+//   email : "testuser@gmail.com",
+//   password : "12345678"
+// })
+;(async function () {
+  const isValidUser = await checkAuthorization();
+  console.log(isValidUser)
+  if(isValidUser) {
+    initPage();
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: '사용자 세션이 만료되었습니다.',
+      text: '로그인 페이지로 이동합니다.',
+    })
+    // 로그인 페이지로 redirect
+    // location.assign('로그인 페이지 경로')
+  }
+})()
+
+  // initPage();
+
+
+async function initPage() {
+  // 사용자 계좌 목록 조회
+  const accessToken = getAccessTokenFromLocalStorage();
+  const res = await getUserAccounts(accessToken);
+  const accountList = res.accounts || [];
+  console.log(accountList)
+
+  // 있을 때 없을 때 구분하여 렌더링
+  // 있을 때
+  if(accountList.length === 0) {
+    // 없을 때
+  } else {
+    const noListEl = $('.no-list');
+    noListEl.classList.add('d-none');
+
+    // DOM Create !
+    const templateEl = document.createElement('template');
+    accountList.forEach(account => {
+      const { bankName, accountNumber, balance } = account;
+      const formattedBalance = balance.toLocaleString('ko-KR')
+      templateEl.innerHTML += /* html */`
+        <li class="item">
+          <div class="account-info">
+            <span id="account-bank">${bankName}</span>
+            <span id="account-number">${accountNumber}</span>
+            <span id="account-balance">${formattedBalance}</span>
+          </div>
+          <button class="account-delete-btn">삭제</button>
+        </li>
+      `
+    })
+    // Render !
+    const ulEl = $('.account-list');
+    ulEl.innerHTML = '';
+    ulEl.append(templateEl.content);
+  }
+}
+
+// 계좌 해지(삭제) 기능 추가
