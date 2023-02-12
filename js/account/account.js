@@ -12,37 +12,47 @@ const modalTrigger = $('.add-account-btn');
  * 계좌 추가를 위한 모달창 작업
  */
 modalTrigger.addEventListener('click', async () => {
-  // accessToken Get !
-  const accessToken = getAccessTokenFromLocalStorage();
-
   // 계좌 목록 조회 API !
-  let bankList = await getBankList(accessToken);
+  let bankList = await getBankList();
 
-  // DOM Create !
-  bankList = bankList.filter(bank => {
-    return bank.name !== "케이뱅크" // 케이뱅크는 목록에서 제외합니다.
-  });
+  // DOM 생성 !
+  const templateEl = createBankList(bankList);
 
-  const templateEl = document.createElement('template');
-  bankList.forEach(bank => {
-    const { name, code, digits } = bank;
-    const digitsFormat = String(digits).replaceAll(',', '-') // 계좌 번호 간 구분 기호로 좀 더 친숙한 하이픈으로 교체합니다.
-    templateEl.innerHTML += /* html */`
-      <li class="item">
-        <input type="radio" name="bank" id=${code} required>
-        <label for=${code}>${name} [${digitsFormat}]</label>
-      </li>
-    `
-  })
   // Render !
-  const ulEl = $('.bank-list');
-  ulEl.innerHTML = '';
-  ulEl.append(templateEl.content)
+  renderBankList(templateEl);
 
-  // 이벤트 핸들러 : 계좌 자리수 추출을 위한 select change
   let totalDigits;
+  const ulEl = $('.bank-list');
   ulEl.addEventListener('change', getTotalAccountDigits)
 
+  // 이벤트 핸들러 : 폼 submit
+  const accountFormEl = $('#accountForm');
+  accountFormEl.addEventListener('submit', submitAccountForm)
+
+  // FUNCTIONS
+  function createBankList(bankList) {
+    bankList = bankList.filter(bank => {
+      return bank.name !== "케이뱅크" // 케이뱅크는 목록에서 제외합니다.
+    });
+  
+    const templateEl = document.createElement('template');
+    bankList.forEach(bank => {
+      const { name, code, digits } = bank;
+      const digitsFormat = String(digits).replaceAll(',', '-') // 계좌 번호 간 구분 기호로 좀 더 친숙한 하이픈으로 교체합니다.
+      templateEl.innerHTML += /* html */`
+        <li class="item">
+          <input type="radio" name="bank" id=${code} required>
+          <label for=${code}>${name} [${digitsFormat}]</label>
+        </li>
+      `
+    })
+    return templateEl;
+  }
+  function renderBankList(templateEl) {
+    const ulEl = $('.bank-list');
+    ulEl.innerHTML = '';
+    ulEl.append(templateEl.content)
+  }
   function getTotalAccountDigits(event) {
     if(event.target.matches('input[type="radio"]')) {
       const str = event.target.labels[0].innerText;
@@ -52,12 +62,7 @@ modalTrigger.addEventListener('click', async () => {
       }, 0)
     }
   }
-
-  // 이벤트 핸들러 : 폼 submit
-  const accountFormEl = $('#accountForm');
-  accountFormEl.addEventListener('submit', submitAccountForm)
-
-  function submitAccountForm(event) {
+  async function submitAccountForm(event) {
     event.preventDefault();
 
     // 선택한 은행 코드 추출
@@ -79,24 +84,39 @@ modalTrigger.addEventListener('click', async () => {
     }
 
     const submitData = { bankCode, accountNumber, phoneNumber, signature : true }
-    // 계좌 연결(등록) API
+    // 계좌 연결 API
     try {
-      connectBankAccount(accessToken, submitData)
+      const res = await connectBankAccount(submitData);
+      if(typeof res !== 'string') {
+        // 연결 요청 성공 시
+        Swal.fire(
+          '연결 성공!',
+          '계좌가 성공적으로 연결되었습니다.',
+          'success'
+        )
+
+        //리렌더링
+        initPage();
+
+        // 모달창 닫기
+        const modalEl = $('input[type="checkbox"]#modal');
+        modalEl.checked = false;
+  
+        // 내부에서 사용한 이벤트 핸들러 제거
+        ulEl.removeEventListener('change', getTotalAccountDigits)
+        accountFormEl.removeEventListener('submit', submitAccountForm)
+      } else {
+        // 연결 요청 실패 시
+        throw new Error('계좌 연결에 실패했습니다.') // 에러 처리 고도화 필요
+      }
     } catch(err) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: '계좌 등록에 실패했습니다.',
+        text: err.message,
       })
       console.error(err);
     }
-
-    const modalEl = $('input[type="checkbox"]#modal');
-    modalEl.checked = false; // 모달창 닫기
-
-    // form 제출 완료되면 내부에서 사용한 이벤트 핸들러 제거
-    ulEl.removeEventListener('change', getTotalAccountDigits)
-    accountFormEl.removeEventListener('submit', submitAccountForm)
   }
 })
 
@@ -166,11 +186,10 @@ function createAccountList (accountList) {
         if (result.isConfirmed) {
           const body = { accountId : event.target.dataset.accountId, signature : true };
           console.log(body)
-          const accessToken = getAccessTokenFromLocalStorage();
 
           try {
             // 삭제 요청 API 전송
-            const res = await deleteAccount(accessToken, body);
+            const res = await deleteAccount(body);
             if(res) {
               // 삭제 요청 성공 시
               Swal.fire(

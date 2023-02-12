@@ -5,7 +5,6 @@ import { getAccessTokenFromLocalStorage } from './utils/localStorage.js'
 
 /**
  * 선택 가능한 계좌 목록 조회
- * @param {*} accessToken 
  * @returns 
     type ResponseValue = Bank[]
     interface Bank { // 선택 가능한 은행 정보
@@ -15,7 +14,8 @@ import { getAccessTokenFromLocalStorage } from './utils/localStorage.js'
       disabled: boolean // 사용자가 추가한 계좌 여부
     } 
  */
-export async function getBankList (accessToken) {
+export async function getBankList () {
+  const accessToken = getAccessTokenFromLocalStorage();
   const res = await fetch(`${url}account/banks`, {
     headers : {
       ...headers,
@@ -28,7 +28,6 @@ export async function getBankList (accessToken) {
 
 /**
  * 계좌 연결
- * @param {*} accessToken 
  * @param {*} body {
     bankCode: string // 연결할 은행 코드 (필수!)
     accountNumber: string // 연결할 계좌번호 (필수!)
@@ -43,7 +42,8 @@ export async function getBankList (accessToken) {
     balance: number // 계좌 잔액
   }
  */
-export async function connectBankAccount (accessToken, body) {
+export async function connectBankAccount (body) {
+  const accessToken = getAccessTokenFromLocalStorage();
   const res = await fetch(`${url}account`, {
     method: 'POST',
     headers : {
@@ -58,7 +58,6 @@ export async function connectBankAccount (accessToken, body) {
 
 /**
  * 사용자 계좌 목록 조희
- * @param {*} accessToken 
  * @return accountList: Bank[] // 사용자 계좌 정보 목록
   } 
  * interface Bank { 
@@ -92,7 +91,8 @@ export async function getUserAccounts() {
   }
  * @return 
  */
-export async function deleteAccount(accessToken, body) {
+export async function deleteAccount(body) {
+  const accessToken = getAccessTokenFromLocalStorage();
   const res = await fetch(`${url}account`, {
     method: 'DELETE',
     headers : {
