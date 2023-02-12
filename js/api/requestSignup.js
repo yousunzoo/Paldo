@@ -8,15 +8,20 @@ export async function requestSignup(signupData) {
   })
     .then((response) => {
       if (!response.ok) {
-        return error;
+        throw new Error(response.status);
       }
       return response.json();
     })
     .then((result) => {
-      return result;
+      setUserInfo(result, signupData.email);
+      history.back();
     })
     .catch((error) => {
-      console.log(error);
+      if (error == "Error: 401") {
+        Swal.fire({
+          icon: "error",
+          text: "이미 존재하는 아이디입니다!",
+        });
+      }
     });
-  return res;
 }

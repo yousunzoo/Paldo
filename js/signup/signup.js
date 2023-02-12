@@ -36,12 +36,8 @@ signupButton.addEventListener("click", async (event) => {
     });
     return;
   }
-
   // 회원가입 요청
-  const result = await requestSignup(userInfo);
-
-  // localStorage에 회원정보 저장
-  setUserInfo(result, userInfo.email);
+  await requestSignup(userInfo);
 });
 
 // 이메일 유효성 검사
