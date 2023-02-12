@@ -1,7 +1,5 @@
-import { logInFn } from '../api/requestLogin.js';
 import { checkAuthorization } from '../api/checkAuthorization.js';
 import { getBankList, connectBankAccount, getUserAccounts, deleteAccount } from './accountApi.js';
-import { getAccessTokenFromLocalStorage } from './utils/localStorage.js';
 import { $ } from './utils/dom.js';
 import { makeDOMwithProperties } from '../utils/dom.js';
 
@@ -21,11 +19,12 @@ modalTrigger.addEventListener('click', async () => {
   // Render !
   renderBankList(templateEl);
 
+  // 계좌 자리수 총합을 구하기 위한 리스너. 계좌 번호 유효성 검사에 사용
   let totalDigits;
   const ulEl = $('.bank-list');
   ulEl.addEventListener('change', getTotalAccountDigits)
 
-  // 이벤트 핸들러 : 폼 submit
+  // 폼 제출 리스너
   const accountFormEl = $('#accountForm');
   accountFormEl.addEventListener('submit', submitAccountForm)
 
@@ -199,7 +198,11 @@ function createAccountList (accountList) {
               )
               // 리렌더링
               const accountList = await getUserAccounts()
-              renderAccountList(accountList);
+              if(accountList.length === 0) {
+                renderEmptyList()
+              } else {
+                renderAccountList(accountList);
+              }
             } else {
               throw new Error('계좌 삭제에 실패했습니다.')
             }
@@ -247,6 +250,9 @@ function renderAccountList (accountList) {
 }
 
 function renderEmptyList () {
+  const ulEl = $('.account-list');
+  ulEl.innerHTML = '';
+  
   const noListEl = $('.no-list');
   noListEl.classList.remove('d-none');
 }
