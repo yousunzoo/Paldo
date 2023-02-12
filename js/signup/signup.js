@@ -26,6 +26,7 @@ const thumbnailInput = document.querySelector("#userThumbnail");
 const thumbnailFigure = document.querySelector(".check-thumbnail");
 const signupButton = document.querySelector(".signup-button");
 const findAddresssButton = document.querySelector(".find-address");
+
 // 제출 버튼 클릭
 signupButton.addEventListener("click", async (event) => {
   event.preventDefault();
@@ -39,6 +40,8 @@ signupButton.addEventListener("click", async (event) => {
   }
   // 주소 체크
   addressCheck();
+
+  // 서버에 회원가입 요청
   await requestSignup(userInfo, userAddress);
 });
 
