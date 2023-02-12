@@ -1,4 +1,5 @@
 import { headers, url } from '../api/headers.js'
+import { getAccessTokenFromLocalStorage } from './utils/localStorage.js'
 
 // 모든 API는 외부에서 accessToken을 받아 API 요청을 보냅니다.
 
@@ -28,7 +29,12 @@ export async function getBankList (accessToken) {
 /**
  * 계좌 연결
  * @param {*} accessToken 
- * @param {*} body 
+ * @param {*} body {
+    bankCode: string // 연결할 은행 코드 (필수!)
+    accountNumber: string // 연결할 계좌번호 (필수!)
+    phoneNumber: string // 사용자 전화번호 (필수!)
+    signature: boolean // 사용자 서명 (필수!)
+  }
  * @returns ResponseValue { 
     id: string // 계좌 ID
     bankName: string // 은행 이름
@@ -53,9 +59,7 @@ export async function connectBankAccount (accessToken, body) {
 /**
  * 사용자 계좌 목록 조희
  * @param {*} accessToken 
- * @return ResponseValue {
-    totalBalance: number // 사용자 계좌 잔액 총합
-    accounts: Bank[] // 사용자 계좌 정보 목록
+ * @return accountList: Bank[] // 사용자 계좌 정보 목록
   } 
  * interface Bank { 
     id: string // 계좌 ID
@@ -65,7 +69,8 @@ export async function connectBankAccount (accessToken, body) {
     balance: number // 계좌 잔액
   }
  */ 
-export async function getUserAccounts(accessToken) {
+export async function getUserAccounts() {
+  const accessToken = getAccessTokenFromLocalStorage();
   const res = await fetch(`${url}account`, {
     method: 'GET',
     headers : {
@@ -73,6 +78,29 @@ export async function getUserAccounts(accessToken) {
       Authorization: `Bearer ${accessToken}`
     }
   })
-  const json = res.json();
-  return json;
+  const json = await res.json();
+  const accountList = json.accounts || [];
+  return accountList;
+}
+
+/**
+ * 계좌 해지
+ * @param {*} accessToken 
+ * @param {*} body  {
+    accountId: string
+    signature: boolean
+  }
+ * @return 
+ */
+export async function deleteAccount(accessToken, body) {
+  const res = await fetch(`${url}account`, {
+    method: 'DELETE',
+    headers : {
+      ...headers,
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify(body)
+  })
+  const json = await res.json();
+  return json
 }

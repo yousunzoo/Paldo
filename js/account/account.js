@@ -1,8 +1,9 @@
-import { logInFn } from '../api/requestLogin.js'
-import { checkAuthorization } from '../api/checkAuthorization.js'
-import { getBankList, connectBankAccount, getUserAccounts } from './accountApi.js';
+import { logInFn } from '../api/requestLogin.js';
+import { checkAuthorization } from '../api/checkAuthorization.js';
+import { getBankList, connectBankAccount, getUserAccounts, deleteAccount } from './accountApi.js';
 import { getAccessTokenFromLocalStorage } from './utils/localStorage.js';
-import { $ } from './utils/dom.js'
+import { $ } from './utils/dom.js';
+import { makeDOMwithProperties } from '../utils/dom.js';
 
 /* DOM */
 const modalTrigger = $('.add-account-btn');
@@ -78,7 +79,7 @@ modalTrigger.addEventListener('click', async () => {
     }
 
     const submitData = { bankCode, accountNumber, phoneNumber, signature : true }
-    // 계좌 연결 API
+    // 계좌 연결(등록) API
     try {
       connectBankAccount(accessToken, submitData)
     } catch(err) {
@@ -110,7 +111,6 @@ modalTrigger.addEventListener('click', async () => {
 // })
 ;(async function () {
   const isValidUser = await checkAuthorization();
-  console.log(isValidUser)
   if(isValidUser) {
     initPage();
   } else {
@@ -124,45 +124,110 @@ modalTrigger.addEventListener('click', async () => {
   }
 })()
 
-  // initPage();
 
-
+// FUNCTIONS
 async function initPage() {
   // 사용자 계좌 목록 조회
-  const accessToken = getAccessTokenFromLocalStorage();
-  const res = await getUserAccounts(accessToken);
-  const accountList = res.accounts || [];
-  console.log(accountList)
+  const accountList = await getUserAccounts();
 
-  // 있을 때 없을 때 구분하여 렌더링
-  // 있을 때
   if(accountList.length === 0) {
-    // 없을 때
+    // 없을 때 렌더링
+    renderEmptyList();
   } else {
-    const noListEl = $('.no-list');
-    noListEl.classList.add('d-none');
-
-    // DOM Create !
-    const templateEl = document.createElement('template');
-    accountList.forEach(account => {
-      const { bankName, accountNumber, balance } = account;
-      const formattedBalance = balance.toLocaleString('ko-KR')
-      templateEl.innerHTML += /* html */`
-        <li class="item">
-          <div class="account-info">
-            <span id="account-bank">${bankName}</span>
-            <span id="account-number">${accountNumber}</span>
-            <span id="account-balance">${formattedBalance}</span>
-          </div>
-          <button class="account-delete-btn">삭제</button>
-        </li>
-      `
-    })
-    // Render !
-    const ulEl = $('.account-list');
-    ulEl.innerHTML = '';
-    ulEl.append(templateEl.content);
+    renderAccountList(accountList)
   }
 }
 
-// 계좌 해지(삭제) 기능 추가
+function createAccountList (accountList) {
+  const fragmentEl = document.createDocumentFragment();
+  accountList.forEach(account => {
+    const { id, bankName, accountNumber, balance } = account;
+    const formattedBalance = balance.toLocaleString('ko-KR'); // 통화 표기법으로 변경
+
+    const liEl = makeDOMwithProperties('li', { 'className' : 'item' });
+    const accountInfoEl = makeDOMwithProperties('div', { 'className' : 'account-info'});
+    const accountBankEl = makeDOMwithProperties('span', { 'id' : 'accountBank', 'innerText': bankName});
+    const accountNumberEl = makeDOMwithProperties('span', { 'id' : 'accountNumber', 'innerText': accountNumber});
+    const accountBalanceEl = makeDOMwithProperties('span', { 'id' : 'accountBalance', 'innerText': formattedBalance });
+
+    const btnEl = makeDOMwithProperties('button', { 'className' : 'account-delete-btn', 'innerText' : '삭제'});
+    btnEl.dataset.accountId = id; // 버튼에 해당 계좌 id를 dataset로 저장
+    btnEl.addEventListener('click', (event) => {
+      Swal.fire({
+        title: '정말로 삭제하겠습니까 ?',
+        text: "삭제한 계좌는 재연결해도 잔액이 반영되지 않습니다.(기본 금액으로 추가됩니다)",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '삭제',
+        cancelButtonText: '취소'
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const body = { accountId : event.target.dataset.accountId, signature : true };
+          console.log(body)
+          const accessToken = getAccessTokenFromLocalStorage();
+
+          try {
+            // 삭제 요청 API 전송
+            const res = await deleteAccount(accessToken, body);
+            if(res) {
+              // 삭제 요청 성공 시
+              Swal.fire(
+                '삭제 성공!',
+                '계좌가 성공적으로 삭제되었습니다.',
+                'success'
+              )
+              // 리렌더링
+              const accountList = await getUserAccounts()
+              renderAccountList(accountList);
+            } else {
+              throw new Error('계좌 삭제에 실패했습니다.')
+            }
+          } catch(err) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: err.message,
+            })
+            console.error(err);
+            return;
+          }
+        }
+      })
+    });
+
+    accountInfoEl.append(accountBankEl, accountNumberEl, accountBalanceEl);
+    liEl.append(accountInfoEl, btnEl);
+    fragmentEl.append(liEl);
+  })
+  return fragmentEl;
+
+  // 하단 렌더링 구조 참고
+  /* html */`
+    <li class="item">
+      <div class="account-info">
+        <span id="accountBank">NH농협은행</span>
+        <span id="accountNumber">123-XXXX-XXXX-XX</span>
+        <span id="accountBalance">3,000,000</span>
+      </div>
+      <button class="account-delete-btn">삭제</button>
+    </li>
+  `
+}
+
+function renderAccountList (accountList) {
+  const noListEl = $('.no-list');
+  noListEl.classList.add('d-none');
+
+  const fragmentEl = createAccountList(accountList);
+
+  const ulEl = $('.account-list');
+  ulEl.innerHTML = '';
+  ulEl.append(fragmentEl);
+}
+
+function renderEmptyList () {
+  const noListEl = $('.no-list');
+  noListEl.classList.remove('d-none');
+}
