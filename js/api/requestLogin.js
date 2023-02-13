@@ -13,7 +13,7 @@ export async function logInFn(data) {
       }
       return response.json();
     })
-    .then(async (result) => {
+    .then((result) => {
       setUserInfo(result, data.email);
       history.back();
     })
