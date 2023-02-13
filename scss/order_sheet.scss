@@ -309,20 +309,84 @@ $color_copyright: rgb(247, 247, 247);
             text-align: center;
             width: 100%;
           }
-          .account {
+          .account-empty {
             margin-top : 20px;
-          }
-          .no-list {
             align-items: center;
             background-color: #fafafa;
             border: 1px solid #f2f2f2;
             border-radius: 10px;
             box-sizing: border-box;
             display: flex;
-            height: 160px;
+            flex-direction: column;
+            height: 180px;
             justify-content: center;
             margin-top: 20px;
             padding: 30px;
+            p {
+              margin-bottom : 10px;
+              font-size : 16px;
+            }
+            a{
+              span {
+                font-size :14px;
+                &:hover {
+                  text-decoration: underline;
+                }
+              }
+            }
+
+          }
+          .swiper {
+            width: 552px;
+            height : 180px;
+            box-sizing: border-box;
+            margin-top : 20px;
+            &:hover .swiper-button-prev::after {
+              opacity: 1;
+            }
+            &:hover .swiper-button-next::after {
+              opacity: 1;
+            }
+            .swiper-wrapper {
+              .swiper-slide {
+                box-sizing: border-box;
+                padding : 30px 70px;
+                background-color: #fafafa;
+                border: 1px solid #f2f2f2;
+                .account-info {
+                  display : flex;
+                  flex-direction: column;
+                  gap : 4px;
+                  #bankName {
+                    font-weight: bold;
+                  }
+                  #accountNumber {
+                    margin: 8px 0 30px;
+                  }
+                  #balance {
+                    text-align: end;
+                  }
+                }
+              }
+            }
+            .swiper-pagination {
+              bottom : 15px;
+              span {
+                background-color : $color-primary;
+              }
+            }
+            .swiper-button-prev::after {
+              font-size: 16px;
+              color : $color-primary;
+              opacity: 0;
+              transition : opacity .2s ease;
+            }
+            .swiper-button-next::after {
+              font-size: 16px;
+              color : $color-primary;
+              opacity: 0;
+              transition : opacity .2s ease;
+            }
           }
         }
       }
