@@ -72,7 +72,7 @@ function setRecommendList(data) {
   const recommendLis = data.map((item) => {
     const recommendLi = document.createElement("li");
     recommendLi.innerHTML = /*html*/ `
-    <a href="javascript:void(0)" class="recommend-product">
+    <a href="javascript:void(0)" class="recommend-product" data-id="${item.id}">
     <div class="thumbnail">
       <img
         src="${item.thumbnail}"
