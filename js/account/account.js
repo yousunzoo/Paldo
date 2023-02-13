@@ -1,7 +1,9 @@
 import { checkAuthorization } from '../api/checkAuthorization.js';
 import { getBankList, connectBankAccount, getUserAccounts, deleteAccount } from './accountApi.js';
-import { $ } from './utils/dom.js';
 import { makeDOMwithProperties } from '../utils/dom.js';
+
+/* COMMON */
+export const $ = selector => document.querySelector(selector)
 
 /* GLOBAL LOGIC */
 
