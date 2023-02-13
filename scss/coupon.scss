@@ -54,6 +54,13 @@ $color_banner_btn: #fbcd57;
       background-color: $color_primary;
       color: $color_white;
     }
+    &.disabled {
+      cursor: default;
+    }
+    &.disabled:hover {
+      background-color: inherit;
+      color: inherit;
+    }
   }
 }
 
