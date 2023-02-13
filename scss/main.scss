@@ -235,10 +235,50 @@ header {
       .main-product-swiper {
         position: relative;
         .swiper-slide {
-          height: 320px;
+          position: relative;
+          .skeleton-loading {
+            position: absolute;
+            background: $color_white;
+            width: 100%;
+            height: 100%;
+            div {
+              border-radius: 10px;
+              height: 249px;
+              background: linear-gradient(
+                120deg,
+                #e5e5e5 30%,
+                #f0f0f0 38%,
+                #f0f0f0 40%,
+                #e5e5e5 48%
+              );
+              background-size: 200% 100%;
+              background-position: 100% 0;
+              animation: blinker 1s linear infinite;
+              &:nth-child(2) {
+                margin-top: 16px;
+                width: 110px;
+                height: 20px;
+              }
+              &:nth-child(3) {
+                margin-top: 12px;
+                width: 130px;
+                height: 18px;
+              }
+              &:nth-child(4) {
+                margin-top: 10px;
+                width: 60px;
+                height: 12px;
+              }
+            }
+            @keyframes blinker {
+              100% {
+                background-position: -100% 0;
+              }
+            }
+          }
           .image-container {
             background-color: #eee;
-            height: 320px;
+            height: 249px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -249,7 +289,6 @@ header {
             }
           }
           .product-info {
-            position: relative;
             padding: 14px 10px 0px 0px;
             box-sizing: border-box;
             .product-name {
@@ -294,6 +333,7 @@ header {
           border: none;
           width: 60px;
           height: 60px;
+          top: 130px;
           z-index: 100;
           &::after {
             display: none;
@@ -446,15 +486,6 @@ header {
               }
             }
           }
-        }
-        .recommend-more-btn {
-          display: block;
-          margin: auto;
-          width: 400px;
-          height: 56px;
-          line-height: 56px;
-          text-align: center;
-          border: 1px solid $color_btn_border;
         }
       }
     }
