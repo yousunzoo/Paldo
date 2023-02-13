@@ -1,7 +1,8 @@
-import { login, me } from './orderSheetApi.js';
+import { checkAuthorization } from '../api/checkAuthorization'
+import { getUserAccounts } from '../account/accountApi.js'
 
 /* COMMON */
-const $ = selector => document.querySelector(selector)
+const $ = selector => document.querySelector(selector);
 
 /* DOM */
 const toggleOrderListEl = $('#toggleOrderList');
@@ -13,8 +14,21 @@ toggleOrderListEl.addEventListener('click', toggleOrderList());
 toggleCouponListEl.addEventListener('click', toggleCouponList);
 
 /* GLOBAL LOGIC */
-setMockData();
-initPage();
+// setMockData();
+;(async function () {
+  const isValidUser = await checkAuthorization();
+  if(isValidUser) {
+    initPage();
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: '사용자 세션이 만료되었습니다.',
+      text: '로그인 페이지로 이동합니다.',
+    })
+    // 로그인 페이지로 redirect
+    // location.assign('로그인 페이지 경로')
+  }
+})()
 
 
 /* FUNCTIONS */
@@ -23,26 +37,26 @@ initPage();
  * initialize page
  */
 async function initPage() {
-  /* 사용자 인증 확인 */
-  try {
-    // 인증 확인
-
-  } catch(err) {
-    // 인증 실패 시 
-    // alert !
-    // 로그인 페이지로 Redirect ! (location.assign ?)
-  }
-
   /* 주문 상품 섹션 Summary 출력 */
   const summaryTextEl = $('.order-list-area > .summary span');
 
+  /**
+   * @todo localStorage key,value format 변경에 따른 수정 예정
+   */
   const json = localStorage.getItem('cartProduct');
   const cartProduct = JSON.parse(json);
 
   summaryTextEl.innerText = `${cartProduct[0].title} 외 ${cartProduct.length -1}개`
 
-  /* 다음 기능 */
+  /* 계좌 조회 */
+  const accountList = await getUserAccounts();
+  if(accountList.length === 0) {
+    renderEmptyList()
+  } else {
+    renderAccountList(accountList);
+  }
 
+  /* 결제 관련 */
 }
 
 /**
@@ -123,3 +137,42 @@ function toggleCouponList() {
   const couponListEl = $('.coupon-list');
   couponListEl.classList.toggle('opened');
 }
+function createAccountList(accountList) {
+  const templateEl = document.createElement('template');
+  accountList.forEach(account => {
+    const { id, bankName, accountNumber, balance } = account;
+    const formattedBalance = balance.toLocaleString('ko-KR'); // 통화 표기법으로 변경
+
+    templateEl.innerHTML += /* html */`
+      <div class="swiper-slide">
+        <div class="account-info" id="accountId" data-account-id=${id}>
+          <h4 id="bankName">${bankName}</h4>
+          <p id="accountNumber">${accountNumber}</p>
+          <span id="balance">${formattedBalance}</span>
+        </div>
+      </div>
+    `
+  })
+  return templateEl;
+}
+function renderEmptyList() {
+  const accountListEl = $('.account-list');
+  accountListEl.classList.add('d-none');
+
+  const noListEl = $('.no-list');
+  noListEl.classList.remove('d-none');
+}
+function renderAccountList(accountList) {
+  const noListEl = $('.no-list');
+  noListEl.classList.add('d-none');
+
+  const accountListEl = $('.account-list');
+  accountListEl.classList.remove('d-none');
+
+  const templateEl = createAccountList(accountList);
+
+  const swiperWrapperEl = $('.swiper-wrapper');
+  swiperWrapperEl.append(templateEl.content);
+}
+
+//swiper-slide-active 클래스의 자식 

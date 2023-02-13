@@ -309,7 +309,7 @@ $color_copyright: rgb(247, 247, 247);
             text-align: center;
             width: 100%;
           }
-          .account-empty {
+          .no-list {
             margin-top : 20px;
             align-items: center;
             background-color: #fafafa;
@@ -387,6 +387,9 @@ $color_copyright: rgb(247, 247, 247);
               opacity: 0;
               transition : opacity .2s ease;
             }
+          }
+          .d-none {
+            display : none;
           }
         }
       }
