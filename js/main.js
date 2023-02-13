@@ -30,13 +30,13 @@ function setPrdList(prdList, data) {
     const swiperDiv = makeDOMwithProperties("div", {
       className: "swiper-slide",
     });
-    swiperDiv.dataset.id = item.id;
     const discountRate = item.discountRate > 0;
     const originPrice = Math.floor(
       (item.price * 100) / (100 - item.discountRate)
     );
 
     swiperDiv.innerHTML = /* html */ ` 
+    <a href="javascript:void(0)" data-id="${item.id}">
     <div class="image-container">
       <img src="${item.thumbnail}" alt="${item.title}">
     </div>
@@ -60,6 +60,7 @@ function setPrdList(prdList, data) {
         </div>
       </div>
     </div>
+    </a>
     `;
     return swiperDiv;
   });
