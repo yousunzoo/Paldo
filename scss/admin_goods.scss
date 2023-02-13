@@ -23,6 +23,7 @@ $color_copyright: rgb(247, 247, 247);
       display: flex;
       justify-content: space-between;
       padding: 20px 0 10px 0;
+
       .title {
         padding: 20px 40px;
         font-size: 20px;
@@ -38,18 +39,33 @@ $color_copyright: rgb(247, 247, 247);
           height: 20px;
           border: 1px solid #b5b5b5;
           padding: 10px;
+          margin-right: 20px;
         }
         .category-list,
         .soldout-list {
           height: 0;
           overflow: hidden;
+          z-index: 5;
+          position: absolute;
+          transition: all 0.3s ease;
+
           li {
-            width: 120px;
-            height: 20px;
-            border-radius: 8px;
+            width: 100px;
+            height: 40px;
             border: 1px solid #b5b5b5;
+            background-color: $color-white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-top: none;
+            cursor: pointer;
           }
         }
+        .category-list.active,
+        .soldout-list.active {
+          height: 650px;
+        }
+
         .search-goodsname {
           width: 260px;
           height: 40px;
@@ -58,56 +74,66 @@ $color_copyright: rgb(247, 247, 247);
           padding-left: 10px;
           margin-right: 10px;
         }
+        .search {
+          width: 70px;
+          height: 42px;
+          font-size: 14px;
+          color: $color-white;
+          background-color: $color_primary;
+          margin-right: 10px;
+        }
+      }
+    }
+    .item-tag {
+      background-color: #f7f7f7;
+      height: 60px;
+      display: flex;
+      color: #3c3c3c;
+      font-size: 14px;
+      font-weight: 500;
+      margin: 0 20px;
+      .info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 12px;
+        padding: 5px;
+        border-top: 2px solid #cdcdcd;
+        border-bottom: 2px solid #cdcdcd;
+        border-right: 1px solid #e7e6e6;
+      }
+      .all-check {
+        width: 40px;
+        border-left: 1px solid #e7e6e6;
+      }
+      .item-no {
+        width: 30px;
+      }
+      .item-number {
+        width: 180px;
+      }
+      .item-thumbnail {
+        width: 70px;
+      }
+      .item-name {
+        width: 340px;
+      }
+      .item-category {
+        width: 110px;
+      }
+      .item-price {
+        width: 60px;
+      }
+      .item-sale {
+        width: 60px;
+      }
+      .item-outstock {
+        width: 60px;
       }
     }
     .goods-list {
       margin: 0 20px;
-      .item-tag {
-        background-color: #f7f7f7;
-        height: 60px;
-        display: flex;
-        color: #3c3c3c;
-        font-size: 14px;
-        font-weight: 500;
-        .info {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          line-height: 12px;
-          padding: 5px;
-          border-top: 2px solid #cdcdcd;
-          border-bottom: 2px solid #cdcdcd;
-          border-right: 1px solid #e7e6e6;
-        }
-        .item-check {
-          width: 40px;
-          border-left: 1px solid #e7e6e6;
-        }
-        .item-no {
-          width: 30px;
-        }
-        .item-number {
-          width: 180px;
-        }
-        .item-thumbnail {
-          width: 70px;
-        }
-        .item-name {
-          width: 340px;
-        }
-        .item-category {
-          width: 110px;
-        }
-        .item-price {
-          width: 60px;
-        }
-        .item-sale {
-          width: 60px;
-        }
-        .item-outstock {
-          width: 60px;
-        }
-      }
+      min-height: 600px;
       .item {
         height: 60px;
         display: flex;
@@ -158,15 +184,36 @@ $color_copyright: rgb(247, 247, 247);
         }
       }
     }
+
     .pagination {
-      height: 40px;
       display: flex;
-      justify-content: center;
-      align-items: center;
+      width: 200px;
+      margin: 0 auto;
       padding-top: 20px;
+      justify-content: center;
+
+      .pageNumber {
+        width: 20px;
+        height: 30px;
+        color: #555555;
+        font-weight: 700;
+        padding: 0 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .prev,
+      .next {
+        width: 50px;
+        background-color: #414141;
+        color: $color-white;
+        font-size: 14px;
+        text-align: center;
+      }
     }
+
     .btn-area {
-      padding: 0 20px;
+      padding: 0 20px 0;
       display: flex;
       justify-content: space-between;
       .btn {
