@@ -64,6 +64,8 @@ function setPrdList(prdList, data) {
     `;
     return swiperDiv;
   });
+
+  prdList.innerHTML = "";
   prdList.append(...prdlistDiv);
 }
 
@@ -88,5 +90,6 @@ function setRecommendList(data) {
   </a>`;
     return recommendLi;
   });
+  recommendList.innerHTML = "";
   recommendList.append(...recommendLis);
 }
