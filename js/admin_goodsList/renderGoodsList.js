@@ -1,4 +1,4 @@
-import { makeDOMwithProperties } from "../utils/dom";
+import { makeDOMwithProperties } from "../utils/dom.js";
 
 export const ulEl = document.querySelector(".goods-list");
 let no = 1;
@@ -54,12 +54,13 @@ export const renderGoodsList = async (itemListData, search) => {
     itemPrice.textContent = item.price;
     itemSale.textContent = item.discountRate;
     itemOutstock.textContent = soldOutcheck;
-
+    itemEl.dataset.id = item.id;
     itemCheck.append(inputCheck);
     itemThum.append(itemImg);
     itemEl.append(itemCheck, itemNo, itemId, itemThum, itemName, itemCategory, itemPrice, itemSale, itemOutstock);
     return itemEl;
   });
+
   ulEl.append(...itemEls);
   return ulEl;
 };

@@ -1,17 +1,24 @@
+import { deleteProduct } from "../api/deleteProduct";
 import { getProduct } from "../api/getProduct";
 import { renderGoodsList, ulEl } from "./renderGoodsList";
 
 export let isRendered = false;
 
 const paginationEl = document.querySelector(".pagination");
+
 let limit = 10;
 let currentPage = 1;
 let tagList = ["초콜릿/캔디류", "라면", "음료", "스낵", "인기", "세일", "신상"];
 let boolean = ["YES", "NO"];
+let allCheck;
+let itemCheck;
+let deleteBtn;
+let listEls;
 export const pagination = async (search = undefined) => {
-  let listEls = await getProduct();
+  listEls = await getProduct();
   let arr;
   let totalCount;
+
   if (tagList.includes(search)) {
     arr = filterByTag(listEls, search);
     totalCount = arr.length * 10;
@@ -44,6 +51,7 @@ export const pagination = async (search = undefined) => {
       currentPage = button.innerText;
       ulEl.innerHTML = "";
       renderGoodsList(arr[currentPage - 1]);
+      itemCheck = document.querySelectorAll(".item-check input");
     });
   });
 
@@ -51,9 +59,32 @@ export const pagination = async (search = undefined) => {
     renderGoodsList(arr[currentPage - 1]);
     isRendered = true;
   }
+  allCheck = document.querySelector(".all-check input");
+  itemCheck = document.querySelectorAll(".item-check input");
+  deleteBtn = document.querySelector(".delete-btn");
+  allCheck.addEventListener("click", () => {
+    let isChecked = allCheck.checked;
+    if (true) {
+      itemCheck.forEach((item) => (item.checked = isChecked));
+    }
+  });
+  deleteBtn.addEventListener("click", async () => {
+    itemCheck = document.querySelectorAll(".item-check input");
+    itemCheck.forEach((item) => {
+      if (item.checked) {
+        deleteProduct(item.closest(".item").getAttribute("data-id"));
+      }
+    });
+
+    isRendered = false;
+    listEls = await getProduct();
+    ulEl.innerHTML = "";
+    pagination();
+  });
 };
 
-// 카테고리 필터링
+// deleteProduct(item.closest(".item"))
+
 export const filterByTag = (listEls, search) => {
   const searchFilters = listEls.filter((item) => item.tags.includes(search));
   const arr = Array(Math.ceil(searchFilters.length / 10)).fill([]);
