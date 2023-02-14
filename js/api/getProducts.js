@@ -1,13 +1,20 @@
 import { headers, url } from "./headers";
 
-export async function getProducts(tag) {
+export async function getProducts(keyword = "", tag = []) {
+  const data = {};
+  if (keyword) {
+    data.searchText = keyword;
+  }
+  if (tag.length === 0) {
+    data.searchTags = tag;
+  }
   const res = await fetch(
     `${url}products/search
   `,
     {
       method: "POST",
       headers,
-      body: JSON.stringify({ searchTags: tag }),
+      body: JSON.stringify(data),
     }
   )
     .then((response) => {

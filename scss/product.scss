@@ -29,6 +29,22 @@ $color_banner_btn: #fbcd57;
   width: 1050px;
   margin-top: 50px;
   margin-bottom: 75px;
+  .no-result {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 20px;
+    }
+    p {
+      color: $color_product_tag;
+    }
+  }
   .total-count {
     font-size: 14px;
     .count {
@@ -93,10 +109,10 @@ $color_banner_btn: #fbcd57;
         position: absolute;
         right: 16px;
         bottom: 16px;
-        img {
-          width: 45px;
-          height: 45px;
-        }
+        width: 45px;
+        height: 45px;
+        background-image: url("../static/images/product-add-cart-btn.svg");
+        background-size: cover;
       }
     }
     .product-info {
