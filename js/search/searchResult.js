@@ -2,17 +2,14 @@
 
 import { getProducts } from "../api/getProducts";
 import link from "../../static/images/no-result.svg";
-import { makeDOMwithProperties } from "../utils/dom";
 
-const keyword = localStorage.getItem("searchKeyword");
-
-window.onload = async () => {
+export default async function setResultPage(keyword) {
   const searchResult = await getProducts(keyword);
   const originResult = [...searchResult];
-  showResult(searchResult, originResult);
-};
+  showResult(searchResult, originResult, keyword);
+}
 
-function showResult(searchResult, originResult) {
+function showResult(searchResult, originResult, keyword) {
   const keywordTitle = document.querySelector(".product-title");
   const amount = document.querySelector(".count");
   keywordTitle.textContent = keyword;

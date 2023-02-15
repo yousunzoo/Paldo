@@ -10,20 +10,9 @@ export default async function setPrdList() {
   const snacksData = await getProducts("", ["스낵"]);
   const sweetsData = await getProducts("", ["초콜릿/캔디류"]);
 
-  const searchForm = document.querySelector("form.search");
   setMainPrdList(prdList1, drinksData);
   setMainPrdList(prdList2, snacksData);
   setRecommendList(recommendList, sweetsData);
-
-  // searchForm 제출 시 localStorage에 검색어 저장 및 페이지 이동
-  searchForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const keyword = searchForm.querySelector("input").value;
-    if (!keyword) return;
-    localStorage.setItem("searchKeyword", keyword);
-    location.href = "./search-result.html";
-    // custom event
-  });
 }
 
 function setMainPrdList(prdList, data) {

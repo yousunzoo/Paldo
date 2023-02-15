@@ -1,10 +1,17 @@
 import Navigo from "navigo"; // When using ES modules.
 import { checkAuthorization } from "./api/checkAuthorization";
-import { loginPage, mainPage, sigupPage } from "./components/userPage";
+import {
+  loginPage,
+  mainPage,
+  searchPage,
+  sigupPage,
+} from "./components/userPage";
+import handleSearchInput from "./header/handleSearchInput";
 import swiperAction from "./library/swiper";
 import loginEvent from "./login";
 import { changeHeader } from "./main/changeHeader";
 import setPrdList from "./main/setPrdList";
+import setResultPage from "./search/searchResult";
 import signUpEvent from "./signup/signup";
 
 const router = new Navigo("/", { hash: true });
@@ -22,6 +29,7 @@ router
       if (isLogin) {
         changeHeader();
       }
+      handleSearchInput(router);
     },
     login: () => {
       // do something
@@ -32,6 +40,10 @@ router
     signup: () => {
       mainSection.innerHTML = sigupPage;
       signUpEvent();
+    },
+    "search/:id": async ({ data }) => {
+      mainSection.innerHTML = searchPage;
+      await setResultPage(data.id);
     },
   })
   .resolve();
