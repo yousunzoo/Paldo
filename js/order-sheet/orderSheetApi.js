@@ -1,36 +1,22 @@
-import { headers } from "../api/headers.js";
+import { getDataFromLocalStorage } from './utils/localStorage.js';
+import { headers, url } from "../api/headers.js";
 
-export async function login() {
-  const res = await fetch('https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/login', {
-    method: 'POST',
-    headers,
-    body: JSON.stringify({
-      email: "testuser@gmail.com",
-      password: "12345678"
-    })
-  })
-  const json = res.json();
-  return json;
-}
-
-export async function checkAuthorization(accessToken) {
-  const res = await fetch(
-    "https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/me",
-    {
-      method: "POST",
+export function requestTransaction(body) {
+  return new Promise((resolve, reject) => {
+    const accessToken = getDataFromLocalStorage('accessToken');
+    fetch(`${url}products/buy`, {
+      method: 'POST',
       headers: {
         ...headers,
-        Authorization: `Bearer ${accessToken}`,
-        masterKey: true,
+        Authorization: `Bearer ${accessToken}`
       },
-    }
-  )
-  .then((response) => {
-    return response.json();
+      body: JSON.stringify(body)
+    })
+    .then((result) => {
+      resolve(result);
+    })
+    .catch((error) => {
+      reject(error);
+    })
   })
-  .then((result) => {
-    return result ? true : false;
-  });
-  
-  return res;
 }

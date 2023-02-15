@@ -1,5 +1,8 @@
 import { checkAuthorization } from '../api/checkAuthorization'
 import { getUserAccounts } from '../account/accountApi.js'
+import { getDataFromLocalStorage } from './utils/localStorage.js';
+import { requestTransaction } from './orderSheetApi.js';
+import { getOrderList } from '../order-list/orderListApi.js'
 
 /* COMMON */
 const $ = selector => document.querySelector(selector);
@@ -7,14 +10,42 @@ const $ = selector => document.querySelector(selector);
 /* DOM */
 const toggleOrderListEl = $('#toggleOrderList');
 const toggleCouponListEl = $('#toggleCouponList');
-
+const transactionBtn = $('.pay-btn-area > button');
 
 /* EVENT LISTENER */
 toggleOrderListEl.addEventListener('click', toggleOrderList());
 toggleCouponListEl.addEventListener('click', toggleCouponList);
+transactionBtn.addEventListener('click',async () => {
+  // accountId Get !
+  const accountEl = $('.swiper-slide-active');
+  const accountId = accountEl.children['accountId'].dataset.accountId;
+  console.log(accountId)
+
+  // productId, Quantity Get !
+  const cartList = getDataFromLocalStorage('cart');
+  const requests = cartList.reduce((acc, cur) => {
+    const { productId, quantity } = cur
+    for(let i = 0; i < quantity; i++) {
+      acc.push(requestTransaction({ productId, accountId }))
+    }
+    return acc;
+  }, [])
+  console.log(requests)
+  console.log(await getOrderList())
+  
+  // Promise.all(requests)
+  // .then((result) => {
+  //   // 결제 처리 성공
+  //   // 결제완료 페이지로 이동
+  // })
+  // .catch((err) => {
+  //   // 결제 처리 실패
+  //   console.error(err)
+  // })
+})
 
 /* GLOBAL LOGIC */
-// setMockData();
+setMockData();
 ;(async function () {
   const isValidUser = await checkAuthorization();
   if(isValidUser) {
@@ -37,26 +68,53 @@ toggleCouponListEl.addEventListener('click', toggleCouponList);
  * initialize page
  */
 async function initPage() {
-  /* 주문 상품 섹션 Summary 출력 */
+  /* 주문 상품 섹션 Summary 렌더링 */
+  const cartList = getDataFromLocalStorage('cart');
+
   const summaryTextEl = $('.order-list-area > .summary span');
+  summaryTextEl.innerText = `${cartList[0].title} 외 ${cartList.length -1}개`
 
-  /**
-   * @todo localStorage key,value format 변경에 따른 수정 예정
-   */
-  const json = localStorage.getItem('cartProduct');
-  const cartProduct = JSON.parse(json);
+  /* 주문자 정보 렌더링 */
+  const userInfo = getDataFromLocalStorage('userInfo')
 
-  summaryTextEl.innerText = `${cartProduct[0].title} 외 ${cartProduct.length -1}개`
+  const senderEl = document.querySelector('.orderer-area .sender');
+  senderEl.textContent = userInfo.displayName;
 
-  /* 계좌 조회 */
+  const emailEl = document.querySelector('.orderer-area .email');
+  emailEl.textContent = userInfo.email;
+
+  /* 사용자 계좌 조회 및 렌더링 */
   const accountList = await getUserAccounts();
-  if(accountList.length === 0) {
-    renderEmptyList()
-  } else {
-    renderAccountList(accountList);
-  }
+  accountList.length === 0 ? renderEmptyList() : renderAccountList(accountList);
 
-  /* 결제 관련 */
+  /* 결제 금액 */
+  const orderAmountEl = $('#orderAmount');
+  let orderAmount = cartList.reduce((acc, cur) => {
+    const { price, quantity } = cur
+    acc += price * quantity;
+    return acc;
+  }, 0)
+  orderAmountEl.textContent = orderAmount.toLocaleString('ko-KR');
+
+  const originAmountEl = $('#originAmount');
+  const originAmount = cartList.reduce((acc, cur) => {
+    const { price, quantity, discountRate } = cur
+    // 할인율이 있으면 원가를 계산하여 누적(DB에 저장된 상품 가격은 할인율이 적용된 가격)
+    acc += (discountRate ? Math.floor((price * 100) / (100 - discountRate)) : price) * quantity;
+    return acc;
+  }, 0)
+  originAmountEl.textContent = originAmount.toLocaleString('ko-KR');
+
+  const saledAmountEl = $('#saledAmount');
+  const saledAmount = originAmount - orderAmount;
+  saledAmountEl.textContent = '-' + saledAmount.toLocaleString('ko-KR');
+
+  const totalAmountEl = $('#totalAmount');
+  let totalAmount = orderAmount;
+  totalAmountEl.textContent = totalAmount.toLocaleString('ko-KR');
+  
+  const totalAmountInBtnEl = $('#totalAmountInBtn');
+  totalAmountInBtnEl.textContent = totalAmount.toLocaleString('ko-KR');
 }
 
 /**
@@ -64,15 +122,16 @@ async function initPage() {
  */
 function setMockData () {
   // 제품명, 가격, 수량, 썸네일이미지
-  const cartProduct = [
-    { productId : 1, title : "감자깡", price : 7000, quantity : 1, thumbnailImage : "/images/product/감자깡.png" },
-    { productId : 2, title : "감자면", price : 6000, quantity : 1, thumbnailImage : "/images/product/감자면.png" },
-    { productId : 3, title : "고구마깡", price : 5000, quantity : 1, thumbnailImage : "/images/product/고구마깡.png" },
-    { productId : 4, title : "둥지냉면 동치미 물냉면", price : 4000, quantity : 1, thumbnailImage : "/images/product/둥지냉면동치미물냉면.png" },
+  const cart = [
+    { productId : 'xr14ikmurlABzuizuDge', title : "이토엔쟈스민티(500ml*24)", price : 37950, quantity : 2, thumbnailImage : "/images/product/이토엔쟈스민티.png" },
+    { productId : 'sm9RXKb3hpHe3MfEZyjb', title : "카프리썬 오렌지(200ml*10)", price : 6050, discountRate : 15, quantity : 3, thumbnailImage : "/images/product/카프리썬오렌지.png" },
+    { productId : 'sWpLAtpN52bmwkhqiq1S', title : "파워오투 복숭아자몽(500ml*24)", price : 35200, quantity : 1, thumbnailImage : "/images/product/파워오투복숭아자몽.png" },
+    { productId : 'sCTHoWGOEdROxEuiMb4v', title : "오이오차녹차(525ml*24)", price : 38060, quantity : 4, thumbnailImage : "/images/product/오이오차녹차.png" },
   ]
-  localStorage.setItem('cartProduct', JSON.stringify(cartProduct))
+  const loginId = JSON.parse(localStorage.getItem('loginInfo')).loginId;
+  const userData = JSON.parse(localStorage.getItem(loginId))
+  localStorage.setItem(loginId, JSON.stringify({...userData, cart}))
 }
-
 function toggleOrderList() {
   let isActive = false;
   // closure
@@ -83,8 +142,7 @@ function toggleOrderList() {
     const summaryEl = $('.order-list-area > .summary');
 
     // localStorage 아이템 Get !
-    const json = localStorage.getItem('cartProduct');
-    let cartProduct = JSON.parse(json);
+    const cartList = getDataFromLocalStorage('cart');
 
     // close -> open
     if(!isActive) {
@@ -94,8 +152,10 @@ function toggleOrderList() {
       
       // DOM Create & Render !
       const templateEl = document.createElement('template');
-      cartProduct.forEach(product => {
-        const { title, price, quantity, thumbnailImage } = product;
+      cartList.forEach(product => {
+        const { title, price, quantity, thumbnailImage , discountRate } = product;
+        // 할인율이 있는 상품은 원가를 계산한 값을 originPrice 변수에 담아 화면에 같이 렌더링
+        const originPrice = discountRate ? Math.floor((price * 100) / (100 - discountRate)) : price;
         templateEl.innerHTML += /* html */`
           <li class="item">
             <img class="thumbnail" src=${thumbnailImage}></img>
@@ -103,12 +163,11 @@ function toggleOrderList() {
               <span class="title">${title}</span>
             </span>
             <div class="quantity-wrapper">
-              <span class="quantity">${quantity}</span>
-              <span>개</span>
+              <span class="quantity">${quantity}개</span>
             </div>
             <span class="price-wrapper">
-              <span class="price">${price}</span>
-              <span>원</span>
+              <span class="discount-price">${(price * quantity).toLocaleString('ko-KR')}원</span>
+              <span class="cost-price">${ originPrice === price ? '' : (originPrice * quantity).toLocaleString('ko-KR') + '원' }</span>
             </span>
           </li>
         `
@@ -125,14 +184,13 @@ function toggleOrderList() {
       summaryEl.style.display = 'block';
 
       let summaryTextEl = summaryEl.firstElementChild;
-      summaryTextEl.innerText = `${cartProduct[0].title} 외 ${cartProduct.length -1}개`
+      summaryTextEl.innerText = `${cartList[0].title} 외 ${cartList.length -1}개`
     }
 
     // toggle state of flag variable
     isActive = !isActive;
   }
 }
-
 function toggleCouponList() {
   const couponListEl = $('.coupon-list');
   couponListEl.classList.toggle('opened');
@@ -141,14 +199,13 @@ function createAccountList(accountList) {
   const templateEl = document.createElement('template');
   accountList.forEach(account => {
     const { id, bankName, accountNumber, balance } = account;
-    const formattedBalance = balance.toLocaleString('ko-KR'); // 통화 표기법으로 변경
 
     templateEl.innerHTML += /* html */`
       <div class="swiper-slide">
         <div class="account-info" id="accountId" data-account-id=${id}>
           <h4 id="bankName">${bankName}</h4>
           <p id="accountNumber">${accountNumber}</p>
-          <span id="balance">${formattedBalance}</span>
+          <span id="balance">${balance.toLocaleString('ko-KR')}</span>
         </div>
       </div>
     `
@@ -174,5 +231,3 @@ function renderAccountList(accountList) {
   const swiperWrapperEl = $('.swiper-wrapper');
   swiperWrapperEl.append(templateEl.content);
 }
-
-//swiper-slide-active 클래스의 자식 

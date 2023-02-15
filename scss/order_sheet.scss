@@ -155,12 +155,22 @@ $color_copyright: rgb(247, 247, 247);
         }
         .price-wrapper {
           display : flex;
+          flex-direction: column;
           align-items: center;
           text-align: right;
           font-weight: 700;
-          font-size: 16px;
-          color: rgb(51, 51, 51);
           line-height: 22px;
+          .discount-price {
+            font-size: 16px;
+            color: rgb(51, 51, 51);
+          }
+          .cost-price {
+            font-size: 14px;
+            line-height: 24px;
+            color: rgb(153, 153, 153);
+            word-break: break-all;
+            text-decoration: line-through;
+          }
         }
       }
     }

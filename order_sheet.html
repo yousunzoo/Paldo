@@ -21,8 +21,9 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
   <link rel="stylesheet" href="./scss/main.scss" />
   <link rel="stylesheet" href="./scss/order_sheet.scss" />
-  <script defer src="./js/order-sheet/orderSheet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script defer src="./js/order-sheet/swiper.js"></script>
+  <script defer src="./js/order-sheet/orderSheet.js"></script>
 </head>
 
 <body>
@@ -94,17 +95,16 @@
 
           <ul class="list">
             <!-- <li class="item">
-              <img class="thumbnail" src="./static/images/product/감튀레드칠리맛.png"></img>
+              <img class="thumbnail" src=${thumbnailImage}></img>
               <span class="title-wrapper">
-                <span class="title">[풀무원] 우리쌀 떡국떡</span>
+                <span class="title">${title}</span>
               </span>
               <div class="quantity-wrapper">
-                <span class="quantity">1</span>
-                <span>개</span>
+                <span class="quantity">${quantity}개</span>
               </div>
               <span class="price-wrapper">
-                <span class="price">6,980</span>
-                <span>원</span>
+                <span class="discount-price">${price.toLocaleString('ko-KR')}원</span>
+                <span class="cost-price">10,000원</span>
               </span>
             </li> -->
           </ul>
@@ -119,7 +119,7 @@
           <div class="info">
             <span class="info-title">보내는 분</span>
             <div class="content-wrapper">
-              <span class="content sender">김팔도</span>
+              <span class="content sender"></span>
             </div>
           </div>
 
@@ -133,7 +133,7 @@
           <div class="info">
             <span class="info-title">이메일</span>
             <div class="content-wrapper">
-              <span class="content email">paldojjang@gmail.com</span>
+              <span class="content email"></span>
               <div class="additional-info">
                 <p>이메일을 통해 주문처리과정을 보내드립니다.</p>
                 <p>정보 변경은 마이페이지 > 개인정보 수정 메뉴에서 가능합니다.</p>
@@ -283,21 +283,21 @@
                 <li>
                   <div class="title">주문금액</div>
                   <div class="amount-wrapper">
-                    <span id="orderAmount">118,230</span>
+                    <span id="orderAmount"></span>
                     <span>원</span>
                   </div>
                 </li>
                 <li>
                   <div class="title">상품금액</div>
                   <div class="amount-wrapper">
-                    <span id="dimmedAmount">161,230</span>
+                    <span id="originAmount"></span>
                     <span>원</span>
                   </div>
                 </li>
                 <li>
                   <div class="title">상품할인금액</div>
                   <div class="amount-wrapper">
-                    <span id="saledAmount">-43,000</span>
+                    <span id="saledAmount"></span>
                     <span>원</span>
                   </div>
                 </li>
@@ -325,7 +325,7 @@
                 <li class="total">
                   <div class="title">최종결제금액</div>
                   <div class="amount-wrapper">
-                    <span id="totalAmount">118,230</span>
+                    <span id="totalAmount"></span>
                     <span>원</span>
                   </div>
                 </li>
@@ -387,7 +387,7 @@
         <div class="pay-btn-area">
           <button type="button" width="240" height="56" radius="3">
             <span>
-              <span id="totalAmount">118,230</span>원 결제하기
+              <span id="totalAmountInBtn"></span>원 결제하기
             </span>
           </button>
           <p class="pay-sub-info">[주문완료] 상태일 경우에만 주문 취소 가능합니다.<br>미성년자가 결제 시 법정대리인이 그 거래를 취소할 수 있습니다.<br>배송 불가 시, 결제수단으로
