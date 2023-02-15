@@ -312,3 +312,22 @@ export const sigupPage = /* html */ `
   </form>
 </div>
 </div>`;
+
+export const searchPage = /* html */ `
+<div class="inner-wrapper">
+          <h3 class="product-title"></h3>
+          <div class="product-wrapper">
+            <div class="product-tab">
+              <p class="total-count">총 <span class="count">20</span>건</p>
+              <ul class="sort-tab">
+                <li class="selected">
+                  <a href="javascript:void(0)">최신순</a>
+                </li>
+                <li><a href="javascript:void(0)">높은 가격순</a></li>
+                <li><a href="javascript:void(0)">낮은 가격순</a></li>
+                <li><a href="javascript:void(0)">할인율순</a></li>
+              </ul>
+            </div>
+            <ul class="product-list"></ul>
+          </div>
+        </div>`;

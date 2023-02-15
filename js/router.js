@@ -12,25 +12,27 @@ const mainSection = document.querySelector("#main");
 
 // 처음 페이지가 로드 되었을 때
 router
-  .on("/", async () => {
-    mainSection.innerHTML = mainPage;
-    setPrdList();
-    swiperAction();
-    const isLogin = await checkAuthorization();
+  .on({
+    "/": async () => {
+      mainSection.innerHTML = mainPage;
+      setPrdList();
+      swiperAction();
+      const isLogin = await checkAuthorization();
 
-    if (isLogin) {
-      changeHeader();
-    }
-  })
-  .on("login", () => {
-    // do something
-    mainSection.innerHTML = loginPage;
-    loginEvent();
-    // isLogin && router.navigate("/");
-  })
-  .on("signup", () => {
-    mainSection.innerHTML = sigupPage;
-    signUpEvent();
+      if (isLogin) {
+        changeHeader();
+      }
+    },
+    login: () => {
+      // do something
+      mainSection.innerHTML = loginPage;
+      loginEvent();
+      // isLogin && router.navigate("/");
+    },
+    signup: () => {
+      mainSection.innerHTML = sigupPage;
+      signUpEvent();
+    },
   })
   .resolve();
 

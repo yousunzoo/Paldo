@@ -97,8 +97,8 @@ $color_banner_btn: #fbcd57;
       justify-content: center;
       align-items: center;
       img {
-        width: 96%;
-        height: 96%;
+        width: 97%;
+        height: 97%;
         object-fit: cover;
         transition: transform 0.3s ease;
       }
@@ -107,10 +107,10 @@ $color_banner_btn: #fbcd57;
       }
       button {
         position: absolute;
-        right: 16px;
-        bottom: 16px;
-        width: 45px;
-        height: 45px;
+        right: 20px;
+        bottom: 20px;
+        width: 47px;
+        height: 47px;
         background-image: url("../static/images/product-add-cart-btn.svg");
         background-size: cover;
       }
