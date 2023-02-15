@@ -1,11 +1,13 @@
 import Navigo from "navigo"; // When using ES modules.
 import { checkAuthorization } from "./api/checkAuthorization";
 import {
+  couponPage,
   loginPage,
   mainPage,
   searchPage,
   sigupPage,
 } from "./components/userPage";
+import handleCouponButton from "./coupon/coupon";
 import handleSearchInput from "./header/handleSearchInput";
 import swiperAction from "./library/swiper";
 import loginEvent from "./login";
@@ -14,7 +16,7 @@ import setPrdList from "./main/setPrdList";
 import setResultPage from "./search/searchResult";
 import signUpEvent from "./signup/signup";
 
-const router = new Navigo("/", { hash: true });
+const router = new Navigo("/");
 const mainSection = document.querySelector("#main");
 
 // 처음 페이지가 로드 되었을 때
@@ -44,6 +46,10 @@ router
     "search/:id": async ({ data }) => {
       mainSection.innerHTML = searchPage;
       await setResultPage(data.id);
+    },
+    coupon: () => {
+      mainSection.innerHTML = couponPage;
+      handleCouponButton();
     },
   })
   .resolve();
