@@ -1,5 +1,5 @@
 import { headers, url } from '../api/headers.js'
-import { getAccessTokenFromLocalStorage } from './utils/localStorage.js'
+import { getDataFromLocalStorage } from './utils/localStorage.js'
 
 /**
  * 선택 가능한 계좌 목록 조회
@@ -12,7 +12,7 @@ import { getAccessTokenFromLocalStorage } from './utils/localStorage.js'
     } 
  */
 export async function getBankList () {
-  const accessToken = getAccessTokenFromLocalStorage();
+  const accessToken = getDataFromLocalStorage('accessToken');
   const res = await fetch(`${url}account/banks`, {
     headers : {
       ...headers,
@@ -40,7 +40,7 @@ export async function getBankList () {
   }
  */
 export async function connectBankAccount (body) {
-  const accessToken = getAccessTokenFromLocalStorage();
+  const accessToken = getDataFromLocalStorage('accessToken');
   const res = await fetch(`${url}account`, {
     method: 'POST',
     headers : {
@@ -65,7 +65,7 @@ export async function connectBankAccount (body) {
   }
  */ 
 export async function getUserAccounts() {
-  const accessToken = getAccessTokenFromLocalStorage();
+  const accessToken = getDataFromLocalStorage('accessToken');
   const res = await fetch(`${url}account`, {
     method: 'GET',
     headers : {
@@ -87,7 +87,7 @@ export async function getUserAccounts() {
  * @return ResponseValue = true
  */
 export async function deleteAccount(body) {
-  const accessToken = getAccessTokenFromLocalStorage();
+  const accessToken = getDataFromLocalStorage('accessToken');
   const res = await fetch(`${url}account`, {
     method: 'DELETE',
     headers : {

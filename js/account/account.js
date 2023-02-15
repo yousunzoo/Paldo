@@ -1,3 +1,4 @@
+import { logInFn } from '../api/requestLogin.js';
 import { checkAuthorization } from '../api/checkAuthorization.js';
 import { getBankList, connectBankAccount, getUserAccounts, deleteAccount } from './accountApi.js';
 import { makeDOMwithProperties } from '../utils/dom.js';
@@ -9,11 +10,14 @@ export const $ = selector => document.querySelector(selector)
 
 /* 
 토큰 만료 시 실행 (로그인 기능 fetch 시 삭제 예정)
-  logInFn({
-    email : "testuser@gmail.com",
-    password : "12345678"
-  }) 
+
 */
+// logInFn({
+//   email : "testuser@gmail.com",
+//   password : "12345678"
+// }) 
+
+
 
 // IIFE
 ;(async function () {
@@ -147,12 +151,7 @@ async function initPage() {
   // 사용자 계좌 목록 조회
   const accountList = await getUserAccounts();
 
-  if(accountList.length === 0) {
-    // 없을 때 렌더링
-    renderEmptyList();
-  } else {
-    renderAccountList(accountList)
-  }
+  accountList.length === 0 ? renderEmptyList() : renderAccountList(accountList);
 }
 
 function createAccountList (accountList) {
