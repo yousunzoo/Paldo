@@ -29,5 +29,8 @@
   "browserslist": [
     "> 1%",
     "last 2 version"
-  ]
+  ],
+  "dependencies": {
+    "navigo": "^8.11.1"
+  }
 }

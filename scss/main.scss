@@ -42,7 +42,7 @@ header {
     box-sizing: border-box;
     letter-spacing: -0.3px;
     .header-menu {
-      display: none;
+      display: flex;
       position: absolute;
       right: 0px;
       top: 0px;
@@ -68,9 +68,6 @@ header {
         &:last-child {
           padding-right: 0;
         }
-      }
-      &.active {
-        display: flex;
       }
     }
     .header-items {
@@ -286,8 +283,8 @@ header {
             justify-content: center;
             align-items: center;
             img {
-              width: 96%;
-              height: 96%;
+              width: 230px;
+              height: 230px;
               object-fit: cover;
             }
           }
