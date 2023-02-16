@@ -36,7 +36,8 @@ transactionBtn.addEventListener('click',async () => {
   // Promise.all(requests)
   // .then((result) => {
   //   // 결제 처리 성공
-  //   // 결제완료 페이지로 이동
+  //   // localStorage cart목록
+  //   // productId 배열을 state로 넘기면서 History.pushState()로 결제완료 페이지로 이동
   // })
   // .catch((err) => {
   //   // 결제 처리 실패

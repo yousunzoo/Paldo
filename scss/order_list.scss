@@ -209,6 +209,16 @@ body {
   }
   .order-list {
     padding-top: 20px;
+    .no-list {
+      height: 75px;
+      margin: 40px 0;
+      text-align: center;
+      letter-spacing: 0.3px;
+      line-height: 75px;
+    }
+    .d-none {
+      display : none;
+    }
     .list-group {
       border-top : 1px solid #e6e6e6;
       background-color: #f9f9f9;

@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Ottogi</title>
   <!-- font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,7 +17,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
   <link rel="stylesheet" href="./scss/main.scss" />
   <link rel="stylesheet" href="./scss/order_list.scss" />
-  <title>My Ottogi</title>
+  <script defer type="module" src="./js/order-list/orderList.js"></script>
 </head>
 
 <body>
@@ -160,7 +161,8 @@
           <div class="divider"></div>
 
           <ul class="order-list">
-            <div class="list-group">
+            <p class="no-list d-none">주문내역이 없습니다.</p>
+            <!-- <div class="list-group">
               <div class="list-title">
                 <div class="title-info">
                   <span class="transaction-date">2020.09.17 결제</span>
@@ -181,24 +183,24 @@
                       <div class="info-list">
                         <dl>
                           <dt>상품명</dt>
-                          <dd>[선물세트] 태우1+한우 실속 구이세트 (냉장)</dd>
-                        </dl>
-                        <dl>
-                          <dt>주문번호</dt>
-                          <dd>2293920100221</dd>
+                          <dd id="name">오이오차녹차</dd>
                         </dl>
                         <dl>
                           <dt>결제방법</dt>
-                          <dd>신용카드</dd>
+                          <dd>계좌 이체</dd>
+                        </dl>
+                        <dl>
+                          <dt>수량</dt>
+                          <dd id="quantity">1개</dd>
                         </dl>
                         <dl>
                           <dt>결제금액</dt>
-                          <dd>131,000원</dd>
+                          <dd id="transactionPrice">131,000원</dd>
                         </dl>
                       </div>
                     </div>
                     <div class="side-info">
-                      <span>배송완료</span>
+                      <span>배송중</span>
                       <div>
                         <button type="button" height="36" radius="3">
                           <span>1:1 문의</span>
@@ -257,7 +259,7 @@
                   </div>
                 </li>
               </ul>
-            </div>
+            </div> -->
 
             <!-- <li class="item">
               <div class="wrapper">
