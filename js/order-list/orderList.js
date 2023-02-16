@@ -76,12 +76,12 @@ async function initPage() {
         acc += product.price * product.quantity;
         return acc;
       }, 0)
-
+      
       // id 만들기
       const date = new Date(time);
       const numericString = `${date.getFullYear()}${(date.getMonth()+1).toString().padStart(2,'0')}${date.getDate().toString().padStart(2,'0')}${date.getHours().toString().padStart(2,'0')}${date.getMinutes().toString().padStart(2,'0')}`;
 
-
+      
       // 외부 Summary 요소 Create !
       const orderListEl = $('.order-list');
       const templateEl = document.createElement('template');
@@ -94,10 +94,10 @@ async function initPage() {
             <label for=${index} class="transaction-name">${productsArr[0].title} 포함 총 ${productsArr.length}건</label>
             <span class="transaction-price">${price.toLocaleString('ko-KR')}원</span>
           </div>
-          <div class="title-btn-wrapper">
+          <!-- <div class="title-btn-wrapper">
             <button></button>
             <button></button>
-          </div>
+          </div> -->
         </div>
         <input type="checkbox" id=${index}>
         <ul>
