@@ -26,19 +26,11 @@ export function changeHeader() {
   logoutMenu.append(logoutButton);
   headerMenu.append(userMenu, logoutMenu);
 
-  // user-menu class active 부여
-  // const loginMenu = document.querySelector(".login-menu");
-  // const userMenu = document.querySelector(".user-menu");
-  // const userNameSpan = userMenu.querySelector(".user-name");
-  // userNameSpan.textContent = userName;
-
-  // loginMenu.classList.remove("active");
-  // userMenu.classList.add("active");
-  // const logoutButton = userMenu.querySelector(".logout-button");
-
   // 로그아웃 버튼 클릭 시 로그아웃
   logoutButton.addEventListener("click", async function () {
     const logout = await requestLogout();
-    if (logout) location.reload();
+    if (logout) {
+      changeHeader();
+    }
   });
 }

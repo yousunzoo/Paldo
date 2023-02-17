@@ -582,6 +582,14 @@ header {
         width: 80px;
         height: 80px;
         background-color: $color_btn_border;
+        a {
+          width: 80px;
+          height: 80px;
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
       }
       .swiper-button-next,
       .swiper-button-prev {

@@ -1,6 +1,7 @@
 import { makeDOMwithProperties } from "../utils/dom";
 import { getProducts } from "../api/getProducts";
 import moveToDetail from "../movetoProductDetail";
+import { setSidebar } from "../sidebar";
 export default async function setPrdList(router) {
   // variables
   const prdList1 = document.querySelector(".prd-list1 .swiper-wrapper");
@@ -56,6 +57,7 @@ function setMainPrdList(prdList, data, router) {
 
     swiperDiv.querySelector("a").addEventListener("click", function (event) {
       moveToDetail(event, this, router);
+      setSidebar(item);
     });
     return swiperDiv;
   });
@@ -88,6 +90,7 @@ function setRecommendList(prdList, data, router) {
     // 해당 li 클릭하면 상품 페이지로 이동
     recommendLi.querySelector("a").addEventListener("click", function (event) {
       moveToDetail(event, this, router);
+      setSidebar(item);
     });
 
     // 장바구니 버튼 누르면 해당 상품 장바구니에 담기

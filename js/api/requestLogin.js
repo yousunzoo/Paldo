@@ -1,7 +1,8 @@
-import Navigo from "navigo";
 import { headers, url } from "./headers";
 import { setUserInfo } from "../localStorage/setLoginData";
+import { changeHeader } from "../main/changeHeader";
 
+// 이전 페이지로 이동하는 버튼을 클릭할 때
 export async function logInFn(data) {
   const res = await fetch(`${url}auth/login`, {
     method: "POST",
@@ -16,6 +17,7 @@ export async function logInFn(data) {
     })
     .then((result) => {
       setUserInfo(result, data.email);
+      changeHeader();
       history.back();
     })
     .catch(() => {

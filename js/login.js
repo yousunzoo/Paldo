@@ -1,6 +1,7 @@
 import { logInFn } from "./api/requestLogin";
 
-export default function loginEvent() {
+export default function loginEvent(router) {
+  let isLogined;
   const loginForm = document.querySelector(".login-form");
 
   loginForm.addEventListener("submit", async (event) => {

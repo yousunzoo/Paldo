@@ -1,3 +1,4 @@
+import { headers } from "./api/headers";
 import Navigo from "navigo"; // When using ES modules.
 import { checkAuthorization } from "./api/checkAuthorization";
 import {
@@ -18,6 +19,7 @@ import setPrdList from "./main/setPrdList";
 import setProductPage from "./product/setProductPage";
 import setResultPage from "./search/searchResult";
 import signUpEvent from "./signup/signup";
+import { setSidebarSwiper } from "./sidebar";
 
 const router = new Navigo("/");
 const mainSection = document.querySelector("#main");
@@ -35,10 +37,10 @@ router
         changeHeader();
       }
     },
-    login: () => {
+    login: async () => {
       // do something
       mainSection.innerHTML = loginPage;
-      loginEvent();
+      loginEvent(router);
       // isLogin && router.navigate("/");
     },
     signup: () => {
@@ -62,8 +64,8 @@ router
   .resolve();
 
 router.link("/");
-sidebarAction();
 
+setSidebarSwiper();
 // search input
 handleSearchInput(router);
 // to-top-button

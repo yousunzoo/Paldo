@@ -31,7 +31,7 @@ export const mainPage = /* html */ `
       <div class="swiper-wrapper">
         <div class="swiper-slide skeleton-slide">
           <div class="skeleton-loading">
-            <div class="loading-image"></div>
+            <div class="skeleton-image"></div>
             <div class="skeleton-text"></div>
             <div class="skeleton-text"></div>
             <div class="skeleton-text"></div>
@@ -39,7 +39,7 @@ export const mainPage = /* html */ `
         </div>
         <div class="swiper-slide skeleton-slide">
           <div class="skeleton-loading">
-            <div class="loading-image"></div>
+            <div class="skeleton-image"></div>
             <div class="skeleton-text"></div>
             <div class="skeleton-text"></div>
             <div class="skeleton-text"></div>
@@ -47,7 +47,7 @@ export const mainPage = /* html */ `
         </div>
         <div class="swiper-slide skeleton-slide">
           <div class="skeleton-loading">
-            <div class="loading-image"></div>
+            <div class="skeleton-image"></div>
             <div class="skeleton-text"></div>
             <div class="skeleton-text"></div>
             <div class="skeleton-text"></div>
@@ -55,7 +55,7 @@ export const mainPage = /* html */ `
         </div>
         <div class="swiper-slide skeleton-slide">
           <div class="skeleton-loading">
-            <div class="loading-image"></div>
+            <div class="skeleton-image"></div>
             <div class="skeleton-text"></div>
             <div class="skeleton-text"></div>
             <div class="skeleton-text"></div>
@@ -117,7 +117,7 @@ export const mainPage = /* html */ `
 </section>
 <section class="main-coupon-banner">
   <div class="coupon-banner">
-    <a class="banner-more-btn" href="./coupon.html">자세히 보기</a>
+    <a class="banner-more-btn" href="coupon" data-navigo>자세히 보기</a>
   </div>
 </section>
 <section class="main-recommend">

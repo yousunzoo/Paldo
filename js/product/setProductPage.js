@@ -3,6 +3,7 @@ import bannerBest from "../../static/images/productBanner-best.png";
 import bannerFrugal from "../../static/images/productBanner-frugal.png";
 import { getProducts } from "../api/getProducts";
 import moveToDetail from "../movetoProductDetail";
+import { setSidebar } from "../sidebar";
 
 export default async function setProductPage(tag, router) {
   // 타이틀 세팅
@@ -102,9 +103,9 @@ function setProductList(prdList, sort, originResult, router) {
                     </div>
                   </div>
                 </a>`;
-
     productEl.querySelector("a").addEventListener("click", function (event) {
       moveToDetail(event, this, router);
+      setSidebar(item);
     });
     return productEl;
   });
