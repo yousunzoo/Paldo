@@ -10,7 +10,8 @@ import {
 } from "./components/userPage";
 import handleCouponButton from "./coupon/coupon";
 import handleSearchInput from "./header/handleSearchInput";
-import swiperAction from "./library/swiper";
+import { swiperAction, sidebarAction } from "./library/swiper";
+import goToTopFn from "./library/toTop";
 import loginEvent from "./login";
 import { changeHeader } from "./main/changeHeader";
 import setPrdList from "./main/setPrdList";
@@ -62,3 +63,7 @@ router
   .resolve();
 
 router.link("/");
+sidebarAction();
+
+// to-top-button
+goToTopFn();

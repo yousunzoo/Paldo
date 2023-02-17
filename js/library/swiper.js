@@ -1,4 +1,4 @@
-export default function swiperAction() {
+export function swiperAction() {
   const mainbanner = document.querySelector(".main-banner .swiper");
   const prdList1 = document.querySelector(".prd-list1 .swiper");
   const prdList2 = document.querySelector(".prd-list2 .swiper");
@@ -31,6 +31,21 @@ export default function swiperAction() {
       // 버튼
       nextEl: ".prd-list2 .swiper-buttons .swiper-button-next",
       prevEl: ".prd-list2 .swiper-buttons .swiper-button-prev",
+    },
+  });
+}
+
+export function sidebarAction() {
+  new Swiper("#sidebar .swiper-wrap", {
+    // Optional parameters
+    direction: "vertical",
+    slidesPerView: 3,
+    spaceBetween: 10,
+
+    // Navigation arrows
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
     },
   });
 }
