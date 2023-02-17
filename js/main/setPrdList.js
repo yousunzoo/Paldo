@@ -1,5 +1,6 @@
 import { makeDOMwithProperties } from "../utils/dom";
 import { getProducts } from "../api/getProducts";
+import moveToDetail from "../movetoProductDetail";
 export default async function setPrdList(router) {
   // variables
   const prdList1 = document.querySelector(".prd-list1 .swiper-wrapper");
@@ -100,10 +101,4 @@ function setRecommendList(prdList, data, router) {
   });
   prdList.innerHTML = "";
   prdList.append(...recommendLis);
-}
-
-function moveToDetail(event, target, router) {
-  event.preventDefault();
-  const targetId = target.getAttribute("href");
-  router.navigate(targetId);
 }

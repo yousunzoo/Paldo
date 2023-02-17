@@ -34,7 +34,6 @@ router
       if (isLogin) {
         changeHeader();
       }
-      handleSearchInput(router);
     },
     login: () => {
       // do something
@@ -48,7 +47,7 @@ router
     },
     "search/:id": async ({ data }) => {
       mainSection.innerHTML = searchPage;
-      await setResultPage(data.id);
+      await setResultPage(data.id, router);
     },
     coupon: () => {
       mainSection.innerHTML = couponPage;
@@ -57,7 +56,7 @@ router
     "productDetail/:id": ({ data }) => {},
     "products/:id": async ({ data }) => {
       mainSection.innerHTML = productPage;
-      await setProductPage(data.id);
+      await setProductPage(data.id, router);
     },
   })
   .resolve();
@@ -65,5 +64,7 @@ router
 router.link("/");
 sidebarAction();
 
+// search input
+handleSearchInput(router);
 // to-top-button
 goToTopFn();

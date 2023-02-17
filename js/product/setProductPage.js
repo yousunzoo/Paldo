@@ -2,8 +2,9 @@ import bannerNew from "../../static/images/productBanner-new.png";
 import bannerBest from "../../static/images/productBanner-best.png";
 import bannerFrugal from "../../static/images/productBanner-frugal.png";
 import { getProducts } from "../api/getProducts";
+import moveToDetail from "../movetoProductDetail";
 
-export default async function setProductPage(tag) {
+export default async function setProductPage(tag, router) {
   // 타이틀 세팅
   const keywordTitle = document.querySelector(".product-title");
   const productBanner = document.querySelector(".product-banner");
@@ -28,17 +29,17 @@ export default async function setProductPage(tag) {
   // 상품리스트 세팅
   const searchResult = await getProducts("", tag);
   const originResult = [...searchResult];
-  showResult(searchResult, originResult, tag);
+  showResult(searchResult, originResult, router);
 }
 
-function showResult(searchResult, originResult, tag) {
+function showResult(searchResult, originResult, router) {
   const amount = document.querySelector(".count");
   amount.textContent = searchResult.length;
-  setProductList(searchResult, "최신순", originResult);
+  setProductList(searchResult, "최신순", originResult, router);
   changeTabs(searchResult, originResult);
 }
 
-function setProductList(prdList, sort, originResult) {
+function setProductList(prdList, sort, originResult, router) {
   let newArr;
   switch (sort) {
     case "최신순":
@@ -72,7 +73,7 @@ function setProductList(prdList, sort, originResult) {
     );
 
     productEl.innerHTML = /*html */ `
-      <a href="javascript:void(0)" data-id="${item.id}">
+      <a href="productDetail/${item.id}" data-id="${item.id}">
                   <div class="product-thumbnail">
                     <img
                       src="${item.thumbnail}"
@@ -102,6 +103,9 @@ function setProductList(prdList, sort, originResult) {
                   </div>
                 </a>`;
 
+    productEl.querySelector("a").addEventListener("click", function (event) {
+      moveToDetail(event, this, router);
+    });
     return productEl;
   });
   productListUi.innerHTML = "";
@@ -122,7 +126,7 @@ function changeTabs(searchResult, originResult) {
       });
       item.parentElement.classList.add("selected");
       const sort = item.textContent;
-      setProductList(searchResult, sort, originResult);
+      setProductList(searchResult, sort, originResult, router);
     });
   });
 }
