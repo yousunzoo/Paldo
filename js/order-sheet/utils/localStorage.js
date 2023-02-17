@@ -1,6 +1,7 @@
 export const SORT_TYPES = {
   ACCESS_TOKEN: 'accessToken',
   USER_INFO: 'userInfo',
+  USER_ADDRESS: 'userAddress',
   CART: 'cart',
   COUPONS: 'coupons',
   WISH: 'wish',
@@ -17,6 +18,9 @@ export function getDataFromLocalStorage (sort) {
     case 'userInfo' : 
       return userData?.userInfo;
 
+    case 'userAddress' :
+      return userData?.userAddress;
+      
     case 'cart' :
       return userData?.cart;
     
