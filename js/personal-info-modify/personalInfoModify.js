@@ -1,9 +1,11 @@
 import { checkAuthorization } from '../api/checkAuthorization.js'
 import { SORT_TYPES, getDataFromLocalStorage } from './utils/localStorage.js';
+import getAddress from "../library/postcode.js";
 
 /* COMMON */
 const $ = selector => document.querySelector(selector);
 const { USER_INFO, USER_ADDRESS } = SORT_TYPES
+const findAddresssButton = document.querySelector(".find-address");
 
 /* GLOBAL LOGIC */
 ;(async function () {
@@ -20,6 +22,12 @@ const { USER_INFO, USER_ADDRESS } = SORT_TYPES
     // location.assign('로그인 페이지 경로')
   }
 })()
+
+// 주소 검색
+findAddresssButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  getAddress();
+});
 
 /* FUNCTIONS */
 function initPage() {
