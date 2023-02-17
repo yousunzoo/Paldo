@@ -151,4 +151,6 @@ async function initPage() {
       ulEl.append(templateEl2.content);
     }
   })
+  const skeletonLoadingEl = $('.skeleton-loading');
+  skeletonLoadingEl.classList.add('d-none');
 }
