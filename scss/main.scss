@@ -433,7 +433,6 @@ header {
           li {
             padding-top: 24px;
             width: 50%;
-            height: 96px; // 임시 설정
             &.skeleton-li {
               background-color: #fff;
               display: flex;
@@ -478,9 +477,15 @@ header {
                 height: 36px;
               }
             }
-            .recommend-product {
+            &.recommend-product {
               display: flex;
+              align-items: center;
+              a {
+                display: flex;
+              }
               .thumbnail {
+                width: 72px;
+                height: 72px;
                 margin-right: 20px;
                 background-color: #eee;
                 img {
@@ -489,7 +494,7 @@ header {
                 }
               }
               .product-info {
-                width: 310px;
+                width: 300px;
                 .product-name {
                   width: 295px;
                   padding-top: 9px;
@@ -511,7 +516,6 @@ header {
                 }
               }
               .add-cart-btn {
-                margin-top: 18px;
                 width: 104px;
                 height: 36px;
                 text-align-last: left;

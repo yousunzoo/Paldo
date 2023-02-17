@@ -4,6 +4,7 @@ import {
   couponPage,
   loginPage,
   mainPage,
+  productPage,
   searchPage,
   sigupPage,
 } from "./components/userPage";
@@ -13,6 +14,7 @@ import swiperAction from "./library/swiper";
 import loginEvent from "./login";
 import { changeHeader } from "./main/changeHeader";
 import setPrdList from "./main/setPrdList";
+import setProductPage from "./product/setProductPage";
 import setResultPage from "./search/searchResult";
 import signUpEvent from "./signup/signup";
 
@@ -24,7 +26,7 @@ router
   .on({
     "/": async () => {
       mainSection.innerHTML = mainPage;
-      setPrdList();
+      setPrdList(router);
       swiperAction();
       const isLogin = await checkAuthorization();
 
@@ -50,6 +52,11 @@ router
     coupon: () => {
       mainSection.innerHTML = couponPage;
       handleCouponButton();
+    },
+    "productDetail/:id": ({ data }) => {},
+    "products/:id": async ({ data }) => {
+      mainSection.innerHTML = productPage;
+      await setProductPage(data.id);
     },
   })
   .resolve();

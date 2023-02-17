@@ -1,6 +1,6 @@
 import { makeDOMwithProperties } from "../utils/dom";
 import { getProducts } from "../api/getProducts";
-export default async function setPrdList() {
+export default async function setPrdList(router) {
   // variables
   const prdList1 = document.querySelector(".prd-list1 .swiper-wrapper");
   const prdList2 = document.querySelector(".prd-list2 .swiper-wrapper");
@@ -10,12 +10,12 @@ export default async function setPrdList() {
   const snacksData = await getProducts("", ["스낵"]);
   const sweetsData = await getProducts("", ["초콜릿/캔디류"]);
 
-  setMainPrdList(prdList1, drinksData);
-  setMainPrdList(prdList2, snacksData);
-  setRecommendList(recommendList, sweetsData);
+  setMainPrdList(prdList1, drinksData, router);
+  setMainPrdList(prdList2, snacksData, router);
+  setRecommendList(recommendList, sweetsData, router);
 }
 
-function setMainPrdList(prdList, data) {
+function setMainPrdList(prdList, data, router) {
   const prdlistDiv = data.map((item) => {
     const swiperDiv = makeDOMwithProperties("div", {
       className: "swiper-slide",
@@ -26,7 +26,7 @@ function setMainPrdList(prdList, data) {
     );
 
     swiperDiv.innerHTML = /* html */ ` 
-    <a href="javascript:void(0)" data-id="${item.id}">
+    <a href="/productDetail/${item.id}">
     <div class="image-container">
       <img src="${item.thumbnail}" alt="${item.title}">
     </div>
@@ -52,6 +52,10 @@ function setMainPrdList(prdList, data) {
     </div>
     </a>
     `;
+
+    swiperDiv.querySelector("a").addEventListener("click", function (event) {
+      moveToDetail(event, this, router);
+    });
     return swiperDiv;
   });
 
@@ -59,12 +63,14 @@ function setMainPrdList(prdList, data) {
   prdList.append(...prdlistDiv);
 }
 
-function setRecommendList(prdList, data) {
+function setRecommendList(prdList, data, router) {
   data = data.splice(0, 4);
   const recommendLis = data.map((item) => {
-    const recommendLi = document.createElement("li");
+    const recommendLi = makeDOMwithProperties("li", {
+      className: "recommend-product",
+    });
     recommendLi.innerHTML = /*html*/ `
-    <a href="javascript:void(0)" class="recommend-product" data-id="${item.id}">
+    <a href="productDetail/${item.id}" data-id="${item.id}">
     <div class="thumbnail">
       <img
         src="${item.thumbnail}"
@@ -75,11 +81,29 @@ function setRecommendList(prdList, data) {
       <p class="product-price">
         <span class="sales-price">${item.price.toLocaleString()}</span>원
       </p>
-    </div>
+    </div></a>
     <button class="add-cart-btn"></button>
-  </a>`;
+  `;
+    // 해당 li 클릭하면 상품 페이지로 이동
+    recommendLi.querySelector("a").addEventListener("click", function (event) {
+      moveToDetail(event, this, router);
+    });
+
+    // 장바구니 버튼 누르면 해당 상품 장바구니에 담기
+    recommendLi
+      .querySelector("button")
+      .addEventListener("click", function (event) {
+        event.preventDefault();
+        console.log("hi");
+      });
     return recommendLi;
   });
   prdList.innerHTML = "";
   prdList.append(...recommendLis);
+}
+
+function moveToDetail(event, target, router) {
+  event.preventDefault();
+  const targetId = target.getAttribute("href");
+  router.navigate(targetId);
 }

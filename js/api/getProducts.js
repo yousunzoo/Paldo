@@ -5,7 +5,18 @@ export async function getProducts(keyword = "", tag = []) {
   if (keyword) {
     data.searchText = keyword;
   }
-  if (tag.length === 0) {
+  if (typeof tag === "string") {
+    switch (tag) {
+      case "new":
+        data.searchTags = ["신상"];
+        break;
+      case "best":
+        data.searchTags = ["인기"];
+        break;
+      case "frugal":
+        data.searchTags = ["세일"];
+    }
+  } else {
     data.searchTags = tag;
   }
   const res = await fetch(

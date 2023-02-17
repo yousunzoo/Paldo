@@ -1,30 +1,29 @@
-import { getProducts } from "../api/getProducts";
-import link from "../../static/images/no-result.svg";
+// localStorage에서 검색어 불러와서 실행
 
-export default async function setResultPage(keyword) {
-  const searchResult = await getProducts(keyword);
+import { getProducts } from "../api/getProducts";
+
+export default async function setProductPage(tag) {
+  const searchResult = await getProducts("", tag);
   const originResult = [...searchResult];
-  showResult(searchResult, originResult, keyword);
+  showResult(searchResult, originResult, tag);
 }
 
-function showResult(searchResult, originResult, keyword) {
+function showResult(searchResult, originResult, tag) {
   const keywordTitle = document.querySelector(".product-title");
   const amount = document.querySelector(".count");
-  keywordTitle.textContent = keyword;
-
-  if (searchResult.length === 0) {
-    keywordTitle.innerHTML = /* html */ `
-    "<span class="search-word">${keyword}</span>"에 대한 검색결과가 없습니다.`;
-    productWrapperDiv.innerHTML = /* html */ `
-    <div class="no-result">
-      <img src="${link}" alt="no results" />
-      <p>검색된 상품이 없습니다.</p>
-    </div>
-    `;
-    return;
+  let title;
+  switch (tag) {
+    case "new":
+      title = "신상품";
+      break;
+    case "best":
+      title = "베스트";
+      break;
+    case "frugal":
+      title = "알뜰쇼핑";
   }
-  keywordTitle.innerHTML = /* html */ `
-    "<span class="search-word">${keyword}</span>"에 대한 검색결과`;
+  keywordTitle.textContent = title;
+
   amount.textContent = searchResult.length;
   setProductList(searchResult, "최신순", originResult);
   changeTabs(searchResult, originResult);
