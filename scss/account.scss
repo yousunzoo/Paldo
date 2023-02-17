@@ -30,6 +30,13 @@ body {
   display : none;
 }
 
+// skeleton-loading
+@keyframes blinker {
+  100% {
+    background-position: -100% 0;
+  }
+}
+
 /* SIDE BAR */
 .side-bar {
   width : 200px;
@@ -210,58 +217,89 @@ body {
     align-items: center;
     border-bottom: 2px solid $color_primary;
   }
-  .no-list {
-    height : 75px;
-    margin : 40px 0;
-    text-align: center;
-    letter-spacing: 0.3px;
-    line-height: 75px;
-  }
-  .account-list {
-    margin-top : 30px;
-    > .item {
-      height : 75px;
+  .content {
+    position: relative;
+    .skeleton-loading {
       box-sizing: border-box;
-      display : flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px;
-      background-color: #fafafa;
-      border: 1px solid #eee;
-      margin-bottom : 20px;
-      .account-info {
-        > span {
-          display :inline-block;
-          margin-right : 10px;
-          &:not(:first-child)::before {
-            content: "";
-            display : inline-block;
-            width : 1px;
-            height : 12px;
-            background-color: #dadce0;
-            margin-right : 10px;
-          }
-        }
-
+      position : absolute;
+      background-color: #fff;
+      width : 100%;
+      height : 100%;
+      top: 0;
+      .skeleton {
+        height: 75px;
+        margin-bottom : 20px;
+        background: linear-gradient(
+          120deg,
+          #e5e5e5 30%,
+          #f0f0f0 38%,
+          #f0f0f0 40%,
+          #e5e5e5 48%
+        );
+        background-size: 200% 100%;
+        background-position: 100% 0;
+        animation: blinker 1s linear infinite;
       }
-      .account-delete-btn {
-        background-color: $color_primary;
-        padding : 6px 11px;
-        border : 1px solid $color_primary;
-        color : #fff;
-        cursor: pointer;
-        transition : .3s ease;
-        &:hover {
-          box-sizing: border-box;
-          color : $color_primary;
+      .skeleton-button {
+        margin : 40px auto 0;
+        width: 120px;
+        height: 40px;
+      }
+    }
+    .no-list-wrapper {
+      .no-list {
+        height : 75px;
+        margin : 30px 0;
+        text-align: center;
+        letter-spacing: 0.3px;
+        line-height: 75px;
+      }
+    }
+
+    .account-list {
+      margin-top : 30px;
+      > .item {
+        height : 75px;
+        box-sizing: border-box;
+        display : flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background-color: #fafafa;
+        border: 1px solid #eee;
+        margin-bottom : 20px;
+        .account-info {
+          > span {
+            display :inline-block;
+            margin-right : 10px;
+            &:not(:first-child)::before {
+              content: "";
+              display : inline-block;
+              width : 1px;
+              height : 12px;
+              background-color: #dadce0;
+              margin-right : 10px;
+            }
+          }
+  
+        }
+        .account-delete-btn {
+          background-color: $color_primary;
+          padding : 6px 11px;
           border : 1px solid $color_primary;
-          background-color: #fff;
+          color : #fff;
+          cursor: pointer;
+          transition : .3s ease;
+          &:hover {
+            box-sizing: border-box;
+            color : $color_primary;
+            border : 1px solid $color_primary;
+            background-color: #fff;
+          }
         }
       }
     }
-  }
-
-  /* 계좌 등록 모달창 */
+      /* 계좌 등록 모달창 */
   #modal {
     display : none;
     &:checked ~ .modal{
@@ -395,6 +433,8 @@ body {
         }
       }
     }
+  } 
+
   }
-  
+
 }

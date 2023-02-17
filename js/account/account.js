@@ -152,6 +152,9 @@ async function initPage() {
   const accountList = await getUserAccounts();
 
   accountList.length === 0 ? renderEmptyList() : renderAccountList(accountList);
+
+  const skeletonLoadingEl = $('.skeleton-loading');
+  skeletonLoadingEl.classList.add('d-none');
 }
 
 function createAccountList (accountList) {
@@ -236,8 +239,8 @@ function createAccountList (accountList) {
 }
 
 function renderAccountList (accountList) {
-  const noListEl = $('.no-list');
-  noListEl.classList.add('d-none');
+  const noListWrapperEl = $('.no-list-wrapper');
+  noListWrapperEl.innerHTML = '';
 
   const fragmentEl = createAccountList(accountList);
 
@@ -245,11 +248,15 @@ function renderAccountList (accountList) {
   ulEl.innerHTML = '';
   ulEl.append(fragmentEl);
 }
-
+function createEmptyList () {
+  return `<p class="no-list">등록된 계좌가 없습니다.</p>`
+}
 function renderEmptyList () {
   const ulEl = $('.account-list');
   ulEl.innerHTML = '';
 
-  const noListEl = $('.no-list');
-  noListEl.classList.remove('d-none');
+  const noListEl = createEmptyList();
+
+  const noListWrapperEl = $('.no-list-wrapper');
+  noListWrapperEl.innerHTML = noListEl;
 }
