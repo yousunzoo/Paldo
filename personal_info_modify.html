@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Ottogi</title>
   <!-- font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,7 +17,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
   <link rel="stylesheet" href="./scss/main.scss" />
   <link rel="stylesheet" href="./scss/personal_info_modify.scss" />
-  <title>My Ottogi</title>
+  <script defer type="module" src="./js/personal-info-modify/personalInfoModify.js"></script>
 </head>
 
 <body>
@@ -197,10 +198,10 @@
                   </div>
                   <div class="modify-box address-box">
                     <div class="inline-div">
-                      <input type="text" id="postcode" placeholder="우편번호" />
+                      <input type="text" id="postcode" placeholder="우편번호" disabled />
                       <button class="find-address">우편번호 찾기</button>
                     </div>
-                    <input type="text" id="roadAddress" placeholder="도로명주소" />
+                    <input type="text" id="roadAddress" placeholder="도로명주소" disabled />
                     <input type="text" id="detailAddress" placeholder="상세주소" />
                   </div>
                 </div>
