@@ -12,8 +12,10 @@ $color_copyright: rgb(247, 247, 247);
 $color_banner_btn: #fbcd57;
 
 .product-banner {
-  height: 400px;
-  background-color: #eee;
+  height: 350px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 .product-title {
