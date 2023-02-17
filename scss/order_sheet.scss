@@ -280,6 +280,8 @@ $color_copyright: rgb(247, 247, 247);
             position: absolute;
             top:90%;
             opacity: 0;
+            background: rgb(250, 250, 250);
+            color: rgb(204, 204, 204);
             transition : .3s;
             .coupon {
               display: flex;
@@ -293,7 +295,6 @@ $color_copyright: rgb(247, 247, 247);
               border: 1px solid rgb(221, 221, 221);
               background: rgb(250, 250, 250);
               span {
-                letter-spacing: 1px;
                 cursor: pointer;
               }
             }

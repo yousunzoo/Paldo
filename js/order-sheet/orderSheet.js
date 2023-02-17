@@ -1,11 +1,12 @@
 import { checkAuthorization } from '../api/checkAuthorization'
 import { getUserAccounts } from '../account/accountApi.js'
-import { getDataFromLocalStorage } from './utils/localStorage.js';
+import { SORT_TYPES, getDataFromLocalStorage } from './utils/localStorage.js';
 import { requestTransaction } from './orderSheetApi.js';
 import { getOrderList } from '../order-list/orderListApi.js'
 
 /* COMMON */
 const $ = selector => document.querySelector(selector);
+const { CART, USER_INFO, COUPONS } = SORT_TYPES;
 
 /* DOM */
 const toggleOrderListEl = $('#toggleOrderList');
@@ -22,7 +23,7 @@ transactionBtn.addEventListener('click',async () => {
   console.log(accountId)
 
   // productId, Quantity Get !
-  const cartList = getDataFromLocalStorage('cart');
+  const cartList = getDataFromLocalStorage(CART);
   const requests = cartList.reduce((acc, cur) => {
     const { productId, quantity } = cur
     for(let i = 0; i < quantity; i++) {
@@ -70,13 +71,13 @@ setMockData();
  */
 async function initPage() {
   /* 주문 상품 섹션 Summary 렌더링 */
-  const cartList = getDataFromLocalStorage('cart');
+  const cartList = getDataFromLocalStorage(CART);
 
   const summaryTextEl = $('.order-list-area > .summary span');
   summaryTextEl.innerText = `${cartList[0].title} 외 ${cartList.length -1}개`
 
   /* 주문자 정보 렌더링 */
-  const userInfo = getDataFromLocalStorage('userInfo')
+  const userInfo = getDataFromLocalStorage(USER_INFO)
 
   const senderEl = document.querySelector('.orderer-area .sender');
   senderEl.textContent = userInfo.displayName;
@@ -87,6 +88,23 @@ async function initPage() {
   /* 사용자 계좌 조회 및 렌더링 */
   const accountList = await getUserAccounts();
   accountList.length === 0 ? renderEmptyList() : renderAccountList(accountList);
+
+  /* 쿠폰 조회 및 렌더링 */
+  const coupons = getDataFromLocalStorage(COUPONS);
+
+  const couponSelectorTextEl = $('.coupon-selector > span');
+  couponSelectorTextEl.textContent = `사용가능 쿠폰 0장 / 전체 ${coupons.length}장`
+
+  const couponListEl = $('.coupon-list');
+  const templateEl = document.createElement('template');
+  coupons.forEach((coupon) => {
+    templateEl.innerHTML += /* html */`
+      <li class="coupon">
+        <span>${coupon.name} [${coupon.discount} 할인]</span>
+      </li>
+    `
+  })
+  couponListEl.append(templateEl.content);
 
   /* 결제 금액 */
   const orderAmountEl = $('#orderAmount');
@@ -143,7 +161,7 @@ function toggleOrderList() {
     const summaryEl = $('.order-list-area > .summary');
 
     // localStorage 아이템 Get !
-    const cartList = getDataFromLocalStorage('cart');
+    const cartList = getDataFromLocalStorage(CART);
 
     // close -> open
     if(!isActive) {
