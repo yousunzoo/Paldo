@@ -17,6 +17,11 @@ const transactionBtn = $('.pay-btn-area > button');
 toggleOrderListEl.addEventListener('click', toggleOrderList());
 toggleCouponListEl.addEventListener('click', toggleCouponList);
 transactionBtn.addEventListener('click',async () => {
+  const spinnerWrapperEl = $('.spinner-wrapper');
+  Object.assign(spinnerWrapperEl.style, {
+    display : 'flex'
+  })
+
   // accountId Get !
   const accountEl = $('.swiper-slide-active');
   const accountId = accountEl.children['accountId'].dataset.accountId;
