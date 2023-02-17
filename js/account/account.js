@@ -37,6 +37,11 @@ export const $ = selector => document.querySelector(selector)
 
 const modalTrigger = $('.add-account-btn');
 modalTrigger.addEventListener('click', async () => {
+  const modalSpinnerEl = $('.modal-spinner');
+  Object.assign(modalSpinnerEl.style, {
+    display : 'flex' // 스피너 노출
+  })
+
   // 계좌 목록 조회 API !
   let bankList = await getBankList();
 
@@ -45,6 +50,9 @@ modalTrigger.addEventListener('click', async () => {
 
   // Render !
   renderBankList(templateEl);
+  Object.assign(modalSpinnerEl.style, {
+    display : 'none' // 스피너 숨김
+  })
 
   // 계좌 자리수 총합을 구하기 위한 리스너. 계좌 번호 유효성 검사에 사용
   let totalDigits;
