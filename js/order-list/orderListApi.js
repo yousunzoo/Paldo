@@ -1,8 +1,10 @@
-import { getDataFromLocalStorage } from '../order-sheet/utils/localStorage.js';
+import { SORT_TYPES, getDataFromLocalStorage } from '../order-sheet/utils/localStorage.js';
 import { headers, url } from "../api/headers.js";
 
+const { ACCESS_TOKEN } = SORT_TYPES;
+
 export async function getOrderList() {
-  const accessToken = getDataFromLocalStorage('accessToken');
+  const accessToken = getDataFromLocalStorage(ACCESS_TOKEN);
   const res = await fetch(`${url}products/transactions/details`, {
     headers : {
       ...headers,
