@@ -377,12 +377,17 @@ export const productPage = /* html */ `
 `;
 
 export const productDetailPage = /* html */ `
-<div class="inner__wrapper"><div class="product-detail-wrapper">
+<div class="inner__wrapper">
+  <div class="product-detail-wrapper">
+    <div class="sold-out">
+        <p>해당 상품은 현재 품절되었습니다.</p>
+      </div>
   <div class="thumbnail">
     <img src="" alt="" />
   </div>
   <div class="info-wrapper">
     <div class="top-info">
+      
       <p class="product-title"></p>
       <div class="product-price"><span class="price-num"></span>원</div>
       <div class="product-login-text">로그인 후 구매하실 수 있습니다.</div>

@@ -3,7 +3,11 @@ import { getProductInfo } from "../api/getProductInfo";
 
 export default async function setProductDetailPage(id, router) {
   const productInfo = await getProductInfo(id);
-
+  // 상품이 품절 상태일 때 품절 div 띄우기
+  if (productInfo.isSoldOut) {
+    const soldOutDiv = document.querySelector(".sold-out");
+    soldOutDiv.style.display = "flex";
+  }
   // 상품 정보 뿌리기
   const title = document.querySelector(".product-title");
   title.textContent = productInfo.title;
