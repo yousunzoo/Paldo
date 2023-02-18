@@ -3,9 +3,6 @@ import { checkAuthorization } from '../api/checkAuthorization.js';
 import { getBankList, connectBankAccount, getUserAccounts, deleteAccount } from './accountApi.js';
 import { makeDOMwithProperties } from '../utils/dom.js';
 
-/* COMMON */
-export const $ = selector => document.querySelector(selector)
-
 /* GLOBAL LOGIC */
 
 /* 
@@ -16,7 +13,6 @@ export const $ = selector => document.querySelector(selector)
 //   email : "testuser@gmail.com",
 //   password : "12345678"
 // }) 
-
 
 
 // IIFE
@@ -35,9 +31,9 @@ export const $ = selector => document.querySelector(selector)
   }
 })()
 
-const modalTrigger = $('.add-account-btn');
+const modalTrigger = document.querySelector('.add-account-btn');
 modalTrigger.addEventListener('click', async () => {
-  const modalSpinnerEl = $('.modal-spinner');
+  const modalSpinnerEl = document.querySelector('.modal-spinner');
   Object.assign(modalSpinnerEl.style, {
     display : 'flex' // 스피너 노출
   })
@@ -56,11 +52,11 @@ modalTrigger.addEventListener('click', async () => {
 
   // 계좌 자리수 총합을 구하기 위한 리스너. 계좌 번호 유효성 검사에 사용
   let totalDigits;
-  const ulEl = $('.bank-list');
+  const ulEl = document.querySelector('.bank-list');
   ulEl.addEventListener('change', getTotalAccountDigits)
 
   // 폼 제출 리스너
-  const accountFormEl = $('#accountForm');
+  const accountFormEl = document.querySelector('#accountForm');
   accountFormEl.addEventListener('submit', submitAccountForm)
 
   // MODAL FUNCTIONS
@@ -83,7 +79,7 @@ modalTrigger.addEventListener('click', async () => {
     return templateEl;
   }
   function renderBankList(templateEl) {
-    const ulEl = $('.bank-list');
+    const ulEl = document.querySelector('.bank-list');
     ulEl.innerHTML = '';
     ulEl.append(templateEl.content)
   }
@@ -133,7 +129,7 @@ modalTrigger.addEventListener('click', async () => {
         initPage();
 
         // 모달창 닫기
-        const modalEl = $('input[type="checkbox"]#modal');
+        const modalEl = document.querySelector('input[type="checkbox"]#modal');
         modalEl.checked = false;
   
         // 내부에서 사용한 이벤트 핸들러 제거
@@ -161,7 +157,7 @@ async function initPage() {
 
   accountList.length === 0 ? renderEmptyList() : renderAccountList(accountList);
 
-  const skeletonLoadingEl = $('.skeleton-loading');
+  const skeletonLoadingEl = document.querySelector('.skeleton-loading');
   skeletonLoadingEl.classList.add('d-none');
 }
 
@@ -233,7 +229,7 @@ function createAccountList (accountList) {
   })
   return fragmentEl;
 
-  // 하단 렌더링 구조 참고
+  // 렌더링 구조 참고
   /* html */`
     <li class="item">
       <div class="account-info">
@@ -247,12 +243,12 @@ function createAccountList (accountList) {
 }
 
 function renderAccountList (accountList) {
-  const noListWrapperEl = $('.no-list-wrapper');
+  const noListWrapperEl = document.querySelector('.no-list-wrapper');
   noListWrapperEl.innerHTML = '';
 
   const fragmentEl = createAccountList(accountList);
 
-  const ulEl = $('.account-list');
+  const ulEl = document.querySelector('.account-list');
   ulEl.innerHTML = '';
   ulEl.append(fragmentEl);
 }
@@ -260,11 +256,11 @@ function createEmptyList () {
   return `<p class="no-list">등록된 계좌가 없습니다.</p>`
 }
 function renderEmptyList () {
-  const ulEl = $('.account-list');
+  const ulEl = document.querySelector('.account-list');
   ulEl.innerHTML = '';
 
   const noListEl = createEmptyList();
 
-  const noListWrapperEl = $('.no-list-wrapper');
+  const noListWrapperEl = document.querySelector('.no-list-wrapper');
   noListWrapperEl.innerHTML = noListEl;
 }

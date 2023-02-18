@@ -1,9 +1,6 @@
 import { checkAuthorization } from '../api/checkAuthorization.js'
 import { getOrderList } from './orderListApi.js'
 
-/* COMMON */
-const $ = selector => document.querySelector(selector);
-
 /* GLOBAL LOGIC */
 ;(async function () {
   const isValidUser = await checkAuthorization();
@@ -25,12 +22,12 @@ async function initPage() {
   // 사용자 전체 거래내역 조회
   const orderList = await getOrderList();
   if(orderList.length === 0) {
-    const noListEl = $('.no-list');
+    const noListEl = document.querySelector('.no-list');
     noListEl.classList.remove('d-none');
     return;
   }
 
-  const noListEl = $('.no-list');
+  const noListEl = document.querySelector('.no-list');
   noListEl.classList.add('d-none');
 
   // 분 단위로 그룹핑
@@ -83,7 +80,7 @@ async function initPage() {
 
       
       // 외부 Summary 요소 Create !
-      const orderListEl = $('.order-list');
+      const orderListEl = document.querySelector('.order-list');
       const templateEl = document.createElement('template');
 
       templateEl.innerHTML += /* html */`
@@ -151,6 +148,6 @@ async function initPage() {
       ulEl.append(templateEl2.content);
     }
   })
-  const skeletonLoadingEl = $('.skeleton-loading');
+  const skeletonLoadingEl = document.querySelector('.skeleton-loading');
   skeletonLoadingEl.classList.add('d-none');
 }

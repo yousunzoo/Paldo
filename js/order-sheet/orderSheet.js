@@ -4,26 +4,25 @@ import { SORT_TYPES, getDataFromLocalStorage } from './utils/localStorage.js';
 import { requestTransaction } from './orderSheetApi.js';
 import { getOrderList } from '../order-list/orderListApi.js'
 
-/* COMMON */
-const $ = selector => document.querySelector(selector);
+/* GLOBAL VARIABLES */
 const { CART, USER_INFO, COUPONS } = SORT_TYPES;
 
 /* DOM */
-const toggleOrderListEl = $('#toggleOrderList');
-const toggleCouponListEl = $('#toggleCouponList');
-const transactionBtn = $('.pay-btn-area > button');
+const toggleOrderListEl = document.querySelector('#toggleOrderList');
+const toggleCouponListEl = document.querySelector('#toggleCouponList');
+const transactionBtn = document.querySelector('.pay-btn-area > button');
 
 /* EVENT LISTENER */
 toggleOrderListEl.addEventListener('click', toggleOrderList());
 toggleCouponListEl.addEventListener('click', toggleCouponList);
 transactionBtn.addEventListener('click',async () => {
-  const spinnerWrapperEl = $('.spinner-wrapper');
+  const spinnerWrapperEl = document.querySelector('.spinner-wrapper');
   Object.assign(spinnerWrapperEl.style, {
     display : 'flex'
   })
 
   // accountId Get !
-  const accountEl = $('.swiper-slide-active');
+  const accountEl = document.querySelector('.swiper-slide-active');
   const accountId = accountEl.children['accountId'].dataset.accountId;
   console.log(accountId)
 
@@ -78,7 +77,7 @@ async function initPage() {
   /* 주문 상품 섹션 Summary 렌더링 */
   const cartList = getDataFromLocalStorage(CART);
 
-  const summaryTextEl = $('.order-list-area > .summary span');
+  const summaryTextEl = document.querySelector('.order-list-area > .summary span');
   summaryTextEl.innerText = `${cartList[0].title} 외 ${cartList.length -1}개`
 
   /* 주문자 정보 렌더링 */
@@ -97,10 +96,10 @@ async function initPage() {
   /* 쿠폰 조회 및 렌더링 */
   const coupons = getDataFromLocalStorage(COUPONS);
 
-  const couponSelectorTextEl = $('.coupon-selector > span');
+  const couponSelectorTextEl = document.querySelector('.coupon-selector > span');
   couponSelectorTextEl.textContent = `사용가능 쿠폰 0장 / 전체 ${coupons.length}장`
 
-  const couponListEl = $('.coupon-list');
+  const couponListEl = document.querySelector('.coupon-list');
   const templateEl = document.createElement('template');
   coupons.forEach((coupon) => {
     templateEl.innerHTML += /* html */`
@@ -112,7 +111,7 @@ async function initPage() {
   couponListEl.append(templateEl.content);
 
   /* 결제 금액 */
-  const orderAmountEl = $('#orderAmount');
+  const orderAmountEl = document.querySelector('#orderAmount');
   let orderAmount = cartList.reduce((acc, cur) => {
     const { price, quantity } = cur
     acc += price * quantity;
@@ -120,7 +119,7 @@ async function initPage() {
   }, 0)
   orderAmountEl.textContent = orderAmount.toLocaleString('ko-KR');
 
-  const originAmountEl = $('#originAmount');
+  const originAmountEl = document.querySelector('#originAmount');
   const originAmount = cartList.reduce((acc, cur) => {
     const { price, quantity, discountRate } = cur
     // 할인율이 있으면 원가를 계산하여 누적(DB에 저장된 상품 가격은 할인율이 적용된 가격)
@@ -129,15 +128,15 @@ async function initPage() {
   }, 0)
   originAmountEl.textContent = originAmount.toLocaleString('ko-KR');
 
-  const saledAmountEl = $('#saledAmount');
+  const saledAmountEl = document.querySelector('#saledAmount');
   const saledAmount = originAmount - orderAmount;
   saledAmountEl.textContent = '-' + saledAmount.toLocaleString('ko-KR');
 
-  const totalAmountEl = $('#totalAmount');
+  const totalAmountEl = document.querySelector('#totalAmount');
   let totalAmount = orderAmount;
   totalAmountEl.textContent = totalAmount.toLocaleString('ko-KR');
   
-  const totalAmountInBtnEl = $('#totalAmountInBtn');
+  const totalAmountInBtnEl = document.querySelector('#totalAmountInBtn');
   totalAmountInBtnEl.textContent = totalAmount.toLocaleString('ko-KR');
 }
 
@@ -162,8 +161,8 @@ function toggleOrderList() {
   return function (event) {
     const btnEl = event.currentTarget;
 
-    const ulEl = $('.order-list-area > ul');
-    const summaryEl = $('.order-list-area > .summary');
+    const ulEl = document.querySelector('.order-list-area > ul');
+    const summaryEl = document.querySelector('.order-list-area > .summary');
 
     // localStorage 아이템 Get !
     const cartList = getDataFromLocalStorage(CART);
@@ -216,7 +215,7 @@ function toggleOrderList() {
   }
 }
 function toggleCouponList() {
-  const couponListEl = $('.coupon-list');
+  const couponListEl = document.querySelector('.coupon-list');
   couponListEl.classList.toggle('opened');
 }
 function createAccountList(accountList) {
@@ -237,21 +236,21 @@ function createAccountList(accountList) {
   return templateEl;
 }
 function renderEmptyList() {
-  const accountListEl = $('.account-list');
+  const accountListEl = document.querySelector('.account-list');
   accountListEl.classList.add('d-none');
 
-  const noListEl = $('.no-list');
+  const noListEl = document.querySelector('.no-list');
   noListEl.classList.remove('d-none');
 }
 function renderAccountList(accountList) {
-  const noListEl = $('.no-list');
+  const noListEl = document.querySelector('.no-list');
   noListEl.classList.add('d-none');
 
-  const accountListEl = $('.account-list');
+  const accountListEl = document.querySelector('.account-list');
   accountListEl.classList.remove('d-none');
 
   const templateEl = createAccountList(accountList);
 
-  const swiperWrapperEl = $('.swiper-wrapper');
+  const swiperWrapperEl = document.querySelector('.swiper-wrapper');
   swiperWrapperEl.append(templateEl.content);
 }
