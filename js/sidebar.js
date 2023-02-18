@@ -13,7 +13,8 @@ export function setSidebar(data) {
       sidebarData.splice(index, 1);
     }
   });
-
+  // 최근 본 상품은 최대 10개까지 저장 가능
+  if (sidebarData.length === 10) sidebarData.pop();
   sidebarData.unshift({ id: data.id, thumbnail: data.thumbnail });
   localStorage.setItem("sidebarData", JSON.stringify(sidebarData));
   setSidebarSwiper();
