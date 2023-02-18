@@ -70,7 +70,7 @@ router
 
 router.link("/");
 
-setSidebarSwiper();
+setSidebarSwiper(router);
 // search input
 handleSearchInput(router);
 // to-top-button

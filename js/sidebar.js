@@ -1,7 +1,8 @@
 import { sidebarAction } from "./library/swiper";
 import { makeDOMwithProperties } from "./utils/dom";
+import moveToDetail from "./movetoProductDetail";
 
-export function setSidebar(data) {
+export function setSidebar(data, router) {
   let sidebarData = JSON.parse(localStorage.getItem("sidebarData"));
   if (!sidebarData) {
     sidebarData = [];
@@ -17,10 +18,10 @@ export function setSidebar(data) {
   if (sidebarData.length === 10) sidebarData.pop();
   sidebarData.unshift({ id: data.id, thumbnail: data.thumbnail });
   localStorage.setItem("sidebarData", JSON.stringify(sidebarData));
-  setSidebarSwiper();
+  setSidebarSwiper(router);
 }
 
-export function setSidebarSwiper() {
+export function setSidebarSwiper(router) {
   const sidebarData = JSON.parse(localStorage.getItem("sidebarData"));
   const swiperWrapperDiv = document.querySelector(
     "#sidebar-area .swiper-wrapper"
@@ -31,6 +32,11 @@ export function setSidebarSwiper() {
       className: "swiper-slide",
     });
     swiperDiv.innerHTML = `<a href="productDetail/${item.id}" data-navigo><img src="${item.thumbnail}" alt="${item.title}"/></a>`;
+
+    swiperDiv.querySelector("a").addEventListener("click", function (event) {
+      moveToDetail(event, this, router);
+      setSidebar(item, router);
+    });
     return swiperDiv;
   });
 
