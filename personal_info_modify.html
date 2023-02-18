@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
   <link rel="stylesheet" href="./scss/main.scss" />
   <link rel="stylesheet" href="./scss/personal_info_modify.scss" />
+  <!-- sweetAlert2 -->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- postcode.map -->
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script defer type="module" src="./js/personal-info-modify/personalInfoModify.js"></script>
@@ -169,19 +171,19 @@
                 </div>
                 <div class="modify-section">
                   <div class="modify-text">
-                    <label class="label-id" for="passwordCheck">새 비밀번호</label>
+                    <label class="label-id" for="newPassword">새 비밀번호</label>
                   </div>
                   <div class="modify-box">
-                    <input type="password" id="passwordCheck" placeholder="새 비밀번호를 입력해주세요." required />
+                    <input type="password" id="newPassword" placeholder="새 비밀번호를 입력해주세요." required />
                     <span class="error-message"></span>
                   </div>
                 </div>
                 <div class="modify-section">
                   <div class="modify-text">
-                    <label class="label-id" for="passwordCheck">비밀번호 확인</label>
+                    <label class="label-id" for="newPasswordCheck">비밀번호 확인</label>
                   </div>
                   <div class="modify-box">
-                    <input type="password" id="passwordCheck" placeholder="비밀번호를 다시 입력해주세요." required />
+                    <input type="password" id="newPasswordCheck" placeholder="비밀번호를 다시 입력해주세요." required />
                     <span class="error-message">비밀번호가 일치하지 않습니다.</span>
                   </div>
                 </div>
