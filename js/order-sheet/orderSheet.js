@@ -5,7 +5,7 @@ import { requestTransaction } from './orderSheetApi.js';
 import { getOrderList } from '../order-list/orderListApi.js'
 
 /* GLOBAL VARIABLES */
-const { CART, USER_INFO, COUPONS } = SORT_TYPES;
+const { CART, USER_INFO, USER_ADDRESS, COUPONS } = SORT_TYPES;
 
 /* DOM */
 const toggleOrderListEl = document.querySelector('#toggleOrderList');
@@ -80,7 +80,7 @@ async function initPage() {
   const summaryTextEl = document.querySelector('.order-list-area > .summary span');
   summaryTextEl.innerText = `${cartList[0].title} 외 ${cartList.length -1}개`
 
-  /* 주문자 정보 렌더링 */
+  /* 주문자 정보 */
   const userInfo = getDataFromLocalStorage(USER_INFO)
 
   const senderEl = document.querySelector('.orderer-area .sender');
@@ -89,26 +89,34 @@ async function initPage() {
   const emailEl = document.querySelector('.orderer-area .email');
   emailEl.textContent = userInfo.email;
 
-  /* 사용자 계좌 조회 및 렌더링 */
-  const accountList = await getUserAccounts();
-  accountList.length === 0 ? renderEmptyList() : renderAccountList(accountList);
+  /* 배송지 정보 */
+  const userAddress = getDataFromLocalStorage(USER_ADDRESS);
+  const { roadAddress, detailAddress } = userAddress;
+  const destinationEl = document.querySelector('.destination');
+  destinationEl.textContent = `${roadAddress}, ${detailAddress}`
 
   /* 쿠폰 조회 및 렌더링 */
   const coupons = getDataFromLocalStorage(COUPONS);
 
   const couponSelectorTextEl = document.querySelector('.coupon-selector > span');
-  couponSelectorTextEl.textContent = `사용가능 쿠폰 0장 / 전체 ${coupons.length}장`
+  couponSelectorTextEl.textContent = `사용가능 쿠폰 0장 / 전체 ${coupons?.length || 0}장`
 
   const couponListEl = document.querySelector('.coupon-list');
   const templateEl = document.createElement('template');
-  coupons.forEach((coupon) => {
-    templateEl.innerHTML += /* html */`
-      <li class="coupon">
-        <span>${coupon.name} [${coupon.discount} 할인]</span>
-      </li>
-    `
-  })
-  couponListEl.append(templateEl.content);
+  if(coupons) {
+    coupons.forEach((coupon) => {
+      templateEl.innerHTML += /* html */`
+        <li class="coupon">
+          <span>${coupon.name} [${coupon.discount} 할인]</span>
+        </li>
+      `
+    })
+    couponListEl.append(templateEl.content);
+  }
+  
+  /* 사용자 계좌 */
+  const accountList = await getUserAccounts();
+  accountList.length === 0 ? renderEmptyList() : renderAccountList(accountList);
 
   /* 결제 금액 */
   const orderAmountEl = document.querySelector('#orderAmount');
