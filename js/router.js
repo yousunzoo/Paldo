@@ -5,6 +5,7 @@ import {
   couponPage,
   loginPage,
   mainPage,
+  productDetailPage,
   productPage,
   searchPage,
   sigupPage,
@@ -20,6 +21,7 @@ import setProductPage from "./product/setProductPage";
 import setResultPage from "./search/searchResult";
 import signUpEvent from "./signup/signup";
 import { setSidebarSwiper } from "./sidebar";
+import setProductDetailPage from "./product/setProductDetailPage";
 
 const router = new Navigo("/");
 const mainSection = document.querySelector("#main");
@@ -55,7 +57,10 @@ router
       mainSection.innerHTML = couponPage;
       handleCouponButton();
     },
-    "productDetail/:id": ({ data }) => {},
+    "productDetail/:id": async ({ data }) => {
+      mainSection.innerHTML = productDetailPage;
+      await setProductDetailPage(data.id, router);
+    },
     "products/:id": async ({ data }) => {
       mainSection.innerHTML = productPage;
       await setProductPage(data.id, router);

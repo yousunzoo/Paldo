@@ -174,10 +174,7 @@ header {
 }
 
 section {
-  padding: 80px;
-  width: 1050px;
-  margin: 0 auto;
-  .product-wrapper {
+  .product-detail-wrapper {
     padding-top: 50px;
     display: flex;
     justify-content: space-between;
@@ -193,6 +190,7 @@ section {
         .product-title {
           font-size: 18px;
           font-weight: 700;
+          text-align-last: left;
         }
         .product-price {
           font-size: 22px;
@@ -265,8 +263,12 @@ section {
             box-sizing: border-box;
             display: flex;
             justify-content: center;
-            img {
-              width: 26px;
+            background-image: url("../static/images/wish.svg");
+            background-size: 30px;
+            background-position: center;
+            background-repeat: no-repeat;
+            &.active {
+              background-image: url("../static/images/wish-active.svg");
             }
           }
           .cart-btn {
@@ -287,210 +289,5 @@ section {
     display: flex;
     justify-content: center;
     padding-top: 120px;
-  }
-}
-
-footer {
-  border-top: 1px solid $color_btn_border;
-  padding-top: 40px;
-  .inner-wrapper {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 30px;
-    .footer-team-info1 {
-      width: 50%;
-      .team-name {
-        display: flex;
-        padding-bottom: 20px;
-        img {
-          width: 100px;
-          height: 100px;
-          margin-right: 20px;
-        }
-        .team-name-desc {
-          padding-top: 20px;
-          .team-title-area {
-            display: flex;
-            align-items: center;
-            .team-title {
-              background-color: $color_primary;
-              padding: 3px 10px;
-              color: $color_white;
-              border-radius: 4px;
-              font-size: 18px;
-            }
-            .team-desc {
-              font-size: 20px;
-              padding-left: 10px;
-            }
-            a:hover {
-              text-decoration: underline;
-            }
-          }
-        }
-        .github-link {
-          font-size: 12px;
-          display: block;
-          padding-top: 6px;
-        }
-      }
-      .team-members {
-        display: flex;
-        flex-wrap: wrap;
-        @for $i from 1 through 5 {
-          .team-member:nth-child(#{$i}) {
-            .profile-thumbnail {
-              background-image: url("../static/images/member_0#{$i}.png");
-            }
-          }
-        }
-        .team-member {
-          display: flex;
-          width: 50%;
-          margin-bottom: 20px;
-          .profile-thumbnail {
-            width: 50px;
-            height: 50px;
-            margin-right: 20px;
-            border-radius: 25px;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-          }
-          .profile-info {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            .profile-info-title {
-              display: flex;
-              .profile-tag {
-                width: 30px;
-                height: 20px;
-                background-color: $color_primary;
-                font-size: 14px;
-                color: $color_white;
-                font-weight: 400;
-                border-radius: 4px;
-                padding: 2px 4px;
-                text-align: center;
-                line-height: 18px;
-              }
-              .member-name {
-                font-size: 16px;
-                padding-left: 10px;
-                line-height: 22px;
-              }
-            }
-            .member-github {
-              padding-top: 8px;
-              font-size: 12px;
-            }
-          }
-        }
-      }
-    }
-    .footer-team-info2 {
-      width: 45%;
-      .footer-title {
-        font-size: 20px;
-        margin-bottom: 20px;
-      }
-      .team-skillset {
-        padding: 20px 0;
-        img {
-          margin-right: 4px;
-          border-radius: 4px;
-        }
-        .skill-list {
-          margin-bottom: 10px;
-        }
-      }
-      .team-inquiry {
-        padding-top: 30px;
-        .inquiry-area {
-          display: flex;
-          .inquiry-btn {
-            display: inline-block;
-            width: 140px;
-            height: 40px;
-            margin-right: 12px;
-            text-align: center;
-            line-height: 40px;
-            border: 1px solid $color_btn_border;
-          }
-          .inquiry-text {
-            line-height: 20px;
-            font-size: 12px;
-            color: $color_product_tag;
-          }
-        }
-        .inquiry-email {
-          margin-top: 20px;
-          font-size: 12px;
-          line-height: 1.4;
-          color: $color_product_tag;
-          p {
-            margin-bottom: 2px;
-          }
-        }
-      }
-    }
-  }
-  .copyright {
-    padding: 20px 0;
-    background-color: $color_copyright;
-    p {
-      font-size: 12px;
-      text-align: center;
-      color: $color_product_tag;
-    }
-  }
-}
-
-// login page
-.login-inner-wrapper {
-  margin: auto;
-  margin-top: 90px;
-  width: 340px;
-
-  form {
-    width: 100%;
-    padding-bottom: 60px;
-    input {
-      width: 100%;
-      height: 54px;
-      font-size: 14px;
-      box-sizing: border-box;
-      padding: 0px 11px 1px 15px;
-      border-radius: 4px;
-      border: 1px solid $color_btn_border;
-      font-weight: 400;
-      line-height: 1.5;
-      &:first-child {
-        margin-bottom: 10px;
-      }
-      &:nth-child(2) {
-        margin-bottom: 30px;
-      }
-    }
-    button {
-      display: block;
-      width: 100%;
-      height: 54px;
-      font-size: 14px;
-      border-radius: 3px;
-      background-color: $color_primary;
-      color: $color_white;
-      font-weight: 500;
-    }
-
-    .signup-btn {
-      margin-top: 10px;
-      background-color: $color_white;
-      border: 1px solid $color_primary;
-      color: $color_primary;
-      font-weight: normal;
-      box-sizing: border-box;
-    }
   }
 }
