@@ -176,6 +176,8 @@ header {
 section {
   .product-detail-wrapper {
     padding-top: 50px;
+    padding-bottom: 50px;
+    border-bottom: 1px solid $color_btn_border;
     display: flex;
     justify-content: space-between;
     position: relative;
@@ -251,7 +253,7 @@ section {
         }
       }
       .low-info {
-        padding-top: 160px;
+        padding-top: 70px;
         .price-info {
           display: flex;
           align-items: flex-end;
