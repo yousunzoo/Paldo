@@ -2,6 +2,7 @@ import { makeDOMwithProperties } from "../utils/dom";
 import { getProducts } from "../api/getProducts";
 import moveToDetail from "../movetoProductDetail";
 import { setSidebar } from "../sidebar";
+import { addCart } from "../product/setProductDetailPage";
 export default async function setPrdList(router) {
   // variables
   const prdList1 = document.querySelector(".prd-list1 .swiper-wrapper");
@@ -94,12 +95,9 @@ function setRecommendList(prdList, data, router) {
     });
 
     // 장바구니 버튼 누르면 해당 상품 장바구니에 담기
-    recommendLi
-      .querySelector("button")
-      .addEventListener("click", function (event) {
-        event.preventDefault();
-        console.log("hi");
-      });
+    recommendLi.querySelector("button").addEventListener("click", () => {
+      addCart(item);
+    });
     return recommendLi;
   });
   prdList.innerHTML = "";
