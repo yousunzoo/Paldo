@@ -48,7 +48,7 @@ $color_copyright: rgb(247, 247, 247);
       margin-top: 60px;
     }
     &:nth-child(6) {
-      .tab {
+      .delivery-info-tab {
         display: flex;
         justify-content: space-between;
         position: relative;
@@ -74,8 +74,9 @@ $color_copyright: rgb(247, 247, 247);
           font-size: 12px;
           color: $color_white;
           line-height: 17px;
+          visibility: visible;
           opacity: 1;
-          transition: opacity 0.3s ease 0s;
+          transition: 0.3s ease 0s;
           &::before {
             content: "";
             position: absolute;
@@ -340,6 +341,9 @@ $color_copyright: rgb(247, 247, 247);
             justify-content: center;
             margin-top: 20px;
             padding: 30px;
+            &.d-none {
+              display: none;
+            }
             p {
               margin-bottom : 10px;
               font-size : 16px;
@@ -364,6 +368,9 @@ $color_copyright: rgb(247, 247, 247);
             }
             &:hover .swiper-button-next::after {
               opacity: 1;
+            }
+            &.d-none {
+              display: none;
             }
             .swiper-wrapper {
               .swiper-slide {
@@ -405,9 +412,6 @@ $color_copyright: rgb(247, 247, 247);
               opacity: 0;
               transition : opacity .2s ease;
             }
-          }
-          .d-none {
-            display : none;
           }
         }
       }

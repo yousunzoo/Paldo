@@ -22,8 +22,8 @@
   <link rel="stylesheet" href="./scss/main.scss" />
   <link rel="stylesheet" href="./scss/order_sheet.scss" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script defer src="./js/order-sheet/swiper.js"></script>
-  <script defer src="./js/order-sheet/orderSheet.js"></script>
+  <script defer type="module" src="./js/order-sheet/swiper.js"></script>
+  <script defer type="module" src="./js/order-sheet/orderSheet.js"></script>
 </head>
 
 <body>
@@ -124,13 +124,6 @@
           </div>
 
           <div class="info">
-            <span class="info-title">휴대폰</span>
-            <div class="content-wrapper">
-              <span class="content phone">010-1234-5678</span>
-            </div>
-          </div>
-
-          <div class="info">
             <span class="info-title">이메일</span>
             <div class="content-wrapper">
               <span class="content email"></span>
@@ -145,7 +138,7 @@
 
         <div class="order-category">
           <h3>배송 정보</h3>
-          <div class="tab">
+          <div class="delivery-info-tab">
             <button class="delivery-notice">배송지 변경 안내</button>
             <div class="delivery-notice-message">
               <p>개인정보 수정에서<br />배송지를 변경할 수 있어요</p>
@@ -342,47 +335,6 @@
           </div>
         </div>
 
-        <div class="order-category">
-          <h3>개인정보 수집/제공</h3>
-        </div>
-        <div class="private-info-consent">
-          <div>
-            <img id="checkAll"
-              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgc3Ryb2tlPSIjREREIj4KICAgICAgICAgICAgPGc+CiAgICAgICAgICAgICAgICA8Zz4KICAgICAgICAgICAgICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNjY5LjAwMDAwMCwgLTEwOTAuMDAwMDAwKSB0cmFuc2xhdGUoMTAwLjAwMDAwMCwgOTM2LjAwMDAwMCkgdHJhbnNsYXRlKDU1My4wMDAwMDAsIDE0Mi4wMDAwMDApIHRyYW5zbGF0ZSgxNi4wMDAwMDAsIDEyLjAwMDAwMCkiPgogICAgICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSIxMS41Ii8+CiAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik03IDEyLjY2N0wxMC4zODUgMTYgMTggOC41Ii8+CiAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICA8L2c+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4K"
-              alt="checkbox all">
-            <span>결제 진행 필수 전체 동의</span>
-          </div>
-          <ul class="list">
-            <li class="item">
-              <img
-                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik03IDEyLjY2NyAxMC4zODUgMTYgMTggOC41IiBzdHJva2U9IiNEREQiIHN0cm9rZS13aWR0aD0iMS41IiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K"
-                alt="checkbox">
-              <span>(필수) 개인정보 수집∙이용 및 처리 동의</span>
-            </li>
-            <li class="item">
-              <img
-                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik03IDEyLjY2NyAxMC4zODUgMTYgMTggOC41IiBzdHJva2U9IiNEREQiIHN0cm9rZS13aWR0aD0iMS41IiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K"
-                alt="checkbox">
-              <span>(필수) 개인정보 제3자 제공 동의</span>
-            </li>
-            <li class="item">
-              <img
-                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik03IDEyLjY2NyAxMC4zODUgMTYgMTggOC41IiBzdHJva2U9IiNEREQiIHN0cm9rZS13aWR0aD0iMS41IiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K"
-                alt="checkbox">
-              <span>(필수) 결제대행 서비스 약관 동의</span>
-            </li>
-            <li class="item">
-              <img
-                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik03IDEyLjY2NyAxMC4zODUgMTYgMTggOC41IiBzdHJva2U9IiNEREQiIHN0cm9rZS13aWR0aD0iMS41IiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K"
-                alt="checkbox">
-              <span>(필수) 전자지급 결제대행 서비스 이용약관 동의</span>
-            </li>
-          </ul>
-
-        </div>
-
-        <p class="sub-info">컬리에서 판매되는 상품 중에는 컬리에 입점한 개별 판매자가 판매하는 마켓플레이스(오픈마켓) 상품이 포함되어 있습니다.<br>마켓플레이스(오픈마켓) 상품의 경우 컬리는
-          통신판매중개자로서 통신판매의 당사자가 아닙니다. 컬리는 해당 상품의 주문, 품질, 교환/환불 등 의무와 책임을 부담하지 않습니다.</p>
         <div class="pay-btn-area">
           <button type="button" width="240" height="56" radius="3">
             <span>
@@ -392,9 +344,6 @@
               <div class="spinner"></div>
             </div>
           </button>
-          <p class="pay-sub-info">[주문완료] 상태일 경우에만 주문 취소 가능합니다.<br>미성년자가 결제 시 법정대리인이 그 거래를 취소할 수 있습니다.<br>배송 불가 시, 결제수단으로
-            환불됩니다. 일부 또는 전체 상품이 품절 등의 사유로 배송 되지 못할 경우, 신속하게 환불해 드리겠습니다.<br>카카오페이, 토스, 네이버페이, 페이코 결제 시, 결제하신 수단으로만
-            환불됩니다.<br></p>
         </div>
       </div>
 

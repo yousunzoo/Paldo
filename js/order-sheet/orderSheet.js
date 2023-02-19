@@ -10,11 +10,31 @@ const { CART, USER_INFO, USER_ADDRESS, COUPONS } = SORT_TYPES;
 /* DOM */
 const toggleOrderListEl = document.querySelector('#toggleOrderList');
 const toggleCouponListEl = document.querySelector('#toggleCouponList');
+const deliveryInfoTabEl = document.querySelector('.delivery-info-tab');
 const transactionBtn = document.querySelector('.pay-btn-area > button');
+
+
+/* GLOBAL LOGIC */
+setMockData();
+;(async function () {
+  const isValidUser = await checkAuthorization();
+  if(isValidUser) {
+    initPage();
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: '사용자 세션이 만료되었습니다.',
+      text: '로그인 페이지로 이동합니다.',
+    })
+    // 로그인 페이지로 redirect
+    // location.assign('로그인 페이지 경로')
+  }
+})()
 
 /* EVENT LISTENER */
 toggleOrderListEl.addEventListener('click', toggleOrderList());
 toggleCouponListEl.addEventListener('click', toggleCouponList);
+deliveryInfoTabEl.addEventListener('click', toggleMessage);
 transactionBtn.addEventListener('click',async () => {
   const spinnerWrapperEl = document.querySelector('.spinner-wrapper');
   Object.assign(spinnerWrapperEl.style, {
@@ -28,8 +48,8 @@ transactionBtn.addEventListener('click',async () => {
 
   // productId, Quantity Get !
   const cartList = getDataFromLocalStorage(CART);
-  const requests = cartList.reduce((acc, cur) => {
-    const { productId, quantity } = cur
+  const requests = cartList.reduce((acc, product) => {
+    const { productId, quantity } = product
     for(let i = 0; i < quantity; i++) {
       acc.push(requestTransaction({ productId, accountId }))
     }
@@ -50,22 +70,6 @@ transactionBtn.addEventListener('click',async () => {
   // })
 })
 
-/* GLOBAL LOGIC */
-setMockData();
-;(async function () {
-  const isValidUser = await checkAuthorization();
-  if(isValidUser) {
-    initPage();
-  } else {
-    Swal.fire({
-      icon: 'error',
-      title: '사용자 세션이 만료되었습니다.',
-      text: '로그인 페이지로 이동합니다.',
-    })
-    // 로그인 페이지로 redirect
-    // location.assign('로그인 페이지 경로')
-  }
-})()
 
 
 /* FUNCTIONS */
@@ -78,7 +82,7 @@ async function initPage() {
   const cartList = getDataFromLocalStorage(CART);
 
   const summaryTextEl = document.querySelector('.order-list-area > .summary span');
-  summaryTextEl.innerText = `${cartList[0].title} 외 ${cartList.length -1}개`
+  summaryTextEl.textContent = `${cartList[0].title} 외 ${cartList.length -1}개`
 
   /* 주문자 정보 */
   const userInfo = getDataFromLocalStorage(USER_INFO)
@@ -119,28 +123,29 @@ async function initPage() {
   accountList.length === 0 ? renderEmptyList() : renderAccountList(accountList);
 
   /* 결제 금액 */
-  const orderAmountEl = document.querySelector('#orderAmount');
-  let orderAmount = cartList.reduce((acc, cur) => {
-    const { price, quantity } = cur
+  const areaAmountEl = document.querySelector('.area-amount > ul');
+  const orderAmountEl = areaAmountEl.querySelector('#orderAmount');
+  let orderAmount = cartList.reduce((acc, product) => {
+    const { price, quantity } = product
     acc += price * quantity;
     return acc;
   }, 0)
   orderAmountEl.textContent = orderAmount.toLocaleString('ko-KR');
 
-  const originAmountEl = document.querySelector('#originAmount');
-  const originAmount = cartList.reduce((acc, cur) => {
-    const { price, quantity, discountRate } = cur
+  const originAmountEl = areaAmountEl.querySelector('#originAmount');
+  const originAmount = cartList.reduce((acc, product) => {
+    const { price, quantity, discountRate } = product
     // 할인율이 있으면 원가를 계산하여 누적(DB에 저장된 상품 가격은 할인율이 적용된 가격)
     acc += (discountRate ? Math.floor((price * 100) / (100 - discountRate)) : price) * quantity;
     return acc;
   }, 0)
   originAmountEl.textContent = originAmount.toLocaleString('ko-KR');
 
-  const saledAmountEl = document.querySelector('#saledAmount');
+  const saledAmountEl = areaAmountEl.querySelector('#saledAmount');
   const saledAmount = originAmount - orderAmount;
   saledAmountEl.textContent = '-' + saledAmount.toLocaleString('ko-KR');
 
-  const totalAmountEl = document.querySelector('#totalAmount');
+  const totalAmountEl = areaAmountEl.querySelector('#totalAmount');
   let totalAmount = orderAmount;
   totalAmountEl.textContent = totalAmount.toLocaleString('ko-KR');
   
@@ -226,6 +231,29 @@ function toggleCouponList() {
   const couponListEl = document.querySelector('.coupon-list');
   couponListEl.classList.toggle('opened');
 }
+function toggleMessage(event) {
+  const deliveryNoticeEl = this.querySelector('.delivery-notice');
+  const closeMessageBtn = this.querySelector('.close-message-btn');
+  const deliveryNoticeMessageEl = this.querySelector('.delivery-notice-message');
+  if(event.target === deliveryNoticeEl) {
+    showMessage()
+  }
+  if(event.target === closeMessageBtn) {
+    closeMessage()
+  }
+  function closeMessage() {
+    Object.assign(deliveryNoticeMessageEl.style, {
+      visibility : 'hidden',
+      opacity : 0
+    })
+  }
+  function showMessage() {
+    Object.assign(deliveryNoticeMessageEl.style, {
+      visibility : 'visible',
+      opacity : 1
+    })
+  }
+}
 function createAccountList(accountList) {
   const templateEl = document.createElement('template');
   accountList.forEach(account => {
@@ -244,7 +272,7 @@ function createAccountList(accountList) {
   return templateEl;
 }
 function renderEmptyList() {
-  const accountListEl = document.querySelector('.account-list');
+  const accountListEl = document.querySelector('.swiper.account-list');
   accountListEl.classList.add('d-none');
 
   const noListEl = document.querySelector('.no-list');
@@ -254,7 +282,7 @@ function renderAccountList(accountList) {
   const noListEl = document.querySelector('.no-list');
   noListEl.classList.add('d-none');
 
-  const accountListEl = document.querySelector('.account-list');
+  const accountListEl = document.querySelector('.swiper.account-list');
   accountListEl.classList.remove('d-none');
 
   const templateEl = createAccountList(accountList);
