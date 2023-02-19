@@ -28,9 +28,16 @@ export function changeHeader() {
 
   // 로그아웃 버튼 클릭 시 로그아웃
   logoutButton.addEventListener("click", async function () {
-    const logout = await requestLogout();
-    if (logout) {
-      changeHeader();
-    }
+    await requestLogout();
   });
+}
+
+export function resetHeader() {
+  const headerMenu = document.querySelector(".header-menu");
+  headerMenu.innerHTML = `<li class="header-menu-item">
+  <a href="/signup" data-navigo>회원가입</a>
+</li>
+<li class="header-menu-item">
+  <a href="/login" data-navigo>로그인</a>
+</li>`;
 }

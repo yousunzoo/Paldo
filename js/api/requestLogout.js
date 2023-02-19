@@ -1,3 +1,4 @@
+import { resetHeader } from "../main/changeHeader";
 import { headers, url } from "./headers";
 
 export async function requestLogout() {
@@ -21,6 +22,7 @@ async function logoutFn(accessToken) {
       return response.json();
     })
     .then((result) => {
+      resetHeader();
       return result;
     });
   return res;
