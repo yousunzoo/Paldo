@@ -146,7 +146,8 @@ export async function addCart(product, quantity = 1) {
     cartList.push({
       id: product.id,
       title: product.title,
-      totalPrice: totalPrice,
+      price: product.price,
+      totalPrice: product.totalPrice,
       quantity: Number(quantity),
       thumbnail: product.thumbnail,
     });

@@ -15,6 +15,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
     <link rel="stylesheet" href="./scss/reset.css" />
+    <link rel="stylesheet" href="./scss/main.scss" />
     <link rel="stylesheet" href="/scss/cart.scss" />
     <title>Document</title>
   </head>
@@ -22,166 +23,149 @@
   <body>
     <div id="wrap">
       <header>
-        <div class="inner__wrapper">
-          <div class="header__top">
-            <ul class="header__menu">
-              <li class="header__menu-item">
-                <a href="/signup.html">회원가입</a>
+        <div class="inner-wrapper">
+          <div class="header-top">
+            <ul class="header-menu login-menu">
+              <li class="header-menu-item">
+                <a href="/signup" data-navigo>회원가입</a>
               </li>
-              <li class="header__menu-item">
-                <a href="javascript:void(0)">로그인</a>
+              <li class="header-menu-item">
+                <a href="/login" data-navigo>로그인</a>
               </li>
             </ul>
-            <div class="header__items">
-              <a class="logo" href="javascript:void(0)">
+
+            <div class="header-items">
+              <a class="logo" href="/" data-navigo>
                 <img src="./static/images/logo.png" alt="오뚜기 몰" />
               </a>
-              <div class="search">
+              <form class="search">
                 <input
                   type="text"
                   id="gnbSearch"
-                  placeholder="검색어를 입력해주세요"
-                  required />
-                <button class="search_btn"></button>
-              </div>
-              <ul class="header__icon_menus">
-                <li><a href="/like.html" aria-label="찜목록"></a></li>
-                <li><a href="javascript:void(0)" aria-label="장바구니"></a></li>
+                  placeholder="검색어를 입력해주세요" />
+                <button class="search-btn"></button>
+              </form>
+              <ul class="header-icon-menus">
+                <li><a href="javascript:void(0)" aria-label="찜목록"></a></li>
+                <li>
+                  <a href="./cart.html" data-navigo aria-label="장바구니"></a>
+                </li>
               </ul>
             </div>
           </div>
-          <div class="header__bottom">
-            <ul class="header__tablist">
-              <li class="header__tablist-item">
-                <a href="#">신상품</a>
+          <div class="header-bottom">
+            <ul class="header-tablist">
+              <li class="header-tablist-item">
+                <a href="/products/new" data-navigo>신상품</a>
               </li>
-              <li class="header__tablist-item">
-                <a href="#">베스트</a>
+              <li class="header-tablist-item">
+                <a href="/products/best" data-navigo>베스트</a>
               </li>
-              <li class="header__tablist-item">
-                <a href="#">알뜰쇼핑</a>
+              <li class="header-tablist-item">
+                <a href="/products/frugal" data-navigo>알뜰쇼핑</a>
               </li>
-              <li class="header__tablist-item">
-                <a href="#">특가/혜택</a>
+              <li class="header-tablist-item">
+                <a href="/coupon" data-navigo>특가/혜택</a>
               </li>
             </ul>
           </div>
         </div>
       </header>
       <section id="main">
-        <h2 class="cart-title">장바구니</h2>
-        <div class="cart-section">
-          <div class="cart-left">
-            <div class="cart-left-head">
-              <div class="cart-left-container">
-                <label for="" class="cart-optionbox">
-                  <input type="checkbox" class="left-container-check" />
-                  <img src="/static/images/cart-checkbox.svg" alt="check" />
-                  <span class="left-container-text">전체선택</span>
+        <div class="inner-wrapper cart-wrapper">
+          <h2 class="main-title">장바구니</h2>
+          <div class="cart-section">
+            <div class="cart-list">
+              <div class="cart-list-tab">
+                <label for="check-all" class="check-all-area">
+                  <input type="checkbox" id="check-all" />
+                  <div class="checkbox-icon"></div>
+                  <span>전체선택</span>
                 </label>
-                <span class="option-middle"></span>
-                <button class="option-left">선택삭제</button>
+
+                <button class="delete-button">선택삭제</button>
               </div>
-            </div>
-            <div class="cart-left-center">
-              <ul>
-                <li class="product-list">
-                  <label class="checkbox">
-                    <input type="checkbox" class="push-checkbox" />
-                    <img
-                      src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGc+CiAgICAgICAgICAgIDxnPgogICAgICAgICAgICAgICAgPGc+CiAgICAgICAgICAgICAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE3Ni4wMDAwMDAsIC0xMDkwLjAwMDAwMCkgdHJhbnNsYXRlKDEwMC4wMDAwMDAsIDkzNi4wMDAwMDApIHRyYW5zbGF0ZSg2MC4wMDAwMDAsIDE0Mi4wMDAwMDApIHRyYW5zbGF0ZSgxNi4wMDAwMDAsIDEyLjAwMDAwMCkiPgogICAgICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSIxMiIgZmlsbD0iIzVGMDA4MCIvPgogICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBzdHJva2U9IiNGRkYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik03IDEyLjY2N0wxMC4zODUgMTYgMTggOC41Ii8+CiAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICA8L2c+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4K"
-                      alt="checkbox" />
-                    <span class="push-checkbox-span"></span>
-                  </label>
-                  <a href="" class="product-image-box">
-                    <span class="product-image"></span>
-                  </a>
-                  <div class="product-detail-title">
-                    <a href="" class="product-title">
-                      <p class="product-title-text">[파스키에] 마칼롱 딜리스</p>
+              <div class="cart-list-area">
+                <ul class="product-list">
+                  <li class="product-li">
+                    <label for="check-item" class="check-item-area">
+                      <input type="checkbox" id="check-item" />
+                      <div class="checkbox-icon"></div>
+                    </label>
+                    <a href="" class="product-area" data-navigo>
+                      <div class="product-thumbnail"><img src="" alt="" /></div>
+
+                      <div class="product-detail-title">
+                        <p class="product-title-text"></p>
+                      </div>
                     </a>
-                    <div class="product-title-space"></div>
-                  </div>
-                  <div class="product-detail-count">
+                    <div class="product-quantity">
+                      <button class="down-button">-</button>
+                      <div class="count">1</div>
+                      <button class="up-button">+</button>
+                    </div>
+                    <div class="product-price">
+                      <p class="product-total-price">원</p>
+                      <p class="product-origin-price">원</p>
+                    </div>
                     <button
-                      type="button"
-                      aria-label="수량내리기"
-                      class="product-count-button minus"></button>
-                    <div class="product-count-number">1</div>
-                    <button
-                      type="button"
-                      aria-label="수량올리기"
-                      class="product-count-button plus"></button>
-                  </div>
-                  <div class="product-detail-price">
-                    <span
-                      aria-label="권장 소비자 가격"
-                      data-testid=""
-                      class="product-price">
-                      <span>11,500</span>원
-                    </span>
-                  </div>
-                  <button
-                    class="product-delete-button"
-                    type="button"
-                    data-testid="">
-                    <span class="delete-button"></span>
-                  </button>
-                </li>
-              </ul>
-              <!-- <p class="center-text-box">장바구니에 담긴 상품이 없습니다.</p> -->
-            </div>
-          </div>
-          <div class="cart-right">
-            <div class="cart-right-sticky">
-              <div class="cart-bills-top">
-                <img
-                  src="./static/images/cart_banner.png"
-                  alt="장바구니 배너" />
-              </div>
-              <div class="cart-bills-main">
-                <div class="price-wrapper cart-bills-line">
-                  <span class="price-text">상품 금액</span>
-                  <span class="price-money"><span>0</span>원</span>
-                </div>
-                <div class="discount-wrapper cart-bills-line">
-                  <span class="price-text">상품 할인 금액</span>
-                  <span class="price-money"><span>0</span>원</span>
-                </div>
-                <div class="delivery-wrappe cart-bills-line">
-                  <span class="price-text">배송비</span>
-                  <span class="price-money"><span>0</span>원</span>
-                </div>
-                <div class="pay-wrapper cart-bills-line">
-                  <span class="price-text">결제 예정 금액</span>
-                  <span class="price-money"><span>0</span>원</span>
-                </div>
-              </div>
-              <div class="cart-bills-push">
-                <button class="bills-push-btn" type="button">
-                  <span class="push-btn-txt">상품을 담아주세요.</span>
-                </button>
-                <ul class="description">
-                  <li class="description-option">
-                    [주문완료] 상태일 경우에만 주문 취소 가능합니다.
-                  </li>
-                  <li class="description-option">
-                    [마이페이지 > 주문내역 상세페이지] 에서 직접 취소하실 수
-                    있습니다.
+                      class="product-delete-button"
+                      type="button"></button>
                   </li>
                 </ul>
+                <!-- <p class="center-text-box">장바구니에 담긴 상품이 없습니다.</p> -->
+              </div>
+            </div>
+            <div class="cart-total-area">
+              <div class="cart-total">
+                <div class="cart-bills-top"></div>
+                <div class="cart-bills-main">
+                  <div class="cart-bills-line">
+                    <span class="price-text">상품 금액</span>
+                    <span class="origin-price"><span>0</span>원</span>
+                  </div>
+                  <div class="cart-bills-line">
+                    <span class="price-text">상품 할인 금액</span>
+                    <span class="discount-price"><span>0</span>원</span>
+                  </div>
+                  <div class="cart-bills-line">
+                    <span class="price-text">배송비</span>
+                    <span class="delivery-price"><span>0</span>원</span>
+                  </div>
+                  <div class="cart-bills-line">
+                    <span class="price-text">결제 예정 금액</span>
+                    <span class="price-money"><span>0</span>원</span>
+                  </div>
+                </div>
+                <div class="payment-area">
+                  <button class="payment-button active">
+                    <span class="push-btn-txt">상품을 선택해주세요</span>
+                  </button>
+                  <ul class="description">
+                    <li class="description-option">
+                      [주문완료] 상태일 경우에만 주문 취소 가능합니다.
+                    </li>
+                    <li class="description-option">
+                      [마이페이지 > 주문내역 상세페이지] 에서 직접 취소하실 수
+                      있습니다.
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
       <footer>
-        <div class="inner__wrapper">
-          <div class="footer__team-info1">
+        <div class="inner-wrapper">
+          <div class="footer-team-info1">
             <div class="team-name">
               <img src="./static/images/team_logo.png" alt="전국팔도" />
               <div class="team-name-desc">
-                <p>팀) 전국팔도</p>
+                <div class="team-title-area">
+                  <p class="team-title">Team</p>
+                  <p class="team-desc">전국팔도</p>
+                </div>
                 <a
                   href="https://github.com/KDT4-team6/Ottogi"
                   class="github-link"
@@ -191,45 +175,60 @@
             </div>
             <ul class="team-members">
               <li class="team-member">
-                <div class="profile_thumbnail"></div>
-                <div class="profile_info">
-                  <p class="member-name">조장) 권범준</p>
+                <div class="profile-thumbnail"></div>
+                <div class="profile-info">
+                  <div class="profile-info-title">
+                    <p class="profile-tag">팀장</p>
+                    <p class="member-name">권범준</p>
+                  </div>
                   <a href="https://github.com/kjungit" class="member-github"
                     >https://github.com/kjungit</a
                   >
                 </div>
               </li>
               <li class="team-member">
-                <div class="profile_thumbnail"></div>
-                <div class="profile_info">
-                  <p class="member-name">조원) 고봉석</p>
+                <div class="profile-thumbnail"></div>
+                <div class="profile-info">
+                  <div class="profile-info-title">
+                    <p class="profile-tag">팀원</p>
+                    <p class="member-name">고봉석</p>
+                  </div>
                   <a href="https://github.com/bongsee" class="member-github"
                     >https://github.com/bongsee</a
                   >
                 </div>
               </li>
               <li class="team-member">
-                <div class="profile_thumbnail"></div>
-                <div class="profile_info">
-                  <p class="member-name">조원) 유선주</p>
+                <div class="profile-thumbnail"></div>
+                <div class="profile-info">
+                  <div class="profile-info-title">
+                    <p class="profile-tag">팀원</p>
+                    <p class="member-name">유선주</p>
+                  </div>
                   <a href="https://github.com/yousunzoo" class="member-github"
                     >https://github.com/yousunzoo</a
                   >
                 </div>
               </li>
               <li class="team-member">
-                <div class="profile_thumbnail"></div>
-                <div class="profile_info">
-                  <p class="member-name">조원) 조성민</p>
+                <div class="profile-thumbnail"></div>
+                <div class="profile-info">
+                  <div class="profile-info-title">
+                    <p class="profile-tag">팀원</p>
+                    <p class="member-name">조성민</p>
+                  </div>
                   <a href="https://github.com/FranzCho" class="member-github"
                     >https://github.com/FranzCho</a
                   >
                 </div>
               </li>
               <li class="team-member">
-                <div class="profile_thumbnail"></div>
-                <div class="profile_info">
-                  <p class="member-name">조원) 김재도</p>
+                <div class="profile-thumbnail"></div>
+                <div class="profile-info">
+                  <div class="profile-info-title">
+                    <p class="profile-tag">팀원</p>
+                    <p class="member-name">김재도</p>
+                  </div>
                   <a href="https://github.com/KJDsports" class="member-github"
                     >https://github.com/KJDsports</a
                   >
@@ -237,7 +236,7 @@
               </li>
             </ul>
           </div>
-          <div class="footer__team-info2">
+          <div class="footer-team-info2">
             <div class="team-skillset">
               <p class="footer-title">Our skills</p>
               <div class="skill-list">

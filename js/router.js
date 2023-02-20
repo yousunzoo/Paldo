@@ -23,6 +23,7 @@ import setResultPage from "./search/searchResult";
 import signUpEvent from "./signup/signup";
 import { setSidebarSwiper } from "./sidebar";
 import setProductDetailPage from "./product/setProductDetailPage";
+import setCartPage from "./cart/setCartPage";
 
 const router = new Navigo("/");
 const mainSection = document.querySelector("#main");
@@ -69,13 +70,14 @@ router
   })
   .resolve();
 
-router
-  .on({
-    cart: () => {
-      mainSection.innerHTML = cartPage;
-    },
-  })
-  .resolve();
+// router
+//   .on({
+//     cart: () => {
+//       mainSection.innerHTML = cartPage;
+//       setCartPage(router);
+//     },
+//   })
+//   .resolve();
 
 router.link("/");
 

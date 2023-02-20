@@ -451,16 +451,13 @@ export const cartPage = /* html */ `
         <button class="up-button">+</button>
       </div>
           <div class="product-detail-price">
-            <span
-              aria-label="권장 소비자 가격"
-              class="product-price">
-              <span class=product-total-price></span>원
-            </span>
+            <div class="product-price">
+              <p class='product-total-price'>원</p>
+              <p class='product-origin-price'>원</p></div>
           </div>
           <button
             class="product-delete-button"
             type="button">
-            <span class="delete-button"></span>
           </button>
           
         </li>
@@ -495,7 +492,7 @@ export const cartPage = /* html */ `
       </div>
       <div class="cart-bills-push">
         <button class="bills-push-btn" type="button">
-          <span class="push-btn-txt">상품을 담아주세요.</span>
+          <span class="push-btn-txt">상품을 선택해주세요</span>
         </button>
         <ul class="description">
           <li class="description-option">
