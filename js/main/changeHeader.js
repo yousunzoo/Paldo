@@ -13,7 +13,7 @@ export function changeHeader() {
 
   const userMenu = makeDOMwithProperties("li", {
     className: "header-menu-item",
-    innerHTML: `<a href="./order-list.html">${userName}님 환영합니다!</a>`,
+    innerHTML: `<a href="./cart.html">${userName}님 환영합니다!</a>`,
   });
   const logoutMenu = makeDOMwithProperties("li", {
     className: "header-menu-item",

@@ -2,6 +2,7 @@ import { headers } from "./api/headers";
 import Navigo from "navigo"; // When using ES modules.
 import { checkAuthorization } from "./api/checkAuthorization";
 import {
+  cartPage,
   couponPage,
   loginPage,
   mainPage,
@@ -64,6 +65,14 @@ router
     "products/:id": async ({ data }) => {
       mainSection.innerHTML = productPage;
       await setProductPage(data.id, router);
+    },
+  })
+  .resolve();
+
+router
+  .on({
+    cart: () => {
+      mainSection.innerHTML = cartPage;
     },
   })
   .resolve();

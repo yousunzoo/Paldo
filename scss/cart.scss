@@ -191,7 +191,7 @@ header {
     justify-content: space-between;
     box-sizing: border-box;
     margin: auto;
-    
+
     .cart-left {
       width: 742px;
       box-sizing: border-box;
@@ -231,6 +231,7 @@ header {
             line-height: 26px;
             padding: 0px;
             color: rgb(51, 51, 51);
+            cursor: pointer;
             .left-container-check {
               display: none;
               box-sizing: border-box;
@@ -266,20 +267,17 @@ header {
       }
       .cart-left-center {
         border-bottom: 1px solid $color_devide_line;
-        ul {
-          list-style-type: none;
-          .product-list {
+        .product-list {
+          .product-li {
             display: flex;
             align-items: center;
             position: relative;
             padding: 20px 0px;
             .checkbox {
               margin-left: 2px;
-              .push-checkbox{
+              .push-checkbox {
                 overflow: hidden;
                 position: absolute;
-                clip: rect(0 0 0 0);
-                clip-path: inset(50%);
                 width: 1px;
                 height: 1px;
               }
@@ -288,33 +286,37 @@ header {
                 width: 24px;
                 height: 24px;
                 margin-right: 12px;
-                object-fit:cover
+                object-fit: cover;
               }
             }
-            .product-image-box {
-              display: inline-block;
-              width: 60px;
+            .product-area {
+              display: flex;
+              width: 420px;
               height: 60px;
               margin-right: 20px;
-              background: url(https://res.kurly.com/kurly/bg/no_img.svg) center center no-repeat rgb(245, 245, 245);
-              .product-image {
-                display: block;
+              align-items: center;
+              justify-content: space-between;
+              .product-thumbnail {
+                width: 60px;
                 height: 100%;
-                background-image: url(https://product-image.kurly.com/product/image/07123a13-3d24-40a7-975b-2413e4572a0a.jpg);
-                background-size: cover;
-                background-position: center center;
-                background-repeat: no-repeat;
+                background-color: $color_original_price;
+
+                img {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                }
               }
             }
             .product-detail-title {
               display: flex;
               flex-direction: column;
               width: 345px;
-              margin-right: 20px;
               overflow: hidden;
               white-space: nowrap;
               word-break: break-all;
               .product-title {
+                margin-top: 0;
                 background-color: transparent;
                 text-decoration: none;
                 color: inherit;
@@ -336,42 +338,27 @@ header {
                 margin-top: 10px;
               }
             }
-            .product-detail-count {
-              display: inline-flex;
-              flex-direction: row;
-              align-items: center;
-              border: 1px solid rgb(221, 223, 225);
-              width: 88px;
-              border-radius: 3px;
-              .product-count-button{
-                display: inline-flex;
-                width: 28px;
-                height: 28px;
-                border: none;
-                font-size: 1px;
-                color: transparent;
-                background-size: cover;
-                background-color: transparent;
-                vertical-align: top;
+            .product-quantity {
+              display: flex;
+
+              button {
+                width: 25px;
+                height: 25px;
+                border: 1px solid #b5b5b5;
+                line-height: 25px;
+                font-size: 18px;
               }
-              .product-count-button.minus {
-                background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAzMCAzMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0yMCAxNHYySDEwdi0yeiIgZmlsbD0iI0RERCIgZmlsbC1ydWxlPSJub256ZXJvIi8+Cjwvc3ZnPgo=);
-              }
-              .product-count-button.plus {
-                background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAzMCAzMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0xNiAxMHY0aDR2MmgtNHY0aC0ydi00aC00di0yaDR2LTRoMnoiIGZpbGw9IiMzMzMiIGZpbGwtcnVsZT0ibm9uemVybyIvPgo8L3N2Zz4K);
-              }
-              .product-count-number {
-                display: inline-flex;
-                overflow: hidden;
-                white-space: nowrap;
-                justify-content: center;
-                font-size: 14px;
-                font-weight: 400;
-                color: $color_primary;
+              .count {
+                width: 25px;
+                height: 25px;
+                border-top: 1px solid #b5b5b5;
+                border-bottom: 1px solid #b5b5b5;
                 text-align: center;
-                width: 31px;
-                height: 28px;
-                line-height: 28px;
+                font-size: 14px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                line-height: 15px;
               }
             }
             .product-detail-price {
@@ -423,16 +410,13 @@ header {
         right: 0px;
         height: auto;
         .cart-bills-top {
-          padding: 23px 19px 20px;
+          width: 100%;
           border: 1px solid #f2f2f2;
           border-bottom: 0;
-          .bills-top-text {
-            padding-left: 24px;
-            font-size: 16px;
-            font-weight: 500;
-            line-height: 20px;
-            background-size: 20px 20px;
-            background: url(https://res.kurly.com/pc/service/cart/2007/ico_location.svg) 0px 50% / 20px 20px no-repeat;
+          img {
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
           }
           .bills-top-main {
             padding-top: 12px;
@@ -478,7 +462,6 @@ header {
                   margin-right: 0;
                   vertical-align: top;
                 }
-
               }
             }
           }
@@ -488,18 +471,18 @@ header {
           border: 1px solid #f2f2f2;
           background-color: #fafafa;
           .cart-bills-line {
-              font-size: 16px;
-              justify-content: space-between;
-              display: flex;
-              line-height: 24px;
-              padding: 4px 0;
-              .price-text {
-                width: 100px;
-                white-space: nowrap;
-              }
-              .price-money {
-                text-align: right;
-              }
+            font-size: 16px;
+            justify-content: space-between;
+            display: flex;
+            line-height: 24px;
+            padding: 4px 0;
+            .price-text {
+              width: 100px;
+              white-space: nowrap;
+            }
+            .price-money {
+              text-align: right;
+            }
           }
           .pay-wrapper {
             margin-top: 16px;
@@ -538,15 +521,12 @@ header {
               padding-top: 4px;
               color: #666;
             }
-          }    
+          }
         }
       }
-      
     }
   }
 }
-
-
 
 footer {
   border-top: 1px solid $color_btn_border;

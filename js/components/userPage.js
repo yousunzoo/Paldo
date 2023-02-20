@@ -381,13 +381,12 @@ export const productDetailPage = /* html */ `
   <div class="product-detail-wrapper">
     <div class="sold-out">
         <p>해당 상품은 현재 품절되었습니다.</p>
-      </div>
+    </div>
   <div class="thumbnail">
     <img src="" alt="" />
   </div>
   <div class="info-wrapper">
     <div class="top-info">
-      
       <p class="product-title"></p>
       <div class="product-price"><span class="price-num"></span>원</div>
       <div class="product-login-text">로그인 후 구매하실 수 있습니다.</div>
@@ -414,3 +413,100 @@ export const productDetailPage = /* html */ `
 <div class="detail-img">
   <img src="/감자깡-상세페이지.jpeg" alt="상세페이지" />
 </div></div>`;
+
+export const cartPage = /* html */ `
+<h2 class="cart-title">장바구니</h2>
+<div class="cart-section">
+  <div class="cart-left">
+    <div class="cart-left-head">
+      <div class="cart-left-container">
+        <label for="" class="cart-optionbox">
+          <input type="checkbox" class="left-container-check" />
+          <img src="${require("../../static/images/cart-checkbox.svg")}" alt="check" />
+          <span class="left-container-text">전체선택</span>
+        </label>
+        <span class="option-middle"></span>
+        <button class="option-left">선택삭제</button>
+      </div>
+    </div>
+    <div class="cart-left-center">
+      <ul class="product-list">
+        <li class="product-li">
+          <label class="checkbox">
+            <input type="checkbox" class="push-checkbox" />
+            <img
+              src="${require("../../static/images/cart-checkbox-checked.svg")}"
+              alt="checkbox" />
+          </label>
+          <a href="" class="product-area" data-navigo>
+            <div class="product-thumbnail"><img src="" alt="" /></div>
+          
+          <div class="product-detail-title">
+              <p class="product-title-text"></p>
+          </div>
+          </a>
+          <div class="product-quantity">
+        <button class="down-button">-</button>
+        <div class="count">1</div>
+        <button class="up-button">+</button>
+      </div>
+          <div class="product-detail-price">
+            <span
+              aria-label="권장 소비자 가격"
+              class="product-price">
+              <span class=product-total-price></span>원
+            </span>
+          </div>
+          <button
+            class="product-delete-button"
+            type="button">
+            <span class="delete-button"></span>
+          </button>
+          
+        </li>
+      </ul>
+      <!-- <p class="center-text-box">장바구니에 담긴 상품이 없습니다.</p> -->
+    </div>
+  </div>
+  <div class="cart-right">
+    <div class="cart-right-sticky">
+      <div class="cart-bills-top">
+        <img
+          src="${require("../../static/images/cart_banner.png")}"
+          alt="장바구니 배너" />
+      </div>
+      <div class="cart-bills-main">
+        <div class="price-wrapper cart-bills-line">
+          <span class="price-text">상품 금액</span>
+          <span class="price-money"><span>0</span>원</span>
+        </div>
+        <div class="discount-wrapper cart-bills-line">
+          <span class="price-text">상품 할인 금액</span>
+          <span class="price-money"><span>0</span>원</span>
+        </div>
+        <div class="delivery-wrappe cart-bills-line">
+          <span class="price-text">배송비</span>
+          <span class="price-money"><span>0</span>원</span>
+        </div>
+        <div class="pay-wrapper cart-bills-line">
+          <span class="price-text">결제 예정 금액</span>
+          <span class="price-money"><span>0</span>원</span>
+        </div>
+      </div>
+      <div class="cart-bills-push">
+        <button class="bills-push-btn" type="button">
+          <span class="push-btn-txt">상품을 담아주세요.</span>
+        </button>
+        <ul class="description">
+          <li class="description-option">
+            [주문완료] 상태일 경우에만 주문 취소 가능합니다.
+          </li>
+          <li class="description-option">
+            [마이페이지 > 주문내역 상세페이지] 에서 직접 취소하실 수
+            있습니다.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>`;
