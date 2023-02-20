@@ -441,19 +441,19 @@ export const cartPage = /* html */ `
                 <div class="cart-bills-main">
                   <div class="cart-bills-line">
                     <span class="price-text">상품 금액</span>
-                    <span class="origin-price"><span>0</span>원</span>
+                    <span class="origin-price"><span>0</span> 원</span>
                   </div>
                   <div class="cart-bills-line">
                     <span class="price-text">상품 할인 금액</span>
-                    <span class="discount-price"><span>0</span>원</span>
+                    <span class="discount-price">- <span>0</span> 원</span>
                   </div>
                   <div class="cart-bills-line">
                     <span class="price-text">배송비</span>
-                    <span class="delivery-price"><span>0</span>원</span>
+                    <span class="delivery-price"><span>0</span> 원</span>
                   </div>
                   <div class="cart-bills-line">
                     <span class="price-text">결제 예정 금액</span>
-                    <span class="price-money"><span>0</span>원</span>
+                    <span class="total-price"><span>0</span> 원</span>
                   </div>
                 </div>
                 <div class="payment-area">

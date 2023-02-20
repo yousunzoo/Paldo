@@ -15,8 +15,17 @@ export default async function setCartPage(router) {
   }
   const loginedId = JSON.parse(localStorage.getItem("loginInfo")).loginId;
   const cartList = JSON.parse(localStorage.getItem(loginedId)).cartList;
-  console.log(cartList);
 
+  const totalArea = document.querySelector(".cart-total");
+  const totalOriginPrice = totalArea
+    .querySelector(".origin-price")
+    .querySelector("span");
+  const totalDiscountPrice = totalArea
+    .querySelector(".discount-price")
+    .querySelector("span");
+  const totalPrice = totalArea
+    .querySelector(".total-price")
+    .querySelector("span");
   const cartListArea = document.querySelector(".product-list");
   if (!cartList) {
     // localStorage에 cartList 없으면 없다는 정보 출력
@@ -62,9 +71,41 @@ export default async function setCartPage(router) {
       type="button"></button>
   `;
     const checkboxLabel = cardLi.querySelector("label");
+
     checkboxLabel.addEventListener("click", (event) => {
       event.preventDefault();
       const checkbox = event.target.previousElementSibling;
+      const originPrice = Math.floor(
+        (item.price * 100) / (100 - item.discountRate)
+      );
+      if (!checkbox.checked) {
+        // 주문목록에 넣기
+        totalOriginPrice.textContent = (
+          parseInt(totalOriginPrice.textContent.replace(/,/g, "")) +
+          originPrice * item.quantity
+        ).toLocaleString();
+        totalDiscountPrice.textContent = (
+          parseInt(totalDiscountPrice.textContent.replace(/,/g, "")) +
+          (originPrice - item.price) * item.quantity
+        ).toLocaleString();
+        totalPrice.textContent = (
+          parseInt(totalPrice.textContent.replace(/,/g, "")) +
+          item.price * item.quantity
+        ).toLocaleString();
+      } else {
+        totalOriginPrice.textContent = (
+          parseInt(totalOriginPrice.textContent.replace(/,/g, "")) -
+          originPrice * item.quantity
+        ).toLocaleString();
+        totalDiscountPrice.textContent = (
+          parseInt(totalDiscountPrice.textContent.replace(/,/g, "")) -
+          (originPrice - item.price) * item.quantity
+        ).toLocaleString();
+        totalPrice.textContent = (
+          parseInt(totalPrice.textContent.replace(/,/g, "")) -
+          item.price * item.quantity
+        ).toLocaleString();
+      }
       checkbox.checked = !checkbox.checked;
     });
     return cardLi;
