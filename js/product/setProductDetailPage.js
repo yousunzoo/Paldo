@@ -76,6 +76,8 @@ export default async function setProductDetailPage(id, router) {
         id: productInfo.id,
         title: productInfo.title,
         thumbnail: productInfo.thumbnail,
+        discountRate: productInfo.discountRate,
+        price: productInfo.price,
       });
     }
     loginedIdData.wishList = wishList;
@@ -134,7 +136,6 @@ export async function addCart(product, quantity = 1) {
   }
   const loginedId = JSON.parse(localStorage.getItem("loginInfo")).loginId;
   const loginedIdData = JSON.parse(localStorage.getItem(loginedId));
-  const totalPrice = quantity * product.price;
   let cartList = loginedIdData.cartList;
   if (!cartList) {
     cartList = [];
