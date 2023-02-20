@@ -61,6 +61,12 @@ export default async function setCartPage(router) {
       class="product-delete-button"
       type="button"></button>
   `;
+    const checkboxLabel = cardLi.querySelector("label");
+    checkboxLabel.addEventListener("click", (event) => {
+      event.preventDefault();
+      const checkbox = event.target.previousElementSibling;
+      checkbox.checked = !checkbox.checked;
+    });
     return cardLi;
   });
   cartListArea.append(...cartLis);
