@@ -20,7 +20,6 @@ $color_devide_line: rgb(244, 244, 244);
   .cart-section {
     position: relative;
     width: 1050px;
-    min-height: 700px;
     display: flex;
     justify-content: space-between;
     box-sizing: border-box;
@@ -74,23 +73,24 @@ $color_devide_line: rgb(244, 244, 244);
         }
       }
       .cart-list-area {
-        position: relative;
-        .no-list {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          top: 0;
-          left: 0;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          p {
-            text-align: center;
-            font-size: 30px;
-            color: $color_primary;
-          }
-        }
         .product-list {
+          position: relative;
+          min-height: 700px;
+          .no-list {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            p {
+              text-align: center;
+              font-size: 30px;
+              color: $color_primary;
+            }
+          }
           .product-li {
             height: 60px;
             border-bottom: 1px solid $color_devide_line;

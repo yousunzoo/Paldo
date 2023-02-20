@@ -1,6 +1,8 @@
 import { checkAuthorization } from "../api/checkAuthorization";
 import { makeDOMwithProperties } from "../utils/dom";
 
+let paymentList = [];
+
 export default async function setCartPage(router) {
   // 로그인 되었는지 확인
   const isLogined = await checkAuthorization();
@@ -14,20 +16,14 @@ export default async function setCartPage(router) {
     return;
   }
   const loginedId = JSON.parse(localStorage.getItem("loginInfo")).loginId;
-  const cartList = JSON.parse(localStorage.getItem(loginedId)).cartList;
-  let paymentList = [];
-  const totalArea = document.querySelector(".cart-total");
-  const totalOriginPrice = totalArea
-    .querySelector(".origin-price")
-    .querySelector("span");
-  const totalDiscountPrice = totalArea
-    .querySelector(".discount-price")
-    .querySelector("span");
-  const totalPrice = totalArea
-    .querySelector(".total-price")
-    .querySelector("span");
+  const loginedIdData = JSON.parse(localStorage.getItem(loginedId));
+  let cartList = loginedIdData.cartList;
+
   const cartListArea = document.querySelector(".product-list");
-  if (!cartList) {
+
+  cartListArea.innerHTML = "";
+
+  if (!cartList || cartList.length === 0) {
     // localStorage에 cartList 없으면 없다는 정보 출력
     cartListArea.innerHTML = `<div class="no-list"><p>장바구니에 담긴 상품이 없습니다.</p></div>`;
   }
@@ -70,51 +66,86 @@ export default async function setCartPage(router) {
       class="product-delete-button"
       type="button"></button>
   `;
-    const checkboxLabel = cardLi.querySelector("label");
 
+    // 체크박스 기능 구현
+    const checkboxLabel = cardLi.querySelector("label");
     checkboxLabel.addEventListener("click", (event) => {
       event.preventDefault();
-      const checkbox = event.target.previousElementSibling;
-      const originPrice = Math.floor(
-        (item.price * 100) / (100 - item.discountRate)
-      );
-      if (!checkbox.checked) {
-        // 주문목록에 넣기
-        paymentList.push(item);
-        totalOriginPrice.textContent = (
-          convertNumber(totalOriginPrice) +
-          originPrice * item.quantity
-        ).toLocaleString();
-        totalDiscountPrice.textContent = (
-          convertNumber(totalDiscountPrice) +
-          (originPrice - item.price) * item.quantity
-        ).toLocaleString();
-        totalPrice.textContent = (
-          convertNumber(totalPrice) +
-          item.price * item.quantity
-        ).toLocaleString();
-      } else {
-        // 주문목록에서 해당 아이템 삭제
-        paymentList = paymentList.filter((arrItem) => arrItem != item);
-        totalOriginPrice.textContent = (
-          convertNumber(totalOriginPrice) -
-          originPrice * item.quantity
-        ).toLocaleString();
-        totalDiscountPrice.textContent = (
-          convertNumber(totalDiscountPrice) -
-          (originPrice - item.price) * item.quantity
-        ).toLocaleString();
-        totalPrice.textContent = (
-          convertNumber(totalPrice) -
-          item.price * item.quantity
-        ).toLocaleString();
-      }
-      checkbox.checked = !checkbox.checked;
-      console.log(paymentList);
+      toggleCheckbox(event, item);
     });
+
+    // 아이템 삭제 기능 구현
+    const deleteButton = cardLi.querySelector(".product-delete-button");
+    deleteButton.addEventListener("click", () => {
+      Swal.fire({
+        title: "삭제하시겠습니까?",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        cancelBUttonText: "취소",
+        confirmButtonText: "확인",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          cartList = cartList.filter((arrItem) => arrItem != item);
+          loginedIdData.cartList = cartList;
+          localStorage.setItem(loginedId, JSON.stringify(loginedIdData));
+          setCartPage(router);
+        }
+      });
+    });
+
     return cardLi;
   });
   cartListArea.append(...cartLis);
+}
+
+function toggleCheckbox(event, item) {
+  const totalArea = document.querySelector(".cart-total");
+  const totalOriginPrice = totalArea
+    .querySelector(".origin-price")
+    .querySelector("span");
+  const totalDiscountPrice = totalArea
+    .querySelector(".discount-price")
+    .querySelector("span");
+  const totalPrice = totalArea
+    .querySelector(".total-price")
+    .querySelector("span");
+  const checkbox = event.target.previousElementSibling;
+  const originPrice = Math.floor(
+    (item.price * 100) / (100 - item.discountRate)
+  );
+  if (!checkbox.checked) {
+    // 주문목록에 넣기
+    paymentList.push(item);
+    totalOriginPrice.textContent = (
+      convertNumber(totalOriginPrice) +
+      originPrice * item.quantity
+    ).toLocaleString();
+    totalDiscountPrice.textContent = (
+      convertNumber(totalDiscountPrice) +
+      (originPrice - item.price) * item.quantity
+    ).toLocaleString();
+    totalPrice.textContent = (
+      convertNumber(totalPrice) +
+      item.price * item.quantity
+    ).toLocaleString();
+  } else {
+    // 주문목록에서 해당 아이템 삭제
+    paymentList = paymentList.filter((arrItem) => arrItem != item);
+    totalOriginPrice.textContent = (
+      convertNumber(totalOriginPrice) -
+      originPrice * item.quantity
+    ).toLocaleString();
+    totalDiscountPrice.textContent = (
+      convertNumber(totalDiscountPrice) -
+      (originPrice - item.price) * item.quantity
+    ).toLocaleString();
+    totalPrice.textContent = (
+      convertNumber(totalPrice) -
+      item.price * item.quantity
+    ).toLocaleString();
+  }
+  checkbox.checked = !checkbox.checked;
 }
 
 function convertNumber(value) {
