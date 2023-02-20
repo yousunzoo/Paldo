@@ -5,7 +5,7 @@ import { makeDOMwithProperties } from '../utils/dom.js'
 const { WISH, CART } = SORT_TYPES
 
 /* GLOBAL LOGIC */
-// setMockData();
+setMockData();
 ;(async function () {
   const isValidUser = await checkAuthorization();
   if(isValidUser) {
@@ -75,10 +75,14 @@ function createWishList(wishList) {
     productTitleEl.append(productLinkEl);
     // product-price
     const productPriceEl = makeDOMwithProperties('div', { className : 'product-price' });
+    const productDiscountRateEl = makeDOMwithProperties('div', { className : 'product-discount-rate' });
+    if(discountRate) {
+      productDiscountRateEl.textContent = `${discountRate}%`
+    }
     const productDiscountPriceEl = makeDOMwithProperties('div', { className : 'product-discount-price', textContent: `${price.toLocaleString('ko-KR')}원`});
     const productCostPriceEl = makeDOMwithProperties('div', { className : 'product-cost-price', textContent: ''});
     productCostPriceEl.textContent = discountRate ? `${costPrice.toLocaleString('ko-KR')}원` : '';
-    productPriceEl.append(productDiscountPriceEl, productCostPriceEl);
+    productPriceEl.append(productDiscountRateEl, productDiscountPriceEl, productCostPriceEl);
 
     /* product-button-section > delete-button + take-button */
     const productButtonSectionEl = makeDOMwithProperties('div', { className : 'product-button-section' });
