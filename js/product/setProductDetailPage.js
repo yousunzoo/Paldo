@@ -147,7 +147,7 @@ export async function addCart(product, quantity = 1) {
       id: product.id,
       title: product.title,
       price: product.price,
-      totalPrice: product.totalPrice,
+      discountRate: product.discountRate,
       quantity: Number(quantity),
       thumbnail: product.thumbnail,
     });

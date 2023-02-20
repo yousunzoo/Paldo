@@ -67,17 +67,12 @@ router
       mainSection.innerHTML = productPage;
       await setProductPage(data.id, router);
     },
+    cart: () => {
+      mainSection.innerHTML = cartPage;
+      setCartPage(router);
+    },
   })
   .resolve();
-
-// router
-//   .on({
-//     cart: () => {
-//       mainSection.innerHTML = cartPage;
-//       setCartPage(router);
-//     },
-//   })
-//   .resolve();
 
 router.link("/");
 
