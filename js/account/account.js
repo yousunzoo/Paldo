@@ -5,17 +5,6 @@ import { makeDOMwithProperties } from '../utils/dom.js';
 
 /* GLOBAL LOGIC */
 
-/* 
-토큰 만료 시 실행 (로그인 기능 fetch 시 삭제 예정)
-
-*/
-// logInFn({
-//   email : "testuser@gmail.com",
-//   password : "12345678"
-// }) 
-
-
-// IIFE
 ;(async function () {
   const isValidUser = await checkAuthorization();
   if(isValidUser) {
@@ -241,26 +230,19 @@ function createAccountList (accountList) {
     </li>
   `
 }
-
 function renderAccountList (accountList) {
-  const noListWrapperEl = document.querySelector('.no-list-wrapper');
-  noListWrapperEl.innerHTML = '';
-
   const fragmentEl = createAccountList(accountList);
 
   const ulEl = document.querySelector('.account-list');
   ulEl.innerHTML = '';
   ulEl.append(fragmentEl);
 }
-function createEmptyList () {
-  return `<p class="no-list">등록된 계좌가 없습니다.</p>`
-}
 function renderEmptyList () {
   const ulEl = document.querySelector('.account-list');
   ulEl.innerHTML = '';
-
-  const noListEl = createEmptyList();
-
-  const noListWrapperEl = document.querySelector('.no-list-wrapper');
-  noListWrapperEl.innerHTML = noListEl;
+  ulEl.innerHTML = /* html */`
+    <div class="no-list-wrapper">
+    <p class="no-list">등록된 계좌가 없습니다.</p>
+    </div>
+  `
 }

@@ -26,10 +26,6 @@ body {
   }
 }
 
-.d-none {
-  display : none;
-}
-
 // skeleton-loading
 @keyframes blinker {
   100% {
@@ -241,6 +237,9 @@ body {
       width : 100%;
       height : 100%;
       top: 0;
+      &.d-none {
+        display: none;
+      }
       .skeleton {
         height: 75px;
         margin-bottom : 20px;
