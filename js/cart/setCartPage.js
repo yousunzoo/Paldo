@@ -81,28 +81,28 @@ export default async function setCartPage(router) {
       if (!checkbox.checked) {
         // 주문목록에 넣기
         totalOriginPrice.textContent = (
-          parseInt(totalOriginPrice.textContent.replace(/,/g, "")) +
+          convertNumber(totalOriginPrice) +
           originPrice * item.quantity
         ).toLocaleString();
         totalDiscountPrice.textContent = (
-          parseInt(totalDiscountPrice.textContent.replace(/,/g, "")) +
+          convertNumber(totalDiscountPrice) +
           (originPrice - item.price) * item.quantity
         ).toLocaleString();
         totalPrice.textContent = (
-          parseInt(totalPrice.textContent.replace(/,/g, "")) +
+          convertNumber(totalPrice) +
           item.price * item.quantity
         ).toLocaleString();
       } else {
         totalOriginPrice.textContent = (
-          parseInt(totalOriginPrice.textContent.replace(/,/g, "")) -
+          convertNumber(totalOriginPrice) -
           originPrice * item.quantity
         ).toLocaleString();
         totalDiscountPrice.textContent = (
-          parseInt(totalDiscountPrice.textContent.replace(/,/g, "")) -
+          convertNumber(totalDiscountPrice) -
           (originPrice - item.price) * item.quantity
         ).toLocaleString();
         totalPrice.textContent = (
-          parseInt(totalPrice.textContent.replace(/,/g, "")) -
+          convertNumber(totalPrice) -
           item.price * item.quantity
         ).toLocaleString();
       }
@@ -111,4 +111,8 @@ export default async function setCartPage(router) {
     return cardLi;
   });
   cartListArea.append(...cartLis);
+}
+
+function convertNumber(value) {
+  return parseInt(value.textContent.replace(/,/g, ""));
 }
