@@ -15,7 +15,7 @@ export default async function setCartPage(router) {
   }
   const loginedId = JSON.parse(localStorage.getItem("loginInfo")).loginId;
   const cartList = JSON.parse(localStorage.getItem(loginedId)).cartList;
-
+  let paymentList = [];
   const totalArea = document.querySelector(".cart-total");
   const totalOriginPrice = totalArea
     .querySelector(".origin-price")
@@ -80,6 +80,7 @@ export default async function setCartPage(router) {
       );
       if (!checkbox.checked) {
         // 주문목록에 넣기
+        paymentList.push(item);
         totalOriginPrice.textContent = (
           convertNumber(totalOriginPrice) +
           originPrice * item.quantity
@@ -93,6 +94,8 @@ export default async function setCartPage(router) {
           item.price * item.quantity
         ).toLocaleString();
       } else {
+        // 주문목록에서 해당 아이템 삭제
+        paymentList = paymentList.filter((arrItem) => arrItem != item);
         totalOriginPrice.textContent = (
           convertNumber(totalOriginPrice) -
           originPrice * item.quantity
@@ -107,6 +110,7 @@ export default async function setCartPage(router) {
         ).toLocaleString();
       }
       checkbox.checked = !checkbox.checked;
+      console.log(paymentList);
     });
     return cardLi;
   });
