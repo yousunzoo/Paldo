@@ -2,10 +2,10 @@ import { checkAuthorization } from '../api/checkAuthorization.js';
 import { SORT_TYPES, getDataFromLocalStorage } from '../account/utils/localStorage.js'
 import { makeDOMwithProperties } from '../utils/dom.js'
 
-const { WISH } = SORT_TYPES
+const { WISH, CART } = SORT_TYPES
 
 /* GLOBAL LOGIC */
-setMockData();
+// setMockData();
 ;(async function () {
   const isValidUser = await checkAuthorization();
   if(isValidUser) {
@@ -27,7 +27,6 @@ function initPage() {
   const totalEl = document.querySelector('.main-text > span');
   totalEl.textContent = wishList?.length || 0;
   const containerEl = document.querySelector('.likelist-container');
-  const noListEl = document.querySelector('.no-list');
 
     // 찜목록이 없다면
     if(!wishList?.length) {
@@ -93,16 +92,61 @@ function createWishList(wishList) {
       const loginId = JSON.parse(localStorage.getItem('loginInfo')).loginId;
       const userData = JSON.parse(localStorage.getItem(loginId))
       localStorage.setItem(loginId, JSON.stringify({...userData, wish : filteredWishList}))
-      initPage()
+      initPage();
     })
     // take-button
     const takeButtonEl = makeDOMwithProperties('button', { className : 'take-button', textContent: '담기' });
     takeButtonEl.addEventListener('click', function () {
       const productId = this.closest('.product-button-section').dataset.id
-      // const wishList = getDataFromLocalStorage(WISH);
-      // wishList.filter(() => {
+      // 기존 cart 목록
+      const cartList = getDataFromLocalStorage(CART) || [];
+      // 추가할 wish
+      const wishList = getDataFromLocalStorage(WISH);
+      const targetWish = wishList.find((wish) => {
+        return wish.productId === productId
+      })
+      // 이미 담겨져 있는 것 제외
+      console.log(cartList)
+      const isExisting = cartList.find((item) => {
+        return item.productId === productId
+      })
+      if(isExisting) {
+        Swal.fire({
+          title: '장바구니에 이미 존재하는 상품입니다.',
+          text: "장바구니를 확인하러 가볼까요 ?",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: '장바구니로 이동',
+          cancelButtonText: '계속 쇼핑하기'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            //장바구니 이동
+          }
+        })
+        return;
+      }
+      // 덮어쓰기
+      const loginId = JSON.parse(localStorage.getItem('loginInfo')).loginId;
+      const userData = JSON.parse(localStorage.getItem(loginId))
+      localStorage.setItem(loginId, JSON.stringify({...userData, cart : [...cartList, {...targetWish, quantity : 1}]}))
+      //swal
+      Swal.fire({
+        title: '장바구니에 성공적으로 담겼습니다.',
+        text: "장바구니를 확인하러 가볼까요 ?",
+        icon: 'success',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '장바구니로 이동',
+        cancelButtonText: '계속 쇼핑하기'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          //장바구니 이동
+        }
+      })
 
-      // })
     })
     const takeButtonImageEl = makeDOMwithProperties('img', { alt : '장바구니 담기', src : "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzYiIGhlaWdodD0iMzYiIHZpZXdCb3g9IjAgMCAzNiAzNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTTM2IDM2SDBWMGgzNnoiLz4KICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1LjE2NCA2LjU0NykiIHN0cm9rZT0iIzVmMDA4MCIgc3Ryb2tlLWxpbmVjYXA9InNxdWFyZSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjciPgogICAgICAgICAgICA8cGF0aCBkPSJtMjUuNjggMy42Ni0yLjcyIDExLjU3SDcuMzdMNC42NiAzLjY2eiIvPgogICAgICAgICAgICA8Y2lyY2xlIGN4PSIyMC41MiIgY3k9IjIwLjc4IiByPSIyLjE0Ii8+CiAgICAgICAgICAgIDxjaXJjbGUgY3g9IjkuODEiIGN5PSIyMC43OCIgcj0iMi4xNCIvPgogICAgICAgICAgICA8cGF0aCBkPSJNMCAwaDMuOGwxLjc2IDcuNSIvPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+Cg==" })
     takeButtonEl.prepend(takeButtonImageEl);
