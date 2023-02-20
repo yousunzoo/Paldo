@@ -5,12 +5,21 @@ const { ACCESS_TOKEN } = SORT_TYPES;
 
 export async function getOrderList() {
   const accessToken = getDataFromLocalStorage(ACCESS_TOKEN);
-  const res = await fetch(`${url}products/transactions/details`, {
+  const res = fetch(`${url}products/transactions/details`, {
     headers : {
-      ...headers,
-      Authorization: `Bearer ${accessToken}`
-    }
+        ...headers,
+        Authorization: `Bearer ${accessToken}`
+      }
   })
-  const json = await res.json();
-  return json;
+  .then((result) => {
+    if(!result.ok) {
+      throw new Error(result);
+    }
+    return result.json();
+  })
+  .catch((err) => {
+    console.clear()
+    return [];
+  })
+  return res;
 }

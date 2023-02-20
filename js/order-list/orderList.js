@@ -21,19 +21,24 @@ import { getOrderList } from './orderListApi.js'
 async function initPage() {
   // 사용자 전체 거래내역 조회
   const orderList = await getOrderList();
+  console.log(orderList);
+  const contentEl = document.querySelector('.order-list > .content');
+  const skeletonLoadingEl = document.querySelector('.skeleton-loading');
+
+  // 거래 내역이 없을 때
   if(orderList.length === 0) {
-    const noListEl = document.querySelector('.no-list');
-    noListEl.classList.remove('d-none');
+    contentEl.innerHTML = /* html */`
+      <p class="no-list">주문내역이 없습니다.</p>
+    `
+    skeletonLoadingEl.classList.add('d-none');
     return;
   }
-
-  const noListEl = document.querySelector('.no-list');
-  noListEl.classList.add('d-none');
-
+  // 거래 내역이 있을 때
+  contentEl.innerHTML = '';
   // 분 단위로 그룹핑
-  const groupedList = orderList.reduce((acc, cur) => {
-    // console.log(cur);
-    const utcIsoString = cur.timePaid;
+  const groupedList = orderList.reduce((acc, order) => {
+    // 거래 시간 UTCISO -> KST 분까지 나타내는 format으로 변형
+    const utcIsoString = order.timePaid;
     const utcDate = new Date(utcIsoString);
     const kstDate = new Date(utcDate.getTime() + (9 * 60 * 60 * 1000));
     const year = kstDate.getFullYear();
@@ -43,24 +48,27 @@ async function initPage() {
     const minute = kstDate.getMinutes();
     const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${date.toString().padStart(2, '0')} ${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
 
-    acc[formattedDate] ? acc[formattedDate].push(cur.product) : acc[formattedDate] = [cur.product];
+    acc[formattedDate] ? acc[formattedDate].push(order.product) : acc[formattedDate] = [order.product];
     return acc;
   }, {})
+  console.log(groupedList);
 
+  // 거래 시간 기준 내림차순 정렬
   const timeDescendingOrder = Object.entries(groupedList).sort((a, b) => {
     return new Date(b[0]).getTime() - new Date(a[0]).getTime()
   })
-  // console.log(timeDescendingOrder)
+  console.log(timeDescendingOrder)
   const timeDescendingOrderArr = timeDescendingOrder.reduce((acc, order) => {
     acc.push({[order[0]] : order[1]})
     return acc;
   }, [])
-  // console.log(timeDescendingOrderArr)
+  console.log(timeDescendingOrderArr)
   
   // 그룹핑된 결제 단위 안에서 수량을 다시 체크하는 로직(중복이 제거된 배열과 함께 수량까지 체크되어야함.)
   // [{time : [{...}, {...}}]}, {...}, {...}]
   timeDescendingOrderArr.forEach((order, index) => {
     for(let time in order) {
+      // 중복 상품 제거 및 수량 정보 추가
       const deduplicated = order[time].reduce((acc, product) => {
         const { productId } = product;
         acc[productId] ? acc[productId].quantity += 1 : acc[productId] = {...product, quantity : 1}
@@ -77,10 +85,8 @@ async function initPage() {
       // id 만들기
       const date = new Date(time);
       const numericString = `${date.getFullYear()}${(date.getMonth()+1).toString().padStart(2,'0')}${date.getDate().toString().padStart(2,'0')}${date.getHours().toString().padStart(2,'0')}${date.getMinutes().toString().padStart(2,'0')}`;
-
       
-      // 외부 Summary 요소 Create !
-      const orderListEl = document.querySelector('.order-list');
+      // 외부 title 요소 Create !
       const templateEl = document.createElement('template');
 
       templateEl.innerHTML += /* html */`
@@ -102,7 +108,7 @@ async function initPage() {
         </ul>
       </div>
       `
-      orderListEl.append(templateEl.content);
+      contentEl.append(templateEl.content);
   
       // 내부 리스트 요소 Create !
       const groupEl = document.getElementById(numericString);
@@ -148,6 +154,6 @@ async function initPage() {
       ulEl.append(templateEl2.content);
     }
   })
-  const skeletonLoadingEl = document.querySelector('.skeleton-loading');
+  // 스켈레톤 로딩 처리
   skeletonLoadingEl.classList.add('d-none');
 }
