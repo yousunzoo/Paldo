@@ -26,18 +26,20 @@ function initPage() {
   const wishList = getDataFromLocalStorage(WISH)
   const totalEl = document.querySelector('.main-text > span');
   totalEl.textContent = wishList?.length || 0;
-  const containerEl = document.querySelector('.likelist-container');
+  const contentEl = document.querySelector('.likelist-container > .content');
+  const skeletonLoadingEl = document.querySelector('.likelist-container > .skeleton-loading');
 
-    // 찜목록이 없다면
-    if(!wishList?.length) {
-      // skeletonLoadingEl.classList.add('d-none');
-      containerEl.innerHTML = `<p class="no-list">찜한 상품이 없습니다.</p>`
-      return;
-    }
-    // 찜목록이 있다면
-    const wishListEl = createWishList(wishList)
-    containerEl.innerHTML = '';
-    containerEl.append(wishListEl);
+  // 찜목록이 없다면
+  if(!wishList?.length) {
+    contentEl.innerHTML = `<p class="no-list">찜한 상품이 없습니다.</p>`
+    skeletonLoadingEl.classList.add('d-none');
+    return;
+  }
+  // 찜목록이 있다면
+  const wishListEl = createWishList(wishList)
+  contentEl.innerHTML = '';
+  contentEl.append(wishListEl);
+  skeletonLoadingEl.classList.add('d-none');
 }
 function setMockData () {
   // 제품명, 가격, 수량, 썸네일이미지

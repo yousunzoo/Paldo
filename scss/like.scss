@@ -22,6 +22,13 @@ a {
   letter-spacing: -0.3px;
 }
 
+// skeleton-loading
+@keyframes blinker {
+  100% {
+    background-position: -100% 0;
+  }
+}
+
 .inner-wrapper {
   width: 1050px;
   margin: 0 auto;
@@ -328,7 +335,7 @@ header {
         }
       }
     }
-        .likelist-main{
+    .likelist-main{
       width: 820px;
       .main-head {
         display: flex;
@@ -336,6 +343,7 @@ header {
         align-items: center;
         padding-bottom: 27px;
         border-bottom: 2px solid rgb(51, 51, 51);
+        margin-bottom: 24px;
         .main-text {
           font-weight: 500;
           font-size: 24px;
@@ -353,144 +361,138 @@ header {
       }
       .likelist-container {
         width: 100%;
-        height: 557px;
-        .no-list {
-          height: 75px;
-          margin: 40px 0;
-          text-align: center;
-          letter-spacing: 0.3px;
-          line-height: 75px;
+        .skeleton-loading {
+          box-sizing: border-box;
+          background-color: #fff;
+          width : 100%;
+          height : 100%;
+          top: 0;
           &.d-none {
             display : none;
           }
-        }
-        .product-list-container {
-          position: relative;
-          display: flex;
-          padding: 24px 0px;
-          border-top: 1px solid rgb(244, 244, 244);
-          width: 100%;
-          height: 128px;
-          margin-top: 0;
-          left: 0px;
-          box-sizing: border-box;
-          justify-content: space-between;
-          img {
-            width: 78px;
-            height: 78px;
-            object-fit: cover;
+          .skeleton {
+            height: 112px;
+            margin-bottom : 20px;
+            background: linear-gradient(
+              120deg,
+              #e5e5e5 30%,
+              #f0f0f0 38%,
+              #f0f0f0 40%,
+              #e5e5e5 48%
+            );
+            background-size: 200% 100%;
+            background-position: 100% 0;
+            animation: blinker 1s linear infinite;
           }
-          .product-detail-section {
-            width: calc(100% - 100px);
+        }
+        > .content {
+          .no-list {
+            height: 75px;
+            margin: 40px 0;
+            text-align: center;
+            letter-spacing: 0.3px;
+            line-height: 75px;
+            &.d-none {
+              display : none;
+            }
+          }
+          .product-list-container {
+            position: relative;
             display: flex;
-            -webkit-box-pack: justify;
+            padding-bottom: 24px;
+            border-top: 1px solid rgb(244, 244, 244);
+            width: 100%;
+            height: 128px;
+            margin-top: 0;
+            left: 0px;
+            box-sizing: border-box;
             justify-content: space-between;
-            .product-text-container {
-              .product-title {
-                display: -webkit-box;
-                overflow: hidden;
-                word-break: break-all;
-                white-space: normal;
-                font-size: 16px;
-                line-height: normal;
-                .product-name {
-                  display: block;
-                  font-size: 16px;
-                  color: #333333;
-                }
-              }
-              .product-price {
-                margin-top: 6px;
-                font-size: 16px;
-                display : inline-flex;
-                flex-direction: column;
-                gap: 3px;
-                .product-cost-price {
-                  font-size: 13px;
-                  color: rgb(153, 153, 153);
-                  word-break: break-all;
-                  text-decoration: line-through;
-                  text-align: center;
-                }
-              }
+            img {
+              width: 78px;
+              height: 78px;
+              object-fit: cover;
             }
-            .product-button-section {
+            .product-detail-section {
+              width: calc(100% - 100px);
               display: flex;
-              flex-direction: column;
-              .delete-button {
-                display: block;
-                padding: 0px 10px;
-                text-align: center;
-                overflow: hidden;
-                width: 104px;
-                height: 36px;
-                color: rgb(51, 51, 51);
-                background-color: rgb(255, 255, 255);
-                border: 1px solid rgb(221, 221, 221);
-                margin-bottom: 8px;
-                box-sizing: border-box;
-                font-size: 13px;
+              -webkit-box-pack: justify;
+              justify-content: space-between;
+              .product-text-container {
+                .product-title {
+                  display: -webkit-box;
+                  overflow: hidden;
+                  word-break: break-all;
+                  white-space: normal;
+                  font-size: 16px;
+                  line-height: normal;
+                  .product-name {
+                    display: block;
+                    font-size: 16px;
+                    color: #333333;
+                  }
+                }
+                .product-price {
+                  margin-top: 6px;
+                  font-size: 16px;
+                  display : inline-flex;
+                  flex-direction: column;
+                  gap: 3px;
+                  .product-cost-price {
+                    font-size: 13px;
+                    color: rgb(153, 153, 153);
+                    word-break: break-all;
+                    text-decoration: line-through;
+                    text-align: center;
+                  }
+                }
               }
-              .take-button {
-                display: block;
-                padding: 0px 10px;
-                text-align: center;
-                overflow: hidden;
-                width: 104px;
-                height: 36px;
-                color: $color_primary;
-                background-color: rgb(255, 255, 255);
-                border: 1px solid $color_primary;
-                box-sizing: border-box;
-                font-size: 13px;
+              .product-button-section {
                 display: flex;
-                align-items: center;
-                justify-content: center;
-                img {
-                  display: inline-block;
-                  width: 20px;
-                  height: 20px;
-                  margin-right: 4px;
-                  vertical-align: middle;
-                  border: 0;
-                  color: $color_primary;
+                flex-direction: column;
+                .delete-button {
+                  display: block;
+                  padding: 0px 10px;
+                  text-align: center;
+                  overflow: hidden;
+                  width: 104px;
+                  height: 36px;
+                  color: rgb(51, 51, 51);
+                  background-color: rgb(255, 255, 255);
+                  border: 1px solid rgb(221, 221, 221);
+                  margin-bottom: 8px;
                   box-sizing: border-box;
+                  font-size: 13px;
+                }
+                .take-button {
+                  display: block;
+                  padding: 0px 10px;
+                  text-align: center;
+                  overflow: hidden;
+                  width: 104px;
+                  height: 36px;
+                  color: $color_primary;
+                  background-color: rgb(255, 255, 255);
+                  border: 1px solid $color_primary;
+                  box-sizing: border-box;
+                  font-size: 13px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  img {
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                    margin-right: 4px;
+                    vertical-align: middle;
+                    border: 0;
+                    color: $color_primary;
+                    box-sizing: border-box;
+                  }
                 }
               }
             }
           }
-        }
-
-
-        .container-text-top {
-          width: 60px;
-          margin: 0px auto 15px;
-          svg {
-            overflow: hidden;
-          }
-        }
-        .container-text {
-          display: block;
-          margin-bottom: 20px;
-          font-size: 16px;
-          font-weight: normal;
-          color: rgb(181, 181, 181);
-        }
-        .best-products {
-          display: block;
-          padding: 0px 10px;
-          text-align: center;
-          overflow: hidden;
-          width: 150px;
-          height: 44px;
-          border-radius: 3px;
-          color: rgb(255, 255, 255);
-          background-color: rgb(95, 0, 128);
-          border: 0px none;
-          .container-texts {
-            font-size: 14px;
-            line-height: 44px;
-          }
+  
         }
       }
     }
