@@ -97,6 +97,25 @@ export default async function setCartPage(router) {
     return cardLi;
   });
   cartListArea.append(...cartLis);
+
+  // 전체 선택 버튼 누르면 paymentList 배열 변경 및 모든 checkList 변경
+  const checkAllButton = document.querySelector("#check-all");
+  const checkButtons = document.querySelectorAll("#check-item");
+  checkAllButton.addEventListener("click", (event) => {
+    const isChecked = event.target.checked;
+
+    if (isChecked) {
+      paymentList = [...cartList];
+      checkButtons.forEach((item) => {
+        item.checked = true;
+      });
+    } else {
+      paymentList = [];
+      checkButtons.forEach((item) => {
+        item.checked = false;
+      });
+    }
+  });
 }
 
 function toggleCheckbox(event, item) {
