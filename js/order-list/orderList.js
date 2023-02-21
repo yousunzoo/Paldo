@@ -74,13 +74,16 @@ async function initPage() {
           <span class='transaction-name'>${products[0].title} 포함 총 ${products.length}건</span>
           <span class='transaction-price'>${price.toLocaleString('ko-KR')}원</span>
         </div>
+        <div class="spinner"></div>
       </div>
       <ul>
         
       </ul>
     `
     const listTitleEl = listGroupEl.querySelector('.list-title')
-    listTitleEl.addEventListener('click', (event) => {
+    listTitleEl.addEventListener('click', () => {
+      const spinnerEl = listGroupEl.querySelector('.spinner');
+      spinnerEl.classList.add('active');
       // 내부에 요소가 없으면
       const ulEl = listTitleEl.parentElement.querySelector('ul')
       if(!ulEl.children.length) {
@@ -222,6 +225,7 @@ async function initPage() {
       }
       // 있으면 토글링만
       ulEl.style.display = ulEl.style.display === 'block' ? 'none' : 'block';
+      spinnerEl.classList.remove('active');
     })
     return listGroupEl
   })
