@@ -68,14 +68,14 @@ export default async function setCartPage(router) {
       type="button"></button>
   `;
 
-    // 체크박스 기능 구현
+    // 체크박스 기능
     const checkboxButton = cartLi.querySelector("label");
     checkboxButton.addEventListener("click", (event) => {
       event.preventDefault();
       toggleCheckbox(item, event);
     });
 
-    // 아이템 삭제 기능 구현
+    // 아이템 삭제 기능
     const deleteButton = cartLi.querySelector(".product-delete-button");
     deleteButton.addEventListener("click", () => {
       Swal.fire({
@@ -95,6 +95,11 @@ export default async function setCartPage(router) {
       });
     });
 
+    // 아이템 갯수 조절 기능
+    const originPrice = parseInt(
+      (item.price * 100) / (100 - item.discountRate)
+    );
+    toggleCountButton(cartLi, item);
     return cartLi;
   });
   cartListArea.append(...cartLis);
@@ -189,4 +194,85 @@ function changeBillArea() {
   totalOriginPrice.textContent = parseInt(origin).toLocaleString();
   totalDiscountPrice.textContent = parseInt(discount).toLocaleString();
   totalPrice.textContent = total.toLocaleString();
+}
+
+function toggleCountButton(cartLi, item) {
+  // 버튼으로 구매할 수량 조절 및 총 구매 금액 설정
+  const upButton = cartLi.querySelector(".product-quantity .up-button");
+  const downButton = cartLi.querySelector(".product-quantity .down-button");
+  const quantityDiv = cartLi.querySelector(".product-quantity .count");
+  const totalPriceText = cartLi.querySelector(".product-total-price span");
+  const totalOriginPriceText = cartLi.querySelector(
+    ".product-origin-price span"
+  );
+  let quantity = item.quantity;
+  let originPrice = parseInt((item.price * 100) / (100 - item.discountRate));
+
+  const loginedId = JSON.parse(localStorage.getItem("loginInfo")).loginId;
+  const loginedIdData = JSON.parse(localStorage.getItem(loginedId));
+
+  if (quantity === 1) {
+    downButton.disabled = true;
+    downButton.style.opacity = 0.5;
+  }
+
+  upButton.addEventListener("click", () => {
+    quantity += 1;
+
+    // cartList, paymentList quantity 변경
+    const cartListIndex = cartList.indexOf(item);
+    cartList[cartListIndex].quantity = quantity;
+    loginedIdData.cartList = cartList;
+    localStorage.setItem(loginedId, JSON.stringify(loginedIdData));
+
+    const checkbox = cartLi.querySelector("input");
+    if (checkbox.checked) {
+      const paymentListIndex = paymentList.indexOf(item);
+      paymentList[paymentListIndex].quantity = quantity;
+      changeBillArea();
+    }
+
+    // 텍스트 변경
+    quantityDiv.textContent = quantity;
+    totalPriceText.textContent = (quantity * item.price).toLocaleString();
+    if (item.discountRate) {
+      totalOriginPriceText.textContent = (
+        quantity * originPrice
+      ).toLocaleString();
+    }
+    if (quantity === 2) {
+      downButton.disabled = false;
+      downButton.style.opacity = 1;
+    }
+  });
+
+  downButton.addEventListener("click", () => {
+    quantity -= 1;
+
+    // cartList, paymentList quantity 변경
+    const cartListIndex = cartList.indexOf(item);
+    cartList[cartListIndex].quantity = quantity;
+    loginedIdData.cartList = cartList;
+    localStorage.setItem(loginedId, JSON.stringify(loginedIdData));
+
+    const checkbox = cartLi.querySelector("input");
+    if (checkbox.checked) {
+      const paymentListIndex = paymentList.indexOf(item);
+      paymentList[paymentListIndex].quantity = quantity;
+      changeBillArea();
+    }
+
+    // 텍스트 변경
+    quantityDiv.textContent = quantity;
+    totalPriceText.textContent = (quantity * item.price).toLocaleString();
+    if (item.discountRate) {
+      totalOriginPriceText.textContent = (
+        quantity * originPrice
+      ).toLocaleString();
+    }
+    if (quantity === 1) {
+      downButton.disabled = true;
+      downButton.style.opacity = 0.5;
+    }
+  });
 }
