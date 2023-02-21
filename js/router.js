@@ -32,6 +32,7 @@ const mainSection = document.querySelector("#main");
 router
   .on({
     "/": async () => {
+      window.scrollTo(0, 0);
       mainSection.innerHTML = mainPage;
       setPrdList(router);
       swiperAction();
@@ -42,32 +43,37 @@ router
       }
     },
     login: async () => {
-      // do something
+      window.scrollTo(0, 0);
       mainSection.innerHTML = loginPage;
       loginEvent(router);
-      // isLogin && router.navigate("/");
     },
     signup: () => {
+      window.scrollTo(0, 0);
       mainSection.innerHTML = sigupPage;
       signUpEvent();
     },
     "search/:id": async ({ data }) => {
+      window.scrollTo(0, 0);
       mainSection.innerHTML = searchPage;
       await setResultPage(data.id, router);
     },
     coupon: () => {
+      window.scrollTo(0, 0);
       mainSection.innerHTML = couponPage;
       handleCouponButton();
     },
     "productDetail/:id": async ({ data }) => {
+      window.scrollTo(0, 0);
       mainSection.innerHTML = productDetailPage;
       await setProductDetailPage(data.id, router);
     },
     "products/:id": async ({ data }) => {
+      window.scrollTo(0, 0);
       mainSection.innerHTML = productPage;
       await setProductPage(data.id, router);
     },
     cart: () => {
+      window.scrollTo(0, 0);
       mainSection.innerHTML = cartPage;
       setCartPage(router);
     },
