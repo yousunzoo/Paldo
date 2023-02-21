@@ -96,9 +96,6 @@ export default async function setCartPage(router) {
     });
 
     // 아이템 갯수 조절 기능
-    const originPrice = parseInt(
-      (item.price * 100) / (100 - item.discountRate)
-    );
     toggleCountButton(cartLi, item);
     return cartLi;
   });
@@ -106,6 +103,7 @@ export default async function setCartPage(router) {
 
   // 전체 선택 버튼 누르면 paymentList 배열 변경 및 모든 checkList 변경
   const checkAllButton = document.querySelector("#check-all");
+  const orderButton = document.querySelector(".payment-button");
   checkAllButton.addEventListener("click", (event) => {
     const isChecked = event.target.checked;
     const checkButtons = document.querySelectorAll("#check-item");
@@ -115,11 +113,17 @@ export default async function setCartPage(router) {
       checkButtons.forEach((item) => {
         item.checked = true;
       });
+      orderButton.classList.add("active");
+      orderButton.querySelector("span").textContent = "주문하기";
+      orderButton.disabled = false;
     } else {
       paymentList = [];
       checkButtons.forEach((item) => {
         item.checked = false;
       });
+      orderButton.classList.remove("active");
+      orderButton.querySelector("span").textContent = "상품을 성택해주세요";
+      orderButton.disabled = true;
     }
     changeBillArea();
   });
@@ -151,23 +155,44 @@ export default async function setCartPage(router) {
       }
     });
   });
+
+  // 주문 버튼 누르면 payment 페이지로 이동
+  orderButton.addEventListener("click", () => {
+    localStorage.setItem("paymentList", JSON.stringify(paymentList));
+    router.navigate("/payment");
+  });
 }
 
 function toggleCheckbox(item, event) {
   const checkbox = event.target.previousElementSibling;
+  const orderButton = document.querySelector(".payment-button");
   if (!checkbox.checked) {
     // 주문목록에 넣기
     paymentList.push(item);
+    // 주문버튼 활성화
+    if (!orderButton.classList.contains("active")) {
+      orderButton.classList.add("active");
+      orderButton.querySelector("span").textContent = "주문하기";
+      orderButton.disabled = false;
+    }
   } else {
     // 주문목록에서 해당 아이템 삭제
-    paymentList = paymentList.filter((arrItem) => arrItem != item);
+    paymentList = paymentList.filter((arrItem) => arrItem != item); // 주문버튼 활성화
   }
 
   changeBillArea();
   checkbox.checked = !checkbox.checked;
+  const checkAllButton = document.querySelector("#check-all");
   if (cartList.length === paymentList.length) {
-    const checkAllButton = document.querySelector("#check-all");
     checkAllButton.checked = true;
+  } else {
+    checkAllButton.checked = false;
+  }
+  const checkButtons = document.querySelectorAll("#check-item:checked");
+  if (checkButtons.length === 0) {
+    orderButton.classList.remove("active");
+    orderButton.querySelector("span").textContent = "상품을 선택해주세요";
+    orderButton.disabled = true;
   }
 }
 
