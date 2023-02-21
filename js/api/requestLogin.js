@@ -18,7 +18,7 @@ export async function logInFn(data) {
     .then((result) => {
       setUserInfo(result, data.email);
       changeHeader();
-      history.back();
+      window.history.go(-1);
     })
     .catch(() => {
       Swal.fire({

@@ -23,6 +23,18 @@ export default async function setProductDetailPage(id, router) {
   productDetail.src = productInfo.photo;
   thumbnail.alt = "상품 상세정보";
 
+  const discountRate = document.querySelector(".discount-rate");
+  const originPrice = document.querySelector(".origin-price");
+  if (productInfo.discountRate) {
+    discountRate.querySelector("span").textContent = productInfo.discountRate;
+    originPrice.querySelector("span").textContent = parseInt(
+      (productInfo.price * 100) / (100 - productInfo.discountRate)
+    ).toLocaleString();
+  } else {
+    discountRate.innerHTML = "";
+    originPrice.innerHTML = "";
+  }
+
   const totalPrice = document.querySelector(".total-num");
   totalPrice.textContent = productInfo.price.toLocaleString();
 

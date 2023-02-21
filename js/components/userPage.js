@@ -388,7 +388,10 @@ export const productDetailPage = /* html */ `
   <div class="info-wrapper">
     <div class="top-info">
       <p class="product-title"></p>
+      <div class="product-price-area">
       <div class="product-price"><span class="price-num"></span>원</div>
+      <div class="discount-rate"><span class="price-num"></span>%</div>
+      <div class="origin-price"><span class="price-num"></span>원</div></div>
       <div class="product-login-text">로그인 후 구매하실 수 있습니다.</div>
       <div class="product-quantity">
         <div class="title">수량 선택</div>

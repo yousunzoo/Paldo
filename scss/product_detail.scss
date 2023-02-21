@@ -207,14 +207,31 @@ section {
       padding-top: 50px;
       .top-info {
         .product-title {
-          font-size: 18px;
+          font-size: 20px;
+          line-height: 1.4;
           font-weight: 700;
           text-align-last: left;
         }
-        .product-price {
+        .product-price-area {
+          display: flex;
+          padding-top: 30px;
+          flex-wrap: wrap;
           font-size: 22px;
           font-weight: 800;
-          padding-top: 30px;
+          .product-price {
+            margin-right: 10px;
+          }
+          .discount-rate {
+            color: $color_discount_rate;
+          }
+          .origin-price {
+            width: 100%;
+            text-decoration: line-through;
+            font-size: 16px;
+            padding-top: 10px;
+            color: $color_original_price;
+            font-weight: 400;
+          }
         }
         .product-login-text {
           font-size: 12px;
@@ -253,7 +270,7 @@ section {
         }
       }
       .low-info {
-        padding-top: 70px;
+        padding-top: 38px;
         .price-info {
           display: flex;
           align-items: flex-end;
