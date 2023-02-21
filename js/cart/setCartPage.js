@@ -101,9 +101,9 @@ export default async function setCartPage(router) {
 
   // 전체 선택 버튼 누르면 paymentList 배열 변경 및 모든 checkList 변경
   const checkAllButton = document.querySelector("#check-all");
-  const checkButtons = document.querySelectorAll("#check-item");
   checkAllButton.addEventListener("click", (event) => {
     const isChecked = event.target.checked;
+    const checkButtons = document.querySelectorAll("#check-item");
 
     if (isChecked) {
       paymentList = [...cartList];
@@ -116,7 +116,35 @@ export default async function setCartPage(router) {
         item.checked = false;
       });
     }
-    changeBillArea(paymentList);
+    changeBillArea();
+  });
+
+  // 선택삭제 버튼 누르면 paymentList에 있는 제품 모두 삭제
+  const deleteButton = document.querySelector(".delete-button");
+  deleteButton.addEventListener("click", () => {
+    Swal.fire({
+      title: "선택한 상품을 삭제하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      cancelBUttonText: "취소",
+      confirmButtonText: "확인",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        paymentList.forEach((item) => {
+          cartList = cartList.filter((arrItem) => arrItem != item);
+        });
+        loginedIdData.cartList = cartList;
+        localStorage.setItem(loginedId, JSON.stringify(loginedIdData));
+        setCartPage(router);
+        paymentList = [];
+        const checkAllButton = document.querySelector("#check-all");
+        if (checkAllButton.checked) {
+          checkAllButton.checked = !checkAllButton.checked;
+        }
+        changeBillArea();
+      }
+    });
   });
 }
 
@@ -130,7 +158,7 @@ function toggleCheckbox(item, event) {
     paymentList = paymentList.filter((arrItem) => arrItem != item);
   }
 
-  changeBillArea(paymentList);
+  changeBillArea();
   checkbox.checked = !checkbox.checked;
   if (cartList.length === paymentList.length) {
     const checkAllButton = document.querySelector("#check-all");
@@ -138,7 +166,7 @@ function toggleCheckbox(item, event) {
   }
 }
 
-function changeBillArea(paymentList) {
+function changeBillArea() {
   const totalArea = document.querySelector(".cart-total");
   const totalOriginPrice = totalArea
     .querySelector(".origin-price")
