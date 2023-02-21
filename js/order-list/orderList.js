@@ -2,6 +2,7 @@ import { checkAuthorization } from '../api/checkAuthorization.js'
 import { getOrderList } from './orderListApi.js'
 
 /* GLOBAL LOGIC */
+let renderList;
 ;(async function () {
   const isValidUser = await checkAuthorization();
   if(isValidUser) {
@@ -21,139 +22,160 @@ import { getOrderList } from './orderListApi.js'
 async function initPage() {
   // 사용자 전체 거래내역 조회
   const orderList = await getOrderList();
-  console.log(orderList);
   const contentEl = document.querySelector('.order-list > .content');
   const skeletonLoadingEl = document.querySelector('.skeleton-loading');
 
   // 거래 내역이 없을 때
   if(orderList.length === 0) {
     contentEl.innerHTML = /* html */`
-      <p class="no-list">주문내역이 없습니다.</p>
+      <p class='no-list'>주문내역이 없습니다.</p>
     `
     skeletonLoadingEl.classList.add('d-none');
     return;
   }
   // 거래 내역이 있을 때
   contentEl.innerHTML = '';
-  // 분 단위로 그룹핑
-  const groupedList = orderList.reduce((acc, order) => {
-    // 거래 시간 UTCISO -> KST 분까지 나타내는 format으로 변형
-    const utcIsoString = order.timePaid;
-    const utcDate = new Date(utcIsoString);
-    const kstDate = new Date(utcDate.getTime() + (9 * 60 * 60 * 1000));
-    const year = kstDate.getFullYear();
-    const month = kstDate.getMonth() + 1;
-    const date = kstDate.getDate();
-    const hour = kstDate.getHours();
-    const minute = kstDate.getMinutes();
-    const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${date.toString().padStart(2, '0')} ${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+  
+  // 그룹핑
+  const groupedObj = groupByMinutes(orderList);
+  console.log(groupedObj)
 
-    acc[formattedDate] ? acc[formattedDate].push(order.product) : acc[formattedDate] = [order.product];
+  // 내림차순 정렬
+  let sortedList = Object.entries(groupedObj).sort((a, b) => {
+    return new Date(b[0]).getTime() - new Date(a[0]).getTime();
+  })
+
+  //중복 제거 및 수량 체크
+  deduplicateAndCheckQuantity(sortedList);
+  // 외부 변수에 상태 저장
+  renderList = sortedList;
+
+  // 요소 생성
+  const mappingList = sortedList.map((list, index) => {
+    return createGroupEl(list, index)
+  })
+  const templateEl = document.createElement('template');
+  mappingList.forEach((list) => {
+    templateEl.innerHTML += list;
+  })
+  // 렌더링
+  contentEl.append(templateEl.content);
+  skeletonLoadingEl.classList.add('d-none');
+  // 이벤트 할당
+  const groupEls = document.querySelectorAll('.list-title');
+  groupEls.forEach((groupEl) => {
+    groupEl.addEventListener('click', (event) => {
+      // 내부에 요소가 없으면 ?
+      const ulEl = groupEl.parentElement.querySelector('ul')
+      if(!ulEl.children.length) {
+        const templateEl = document.createElement('template');
+        const mappingList = createDetailEl(event.currentTarget, renderList);
+        mappingList.forEach((list) => {
+          templateEl.innerHTML += list;
+        })
+        ulEl.append(templateEl.content);
+      }
+      // 있으면 토글링만 !
+      ulEl.style.display = ulEl.style.display === 'block' ? 'none' : 'block';
+    })
+  })
+  console.log(renderList);
+}
+function changeDateFormatToKR(time) {
+  const utcDate = new Date(time);
+  const kstDate = new Date(utcDate.getTime() + (9 * 60 * 60 * 1000));
+  const year = kstDate.getFullYear();
+  const month = kstDate.getMonth() + 1;
+  const date = kstDate.getDate();
+  const hour = kstDate.getHours();
+  const minute = kstDate.getMinutes();
+  return `${year}-${month.toString().padStart(2, '0')}-${date.toString().padStart(2, '0')} ${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+}
+function groupByMinutes(list) {
+  return list.reduce((acc, order) => {
+    const { timePaid, product } = order;
+    // 날짜 단위 변환
+    const formattedDate = changeDateFormatToKR(timePaid);
+    // 거래 시간으로 그룹핑
+    acc[formattedDate] ? acc[formattedDate].push(product) : acc[formattedDate] = [product];
     return acc;
   }, {})
-  console.log(groupedList);
-
-  // 거래 시간 기준 내림차순 정렬
-  const timeDescendingOrder = Object.entries(groupedList).sort((a, b) => {
-    return new Date(b[0]).getTime() - new Date(a[0]).getTime()
+}
+function deduplicateAndCheckQuantity(list) {
+  list.forEach((item) => {
+    const duplicatedOrders = item[1];
+    const duplicatedOrdersObj = duplicatedOrders.reduce((acc, order) => {
+      const { productId } = order;
+      acc[productId] ? acc[productId].quantity += 1 : acc[productId] = {...order, quantity : 1}
+      return acc;
+    }, {})
+    item.splice(1, 1, Object.values(duplicatedOrdersObj))
   })
-  console.log(timeDescendingOrder)
-  const timeDescendingOrderArr = timeDescendingOrder.reduce((acc, order) => {
-    acc.push({[order[0]] : order[1]})
+}
+function createGroupEl(list, index) {
+  const [ time , products ] = list;
+  // 총 상품 금액
+  const price = products.reduce((acc, product) => {
+    const { price, quantity } = product;
+    acc += price * quantity;
     return acc;
-  }, [])
-  console.log(timeDescendingOrderArr)
+  }, 0)
   
-  // 그룹핑된 결제 단위 안에서 수량을 다시 체크하는 로직(중복이 제거된 배열과 함께 수량까지 체크되어야함.)
-  // [{time : [{...}, {...}}]}, {...}, {...}]
-  timeDescendingOrderArr.forEach((order, index) => {
-    for(let time in order) {
-      // 중복 상품 제거 및 수량 정보 추가
-      const deduplicated = order[time].reduce((acc, product) => {
-        const { productId } = product;
-        acc[productId] ? acc[productId].quantity += 1 : acc[productId] = {...product, quantity : 1}
-        return acc;
-      }, {})
-      const productsArr = Object.values(deduplicated);
-
-      // 총 상품 금액 구하기
-      const price = productsArr.reduce((acc, product) => {
-        acc += product.price * product.quantity;
-        return acc;
-      }, 0)
-      
-      // id 만들기
-      const date = new Date(time);
-      const numericString = `${date.getFullYear()}${(date.getMonth()+1).toString().padStart(2,'0')}${date.getDate().toString().padStart(2,'0')}${date.getHours().toString().padStart(2,'0')}${date.getMinutes().toString().padStart(2,'0')}`;
-      
-      // 외부 title 요소 Create !
-      const templateEl = document.createElement('template');
-
-      templateEl.innerHTML += /* html */`
-      <div class="list-group" id=${numericString}>
-        <div class="list-title">
-          <div class="title-info">
-            <span class="transaction-date">${time} 결제</span>
-            <label for=${index} class="transaction-name">${productsArr[0].title} 포함 총 ${productsArr.length}건</label>
-            <span class="transaction-price">${price.toLocaleString('ko-KR')}원</span>
-          </div>
-          <!-- <div class="title-btn-wrapper">
-            <button></button>
-            <button></button>
-          </div> -->
-        </div>
-        <input type="checkbox" id=${index}>
-        <ul>
-          
-        </ul>
+  return /* html */`
+  <div class='list-group'>
+    <div class='list-title' id=${index}>
+      <div class='title-info'>
+        <span class='transaction-date'>${time} 결제</span>
+        <span class='transaction-name'>${products[0].title} 포함 총 ${products.length}건</span>
+        <span class='transaction-price'>${price.toLocaleString('ko-KR')}원</span>
       </div>
-      `
-      contentEl.append(templateEl.content);
-  
-      // 내부 리스트 요소 Create !
-      const groupEl = document.getElementById(numericString);
-      const ulEl = groupEl.children[2];
-      const templateEl2 = document.createElement('template');
-      productsArr.forEach((product) => {
-        templateEl2.innerHTML += /* html */`
-        <li class="item">
-          <div class="order-area">
-            <div class="info">
-              <img class="thumbnail" src=${product.thumbnail} alt="감자깡" height="60px" />
-              <div class="info-list">
-                <dl>
-                  <dt>상품명</dt>
-                  <dd id="name">${product.title}</dd>
-                </dl>
-                <dl>
-                  <dt>결제방법</dt>
-                  <dd>계좌 이체</dd>
-                </dl>
-                <dl>
-                  <dt>수량</dt>
-                  <dd id="quantity">${product.quantity}개</dd>
-                </dl>
-                <dl>
-                  <dt>결제금액</dt>
-                  <dd id="transactionPrice">${(product.price * product.quantity).toLocaleString('ko-KR')}원</dd>
-                </dl>
-              </div>
-            </div>
-            <div class="side-info">
-              <span>배송중</span>
-              <div>
-                <button type="button" height="36" radius="3">
-                  <span>1:1 문의</span>
-                </button>
-              </div>
-            </div>
+    </div>
+    <ul>
+      
+    </ul>
+  </div>
+  `
+}
+function createDetailEl(targetGroup, list) {
+  console.log(list);
+  const { id } = targetGroup; 
+  const products = list[id][1];
+  console.log(products)
+
+  return products.map((product) => {
+    return /* html */`
+    <li class='item'>
+      <div class='order-area'>
+        <div class='info'>
+          <img class='thumbnail' src=${product.thumbnail} alt='감자깡' height='60px' />
+          <div class='info-list'>
+            <dl>
+              <dt>상품명</dt>
+              <dd id='name'>${product.title}</dd>
+            </dl>
+            <dl>
+              <dt>결제방법</dt>
+              <dd>계좌 이체</dd>
+            </dl>
+            <dl>
+              <dt>수량</dt>
+              <dd id='quantity'>${product.quantity}개</dd>
+            </dl>
+            <dl>
+              <dt>결제금액</dt>
+              <dd id='transactionPrice'>${(product.price * product.quantity).toLocaleString('ko-KR')}원</dd>
+            </dl>
           </div>
-        </li>
-        `
-      })
-      ulEl.append(templateEl2.content);
-    }
+        </div>
+        <div class='side-info'>
+          <span>배송중</span>
+          <div class='buttons'>
+            <button type='button' height='36' radius='3'>주문 취소</button>
+            <button type='button' height='36' radius='3'>거래 확정</button>
+          </div>
+        </div>
+      </div>
+    </li>
+    `
   })
-  // 스켈레톤 로딩 처리
-  skeletonLoadingEl.classList.add('d-none');
 }

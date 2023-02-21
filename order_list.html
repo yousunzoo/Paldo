@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
   <link rel="stylesheet" href="./scss/main.scss" />
   <link rel="stylesheet" href="./scss/order_list.scss" />
+  <!-- sweetAlert2 -->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script defer type="module" src="./js/order-list/orderList.js"></script>
 </head>
 
@@ -153,9 +155,7 @@
               <h2>주문 내역</h2>
               <p>최대 지난 3년간의 주문 내역까지 확인할 수 있어요</p>
             </div>
-            <div class="selector">
-              <!-- 드롭다운 메뉴 (3개월 단위 셀렉터) -->
-            </div>
+            <input type="text" id="myDatepicker" placeholder="거래날짜를 선택해주세요." />
           </div>
 
           <div class="divider"></div>
@@ -171,7 +171,7 @@
             </div>
 
             <div class="content">
-              <p class="no-list d-none">주문내역이 없습니다.</p>
+              <!-- <p class="no-list">주문내역이 없습니다.</p> -->
               <!-- <div class="list-group">
                 <div class="list-title">
                   <div class="title-info">
