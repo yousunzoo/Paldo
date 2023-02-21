@@ -1,6 +1,7 @@
 import { checkAuthorization } from "../api/checkAuthorization";
 import { makeDOMwithProperties } from "../utils/dom";
 
+let cartList = [];
 let paymentList = [];
 
 export default async function setCartPage(router) {
@@ -17,8 +18,8 @@ export default async function setCartPage(router) {
   }
   const loginedId = JSON.parse(localStorage.getItem("loginInfo")).loginId;
   const loginedIdData = JSON.parse(localStorage.getItem(loginedId));
-  let cartList = loginedIdData.cartList;
-
+  let cartListData = loginedIdData.cartList;
+  cartList = [...cartListData];
   const cartListArea = document.querySelector(".product-list");
 
   cartListArea.innerHTML = "";
@@ -28,8 +29,8 @@ export default async function setCartPage(router) {
     cartListArea.innerHTML = `<div class="no-list"><p>장바구니에 담긴 상품이 없습니다.</p></div>`;
   }
   const cartLis = cartList.map((item) => {
-    const cardLi = makeDOMwithProperties("li", { className: "product-li" });
-    cardLi.innerHTML = `
+    const cartLi = makeDOMwithProperties("li", { className: "product-li" });
+    cartLi.innerHTML = `
     <label for="check-item" class="check-item-area">
       <input type="checkbox" id="check-item" />
       <div class="checkbox-icon"></div>
@@ -68,14 +69,14 @@ export default async function setCartPage(router) {
   `;
 
     // 체크박스 기능 구현
-    const checkboxLabel = cardLi.querySelector("label");
-    checkboxLabel.addEventListener("click", (event) => {
+    const checkboxButton = cartLi.querySelector("label");
+    checkboxButton.addEventListener("click", (event) => {
       event.preventDefault();
-      toggleCheckbox(event, item);
+      toggleCheckbox(item, event);
     });
 
     // 아이템 삭제 기능 구현
-    const deleteButton = cardLi.querySelector(".product-delete-button");
+    const deleteButton = cartLi.querySelector(".product-delete-button");
     deleteButton.addEventListener("click", () => {
       Swal.fire({
         title: "삭제하시겠습니까?",
@@ -94,7 +95,7 @@ export default async function setCartPage(router) {
       });
     });
 
-    return cardLi;
+    return cartLi;
   });
   cartListArea.append(...cartLis);
 
@@ -115,10 +116,29 @@ export default async function setCartPage(router) {
         item.checked = false;
       });
     }
+    changeBillArea(paymentList);
   });
 }
 
-function toggleCheckbox(event, item) {
+function toggleCheckbox(item, event) {
+  const checkbox = event.target.previousElementSibling;
+  if (!checkbox.checked) {
+    // 주문목록에 넣기
+    paymentList.push(item);
+  } else {
+    // 주문목록에서 해당 아이템 삭제
+    paymentList = paymentList.filter((arrItem) => arrItem != item);
+  }
+
+  changeBillArea(paymentList);
+  checkbox.checked = !checkbox.checked;
+  if (cartList.length === paymentList.length) {
+    const checkAllButton = document.querySelector("#check-all");
+    checkAllButton.checked = true;
+  }
+}
+
+function changeBillArea(paymentList) {
   const totalArea = document.querySelector(".cart-total");
   const totalOriginPrice = totalArea
     .querySelector(".origin-price")
@@ -129,44 +149,16 @@ function toggleCheckbox(event, item) {
   const totalPrice = totalArea
     .querySelector(".total-price")
     .querySelector("span");
-  const checkbox = event.target.previousElementSibling;
-  const originPrice = Math.floor(
-    (item.price * 100) / (100 - item.discountRate)
-  );
-  if (!checkbox.checked) {
-    // 주문목록에 넣기
-    paymentList.push(item);
-    totalOriginPrice.textContent = (
-      convertNumber(totalOriginPrice) +
-      originPrice * item.quantity
-    ).toLocaleString();
-    totalDiscountPrice.textContent = (
-      convertNumber(totalDiscountPrice) +
-      (originPrice - item.price) * item.quantity
-    ).toLocaleString();
-    totalPrice.textContent = (
-      convertNumber(totalPrice) +
-      item.price * item.quantity
-    ).toLocaleString();
-  } else {
-    // 주문목록에서 해당 아이템 삭제
-    paymentList = paymentList.filter((arrItem) => arrItem != item);
-    totalOriginPrice.textContent = (
-      convertNumber(totalOriginPrice) -
-      originPrice * item.quantity
-    ).toLocaleString();
-    totalDiscountPrice.textContent = (
-      convertNumber(totalDiscountPrice) -
-      (originPrice - item.price) * item.quantity
-    ).toLocaleString();
-    totalPrice.textContent = (
-      convertNumber(totalPrice) -
-      item.price * item.quantity
-    ).toLocaleString();
-  }
-  checkbox.checked = !checkbox.checked;
-}
 
-function convertNumber(value) {
-  return parseInt(value.textContent.replace(/,/g, ""));
+  let origin = 0;
+  let discount = 0;
+  let total = 0;
+  paymentList.forEach((item) => {
+    origin += ((item.price * 100) / (100 - item.discountRate)) * item.quantity;
+    total += item.price * item.quantity;
+    discount = origin - total;
+  });
+  totalOriginPrice.textContent = parseInt(origin).toLocaleString();
+  totalDiscountPrice.textContent = parseInt(discount).toLocaleString();
+  totalPrice.textContent = total.toLocaleString();
 }
