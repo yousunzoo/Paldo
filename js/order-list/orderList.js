@@ -3,7 +3,15 @@ import { getOrderList, cancelTransaction, confirmTransaction } from './orderList
 import { makeDOMwithProperties } from '../utils/dom.js'
 
 /* GLOBAL LOGIC */
-let renderList;
+flatpickr("#myDatepicker", {
+  dateFormat: "Y-m-d", // set the date format
+  disableMobile: true, // disable mobile optimizations
+});
+const pickerEl = document.querySelector(".flatpickr-input");
+pickerEl.addEventListener("change", () => {
+  // 필터링 후 리렌더
+});
+
 ;(async function () {
   const isValidUser = await checkAuthorization();
   if(isValidUser) {
@@ -32,12 +40,13 @@ async function initPage() {
       <p class='no-list'>주문내역이 없습니다.</p>
     `
     skeletonLoadingEl.classList.add('d-none');
+    pickerEl.disabled = true;
     return;
   }
   // 거래 내역이 있을 때
   contentEl.innerHTML = '';
   
-  // 그룹핑
+  // 날짜별 그룹핑
   const groupedObj = groupByMinutes(orderList);
 
   // 내림차순 정렬
@@ -162,8 +171,8 @@ async function initPage() {
           const orderConfirmBtnEl = liEl.querySelector('.order-confirm-button');
           orderConfirmBtnEl.addEventListener('click', () => {
             Swal.fire({
-              title: '구매 확정하겠습니까 ?',
-              text: "구매 확정 후엔 주문 취소가 불가능합니다.",
+              title: '거래 확정하겠습니까 ?',
+              text: "거래 확정 후엔 주문 취소가 불가능합니다.",
               icon: 'question',
               showCancelButton: true,
               confirmButtonColor: '#3085d6',
@@ -174,10 +183,10 @@ async function initPage() {
               if (result.isConfirmed) {
                 try {
                   const body = { detailId : orderCancelBtnEl.parentElement.dataset.id }
-                  // 주문 취소 요청 API 전송
+                  // 거래 확정 요청 API 전송
                   const res = await confirmTransaction(body);
                   if(res) {
-                    // 삭제 요청 성공 시
+                    // 거래 확정 요청 성공 시
                     Swal.fire(
                       '구매 확정 성공!',
                       '성공적으로 구매 확정되었습니다.',
@@ -187,7 +196,9 @@ async function initPage() {
                     const orderConfirmBtnEl = liEl.querySelector('.order-confirm-button');
                     orderConfirmBtnEl.classList.remove('false');
                     orderConfirmBtnEl.classList.add('true');
+                    orderConfirmBtnEl.disabled = true;
                     const orderCancelBtnEl = liEl.querySelector('.order-cancel-button');
+                    orderCancelBtnEl.classList.add('inactive');
                     orderCancelBtnEl.disabled = true;
                   } else {
                     throw new Error('알 수 없는 오류가 발생했습니다.')
