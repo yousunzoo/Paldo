@@ -436,9 +436,38 @@ export const cartPage = /* html */ `
               </div>
               <div class="cart-list-area">
                 <ul class="product-list">
-                  
+                  <li class="skeleton-li">
+                    <div class="skeleton-check skeleton"></div>
+                    <div class="skeleton-img skeleton"></div>
+                    <div class="skeleton-text skeleton"></div>
+                    <div class="skeleton-button skeleton"></div>
+                    <div class="skeleton-text skeleton"></div>
+                    <div class="skeleton-button skeleton"></div>
+                  </li>
+                  <li class="skeleton-li">
+                    <div class="skeleton-check skeleton"></div>
+                    <div class="skeleton-img skeleton"></div>
+                    <div class="skeleton-text skeleton"></div>
+                    <div class="skeleton-button skeleton"></div>
+                    <div class="skeleton-text skeleton"></div>
+                    <div class="skeleton-button skeleton"></div>
+                  </li>
+                  <li class="skeleton-li">
+                    <div class="skeleton-check skeleton"></div>
+                    <div class="skeleton-img skeleton"></div>
+                    <div class="skeleton-text skeleton"></div>
+                    <div class="skeleton-button skeleton"></div>
+                    <div class="skeleton-text skeleton"></div>
+                    <div class="skeleton-button skeleton"></div>
+                  </li><li class="skeleton-li">
+                    <div class="skeleton-check skeleton"></div>
+                    <div class="skeleton-img skeleton"></div>
+                    <div class="skeleton-text skeleton"></div>
+                    <div class="skeleton-button skeleton"></div>
+                    <div class="skeleton-text skeleton"></div>
+                    <div class="skeleton-button skeleton"></div>
+                  </li>
                 </ul>
-                <!-- <p class="center-text-box">장바구니에 담긴 상품이 없습니다.</p> -->
               </div>
             </div>
             <div class="cart-total-area">

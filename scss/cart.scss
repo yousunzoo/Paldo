@@ -91,6 +91,55 @@ $color_devide_line: rgb(244, 244, 244);
               color: $color_primary;
             }
           }
+          .skeleton-li {
+            width: 100%;
+            height: 100px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            .skeleton {
+              border-radius: 10px;
+              background: linear-gradient(
+                120deg,
+                #e5e5e5 30%,
+                #f0f0f0 38%,
+                #f0f0f0 40%,
+                #e5e5e5 48%
+              );
+              background-size: 200% 100%;
+              background-position: 100% 0;
+              animation: blinker 1s linear infinite;
+            }
+            .skeleton-check {
+              width: 24px;
+              height: 24px;
+              margin-right: 14px;
+            }
+            .skeleton-img {
+              height: 60px;
+              width: 60px;
+              margin-right: 20px;
+            }
+            .skeleton-text {
+              width: 240px;
+              height: 30px;
+              margin-right: 115px;
+              &:nth-child(5) {
+                width: 60px;
+                margin-right: 0;
+                margin-left: 70px;
+              }
+            }
+
+            .skeleton-button {
+              width: 78px;
+              height: 28px;
+              &:last-child {
+                margin-left: 20px;
+                width: 28px;
+              }
+            }
+          }
           .product-li {
             height: 60px;
             border-bottom: 1px solid $color_devide_line;
