@@ -29,5 +29,9 @@
   "browserslist": [
     "> 1%",
     "last 2 version"
-  ]
+  ],
+  "dependencies": {
+    "js": "^0.1.0",
+    "navigo": "^8.11.1"
+  }
 }
