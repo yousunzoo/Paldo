@@ -29,6 +29,14 @@ const router = new Navigo("/");
 const mainSection = document.querySelector("#main");
 
 // 처음 페이지가 로드 되었을 때
+(async () => {
+  const isLogin = await checkAuthorization();
+
+  if (isLogin) {
+    changeHeader();
+  }
+})();
+
 router
   .on({
     "/": async () => {
@@ -36,11 +44,6 @@ router
       mainSection.innerHTML = mainPage;
       setPrdList(router);
       swiperAction();
-      const isLogin = await checkAuthorization();
-
-      if (isLogin) {
-        changeHeader();
-      }
     },
     login: async () => {
       window.scrollTo(0, 0);
