@@ -1,6 +1,5 @@
-import { router } from "../main.js";
 import { makeDOMwithProperties } from "../utils/dom.js";
-export const renderGoodsList = async (itemListData, no) => {
+export const renderGoodsList = async (router, itemListData, no) => {
   const ulEl = document.querySelector(".goods-list");
   if (no === undefined) {
     no = 1;
@@ -44,7 +43,7 @@ export const renderGoodsList = async (itemListData, no) => {
     });
     itemEl.dataset.id = item.id;
     itemEl.setAttribute("data-navigo", "");
-    itemEl.href = "/product/" + item.id;
+    itemEl.href = "product/" + item.id;
     const soldOutcheck = item.isSoldOut ? "YES" : "NO";
     itemNo.textContent = no++;
     itemId.textContent = item.id;
@@ -57,7 +56,17 @@ export const renderGoodsList = async (itemListData, no) => {
     itemCheck.append(inputCheck);
     itemThum.append(itemImg);
 
-    itemEl.append(itemCheck, itemNo, itemId, itemThum, itemName, itemCategory, itemPrice, itemSale, itemOutstock);
+    itemEl.append(
+      itemCheck,
+      itemNo,
+      itemId,
+      itemThum,
+      itemName,
+      itemCategory,
+      itemPrice,
+      itemSale,
+      itemOutstock
+    );
     itemEl.addEventListener("click", function (event) {
       if (event.target === inputCheck) {
         console.log(event.target);

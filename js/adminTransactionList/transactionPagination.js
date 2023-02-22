@@ -5,7 +5,7 @@ let limit = 10;
 let currentPage = 1;
 const regex = /^\d{4}-\d{2}-\d{2}$/;
 
-export const transactionPagination = async (search = undefined) => {
+export const transactionPagination = async (search = undefined, router) => {
   isRendered = false;
   const transactionList = document.querySelector(".transaction-list");
   let paginationEl = document.querySelector(".pagination-transaction");
@@ -47,17 +47,23 @@ export const transactionPagination = async (search = undefined) => {
 
   paginationEl.innerHTML = html;
 
-  const currentPageNums = document.querySelectorAll(".pagination-transaction button");
+  const currentPageNums = document.querySelectorAll(
+    ".pagination-transaction button"
+  );
   currentPageNums.forEach((button) => {
     button.addEventListener("click", () => {
       currentPage = button.innerText;
       transactionList.innerHTML = "";
-      renderTransactionsList(arr[currentPage - 1], (currentPage - 1) * 10 + 1);
+      renderTransactionsList(
+        router,
+        arr[currentPage - 1],
+        (currentPage - 1) * 10 + 1
+      );
     });
   });
 
   if (isRendered === false) {
-    renderTransactionsList(arr[currentPage - 1]);
+    renderTransactionsList(router, arr[currentPage - 1]);
     isRendered = true;
   }
 };
@@ -76,7 +82,9 @@ const filterAll = (listEls) => {
 // 검색어 정렬
 const filterBySearch = (listEls, search) => {
   isRendered = false;
-  const searchFilters = listEls.filter((item) => item.user.displayName.includes(search));
+  const searchFilters = listEls.filter((item) =>
+    item.user.displayName.includes(search)
+  );
 
   if (searchFilters.length === 0) {
     Swal.fire({
