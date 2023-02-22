@@ -1,243 +1,215 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
-      rel="stylesheet" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="./scss/reset.css" />
-    <link rel="stylesheet" href="./scss/main.scss" />
-    <link rel="stylesheet" href="./scss/signup.scss" />
-    <link rel="stylesheet" href="/scss/cart.scss" />
-    <link rel="stylesheet" href="./scss/product.scss" />
-    <link rel="stylesheet" href="./scss/coupon.scss" />
-    <link rel="stylesheet" href="./scss/product_detail.scss" />
-    <!-- material icons -->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <!-- swiper -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
 
-    <!-- postcode.map -->
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <!-- sweetAlert2 -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-    <!-- gsap -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"
-      integrity="sha512-f8mwTB+Bs8a5c46DEm7HQLcJuHMBaH/UFlcgyetMqqkvTcYg4g5VXsYR71b3qC82lZytjNYvBj2pf0VekA9/FQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollToPlugin.min.js"
-      integrity="sha512-tQFq+nb/TSS648SDzWbSj0A67t4I1PFzR0U6Oi/yEYFyUbAIwg74SOCbr7t2X1Rn+iln7sYwfh8y+z7p0gddOw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"></script>
-    <script type="module" defer src="./js/router.js"></script>
-    <title>Document</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+    rel="stylesheet" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="./scss/reset.css" />
+  <link rel="stylesheet" href="./scss/main.scss" />
+  <link rel="stylesheet" href="./scss/signup.scss" />
+  <link rel="stylesheet" href="/scss/cart.scss" />
+  <link rel="stylesheet" href="./scss/product.scss" />
+  <link rel="stylesheet" href="./scss/coupon.scss" />
+  <link rel="stylesheet" href="./scss/product_detail.scss" />
+  <!-- material icons -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <!-- swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
 
-  <body>
-    <div id="wrap">
-      <header>
-        <div class="inner-wrapper">
-          <div class="header-top">
-            <ul class="header-menu login-menu">
-              <li class="header-menu-item">
-                <a href="/signup" data-navigo>회원가입</a>
-              </li>
-              <li class="header-menu-item">
-                <a href="/login" data-navigo>로그인</a>
-              </li>
-            </ul>
+  <!-- postcode.map -->
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <!-- sweetAlert2 -->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+  <!-- gsap -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"
+    integrity="sha512-f8mwTB+Bs8a5c46DEm7HQLcJuHMBaH/UFlcgyetMqqkvTcYg4g5VXsYR71b3qC82lZytjNYvBj2pf0VekA9/FQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollToPlugin.min.js"
+    integrity="sha512-tQFq+nb/TSS648SDzWbSj0A67t4I1PFzR0U6Oi/yEYFyUbAIwg74SOCbr7t2X1Rn+iln7sYwfh8y+z7p0gddOw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="module" defer src="./js/router.js"></script>
+  <title>Document</title>
+</head>
 
-            <div class="header-items">
-              <a class="logo" href="/" data-navigo>
-                <img src="./static/images/logo.png" alt="오뚜기 몰" />
-              </a>
-              <form class="search">
-                <input
-                  type="text"
-                  id="gnbSearch"
-                  placeholder="검색어를 입력해주세요" />
-                <button class="search-btn"></button>
-              </form>
-              <ul class="header-icon-menus">
-                <li><a href="javascript:void(0)" aria-label="찜목록"></a></li>
-                <li>
-                  <a href="/cart" data-navigo aria-label="장바구니"></a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="header-bottom">
-            <ul class="header-tablist">
-              <li class="header-tablist-item">
-                <a href="/products/new" data-navigo>신상품</a>
-              </li>
-              <li class="header-tablist-item">
-                <a href="/products/best" data-navigo>베스트</a>
-              </li>
-              <li class="header-tablist-item">
-                <a href="/products/frugal" data-navigo>알뜰쇼핑</a>
-              </li>
-              <li class="header-tablist-item">
-                <a href="/coupon" data-navigo>특가/혜택</a>
+<body>
+  <div id="wrap">
+    <header>
+      <div class="inner-wrapper">
+        <div class="header-top">
+          <ul class="header-menu login-menu">
+            <li class="header-menu-item">
+              <a href="/signup" data-navigo>회원가입</a>
+            </li>
+            <li class="header-menu-item">
+              <a href="/login" data-navigo>로그인</a>
+            </li>
+          </ul>
+
+          <div class="header-items">
+            <a class="logo" href="/" data-navigo>
+              <img src="./static/images/logo.png" alt="오뚜기 몰" />
+            </a>
+            <form class="search">
+              <input type="text" id="gnbSearch" placeholder="검색어를 입력해주세요" />
+              <button class="search-btn"></button>
+            </form>
+            <ul class="header-icon-menus">
+              <li><a href="javascript:void(0)" aria-label="찜목록"></a></li>
+              <li>
+                <a href="/cart" data-navigo aria-label="장바구니"></a>
               </li>
             </ul>
           </div>
         </div>
-      </header>
-      <div id="content-wrapper">
-        <section id="main"></section>
-        <div id="sidebar-area">
-          <article id="sidebar">
-            <p>최근 본 상품</p>
-            <div class="swiper">
-              <div class="swiper-wrap">
-                <div class="swiper-wrapper"></div>
-              </div>
-              <div class="swiper-button-prev"></div>
-              <div class="swiper-button-next"></div>
-            </div>
-          </article>
+        <div class="header-bottom">
+          <ul class="header-tablist">
+            <li class="header-tablist-item">
+              <a href="/products/new" data-navigo>신상품</a>
+            </li>
+            <li class="header-tablist-item">
+              <a href="/products/best" data-navigo>베스트</a>
+            </li>
+            <li class="header-tablist-item">
+              <a href="/products/frugal" data-navigo>알뜰쇼핑</a>
+            </li>
+            <li class="header-tablist-item">
+              <a href="/coupon" data-navigo>특가/혜택</a>
+            </li>
+          </ul>
         </div>
       </div>
-      <footer>
-        <div class="inner-wrapper">
-          <div class="footer-team-info1">
-            <div class="team-name">
-              <img src="./static/images/team_logo.png" alt="전국팔도" />
-              <div class="team-name-desc">
-                <div class="team-title-area">
-                  <p class="team-title">Team</p>
-                  <p class="team-desc">전국팔도</p>
-                </div>
-                <a
-                  href="https://github.com/KDT4-team6/Ottogi"
-                  class="github-link"
-                  >https://github.com/KDT4-team6/Ottogi</a
-                >
-              </div>
+    </header>
+    <div id="content-wrapper">
+      <section id="main"></section>
+      <div id="sidebar-area">
+        <article id="sidebar">
+          <p>최근 본 상품</p>
+          <div class="swiper">
+            <div class="swiper-wrap">
+              <div class="swiper-wrapper"></div>
             </div>
-            <ul class="team-members">
-              <li class="team-member">
-                <div class="profile-thumbnail"></div>
-                <div class="profile-info">
-                  <div class="profile-info-title">
-                    <p class="profile-tag">팀장</p>
-                    <p class="member-name">권범준</p>
-                  </div>
-                  <a href="https://github.com/kjungit" class="member-github"
-                    >https://github.com/kjungit</a
-                  >
-                </div>
-              </li>
-              <li class="team-member">
-                <div class="profile-thumbnail"></div>
-                <div class="profile-info">
-                  <div class="profile-info-title">
-                    <p class="profile-tag">팀원</p>
-                    <p class="member-name">고봉석</p>
-                  </div>
-                  <a href="https://github.com/bongsee" class="member-github"
-                    >https://github.com/bongsee</a
-                  >
-                </div>
-              </li>
-              <li class="team-member">
-                <div class="profile-thumbnail"></div>
-                <div class="profile-info">
-                  <div class="profile-info-title">
-                    <p class="profile-tag">팀원</p>
-                    <p class="member-name">유선주</p>
-                  </div>
-                  <a href="https://github.com/yousunzoo" class="member-github"
-                    >https://github.com/yousunzoo</a
-                  >
-                </div>
-              </li>
-              <li class="team-member">
-                <div class="profile-thumbnail"></div>
-                <div class="profile-info">
-                  <div class="profile-info-title">
-                    <p class="profile-tag">팀원</p>
-                    <p class="member-name">조성민</p>
-                  </div>
-                  <a href="https://github.com/FranzCho" class="member-github"
-                    >https://github.com/FranzCho</a
-                  >
-                </div>
-              </li>
-              <li class="team-member">
-                <div class="profile-thumbnail"></div>
-                <div class="profile-info">
-                  <div class="profile-info-title">
-                    <p class="profile-tag">팀원</p>
-                    <p class="member-name">김재도</p>
-                  </div>
-                  <a href="https://github.com/KJDsports" class="member-github"
-                    >https://github.com/KJDsports</a
-                  >
-                </div>
-              </li>
-            </ul>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
           </div>
-          <div class="footer-team-info2">
-            <div class="team-skillset">
-              <p class="footer-title">Our skills</p>
-              <div class="skill-list">
-                <img src="./static/images/icon-html.svg" alt="HTML5" />
-                <img src="./static/images/icon-css.svg" alt="CSS3" />
-                <img
-                  src="./static/images/icon-javascript.svg"
-                  alt="JavaScript" />
-                <img src="./static/images/icon-sass.svg" alt="Sass" />
-              </div>
-              <div class="tool-list">
-                <img src="./static/images/icon-figma.svg" alt="Figma" />
-                <img src="./static/images/icon-vscode.svg" alt="VSCode" />
-                <img src="./static/images/icon-github.svg" alt="Github" />
-                <img src="./static/images/icon-psd.svg" alt="Photoshop" />
-              </div>
-            </div>
-            <div class="team-inquiry">
-              <p class="footer-title">1:1 문의</p>
-              <div class="inquiry-area">
-                <a
-                  class="inquiry-btn"
-                  href="https://github.com/KDT4-team6/Ottogi"
-                  >문의하기</a
-                >
-                <p class="inquiry-text">
-                  365일<br />
-                  고객센터 운영시간에 순차적으로 답변드리겠습니다.
-                </p>
-              </div>
-              <div class="inquiry-email">
-                <p>비회원 문의 : help1@jeongukpaldo.com</p>
-                <p>비회원 대량주문 문의 : help2@jeongukpaldo.com</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="copyright">
-          <p>© 2023. JeonGukPaldo All rights reserved.</p>
-        </div>
-      </footer>
-      <button id="to-top-button">
-        <span class="material-symbols-outlined"> arrow_upward </span>
-      </button>
+        </article>
+      </div>
     </div>
-  </body>
+    <footer>
+      <div class="inner-wrapper">
+        <div class="footer-team-info1">
+          <div class="team-name">
+            <img src="./static/images/team_logo.png" alt="전국팔도" />
+            <div class="team-name-desc">
+              <div class="team-title-area">
+                <p class="team-title">Team</p>
+                <p class="team-desc">전국팔도</p>
+              </div>
+              <a href="https://github.com/KDT4-team6/Ottogi"
+                class="github-link">https://github.com/KDT4-team6/Ottogi</a>
+            </div>
+          </div>
+          <ul class="team-members">
+            <li class="team-member">
+              <div class="profile-thumbnail"></div>
+              <div class="profile-info">
+                <div class="profile-info-title">
+                  <p class="profile-tag">팀장</p>
+                  <p class="member-name">권범준</p>
+                </div>
+                <a href="https://github.com/kjungit" class="member-github">https://github.com/kjungit</a>
+              </div>
+            </li>
+            <li class="team-member">
+              <div class="profile-thumbnail"></div>
+              <div class="profile-info">
+                <div class="profile-info-title">
+                  <p class="profile-tag">팀원</p>
+                  <p class="member-name">고봉석</p>
+                </div>
+                <a href="https://github.com/bongsee" class="member-github">https://github.com/bongsee</a>
+              </div>
+            </li>
+            <li class="team-member">
+              <div class="profile-thumbnail"></div>
+              <div class="profile-info">
+                <div class="profile-info-title">
+                  <p class="profile-tag">팀원</p>
+                  <p class="member-name">유선주</p>
+                </div>
+                <a href="https://github.com/yousunzoo" class="member-github">https://github.com/yousunzoo</a>
+              </div>
+            </li>
+            <li class="team-member">
+              <div class="profile-thumbnail"></div>
+              <div class="profile-info">
+                <div class="profile-info-title">
+                  <p class="profile-tag">팀원</p>
+                  <p class="member-name">조성민</p>
+                </div>
+                <a href="https://github.com/FranzCho" class="member-github">https://github.com/FranzCho</a>
+              </div>
+            </li>
+            <li class="team-member">
+              <div class="profile-thumbnail"></div>
+              <div class="profile-info">
+                <div class="profile-info-title">
+                  <p class="profile-tag">팀원</p>
+                  <p class="member-name">김재도</p>
+                </div>
+                <a href="https://github.com/KJDsports" class="member-github">https://github.com/KJDsports</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-team-info2">
+          <div class="team-skillset">
+            <p class="footer-title">Our skills</p>
+            <div class="skill-list">
+              <img src="./static/images/icon-html.svg" alt="HTML5" />
+              <img src="./static/images/icon-css.svg" alt="CSS3" />
+              <img src="./static/images/icon-javascript.svg" alt="JavaScript" />
+              <img src="./static/images/icon-sass.svg" alt="Sass" />
+            </div>
+            <div class="tool-list">
+              <img src="./static/images/icon-figma.svg" alt="Figma" />
+              <img src="./static/images/icon-vscode.svg" alt="VSCode" />
+              <img src="./static/images/icon-github.svg" alt="Github" />
+              <img src="./static/images/icon-psd.svg" alt="Photoshop" />
+            </div>
+          </div>
+          <div class="team-inquiry">
+            <p class="footer-title">1:1 문의</p>
+            <div class="inquiry-area">
+              <a class="inquiry-btn" href="https://github.com/KDT4-team6/Ottogi">문의하기</a>
+              <p class="inquiry-text">
+                365일<br />
+                고객센터 운영시간에 순차적으로 답변드리겠습니다.
+              </p>
+            </div>
+            <div class="inquiry-email">
+              <p>비회원 문의 : help1@jeongukpaldo.com</p>
+              <p>비회원 대량주문 문의 : help2@jeongukpaldo.com</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>© 2023. JeonGukPaldo All rights reserved.</p>
+      </div>
+    </footer>
+    <button id="to-top-button">
+      <span class="material-symbols-outlined"> arrow_upward </span>
+    </button>
+  </div>
+</body>
+
 </html>

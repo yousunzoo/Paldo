@@ -5,66 +5,71 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Ottogi</title>
   <!-- font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
     rel="stylesheet" />
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <!-- Bootstrap icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
-  <link rel="stylesheet" href="/scss/reset.css" />
-  <link rel="stylesheet" href="/scss/like.scss" />
-  <!-- sweetAlert2 -->
+  <link rel="stylesheet" href="./scss/main.scss" />
+  <link rel="stylesheet" href="./scss/account.scss" />
+  <title>My Ottogi</title>
+
+  <!-- scripts -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script defer type="module" src="./js/like/like.js"></script>
+  <script defer type="module" src="./js/account/account.js"></script>
 </head>
 
 <body>
   <div id="wrap">
     <header>
       <div class="inner-wrapper">
-        <div class="header__top">
-          <ul class="header__menu">
-            <li class="header__menu-item">
-              <a href="/signup.html">회원가입</a>
+        <div class="header-top">
+          <ul class="header-menu">
+            <li class="header-menu-item">
+              <a href="javascript:void(0)">회원가입</a>
             </li>
-            <li class="header__menu-item">
+            <li class="header-menu-item">
               <a href="javascript:void(0)">로그인</a>
             </li>
           </ul>
-          <div class="header__items">
+          <div class="header-items">
             <a class="logo" href="javascript:void(0)">
               <img src="./static/images/logo.png" alt="오뚜기 몰" />
             </a>
             <div class="search">
               <input type="text" id="gnbSearch" placeholder="검색어를 입력해주세요" required />
-              <button class="search_btn"></button>
+              <button class="search-btn"></button>
             </div>
-            <ul class="header__icon_menus">
+            <ul class="header-icon-menus">
               <li><a href="javascript:void(0)" aria-label="찜목록"></a></li>
               <li><a href="javascript:void(0)" aria-label="장바구니"></a></li>
             </ul>
           </div>
         </div>
-        <div class="header__bottom">
-          <ul class="header__tablist">
-            <li class="header__tablist-item">
-              <a href="#">신상품</a>
+        <div class="header-bottom">
+          <ul class="header-tablist">
+            <li class="header-tablist-item">
+              <a href="./products.html">신상품</a>
             </li>
-            <li class="header__tablist-item">
+            <li class="header-tablist-item">
               <a href="#">베스트</a>
             </li>
-            <li class="header__tablist-item">
+            <li class="header-tablist-item">
               <a href="#">알뜰쇼핑</a>
             </li>
-            <li class="header__tablist-item">
+            <li class="header-tablist-item">
               <a href="#">특가/혜택</a>
             </li>
           </ul>
         </div>
       </div>
     </header>
+
+
     <section id="main">
 
       <!-- USER INFO -->
@@ -82,10 +87,7 @@
               <span>적립금</span>
               <p class="content">1,210 p</p>
             </a>
-            <p class="sub-info">
-              ※ 100,000 포인트 <br />
-              이상부터 사용 가능합니다.
-            </p>
+            <p class="sub-info">※ 100,000 포인트 <br /> 이상부터 사용 가능합니다.</p>
           </div>
           <div class="info">
             <a class="title" href="javascript:void(0)">
@@ -105,7 +107,9 @@
           </a>
         </div>
       </section>
-      <div class="likelist-all-box">
+
+      <div class="inner-wrapper">
+
         <!-- SIDE BAR -->
         <aside class="side-bar">
           <h2>마이페이지</h2>
@@ -116,13 +120,13 @@
                 <i class="bi bi-chevron-right"></i>
               </a>
             </li>
-            <li class="item">
+            <li class="item active">
               <a href="javascript:void(0)">
                 계좌 관리
                 <i class="bi bi-chevron-right"></i>
               </a>
             </li>
-            <li class="item active">
+            <li class="item">
               <a href="javascript:void(0)">
                 찜한 상품
                 <i class="bi bi-chevron-right"></i>
@@ -143,102 +147,178 @@
             <i class="bi bi-chevron-right"></i>
           </a>
         </aside>
-        <div class="likelist-main">
-          <div class="main-head">
-            <h2 class="main-text">찜한상품(<span></span>)</h2>
-            <span class="text-side">찜한 상품은 최대 200개까지 저장됩니다.</span>
+
+        <!-- MAIN SECTION -->
+        <div class="main">
+
+          <div class="header">
+            <div class="wrapper">
+              <h2>계좌 관리</h2>
+            </div>
           </div>
 
-          <div class="likelist-container">
+          <div class="divider"></div>
+
+          <div class="content">
             <!-- skeleton-loading -->
             <div class="skeleton-loading">
               <div class="skeleton"></div>
               <div class="skeleton"></div>
               <div class="skeleton"></div>
-              <div class="skeleton"></div>
-              <div class="skeleton"></div>
+              <div class="skeleton skeleton-button"></div>
             </div>
-            <div class="content">
-              <!-- <p class="no-list">찜한 상품이 없습니다.</p> -->
 
-              <!-- <div class="product-list-container">
-              <img alt="" src="https://img-cf.kurly.com/shop/data/goods/1648206780555l0.jpeg" />
-              <div class="product-detail-section">
-                <div class="product-text-container">
-                  <div class="product-title">
-                    <a href="javascript:void(0)" class="product-name">[사미헌] 갈비탕</a>
-                  </div>
-                  <div class="product-price">
-                    <span class="product-discount-price">11,000원</span>
-                    <span class="product-cost-price">12,000원</span>
-                  </div>
+            <!-- 등록된 계좌 출력 -->
+            <ul class="account-list">
+              <!-- <div class="no-list-wrapper">
+                <p class="no-list">등록된 계좌가 없습니다.</p>
+              </div> -->
+              <!-- <li class="item">
+                <div class="account-info">
+                  <span id="accountBank">NH농협은행</span>
+                  <span id="accountNumber">123-XXXX-XXXX-XX</span>
+                  <span id="accountBalance">3,000,000</span>
                 </div>
-                <div class="product-button-section">
-                  <button class="delete-button">삭제</button>
-                  <button class="take-button">
-                    <img
-                      src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzYiIGhlaWdodD0iMzYiIHZpZXdCb3g9IjAgMCAzNiAzNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTTM2IDM2SDBWMGgzNnoiLz4KICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1LjE2NCA2LjU0NykiIHN0cm9rZT0iIzVmMDA4MCIgc3Ryb2tlLWxpbmVjYXA9InNxdWFyZSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjciPgogICAgICAgICAgICA8cGF0aCBkPSJtMjUuNjggMy42Ni0yLjcyIDExLjU3SDcuMzdMNC42NiAzLjY2eiIvPgogICAgICAgICAgICA8Y2lyY2xlIGN4PSIyMC41MiIgY3k9IjIwLjc4IiByPSIyLjE0Ii8+CiAgICAgICAgICAgIDxjaXJjbGUgY3g9IjkuODEiIGN5PSIyMC43OCIgcj0iMi4xNCIvPgogICAgICAgICAgICA8cGF0aCBkPSJNMCAwaDMuOGwxLjc2IDcuNSIvPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+Cg=="
-                      alt="장바구니 담기" />
-                    담기
-                  </button>
+                <button class="account-delete-btn">삭제</button>
+              </li>
+              <li class="item">
+                <div class="account-info">
+                  <span class="accountBank">KB국민은행</span>
+                  <span class="accountNumber">123-XXXX-XXXX-XX</span>
+                  <span class="accountBalance">3,000,000</span>
+                </div>
+                <button class="account-delete-btn">삭제</button>
+              </li> -->
+            </ul>
+            <!-- 계좌 등록 모달창 -->
+            <input type="checkbox" id="modal" />
+            <label for="modal" class="add-account-btn">계좌 추가</label>
+            <div class="modal">
+              <label for="modal" class="modal-overlay"></label>
+              <div class="modal-contents">
+                <h2>계좌 추가</h2>
+                <form id="accountForm">
+                  <ul class="bank-list">
+                    <!-- <li class="item">
+                      <input type="radio" name="bank" id="004">
+                      <label for="004">KB국민은행 [3-2-4-3]</label>
+                    </li>
+                    <li class="item">
+                      <input type="radio" name="bank" id="088">
+                      <label for="088">신한은행 [3-3-6]</label>
+                    </li>
+                    <li class="item">
+                      <input type="radio" name="bank" id="020">
+                      <label for="020">우리은행 [4-3-6]</label>
+                    </li>
+                    <li class="item">
+                      <input type="radio" name="bank" id="081">
+                      <label for="081">하나은행 [3-6-5]</label>
+                    </li>
+                    <li class="item">
+                      <input type="radio" name="bank" id="011">
+                      <label for="011">NH농협은행 [3-4-4-2]</label>
+                    </li>
+                    <li class="item">
+                      <input type="radio" name="bank" id="090">
+                      <label for="090">카카오뱅크 [4-2-7]</label>
+                    </li> -->
+                  </ul>
+                  <div class="input-wrapper">
+                    <label for="accountNumber">계좌 번호</label>
+                    <input type="text" id="accountNumber" required placeholder="등록할 계좌번호를 입력해주세요." />
+                  </div>
+                  <div class="input-wrapper">
+                    <label for="phoneNumber">전화 번호</label>
+                    <input type="text" id="phoneNumber" required placeholder="사용자 전화번호를 입력해주세요." minlength="11"
+                      maxlength="11" />
+                  </div>
+                  <div class="account-info">
+                    <p>은행 옆의 []안의 숫자를 모두 더하면 각 은행의 유효한 계좌번호 길이가 됩니다.</p>
+                    <p>은행 당 한 계좌만 등록 가능합니다. 동일 은행의 다른 계좌를 등록하려면 기존<br />계좌를 삭제 후 등록하세요.</p>
+                    <p>계좌번호와 전화번호에는 ' - ' 구분이 없어야 합니다.</p>
+                  </div>
+                  <button class="confirm-btn">추가</button>
+                </form>
+                <div class="modal-spinner">
+                  <div class="spinner"></div>
                 </div>
               </div>
-            </div> -->
+
             </div>
           </div>
         </div>
       </div>
     </section>
+
     <footer>
       <div class="inner-wrapper">
-        <div class="footer__team-info1">
+        <div class="footer-team-info1">
           <div class="team-name">
             <img src="./static/images/team_logo.png" alt="전국팔도" />
             <div class="team-name-desc">
-              <p>팀) 전국팔도</p>
+              <div class="team-title-area">
+                <p class="team-title">Team</p>
+                <p class="team-desc">전국팔도</p>
+              </div>
               <a href="https://github.com/KDT4-team6/Ottogi"
                 class="github-link">https://github.com/KDT4-team6/Ottogi</a>
             </div>
           </div>
           <ul class="team-members">
             <li class="team-member">
-              <div class="profile_thumbnail"></div>
-              <div class="profile_info">
-                <p class="member-name">조장) 권범준</p>
+              <div class="profile-thumbnail"></div>
+              <div class="profile-info">
+                <div class="profile-info-title">
+                  <p class="profile-tag">팀장</p>
+                  <p class="member-name">권범준</p>
+                </div>
                 <a href="https://github.com/kjungit" class="member-github">https://github.com/kjungit</a>
               </div>
             </li>
             <li class="team-member">
-              <div class="profile_thumbnail"></div>
-              <div class="profile_info">
-                <p class="member-name">조원) 고봉석</p>
+              <div class="profile-thumbnail"></div>
+              <div class="profile-info">
+                <div class="profile-info-title">
+                  <p class="profile-tag">팀원</p>
+                  <p class="member-name">고봉석</p>
+                </div>
                 <a href="https://github.com/bongsee" class="member-github">https://github.com/bongsee</a>
               </div>
             </li>
             <li class="team-member">
-              <div class="profile_thumbnail"></div>
-              <div class="profile_info">
-                <p class="member-name">조원) 유선주</p>
+              <div class="profile-thumbnail"></div>
+              <div class="profile-info">
+                <div class="profile-info-title">
+                  <p class="profile-tag">팀원</p>
+                  <p class="member-name">유선주</p>
+                </div>
                 <a href="https://github.com/yousunzoo" class="member-github">https://github.com/yousunzoo</a>
               </div>
             </li>
             <li class="team-member">
-              <div class="profile_thumbnail"></div>
-              <div class="profile_info">
-                <p class="member-name">조원) 조성민</p>
+              <div class="profile-thumbnail"></div>
+              <div class="profile-info">
+                <div class="profile-info-title">
+                  <p class="profile-tag">팀원</p>
+                  <p class="member-name">조성민</p>
+                </div>
                 <a href="https://github.com/FranzCho" class="member-github">https://github.com/FranzCho</a>
               </div>
             </li>
             <li class="team-member">
-              <div class="profile_thumbnail"></div>
-              <div class="profile_info">
-                <p class="member-name">조원) 김재도</p>
+              <div class="profile-thumbnail"></div>
+              <div class="profile-info">
+                <div class="profile-info-title">
+                  <p class="profile-tag">팀원</p>
+                  <p class="member-name">김재도</p>
+                </div>
                 <a href="https://github.com/KJDsports" class="member-github">https://github.com/KJDsports</a>
               </div>
             </li>
           </ul>
         </div>
-        <div class="footer__team-info2">
+        <div class="footer-team-info2">
           <div class="team-skillset">
             <p class="footer-title">Our skills</p>
             <div class="skill-list">
