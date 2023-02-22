@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Ottogi</title>
   <!-- font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,8 +16,12 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
   <link rel="stylesheet" href="./scss/main.scss" />
-  <link rel="stylesheet" href="./scss/personal-info-modify.scss" />
-  <title>My Ottogi</title>
+  <link rel="stylesheet" href="./scss/personal_info_modify.scss" />
+  <!-- sweetAlert2 -->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- postcode.map -->
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script defer type="module" src="./js/personal-info-modify/personalInfoModify.js"></script>
 </head>
 
 <body>
@@ -117,6 +122,12 @@
             </li>
             <li class="item">
               <a href="javascript:void(0)">
+                계좌 관리
+                <i class="bi bi-chevron-right"></i>
+              </a>
+            </li>
+            <li class="item">
+              <a href="javascript:void(0)">
                 찜한 상품
                 <i class="bi bi-chevron-right"></i>
               </a>
@@ -147,71 +158,70 @@
 
           <!-- SECTION CONTENT -->
           <div class="content">
-            <form action="" method="POST" onsubmit="return on_submit_check();">
+            <form action="" autocomplete="off">
               <fieldset>
-                <div class="content-section">
-                  <div class="content-text">
-                    <label class="label-id">이메일</label>
+                <div class="modify-section">
+                  <div class="modify-text">
+                    <label class="label-id" for="password">현재 비밀번호</label>
                   </div>
-                  <div class="content-box">
-                    <input type="email" disabled />
-                  </div>
-                  <div class="content-doubleCheck"></div>
-                </div>
-                <div class="content-section">
-                  <div class="content-text">
-                    <label class="label-id">현재 비밀번호</label>
-                  </div>
-                  <div class="content-box">
-                    <input type="password" placeholder="비밀번호를 입력해주세요." />
-                  </div>
-                  <div class="content-doubleCheck"></div>
-                </div>
-                <div class="content-section">
-                  <div class="content-text">
-                    <label class="label-id">새 비밀번호</label>
-                  </div>
-                  <div class="content-box">
-                    <input type="password" placeholder="새 비밀번호를 입력해주세요." />
+                  <div class="modify-box">
+                    <input type="password" id="password" placeholder="현재 비밀번호를 입력해주세요." required />
+                    <span class="error-message"></span>
                   </div>
                 </div>
-                <div class="content-section">
-                  <div class="content-text">
-                    <label class="label-id">새 비밀번호 확인</label>
+                <div class="modify-section">
+                  <div class="modify-text">
+                    <label class="label-id" for="newPassword">새 비밀번호</label>
                   </div>
-                  <div class="content-box">
-                    <input type="password" placeholder="비밀번호 확인을 입력해주세요." />
-                  </div>
-                </div>
-                <div class="content-section">
-                  <div class="content-text">
-                    <label class="label-id">이름</label>
-                  </div>
-                  <div class="content-box">
-                    <input type="text" placeholder="이름을 입력해주세요." />
+                  <div class="modify-box">
+                    <input type="password" id="newPassword" placeholder="새 비밀번호를 입력해주세요." required />
+                    <span class="error-message"></span>
                   </div>
                 </div>
-                <div class="content-section">
-                  <div class="content-text">
+                <div class="modify-section">
+                  <div class="modify-text">
+                    <label class="label-id" for="newPasswordCheck">비밀번호 확인</label>
+                  </div>
+                  <div class="modify-box">
+                    <input type="password" id="newPasswordCheck" placeholder="비밀번호를 다시 입력해주세요." required />
+                    <span class="error-message">비밀번호가 일치하지 않습니다.</span>
+                  </div>
+                </div>
+                <div class="modify-section">
+                  <div class="modify-text">
+                    <label class="label-id" for="userName">이름</label>
+                  </div>
+                  <div class="modify-box">
+                    <input type="text" id="userName" placeholder="이름을 입력해주세요." required />
+                    <span class="error-message">사용자 이름은 20자 이하여야 합니다.</span>
+                  </div>
+                </div>
+                <div class="modify-section">
+                  <div class="modify-text">
                     <label class="label-id">주소</label>
                   </div>
-                  <div class="content-box">
-                    <button>주소 검색</button>
+                  <div class="modify-box address-box">
+                    <div class="inline-div">
+                      <input type="text" id="postcode" placeholder="우편번호" disabled />
+                      <button class="find-address">우편번호 찾기</button>
+                    </div>
+                    <input type="text" id="roadAddress" placeholder="도로명주소" disabled />
+                    <input type="text" id="detailAddress" placeholder="상세주소" />
                   </div>
                 </div>
-                <div class="content-section">
-                  <div class="content-text">
+                <div class="modify-section">
+                  <div class="modify-text">
                     <label class="label-id">프로필</label>
                   </div>
-                  <div class="content-box">
-                    <button>프로필 추가</button>
+                  <div class="modify-box">
+                    <input id="userThumbnail" type="file" />
+                    <span class="error-message"></span>
+                    <figure class="check-thumbnail"></figure>
                   </div>
                 </div>
-
-                <button class="register-push">수정하기</button>
+                <button class="modify-button">수정하기</button>
               </fieldset>
             </form>
-
           </div>
 
         </div>
