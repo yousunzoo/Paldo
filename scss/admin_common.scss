@@ -10,62 +10,64 @@ $color_incorrect: #f03f40;
 $color_white: #ffffff;
 $color_copyright: rgb(247, 247, 247);
 
-.admin-header {
-  height: 60px;
-  background: #202020;
-  display: flex;
-  .header-wrapper {
-    align-items: center;
+#adminWrapper {
+  .admin-header {
+    height: 60px;
+    background: #202020;
     display: flex;
-    justify-content: space-between;
-    padding: 0 30px;
-    width: 100%;
-    max-width: 1380px;
-    box-sizing: border-box;
-    margin: 0 auto;
-    .logo {
-      width: 100px;
-      height: 30px;
-      background-image: url(/static/images/logo-white.png);
-      background-size: 100px;
-      background-repeat: no-repeat;
-      margin-left: 30px;
-    }
-    .admin-info {
+    .header-wrapper {
+      align-items: center;
       display: flex;
-      font-size: 14px;
-      .info-name {
-        color: $color_white;
-        padding: 10px;
+      justify-content: space-between;
+      padding: 0 30px;
+      width: 100%;
+      max-width: 1380px;
+      box-sizing: border-box;
+      margin: 0 auto;
+      .logo {
+        width: 100px;
+        height: 30px;
+        background-image: url(/static/images/logo-white.png);
+        background-size: 100px;
+        background-repeat: no-repeat;
+        margin-left: 30px;
       }
-      .info-logout {
-        color: $color_white;
-        padding: 10px;
+      .admin-info {
+        display: flex;
+        font-size: 14px;
+        .info-name {
+          color: $color_white;
+          padding: 10px;
+        }
+        .info-logout {
+          color: $color_white;
+          padding: 10px;
+        }
       }
     }
   }
-}
-.container {
-  display: flex;
-  margin: 0 auto;
-  max-width: 1380px;
-  .left-nav-bar {
-    height: calc(100vh - 60px);
-    border-right: 1px solid #cdd1d6;
-    border-left: 1px solid #cdd1d6;
-    background-color: rgba($color: #202020, $alpha: 0.03);
-    .side-menu-wrapper {
-      width: 240px;
-      display: flex;
-      flex-direction: column;
-      .side-menu {
-        height: 60px;
+  .container {
+    display: flex;
+    margin: 0 auto;
+    max-width: 1380px;
+    .left-nav-bar {
+      height: calc(100vh - 60px);
+      border-right: 1px solid #cdd1d6;
+      border-left: 1px solid #cdd1d6;
+      background-color: rgba($color: #202020, $alpha: 0.03);
+      .side-menu-wrapper {
+        width: 240px;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        border-bottom: 1px solid #cdd1d6;
-        font-weight: 600;
-        color: #404040;
+        flex-direction: column;
+        .side-menu {
+          height: 60px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-bottom: 1px solid #cdd1d6;
+          font-weight: 600;
+          color: #404040;
+        }
       }
     }
   }
