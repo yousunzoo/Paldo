@@ -1,6 +1,5 @@
-import { router } from "../main.js";
 import { makeDOMwithProperties } from "../utils/dom.js";
-export const renderTransactionsList = async (itemListData, no) => {
+export const renderTransactionsList = async (router, itemListData, no) => {
   const transactionList = document.querySelector(".transaction-list");
   if (no === undefined) {
     no = 1;
@@ -48,11 +47,11 @@ export const renderTransactionsList = async (itemListData, no) => {
     itemPrice.textContent = item.product.price;
     itemCoustmer.textContent = item.user.displayName;
     itemBank.textContent = item.account.bankName;
-    itemTime.textContent = koreaTime.toLocaleString("ko-KR", { timeZone: "Asia/Seoul" });
-    let isCanceled = item.isCanceled ? "O" : "X";
-    let done = item.done ? "O" : "X";
-    itemCancel.textContent = isCanceled;
-    itemConfirm.textContent = done;
+    itemTime.textContent = koreaTime.toLocaleString("ko-KR", {
+      timeZone: "Asia/Seoul",
+    });
+    itemCancel.textContent = item.isCanceled;
+    itemConfirm.textContent = item.done;
     itemEl.append(itemNo, itemName, itemPrice, itemCoustmer, itemBank, itemTime, itemCancel, itemConfirm);
     liEl.append(itemEl);
     itemEl.addEventListener("click", function (event) {

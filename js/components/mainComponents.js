@@ -2,7 +2,7 @@ export const adminWrapper = /* html */ `
 <div id="adminWrapper">
   <header class="admin-header">
     <div class="header-wrapper">
-      <a class="logo" href="admin/report" data-navigo></a>
+      <a class="logo" href="report" data-navigo></a>
       <div class="admin-info">
         <div class="info-name">관리자</div>
         <a href="logout" class="info-logout">로그아웃</a>
@@ -15,7 +15,11 @@ export const adminWrapper = /* html */ `
         <a href="report" class="side-menu report" data-navigo>
           <div class="menu-title">보고서</div>
         </a>
+<<<<<<< HEAD
         <a href="adminproduct/" class="side-menu management" data-navigo>
+=======
+        <a href="product" class="side-menu management" data-navigo>
+>>>>>>> c54931047decbd97433e6b3dbb7a47678b85e523
           <div class="menu-title">상품 관리</div>
         </a>
         <a
