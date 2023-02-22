@@ -2,9 +2,7 @@
   "name": "paldo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "parcel index.html"
   },
   "repository": {
@@ -31,5 +29,8 @@
   "browserslist": [
     "> 1%",
     "last 2 version"
-  ]
+  ],
+  "dependencies": {
+    "navigo": "^8.11.1"
+  }
 }
