@@ -30,7 +30,7 @@ export const mainPage = /* html */ `
     <div class="swiper">
       <div class="swiper-wrapper">
         <div class="swiper-slide skeleton-slide">
-          <div class="skeleton-loading">
+          <div class="skeleton-wrapper">
             <div class="skeleton-image"></div>
             <div class="skeleton-text"></div>
             <div class="skeleton-text"></div>
@@ -38,7 +38,7 @@ export const mainPage = /* html */ `
           </div>
         </div>
         <div class="swiper-slide skeleton-slide">
-          <div class="skeleton-loading">
+          <div class="skeleton-wrapper">
             <div class="skeleton-image"></div>
             <div class="skeleton-text"></div>
             <div class="skeleton-text"></div>
@@ -46,7 +46,7 @@ export const mainPage = /* html */ `
           </div>
         </div>
         <div class="swiper-slide skeleton-slide">
-          <div class="skeleton-loading">
+          <div class="skeleton-wrapper">
             <div class="skeleton-image"></div>
             <div class="skeleton-text"></div>
             <div class="skeleton-text"></div>
@@ -54,7 +54,7 @@ export const mainPage = /* html */ `
           </div>
         </div>
         <div class="swiper-slide skeleton-slide">
-          <div class="skeleton-loading">
+          <div class="skeleton-wrapper">
             <div class="skeleton-image"></div>
             <div class="skeleton-text"></div>
             <div class="skeleton-text"></div>
@@ -76,7 +76,7 @@ export const mainPage = /* html */ `
     <div class="swiper">
       <div class="swiper-wrapper">
         <div class="swiper-slide skeleton-slide">
-          <div class="skeleton-loading">
+          <div class="skeleton-wrapper">
             <div class="loading-image"></div>
             <div class="skeleton-text"></div>
             <div class="skeleton-text"></div>
@@ -84,7 +84,7 @@ export const mainPage = /* html */ `
           </div>
         </div>
         <div class="swiper-slide skeleton-slide">
-          <div class="skeleton-loading">
+          <div class="skeleton-wrapper">
             <div class="loading-image"></div>
             <div class="skeleton-text"></div>
             <div class="skeleton-text"></div>
@@ -92,7 +92,7 @@ export const mainPage = /* html */ `
           </div>
         </div>
         <div class="swiper-slide skeleton-slide">
-          <div class="skeleton-loading">
+          <div class="skeleton-wrapper">
             <div class="loading-image"></div>
             <div class="skeleton-text"></div>
             <div class="skeleton-text"></div>
@@ -100,7 +100,7 @@ export const mainPage = /* html */ `
           </div>
         </div>
         <div class="swiper-slide skeleton-slide">
-          <div class="skeleton-loading">
+          <div class="skeleton-wrapper">
             <div class="loading-image"></div>
             <div class="skeleton-text"></div>
             <div class="skeleton-text"></div>
@@ -144,7 +144,7 @@ export const mainPage = /* html */ `
     <ul class="recommend-list">
       <li class="skeleton-li">
         <div class="skeleton-img skeleton"></div>
-        <div class="skeleton-loading">
+        <div class="skeleton-text-wrapper">
           <div class="skeleton-text skeleton"></div>
           <div class="skeleton-text skeleton"></div>
         </div>
@@ -152,7 +152,7 @@ export const mainPage = /* html */ `
       </li>
       <li class="skeleton-li">
         <div class="skeleton-img skeleton"></div>
-        <div class="skeleton-loading">
+        <div class="skeleton-text-wrapper">
           <div class="skeleton-text skeleton"></div>
           <div class="skeleton-text skeleton"></div>
         </div>
@@ -160,7 +160,7 @@ export const mainPage = /* html */ `
       </li>
       <li class="skeleton-li">
         <div class="skeleton-img skeleton"></div>
-        <div class="skeleton-loading">
+        <div class="skeleton-text-wrapper">
           <div class="skeleton-text skeleton"></div>
           <div class="skeleton-text skeleton"></div>
         </div>
@@ -168,7 +168,7 @@ export const mainPage = /* html */ `
       </li>
       <li class="skeleton-li">
         <div class="skeleton-img skeleton"></div>
-        <div class="skeleton-loading">
+        <div class="skeleton-text-wrapper">
           <div class="skeleton-text skeleton"></div>
           <div class="skeleton-text skeleton"></div>
         </div>

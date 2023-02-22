@@ -39,7 +39,7 @@ function showResult(searchResult, originResult, router) {
   const amount = document.querySelector(".count");
   amount.textContent = searchResult.length;
   setProductList(searchResult, "최신순", originResult, router);
-  changeTabs(searchResult, originResult);
+  changeTabs(searchResult, originResult, router);
 }
 
 function setProductList(prdList, sort, originResult, router) {
@@ -127,7 +127,7 @@ function setProductList(prdList, sort, originResult, router) {
   productListUi.append(...productEls);
 }
 
-function changeTabs(searchResult, originResult) {
+function changeTabs(searchResult, originResult, router) {
   // sort 탭 클릭 시 정렬 방식 변경
   const sortTabButtons = document.querySelectorAll(".sort-tab button");
   sortTabButtons.forEach((item) => {
