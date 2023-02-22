@@ -6,6 +6,13 @@ import { getOrderList } from '../order-list/orderListApi.js'
 
 /* GLOBAL VARIABLES */
 const { CART, USER_INFO, USER_ADDRESS, COUPONS } = SORT_TYPES;
+const payInfo = {
+  orderAmount : 0,
+  originAmount : 0,
+  saledAmount : 0,
+  totalAmount : 0,
+}
+const cartList = getDataFromLocalStorage(CART);
 
 /* DOM */
 const toggleOrderListEl = document.querySelector('#toggleOrderList');
@@ -35,7 +42,8 @@ setMockData();
 toggleOrderListEl.addEventListener('click', toggleOrderList());
 toggleCouponListEl.addEventListener('click', toggleCouponList);
 deliveryInfoTabEl.addEventListener('click', toggleMessage);
-transactionBtn.addEventListener('click',async () => {
+transactionBtn.addEventListener('click', async () => {
+  // 스피너 로딩
   const spinnerWrapperEl = document.querySelector('.spinner-wrapper');
   Object.assign(spinnerWrapperEl.style, {
     display : 'flex'
@@ -44,10 +52,29 @@ transactionBtn.addEventListener('click',async () => {
   // accountId Get !
   const accountEl = document.querySelector('.swiper-slide-active');
   const accountId = accountEl.children['accountId'].dataset.accountId;
-  console.log(accountId)
+
+  // 계좌 잔액보다 결제금액이 클 때
+  try {
+    const accountList = await getUserAccounts();
+    const targetAccount = accountList.find(account => account.id === accountId);
+    if(targetAccount.balance < payInfo.totalAmount) {
+      Swal.fire({
+        icon: 'error',
+        title: '잔액이 부족합니다.',
+        text: err.message,
+      })
+      return
+    }
+  }
+  catch (err) {
+    Swal.fire({
+      icon: 'error',
+      title: '계좌 정보를 불러오는데 실패했습니다.',
+      text: err.message,
+    })
+  }
 
   // productId, Quantity Get !
-  const cartList = getDataFromLocalStorage(CART);
   const requests = cartList.reduce((acc, product) => {
     const { productId, quantity } = product
     for(let i = 0; i < quantity; i++) {
@@ -72,98 +99,31 @@ transactionBtn.addEventListener('click',async () => {
 
 /* FUNCTIONS */
 
-/**
- * initialize page
- */
 async function initPage() {
-  /* 주문 상품 섹션 Summary 렌더링 */
-  const cartList = getDataFromLocalStorage(CART);
-
+  /* 주문 상품 Summary 렌더링 */
   const summaryTextEl = document.querySelector('.order-list-area > .summary span');
   summaryTextEl.textContent = `${cartList[0].title} 외 ${cartList.length -1}개`
 
   /* 주문자 정보 */
-  const userInfo = getDataFromLocalStorage(USER_INFO)
-
-  const senderEl = document.querySelector('.orderer-area .sender');
-  senderEl.textContent = userInfo.displayName;
-
-  const emailEl = document.querySelector('.orderer-area .email');
-  emailEl.textContent = userInfo.email;
+  renderOrdererInfo()
 
   /* 배송지 정보 */
-  const userAddress = getDataFromLocalStorage(USER_ADDRESS);
-  const destinationEl = document.querySelector('.destination');
-  if(userAddress) {
-    const { roadAddress, detailAddress } = userAddress;
-    destinationEl.textContent = `${roadAddress}, ${detailAddress}`
-  } else {
-    destinationEl.textContent = '등록된 배송지 정보가 없습니다.'
-  }
-
+  renderUserAddress()
 
   /* 쿠폰 조회 및 렌더링 */
-  const coupons = getDataFromLocalStorage(COUPONS);
-
-  const couponSelectorTextEl = document.querySelector('.coupon-selector > span');
-  couponSelectorTextEl.textContent = `사용가능 쿠폰 0장 / 전체 ${coupons?.length || 0}장`
-
-  const couponListEl = document.querySelector('.coupon-list');
-  const templateEl = document.createElement('template');
-  if(coupons) {
-    coupons.forEach((coupon) => {
-      templateEl.innerHTML += /* html */`
-        <li class="coupon">
-          <span>${coupon.name} [${coupon.discount} 할인]</span>
-        </li>
-      `
-    })
-    couponListEl.append(templateEl.content);
-  }
+  renderCouponList()
   
   /* 사용자 계좌 */
-  const accountList = await getUserAccounts();
-  accountList.length === 0 ? renderEmptyList() : renderAccountList(accountList);
+  renderUserAccount()
 
   /* 결제 금액 */
-  const areaAmountEl = document.querySelector('.area-amount > ul');
-  const orderAmountEl = areaAmountEl.querySelector('#orderAmount');
-  let orderAmount = cartList.reduce((acc, product) => {
-    const { price, quantity } = product
-    acc += price * quantity;
-    return acc;
-  }, 0)
-  orderAmountEl.textContent = orderAmount.toLocaleString('ko-KR');
-
-  const originAmountEl = areaAmountEl.querySelector('#originAmount');
-  const originAmount = cartList.reduce((acc, product) => {
-    const { price, quantity, discountRate } = product
-    // 할인율이 있으면 원가를 계산하여 누적(DB에 저장된 상품 가격은 할인율이 적용된 가격)
-    acc += (discountRate ? Math.floor((price * 100) / (100 - discountRate)) : price) * quantity;
-    return acc;
-  }, 0)
-  originAmountEl.textContent = originAmount.toLocaleString('ko-KR');
-
-  const saledAmountEl = areaAmountEl.querySelector('#saledAmount');
-  const saledAmount = originAmount - orderAmount;
-  saledAmountEl.textContent = '-' + saledAmount.toLocaleString('ko-KR');
-
-  const totalAmountEl = areaAmountEl.querySelector('#totalAmount');
-  let totalAmount = orderAmount;
-  totalAmountEl.textContent = totalAmount.toLocaleString('ko-KR');
-  
-  const totalAmountInBtnEl = document.querySelector('#totalAmountInBtn');
-  totalAmountInBtnEl.textContent = totalAmount.toLocaleString('ko-KR');
+  renderAmountArea()
 }
 
-/**
- * localStorage Mock Data Setting
- */
 function setMockData () {
   // 제품명, 가격, 수량, 썸네일이미지
   const cart = [
     { productId : '7YQPOYVq4kgrNbQV04vS', title : "고구마깡(83g*1)", price : 15400, quantity : 1, thumbnailImage : "/images/product/이토엔쟈스민티.png" },
-    { productId : '7jLYaH42zKTlM4Nz7mGiimg', title : "신라면블랙(134g*32)", price : 48290, quantity : 1, thumbnailImage : "/images/product/카프리썬오렌지.png" },
     { productId : '9X6iWhN2C5KbJpS4uhDh', title : "둥지냉면비빔냉면(162g*32)", price : 51040, quantity : 1, thumbnailImage : "/images/product/파워오투복숭아자몽.png" },
     { productId : '4dVCUFjymfEqskEuMAKy', title : "츄파춥스 사워게코(90g*124)", price : 57420, quantity : 1, thumbnailImage : "/images/product/오이오차녹차.png" },
     { productId : '4vs61x7YOCYBHfZuIPPU', title : "양파링(80g*1)", price : 15400, quantity : 1, thumbnailImage : "/images/product/오이오차녹차.png" },
@@ -293,4 +253,85 @@ function renderAccountList(accountList) {
 
   const swiperWrapperEl = document.querySelector('.swiper-wrapper');
   swiperWrapperEl.append(templateEl.content);
+}
+function renderAmountArea() {
+  const areaAmountEl = document.querySelector('.area-amount > ul');
+
+  const orderAmountEl = areaAmountEl.querySelector('#orderAmount');
+  payInfo.orderAmount = cartList.reduce((acc, product) => {
+    const { price, quantity } = product
+    acc += price * quantity;
+    return acc;
+  }, 0)
+  orderAmountEl.textContent = payInfo.orderAmount.toLocaleString('ko-KR');
+
+  const originAmountEl = areaAmountEl.querySelector('#originAmount');
+  payInfo.originAmount = cartList.reduce((acc, product) => {
+    const { price, quantity, discountRate } = product
+    // 할인율이 있으면 원가를 계산하여 누적(DB에 저장된 상품 가격은 할인율이 적용된 가격)
+    acc += (discountRate ? Math.floor((price * 100) / (100 - discountRate)) : price) * quantity;
+    return acc;
+  }, 0)
+  originAmountEl.textContent = payInfo.originAmount.toLocaleString('ko-KR');
+
+  const saledAmountEl = areaAmountEl.querySelector('#saledAmount');
+  payInfo.saledAmount = payInfo.originAmount - payInfo.orderAmount;
+  saledAmountEl.textContent = '-' + payInfo.saledAmount.toLocaleString('ko-KR');
+
+  const totalAmountEl = areaAmountEl.querySelector('#totalAmount');
+  payInfo.totalAmount = payInfo.orderAmount;
+  totalAmountEl.textContent = payInfo.totalAmount.toLocaleString('ko-KR');
+  
+  const totalAmountInBtnEl = document.querySelector('#totalAmountInBtn');
+  totalAmountInBtnEl.textContent = payInfo.totalAmount.toLocaleString('ko-KR');
+}
+async function renderUserAccount() {
+  try {
+    const accountList = await getUserAccounts();
+    accountList.length === 0 ? renderEmptyList() : renderAccountList(accountList);
+  } catch (err) {
+    Swal.fire({
+      icon: 'error',
+      title: '계좌 정보를 불러오는데 실패했습니다.',
+      text: err.message,
+    })
+  }
+}
+function renderCouponList() {
+  const coupons = getDataFromLocalStorage(COUPONS);
+
+  const couponSelectorTextEl = document.querySelector('.coupon-selector > span');
+  couponSelectorTextEl.textContent = `사용가능 쿠폰 0장 / 전체 ${coupons?.length || 0}장`
+
+  const couponListEl = document.querySelector('.coupon-list');
+  const templateEl = document.createElement('template');
+  if(coupons) {
+    coupons.forEach((coupon) => {
+      templateEl.innerHTML += /* html */`
+        <li class="coupon">
+          <span>${coupon.name} [${coupon.discount} 할인]</span>
+        </li>
+      `
+    })
+    couponListEl.append(templateEl.content);
+  }
+}
+function renderUserAddress() {
+  const userAddress = getDataFromLocalStorage(USER_ADDRESS);
+  const destinationEl = document.querySelector('.destination');
+  if(userAddress) {
+    const { roadAddress, detailAddress } = userAddress;
+    destinationEl.textContent = `${roadAddress}, ${detailAddress}`
+  } else {
+    destinationEl.textContent = '등록된 배송지 정보가 없습니다.'
+  }
+}
+function renderOrdererInfo() {
+  const userInfo = getDataFromLocalStorage(USER_INFO)
+
+  const senderEl = document.querySelector('.orderer-area .sender');
+  senderEl.textContent = userInfo.displayName;
+
+  const emailEl = document.querySelector('.orderer-area .email');
+  emailEl.textContent = userInfo.email;
 }
