@@ -66,7 +66,6 @@ router
       pagination(search);
     },
     "/product/:id": ({ data }) => {
-      console.log(data);
       document.querySelector("#content").innerHTML = product_detail_page;
       renderDetailPage(data.id, router);
     },

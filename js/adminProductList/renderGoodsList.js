@@ -1,4 +1,4 @@
-import { router } from "../main.js";
+import { router } from "../router.js";
 import { makeDOMwithProperties } from "../utils/dom.js";
 export const renderGoodsList = async (itemListData, no) => {
   const ulEl = document.querySelector(".goods-list");
@@ -44,7 +44,7 @@ export const renderGoodsList = async (itemListData, no) => {
     });
     itemEl.dataset.id = item.id;
     itemEl.setAttribute("data-navigo", "");
-    itemEl.href = "/product/" + item.id;
+    itemEl.href = "/adminproduct/" + item.id;
     const soldOutcheck = item.isSoldOut ? "YES" : "NO";
     itemNo.textContent = no++;
     itemId.textContent = item.id;

@@ -1,16 +1,7 @@
 import { headers } from "./api/headers";
 import Navigo from "navigo"; // When using ES modules.
 import { checkAuthorization } from "./api/checkAuthorization";
-import {
-  cartPage,
-  couponPage,
-  loginPage,
-  mainPage,
-  productDetailPage,
-  productPage,
-  searchPage,
-  sigupPage,
-} from "./components/userPage";
+import { cartPage, couponPage, loginPage, mainPage, productDetailPage, productPage, searchPage, sigupPage } from "./components/userPage";
 import handleCouponButton from "./coupon/coupon";
 import handleSearchInput from "./header/handleSearchInput";
 import { swiperAction, sidebarAction } from "./library/swiper";

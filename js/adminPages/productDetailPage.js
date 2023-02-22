@@ -6,7 +6,7 @@ export default /* html */ `
         </div>
         <div class="button-wrapper">
           <div class="edit">
-            <a href="/product/editproduct/" class="edit-button">수정</a>
+            <a href="/editproduct/" class="edit-button">수정</a>
           </div>
           <div class="delete">
             <a class="delete-button" href="/product" class="delete-button">삭제</a>
