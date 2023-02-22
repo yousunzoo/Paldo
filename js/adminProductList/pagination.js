@@ -11,7 +11,7 @@ let itemCheck;
 let deletebutton;
 let isRendered = false;
 
-export const pagination = async (search = undefined) => {
+export const pagination = async (search = undefined, router) => {
   isRendered = false;
   const ulEl = document.querySelector(".goods-list");
   window.addEventListener("click", (e) => {
@@ -43,6 +43,7 @@ export const pagination = async (search = undefined) => {
   ulEl.innerHTML = "";
 
   let totalPage = Math.ceil(totalCount / limit);
+  router;
 
   // 첫번째 숫자는 마지막 숫자에서 전체 카운트 - 1
 
@@ -59,13 +60,13 @@ export const pagination = async (search = undefined) => {
     button.addEventListener("click", () => {
       currentPage = button.innerText;
       ulEl.innerHTML = "";
-      renderGoodsList(arr[currentPage - 1], (currentPage - 1) * 10 + 1);
+      renderGoodsList(router, arr[currentPage - 1], (currentPage - 1) * 10 + 1);
       itemCheck = document.querySelectorAll(".item-check input");
     });
   });
 
   if (isRendered === false) {
-    renderGoodsList(arr[currentPage - 1]);
+    renderGoodsList(router, arr[currentPage - 1]);
     isRendered = true;
   }
 
@@ -94,7 +95,11 @@ export const pagination = async (search = undefined) => {
     });
     console.log(count);
     if (count < 1) {
-      Swal.fire("선택한 항목이 없습니다.", "삭제할 상품을 선택해주세요.", "question");
+      Swal.fire(
+        "선택한 항목이 없습니다.",
+        "삭제할 상품을 선택해주세요.",
+        "question"
+      );
       return;
     } else {
       for (const item of checkList) {

@@ -56,8 +56,7 @@ const body = document.querySelector("body");
   if (isLogin) {
     const loginId = JSON.parse(localStorage.getItem("loginInfo")).loginId;
     if (loginId === "admin@paldo.com") {
-      body.innerHTML = adminWrapper;
-      router.navigate("admin/report");
+      router.navigate("admin");
     } else {
       changeHeader();
     }
@@ -115,83 +114,95 @@ router
       setCartPage(router);
       sidebarArea.style.paddingTop = "100px";
     },
-    "admin/report": async () => {
-      document.querySelector("#content").innerHTML = report_page;
-      chartFn();
-      renderReportStatus();
-    },
-    "admin/product/": () => {
-      document.querySelector("#content").innerHTML = product_page;
-      const categorybutton = document.querySelector(".button-category");
-      const categoryList = document.querySelector(".category-list");
-      const soldoutbutton = document.querySelector(".button-soldout");
-      const soldoutList = document.querySelector(".soldout-list");
+    admin: () => {
+      const router = new Navigo("/admin");
+      router
+        .on({
+          "/": () => {
+            body.innerHTML = adminWrapper;
+            router.navigate("/report");
+          },
+          report: async () => {
+            document.querySelector("#content").innerHTML = report_page;
+            chartFn();
+            renderReportStatus();
+          },
+          "product/": () => {
+            document.querySelector("#content").innerHTML = product_page;
+            const categorybutton = document.querySelector(".button-category");
+            const categoryList = document.querySelector(".category-list");
+            const soldoutbutton = document.querySelector(".button-soldout");
+            const soldoutList = document.querySelector(".soldout-list");
 
-      toggleClass(categorybutton, categoryList);
-      toggleClass(soldoutbutton, soldoutList);
+            toggleClass(categorybutton, categoryList);
+            toggleClass(soldoutbutton, soldoutList);
 
-      // 검색 버튼 입력 했을때
-      const inputEl = document.querySelector(".search-goodsname");
-      const inputbuttonEl = document.querySelector(".search");
-      inputEl.addEventListener("keyup", (event) => {
-        if (event.key === "Enter" && !event.isComposing) {
-          search = inputEl.value;
-          pagination(search);
-        }
-      });
+            // 검색 버튼 입력 했을때
+            const inputEl = document.querySelector(".search-goodsname");
+            const inputbuttonEl = document.querySelector(".search");
+            inputEl.addEventListener("keyup", (event) => {
+              if (event.key === "Enter" && !event.isComposing) {
+                search = inputEl.value;
+                pagination(search, router);
+              }
+            });
 
-      inputbuttonEl.addEventListener("click", () => {
-        search = inputEl.value;
-        pagination(search);
-      });
+            inputbuttonEl.addEventListener("click", () => {
+              search = inputEl.value;
+              pagination(search, router);
+            });
 
-      let search;
-      pagination(search);
-    },
-    "admin/product/:id": ({ data }) => {
-      console.log(data);
-      document.querySelector("#content").innerHTML = product_detail_page;
-      renderDetailPage(data.id, router);
-    },
-    "admin/transaction": () => {
-      document.querySelector("#content").innerHTML = transaction_page;
-      // 검색 버튼 입력 했을때
-      const inputEl = document.querySelector(".search-username");
-      const inputbuttonEl = document.querySelector(".search");
-      inputEl.addEventListener("keyup", (event) => {
-        if (event.key === "Enter" && !event.isComposing) {
-          search = inputEl.value;
-          transactionPagination(search);
-        }
-      });
-      inputbuttonEl.addEventListener("click", () => {
-        search = inputEl.value;
-        transactionPagination(search);
-      });
+            let search;
+            pagination(search, router);
+          },
+          "product/:id": ({ data }) => {
+            console.log(data);
+            document.querySelector("#content").innerHTML = product_detail_page;
+            renderDetailPage(data.id, router);
+          },
+          transaction: () => {
+            document.querySelector("#content").innerHTML = transaction_page;
+            // 검색 버튼 입력 했을때
+            const inputEl = document.querySelector(".search-username");
+            const inputbuttonEl = document.querySelector(".search");
+            inputEl.addEventListener("keyup", (event) => {
+              if (event.key === "Enter" && !event.isComposing) {
+                search = inputEl.value;
+                transactionPagination(search, router);
+              }
+            });
+            inputbuttonEl.addEventListener("click", () => {
+              search = inputEl.value;
+              transactionPagination(search, router);
+            });
 
-      let search;
-      transactionPagination(search);
-      flatpickr("#myDatepicker", {
-        dateFormat: "Y-m-d", // set the date format
-        disableMobile: true, // disable mobile optimizations
-      });
+            let search;
+            transactionPagination(search, router);
+            flatpickr("#myDatepicker", {
+              dateFormat: "Y-m-d", // set the date format
+              disableMobile: true, // disable mobile optimizations
+            });
 
-      const pickerEl = document.querySelector(".flatpickr-input");
-      pickerEl.addEventListener("change", () => {
-        transactionPagination(pickerEl.value);
-      });
-    },
-    "admin/editproduct/:id": ({ data }) => {
-      document.querySelector("#content").innerHTML = product_edit_page;
-      renderEditDetailPage(data.id, router);
-    },
-    "admin/registration": () => {
-      document.querySelector("#content").innerHTML = add_product_page;
-      renderAddPage();
-    },
-    "transaction/:id": ({ data }) => {
-      document.querySelector("#content").innerHTML = transaction_detail_page;
-      renderDetailTransactionPage(data);
+            const pickerEl = document.querySelector(".flatpickr-input");
+            pickerEl.addEventListener("change", () => {
+              transactionPagination(pickerEl.value, router);
+            });
+          },
+          "editproduct/:id": ({ data }) => {
+            document.querySelector("#content").innerHTML = product_edit_page;
+            renderEditDetailPage(data.id, router);
+          },
+          registration: () => {
+            document.querySelector("#content").innerHTML = add_product_page;
+            renderAddPage();
+          },
+          "transaction/:id": ({ data }) => {
+            document.querySelector("#content").innerHTML =
+              transaction_detail_page;
+            renderDetailTransactionPage(data);
+          },
+        })
+        .resolve();
     },
   })
   .resolve();

@@ -2,7 +2,7 @@ import { detailTransaction } from "../api/detailTransactions";
 import { getTransactions } from "../api/getTransactions";
 import { makeDOMwithProperties } from "../utils/dom";
 
-export const renderDetailTransactionPage = async (id, router) => {
+export const renderDetailTransactionPage = async (id) => {
   const productInfo = await getTransactions();
 
   const [renderItem] = productInfo.filter((item) => item.detailId === id.id);
@@ -25,27 +25,60 @@ export const renderDetailTransactionPage = async (id, router) => {
             <img src="${renderItem.product.thumbnail}" alt="" />
           </div>
           <div class="goods-info-title">상품정보</div>
-          <div class="goods-id"><span class="tag">거래상품 ID : </span><span class="id-val">${renderItem.detailId}</span></div>
-          <div class="goods-name"><span class="tag">상품 이름 : </span><span class="name-val">${renderItem.product.title}</span></div>
-          <div class="goods-price"><span class="tag">상품 가격 : </span><span class="price-val">${renderItem.product.price.toLocaleString()}</span></div>
+          <div class="goods-id">
+            <span class="tag">거래상품 ID : </span
+            ><span class="id-val">${renderItem.detailId}</span>
+          </div>
+          <div class="goods-name">
+            <span class="tag">상품 이름 : </span
+            ><span class="name-val">${renderItem.product.title}</span>
+          </div>
+          <div class="goods-price">
+            <span class="tag">상품 가격 : </span
+            ><span class="price-val"
+              >${renderItem.product.price.toLocaleString()}</span
+            >
+          </div>
         </div>
         <div class="goods-info-right">
           <div class="info-customer">
             <div class="info-customer-title">구매자 정보</div>
-            <div class="customer-email"><span class="tag">고객 메일 : </span><span class="id-val">${renderItem.user.email}</span></div>
-            <div class="customer-name"><span class="tag">고객 이름 : </span><span class="id-val">${renderItem.user.displayName}</span></div>
+            <div class="customer-email">
+              <span class="tag">고객 메일 : </span
+              ><span class="id-val">${renderItem.user.email}</span>
+            </div>
+            <div class="customer-name">
+              <span class="tag">고객 이름 : </span
+              ><span class="id-val">${renderItem.user.displayName}</span>
+            </div>
           </div>
           <div class="info-account">
             <div class="account-title">계좌 정보</div>
-            <div class="customer-account"><span class="tag">계좌 은행 : </span><span class="id-val">${renderItem.account.bankName}</span></div>
-            <div class="customer-bankcode"><span class="tag">은행 코드 : </span><span class="id-val">${renderItem.account.bankCode}</span></div>
-            <div class="customer-accountnum"><span class="tag">계좌 번호 : </span><span class="id-val">${renderItem.account.accountNumber}</span></div>
+            <div class="customer-account">
+              <span class="tag">계좌 은행 : </span
+              ><span class="id-val">${renderItem.account.bankName}</span>
+            </div>
+            <div class="customer-bankcode">
+              <span class="tag">은행 코드 : </span
+              ><span class="id-val">${renderItem.account.bankCode}</span>
+            </div>
+            <div class="customer-accountnum">
+              <span class="tag">계좌 번호 : </span
+              ><span class="id-val">${renderItem.account.accountNumber}</span>
+            </div>
           </div>
           <div class="info-transaction">
             <div class="transaction-title">거래 정보</div>
-            <div class="transaction-time"><span class="tag">거래 일시 : </span><span class="id-val">${renderItem.timePaid}</span></div>
-            <div class="transaction-calcel"><span class="tag">취소 여부 : </span></div>
-            <div class="transaction-confirm"><span class="tag">완료 여부 : </span></div>
+            <div class="transaction-time">
+              <span class="tag">거래 일시 : </span
+              ><span class="id-val">${renderItem.timePaid}</span>
+            </div>
+            <div class="transaction-calcel">
+              <span class="tag">취소 여부 : </span>
+            </div>
+            <div class="transaction-confirm">
+              <span class="tag">완료 여부 : </span>
+            </div>
           </div>
         </div>
       </div>
@@ -80,7 +113,9 @@ export const renderDetailTransactionPage = async (id, router) => {
     console.log(reservation);
     confirmIsToggled = !confirmIsToggled;
     confirmInfoText.textContent = confirmIsToggled;
-    confirmButtonEl.textContent = confirmIsToggled ? "거래완료해제" : "거래완료";
+    confirmButtonEl.textContent = confirmIsToggled
+      ? "거래완료해제"
+      : "거래완료";
     detailTransaction(reservation, renderItem.detailId);
   });
 
