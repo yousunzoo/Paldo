@@ -15,7 +15,7 @@ $color_copyright: rgb(247, 247, 247);
   width: 1100px;
   min-width: 300px;
   background-color: #e8ecef;
-  .goods-list-area {
+  .goods-list-wrapper {
     width: 1085px;
     height: 100%;
     background-color: $color_white;
@@ -30,68 +30,88 @@ $color_copyright: rgb(247, 247, 247);
       }
       .search-goods {
         padding: 10px 20px;
+        display: flex;
         .search-username {
           width: 300px;
           height: 40px;
-          border-radius: 8px;
           border: 1px solid #b5b5b5;
           padding-left: 10px;
         }
-        select {
+        .search {
+          width: 70px;
+          height: 42px;
+          font-size: 14px;
+          color: $color-white;
+          background-color: $color_primary;
+          margin: 0 20px 0 10px;
+        }
+        .search:hover {
+          border: 1px solid $color-primary;
+          box-sizing: border-box;
+          background-color: $color_white;
+          color: $color-primary;
+          font-weight: 700;
+        }
+        .flatpickr-input {
           width: 120px;
-          height: 40px;
-          border-radius: 8px;
           border: 1px solid #b5b5b5;
           padding: 10px;
+          text-align: end;
+          font-size: 12px;
         }
       }
     }
-    .goods-list {
+    .item-tag {
+      background-color: #f7f7f7;
+      height: 60px;
+      width: 1045px;
+      display: flex;
+      color: #3c3c3c;
+      font-size: 14px;
+      font-weight: 500;
       margin: 0 20px;
-      .item-tag {
-        background-color: #f7f7f7;
-        height: 60px;
+
+      .info {
         display: flex;
-        color: #3c3c3c;
-        font-size: 14px;
-        font-weight: 500;
-        .info {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          line-height: 12px;
-          padding: 5px;
-          border-top: 2px solid #cdcdcd;
-          border-bottom: 2px solid #cdcdcd;
-          border-right: 1px solid #e7e6e6;
-        }
-        .item-no {
-          width: 30px;
-          border-left: 1px solid #e7e6e6;
-        }
-        .item-name {
-          width: 430px;
-        }
-        .item-price {
-          width: 80px;
-        }
-        .item-coustmer {
-          width: 80px;
-        }
-        .item-bank {
-          width: 100px;
-        }
-        .item-time {
-          width: 120px;
-        }
-        .item-calcel {
-          width: 60px;
-        }
-        .item-confirm {
-          width: 60px;
-        }
+        justify-content: center;
+        align-items: center;
+        line-height: 12px;
+        padding: 5px;
+        border-top: 2px solid #cdcdcd;
+        border-bottom: 2px solid #cdcdcd;
+        border-right: 1px solid #e7e6e6;
       }
-      .item {
+      .item-no {
+        width: 30px;
+        border-left: 1px solid #e7e6e6;
+      }
+      .item-name {
+        width: 330px;
+      }
+      .item-price {
+        width: 80px;
+      }
+      .item-coustmer {
+        width: 80px;
+      }
+      .item-bank {
+        width: 100px;
+      }
+      .item-time {
+        width: 220px;
+      }
+      .item-calcel {
+        width: 60px;
+      }
+      .item-confirm {
+        width: 60px;
+      }
+    }
+    .transaction-list {
+      margin: 0 20px;
+      .item-transaction {
+        width: 1045px;
+
         height: 60px;
         display: flex;
         color: #3c3c3c;
@@ -111,7 +131,7 @@ $color_copyright: rgb(247, 247, 247);
           border-left: 1px solid #e7e6e6;
         }
         .item-name {
-          width: 430px;
+          width: 330px;
         }
         .item-price {
           width: 80px;
@@ -123,9 +143,9 @@ $color_copyright: rgb(247, 247, 247);
           width: 100px;
         }
         .item-time {
-          width: 120px;
+          width: 220px;
         }
-        .item-calcel {
+        .item-cancel {
           width: 60px;
         }
         .item-confirm {
@@ -133,12 +153,32 @@ $color_copyright: rgb(247, 247, 247);
         }
       }
     }
-    .pagination {
-      height: 40px;
+  }
+  .pagination-transaction {
+    display: flex;
+    width: 200px;
+    margin: 0 auto;
+    padding-top: 20px;
+    justify-content: center;
+    padding-bottom: 60px;
+
+    .pageNumber {
+      width: 20px;
+      height: 30px;
+      color: #555555;
+      font-weight: 700;
+      padding: 0 8px;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding-top: 20px;
+    }
+    .prev,
+    .next {
+      width: 50px;
+      background-color: #414141;
+      color: $color-white;
+      font-size: 14px;
+      text-align: center;
     }
   }
 }

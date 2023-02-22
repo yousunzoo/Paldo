@@ -191,7 +191,7 @@ header {
     justify-content: space-between;
     box-sizing: border-box;
     margin: auto;
-    
+
     .cart-left {
       width: 742px;
       box-sizing: border-box;
@@ -275,7 +275,7 @@ header {
             padding: 20px 0px;
             .checkbox {
               margin-left: 2px;
-              .push-checkbox{
+              .push-checkbox {
                 overflow: hidden;
                 position: absolute;
                 clip: rect(0 0 0 0);
@@ -288,7 +288,7 @@ header {
                 width: 24px;
                 height: 24px;
                 margin-right: 12px;
-                object-fit:cover
+                object-fit: cover;
               }
             }
             .product-image-box {
@@ -343,7 +343,7 @@ header {
               border: 1px solid rgb(221, 223, 225);
               width: 88px;
               border-radius: 3px;
-              .product-count-button{
+              .product-count-button {
                 display: inline-flex;
                 width: 28px;
                 height: 28px;
@@ -478,7 +478,6 @@ header {
                   margin-right: 0;
                   vertical-align: top;
                 }
-
               }
             }
           }
@@ -488,18 +487,18 @@ header {
           border: 1px solid #f2f2f2;
           background-color: #fafafa;
           .cart-bills-line {
-              font-size: 16px;
-              justify-content: space-between;
-              display: flex;
-              line-height: 24px;
-              padding: 4px 0;
-              .price-text {
-                width: 100px;
-                white-space: nowrap;
-              }
-              .price-money {
-                text-align: right;
-              }
+            font-size: 16px;
+            justify-content: space-between;
+            display: flex;
+            line-height: 24px;
+            padding: 4px 0;
+            .price-text {
+              width: 100px;
+              white-space: nowrap;
+            }
+            .price-money {
+              text-align: right;
+            }
           }
           .pay-wrapper {
             margin-top: 16px;
@@ -538,15 +537,12 @@ header {
               padding-top: 4px;
               color: #666;
             }
-          }    
+          }
         }
       }
-      
     }
   }
 }
-
-
 
 footer {
   border-top: 1px solid $color_btn_border;

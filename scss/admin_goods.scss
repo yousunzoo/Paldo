@@ -33,13 +33,18 @@ $color_copyright: rgb(247, 247, 247);
         display: flex;
         padding: 10px;
         font-size: 14px;
-        .btn-category,
-        .btn-soldout {
+        .button-category,
+        .button-soldout {
           width: 80px;
           height: 20px;
           border: 1px solid #b5b5b5;
           padding: 10px;
           margin-right: 20px;
+        }
+        .button-category:hover,
+        .button-soldout:hover {
+          color: $color-white;
+          background-color: $color_primary;
         }
         .category-list,
         .soldout-list {
@@ -59,6 +64,10 @@ $color_copyright: rgb(247, 247, 247);
             align-items: center;
             border-top: none;
             cursor: pointer;
+          }
+          li:hover {
+            color: $color-white;
+            background-color: $color_primary;
           }
         }
         .category-list.active,
@@ -82,9 +91,17 @@ $color_copyright: rgb(247, 247, 247);
           background-color: $color_primary;
           margin-right: 10px;
         }
+
+        .search:hover {
+          border: 1px solid $color-primary;
+          box-sizing: border-box;
+          background-color: $color_white;
+          color: $color-primary;
+          font-weight: 700;
+        }
       }
     }
-    .item-tag {
+    .item-tag-product {
       background-color: #f7f7f7;
       height: 60px;
       display: flex;
@@ -162,6 +179,7 @@ $color_copyright: rgb(247, 247, 247);
         }
         .item-thumbnail {
           width: 70px;
+          overflow: hidden;
           img {
             width: 60px;
             height: 60px;
@@ -181,6 +199,13 @@ $color_copyright: rgb(247, 247, 247);
         }
         .item-outstock {
           width: 60px;
+        }
+      }
+      .item:hover {
+        font-weight: 800;
+        img {
+          width: 63px;
+          height: 63px;
         }
       }
     }
@@ -212,18 +237,21 @@ $color_copyright: rgb(247, 247, 247);
       }
     }
 
-    .btn-area {
-      padding: 0 20px 0;
+    .button-wrapper {
+      padding: 0 20px 20px;
       display: flex;
       justify-content: space-between;
-      .btn {
+      .button {
         width: 70px;
         height: 40px;
         font-size: 14px;
         color: $color-white;
         background-color: $color_primary;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
-      .btn:hover {
+      .button:hover {
         border: 1px solid $color-primary;
         box-sizing: border-box;
         background-color: $color_white;
