@@ -59,6 +59,11 @@ const body = document.querySelector("body");
       router.navigate("admin");
     } else {
       changeHeader();
+      setSidebarSwiper(router);
+      // search input
+      handleSearchInput(router);
+      // to-top-button
+      goToTopFn();
     }
   }
 })();
@@ -208,9 +213,3 @@ router
   .resolve();
 
 router.link("/");
-
-// setSidebarSwiper(router);
-// // search input
-// handleSearchInput(router);
-// // to-top-button
-// goToTopFn();
