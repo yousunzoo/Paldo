@@ -492,7 +492,7 @@ export const cartPage = /* html */ `
                   </div>
                 </div>
                 <div class="payment-area">
-                  <button class="payment-button">
+                  <button class="payment-button" disabled>
                     <span class="push-btn-txt">상품을 선택해주세요</span>
                   </button>
                   <ul class="description">

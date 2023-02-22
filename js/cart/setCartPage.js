@@ -122,7 +122,7 @@ export default async function setCartPage(router) {
         item.checked = false;
       });
       orderButton.classList.remove("active");
-      orderButton.querySelector("span").textContent = "상품을 성택해주세요";
+      orderButton.querySelector("span").textContent = "상품을 선택해주세요";
       orderButton.disabled = true;
     }
     changeBillArea();
