@@ -102,14 +102,14 @@ function initPage() {
   newPasswordCheckInputEl.value = '';
 
   // userName
-  const userName = getDataFromLocalStorage(USER_INFO).displayName;
+  const userName = getDataFromLocalStorage(USER_INFO).displayName || '';
   const userNameEl = document.querySelector('#userName');
   userNameEl.value = userName;
 
   // userAddress
   // "userAddress":{"detailAddress":"101호","postcode":"03054","roadAddress":"서울 종로구 청와대로 73"}
   const userAddress = getDataFromLocalStorage(USER_ADDRESS);
-  const { detailAddress, postcode, roadAddress } = userAddress;
+  const { detailAddress = '', postcode = '', roadAddress = '' } = userAddress;
 
   const postcodeEl = document.querySelector('#postcode');
   postcodeEl.value = postcode;

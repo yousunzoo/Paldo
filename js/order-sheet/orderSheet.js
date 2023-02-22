@@ -70,8 +70,6 @@ transactionBtn.addEventListener('click',async () => {
   // })
 })
 
-
-
 /* FUNCTIONS */
 
 /**
@@ -95,9 +93,14 @@ async function initPage() {
 
   /* 배송지 정보 */
   const userAddress = getDataFromLocalStorage(USER_ADDRESS);
-  const { roadAddress, detailAddress } = userAddress;
   const destinationEl = document.querySelector('.destination');
-  destinationEl.textContent = `${roadAddress}, ${detailAddress}`
+  if(userAddress) {
+    const { roadAddress, detailAddress } = userAddress;
+    destinationEl.textContent = `${roadAddress}, ${detailAddress}`
+  } else {
+    destinationEl.textContent = '등록된 배송지 정보가 없습니다.'
+  }
+
 
   /* 쿠폰 조회 및 렌더링 */
   const coupons = getDataFromLocalStorage(COUPONS);
@@ -159,10 +162,11 @@ async function initPage() {
 function setMockData () {
   // 제품명, 가격, 수량, 썸네일이미지
   const cart = [
-    { productId : 'xr14ikmurlABzuizuDge', title : "이토엔쟈스민티(500ml*24)", price : 37950, quantity : 2, thumbnailImage : "/images/product/이토엔쟈스민티.png" },
-    { productId : 'sm9RXKb3hpHe3MfEZyjb', title : "카프리썬 오렌지(200ml*10)", price : 6050, discountRate : 15, quantity : 3, thumbnailImage : "/images/product/카프리썬오렌지.png" },
-    { productId : 'sWpLAtpN52bmwkhqiq1S', title : "파워오투 복숭아자몽(500ml*24)", price : 35200, quantity : 1, thumbnailImage : "/images/product/파워오투복숭아자몽.png" },
-    { productId : 'sCTHoWGOEdROxEuiMb4v', title : "오이오차녹차(525ml*24)", price : 38060, quantity : 4, thumbnailImage : "/images/product/오이오차녹차.png" },
+    { productId : '7YQPOYVq4kgrNbQV04vS', title : "고구마깡(83g*1)", price : 15400, quantity : 1, thumbnailImage : "/images/product/이토엔쟈스민티.png" },
+    { productId : '7jLYaH42zKTlM4Nz7mGiimg', title : "신라면블랙(134g*32)", price : 48290, quantity : 1, thumbnailImage : "/images/product/카프리썬오렌지.png" },
+    { productId : '9X6iWhN2C5KbJpS4uhDh', title : "둥지냉면비빔냉면(162g*32)", price : 51040, quantity : 1, thumbnailImage : "/images/product/파워오투복숭아자몽.png" },
+    { productId : '4dVCUFjymfEqskEuMAKy', title : "츄파춥스 사워게코(90g*124)", price : 57420, quantity : 1, thumbnailImage : "/images/product/오이오차녹차.png" },
+    { productId : '4vs61x7YOCYBHfZuIPPU', title : "양파링(80g*1)", price : 15400, quantity : 1, thumbnailImage : "/images/product/오이오차녹차.png" },
   ]
   const loginId = JSON.parse(localStorage.getItem('loginInfo')).loginId;
   const userData = JSON.parse(localStorage.getItem(loginId))
