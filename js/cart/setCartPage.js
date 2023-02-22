@@ -152,6 +152,9 @@ export default async function setCartPage(router) {
           checkAllButton.checked = !checkAllButton.checked;
         }
         changeBillArea();
+        orderButton.classList.remove("active");
+        orderButton.querySelector("span").textContent = "상품을 선택해주세요";
+        orderButton.disabled = true;
       }
     });
   });
