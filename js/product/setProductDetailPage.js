@@ -104,6 +104,10 @@ export default async function setProductDetailPage(id, router) {
     ).textContent;
     addCart(productInfo, quantity);
   });
+
+  // 세팅되면 스피너 사라지도록
+  const spinner = document.querySelector(".spinner-wrapper");
+  spinner.style.display = "none";
 }
 
 function toggleCountButton(price) {

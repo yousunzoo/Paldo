@@ -382,6 +382,9 @@ export const productDetailPage = /* html */ `
     <div class="sold-out">
         <p>해당 상품은 현재 품절되었습니다.</p>
     </div>
+    <div class="spinner-wrapper">
+      <div class="spinner"></div>
+    </div>
   <div class="thumbnail">
     <img src="" alt="" />
   </div>
