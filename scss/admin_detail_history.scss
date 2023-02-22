@@ -19,6 +19,7 @@ $color_copyright: rgb(247, 247, 247);
     width: 1085px;
     height: 100%;
     background-color: $color_white;
+    position: relative;
     .goods-title-wrapper {
       display: flex;
       justify-content: space-between;
@@ -30,7 +31,7 @@ $color_copyright: rgb(247, 247, 247);
           font-weight: 600;
         }
       }
-      .btn-wrapper {
+      .button-wrapper {
         display: flex;
         justify-content: end;
         padding: 0 35px;
@@ -57,15 +58,6 @@ $color_copyright: rgb(247, 247, 247);
         .completed {
           display: flex;
         }
-
-        .active-cancel-btn,
-        .active-completed-btn {
-          display: none;
-          background-color: $color-white;
-          color: $color_primary;
-          border: 2px solid $color_primary;
-          box-sizing: border-box;
-        }
       }
     }
     .bar {
@@ -75,6 +67,7 @@ $color_copyright: rgb(247, 247, 247);
     .goods-info {
       display: flex;
       .goods-info-left {
+        margin-bottom: 30px;
         .goods-thumbnail img {
           margin-top: 40px;
           margin-left: 40px;
@@ -140,6 +133,46 @@ $color_copyright: rgb(247, 247, 247);
           .tag {
             font-weight: 600;
           }
+        }
+      }
+    }
+    .skeleton-loading {
+      background: $color_white;
+      width: 100%;
+      height: 100%;
+      .goods-thumbnail {
+        border-radius: 10px;
+        height: 249px;
+        background: linear-gradient(120deg, #e5e5e5 30%, #f0f0f0 38%, #f0f0f0 40%, #e5e5e5 48%);
+        background-size: 200% 100%;
+        background-position: 100% 0;
+        animation: blinker 1s linear infinite;
+        margin-top: 40px;
+        margin-left: 40px;
+        width: 400px;
+        height: 400px;
+      }
+      .goods-id,
+      .goods-name,
+      .goods-price,
+      .customer-email,
+      .customer-name,
+      .customer-account,
+      .customer-bankcode,
+      .customer-accountnum,
+      .transaction-time,
+      .transaction-calcel,
+      .transaction-confirm {
+        border-radius: 10px;
+        height: 249px;
+        background: linear-gradient(120deg, #e5e5e5 30%, #f0f0f0 38%, #f0f0f0 40%, #e5e5e5 48%);
+        background-size: 200% 100%;
+        background-position: 100% 0;
+        animation: blinker 1s linear infinite;
+      }
+      @keyframes blinker {
+        100% {
+          background-position: -100% 0;
         }
       }
     }

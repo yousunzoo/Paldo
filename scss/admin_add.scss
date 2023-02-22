@@ -48,6 +48,13 @@ $color_copyright: rgb(247, 247, 247);
         align-items: center;
         border-bottom: 0.5px solid rgb(184, 184, 184);
         margin: 0 20px;
+        span {
+          font-size: 14px;
+          padding-left: 20px;
+          color: #b81515;
+          height: 20px;
+          line-height: 24px;
+        }
         label {
           display: flex;
           width: 120px;
@@ -69,6 +76,8 @@ $color_copyright: rgb(247, 247, 247);
           height: 30px;
           border: 0.5px solid #dfdfdf;
           background-color: #f3f3f4;
+          box-sizing: border-box;
+          padding-left: 10px;
         }
         .price-desc,
         .sale-desc {
@@ -89,8 +98,17 @@ $color_copyright: rgb(247, 247, 247);
           height: 30px;
           border: 0.5px solid #dfdfdf;
           background-color: #f3f3f4;
+          box-sizing: border-box;
+          padding-left: 10px;
         }
-        .goods-thumbnail {
+        .goods-price:focus,
+        .goods-sale:focus {
+          border: 2px solid #626262;
+        }
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
         }
         input[type="file"]::file-selector-button {
           width: 150px;
@@ -105,18 +123,26 @@ $color_copyright: rgb(247, 247, 247);
         }
       }
     }
-    .res-btn {
+    .button-wrapper {
       display: flex;
-      justify-content: end;
+      justify-content: space-between;
       padding: 20px;
       button {
         width: 70px;
         height: 40px;
         font-size: 14px;
         color: $color-white;
-        border-radius: 5px;
         background-color: $color_primary;
       }
     }
+  }
+}
+#swal2-popup {
+  font-size: 16px;
+}
+
+.swal2-container .swal2-top-end .swal2-backdrop-show {
+  .swal2-popup .swal2-modal .swal2-icon-error .swal2-show {
+    width: 500px;
   }
 }
