@@ -5,7 +5,7 @@ import { makeDOMwithProperties } from '../utils/dom.js'
 const { WISH, CART } = SORT_TYPES
 
 /* GLOBAL LOGIC */
-setMockData();
+// setMockData();
 ;(async function () {
   const isValidUser = await checkAuthorization();
   if(isValidUser) {
@@ -44,10 +44,10 @@ function initPage() {
 function setMockData () {
   // 제품명, 가격, 수량, 썸네일이미지
   const wish = [
-    { productId : 'xr14ikmurlABzuizuDge', title : "이토엔쟈스민티(500ml*24)", price : 37950, thumbnailImage : "/images/product/이토엔쟈스민티.png" },
-    { productId : 'sm9RXKb3hpHe3MfEZyjb', title : "카프리썬 오렌지(200ml*10)", price : 6050, discountRate : 15, thumbnailImage : "/images/product/카프리썬오렌지.png" },
-    { productId : 'sWpLAtpN52bmwkhqiq1S', title : "파워오투 복숭아자몽(500ml*24)", price : 35200, thumbnailImage : "/images/product/파워오투복숭아자몽.png" },
-    { productId : 'sCTHoWGOEdROxEuiMb4v', title : "오이오차녹차(525ml*24)", price : 38060, thumbnailImage : "/images/product/오이오차녹차.png" },
+    { id : 'xr14ikmurlABzuizuDge', title : "이토엔쟈스민티(500ml*24)", price : 37950, thumbnailImage : "/images/product/이토엔쟈스민티.png" },
+    { id : 'sm9RXKb3hpHe3MfEZyjb', title : "카프리썬 오렌지(200ml*10)", price : 6050, discountRate : 15, thumbnailImage : "/images/product/카프리썬오렌지.png" },
+    { id : 'sWpLAtpN52bmwkhqiq1S', title : "파워오투 복숭아자몽(500ml*24)", price : 35200, thumbnailImage : "/images/product/파워오투복숭아자몽.png" },
+    { id : 'sCTHoWGOEdROxEuiMb4v', title : "오이오차녹차(525ml*24)", price : 38060, thumbnailImage : "/images/product/오이오차녹차.png" },
   ]
   const loginId = JSON.parse(localStorage.getItem('loginInfo')).loginId;
   const userData = JSON.parse(localStorage.getItem(loginId))
@@ -56,7 +56,7 @@ function setMockData () {
 function createWishList(wishList) {
   const fragmentEl = document.createDocumentFragment();
   wishList.forEach((wish) => {
-    const { productId, title, price, discountRate = 0, thumbnailImage} = wish;
+    const { id, title, price, discountRate = 0, thumbnailImage} = wish;
     // 할인율이 있는 상품은 원가를 계산한 값을 originPrice 변수에 담아 화면에 같이 렌더링
     const costPrice = discountRate ? Math.floor((price * 100) / (100 - discountRate)) : price;
 
@@ -86,14 +86,14 @@ function createWishList(wishList) {
 
     /* product-button-section > delete-button + take-button */
     const productButtonSectionEl = makeDOMwithProperties('div', { className : 'product-button-section' });
-    productButtonSectionEl.dataset.id = productId;
+    productButtonSectionEl.dataset.id = id;
     // delete-button
     const deleteButtonEl = makeDOMwithProperties('button', { className : 'delete-button', textContent: '삭제' });
     deleteButtonEl.addEventListener('click', function () {
-      const productId = this.closest('.product-button-section').dataset.id
+      const id = deleteButtonEl.closest('.product-button-section').dataset.id
       const wishList = getDataFromLocalStorage(WISH);
       const filteredWishList = wishList.filter((wish) => {
-        return wish.productId !== productId
+        return wish.id !== id
       })
       const loginId = JSON.parse(localStorage.getItem('loginInfo')).loginId;
       const userData = JSON.parse(localStorage.getItem(loginId))
@@ -103,18 +103,18 @@ function createWishList(wishList) {
     // take-button
     const takeButtonEl = makeDOMwithProperties('button', { className : 'take-button', textContent: '담기' });
     takeButtonEl.addEventListener('click', function () {
-      const productId = this.closest('.product-button-section').dataset.id
+      const id = takeButtonEl.closest('.product-button-section').dataset.id
       // 기존 cart 목록
       const cartList = getDataFromLocalStorage(CART) || [];
       // 추가할 wish
       const wishList = getDataFromLocalStorage(WISH);
       const targetWish = wishList.find((wish) => {
-        return wish.productId === productId
+        return wish.id === id
       })
       // 이미 담겨져 있는 것 제외
       console.log(cartList)
       const isExisting = cartList.find((item) => {
-        return item.productId === productId
+        return item.productId === id
       })
       if(isExisting) {
         Swal.fire({
@@ -152,7 +152,6 @@ function createWishList(wishList) {
           //장바구니 이동
         }
       })
-
     })
     const takeButtonImageEl = makeDOMwithProperties('img', { alt : '장바구니 담기', src : "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzYiIGhlaWdodD0iMzYiIHZpZXdCb3g9IjAgMCAzNiAzNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTTM2IDM2SDBWMGgzNnoiLz4KICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1LjE2NCA2LjU0NykiIHN0cm9rZT0iIzVmMDA4MCIgc3Ryb2tlLWxpbmVjYXA9InNxdWFyZSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjciPgogICAgICAgICAgICA8cGF0aCBkPSJtMjUuNjggMy42Ni0yLjcyIDExLjU3SDcuMzdMNC42NiAzLjY2eiIvPgogICAgICAgICAgICA8Y2lyY2xlIGN4PSIyMC41MiIgY3k9IjIwLjc4IiByPSIyLjE0Ii8+CiAgICAgICAgICAgIDxjaXJjbGUgY3g9IjkuODEiIGN5PSIyMC43OCIgcj0iMi4xNCIvPgogICAgICAgICAgICA8cGF0aCBkPSJNMCAwaDMuOGwxLjc2IDcuNSIvPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+Cg==" })
     takeButtonEl.prepend(takeButtonImageEl);
