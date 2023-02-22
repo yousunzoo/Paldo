@@ -30,7 +30,7 @@ import { renderReportStatus } from "./adminReport/renderStoreStatus.js";
 export const router = new Navigo("/");
 router
   .on({
-    report: async () => {
+    report: () => {
       document.querySelector("#content").innerHTML = report_page;
       chartFn();
       renderReportStatus();

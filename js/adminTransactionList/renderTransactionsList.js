@@ -49,8 +49,10 @@ export const renderTransactionsList = async (itemListData, no) => {
     itemCoustmer.textContent = item.user.displayName;
     itemBank.textContent = item.account.bankName;
     itemTime.textContent = koreaTime.toLocaleString("ko-KR", { timeZone: "Asia/Seoul" });
-    itemCancel.textContent = item.isCanceled;
-    itemConfirm.textContent = item.done;
+    let isCanceled = item.isCanceled ? "O" : "X";
+    let done = item.done ? "O" : "X";
+    itemCancel.textContent = isCanceled;
+    itemConfirm.textContent = done;
     itemEl.append(itemNo, itemName, itemPrice, itemCoustmer, itemBank, itemTime, itemCancel, itemConfirm);
     liEl.append(itemEl);
     itemEl.addEventListener("click", function (event) {

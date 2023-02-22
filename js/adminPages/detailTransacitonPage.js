@@ -6,9 +6,10 @@ export default /* html */ `
     </div>
     <div class="button-wrapper">
       <div class="cancel">
+         <button class="completed-button"></button>
       </div>
       <div class="completed">
-        <button class="completed-button">거래 완료</button>
+        <button class="completed-button"></button>
       </div>
     </div>
   </div>

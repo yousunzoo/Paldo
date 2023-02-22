@@ -12,7 +12,6 @@ export const transactionPagination = async (search = undefined) => {
   let listEls = await getTransactions();
   let arr;
   let totalCount;
-
   // 시간순으로 정렬
   listEls.sort(function (a, b) {
     return new Date(b.timePaid) - new Date(a.timePaid);
