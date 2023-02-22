@@ -27,6 +27,7 @@ import setCartPage from "./cart/setCartPage";
 
 const router = new Navigo("/");
 const mainSection = document.querySelector("#main");
+const sidebarArea = document.querySelector("#sidebar-area");
 
 // 처음 페이지가 로드 되었을 때
 (async () => {
@@ -44,41 +45,49 @@ router
       mainSection.innerHTML = mainPage;
       setPrdList(router);
       swiperAction();
+      sidebarArea.style.paddingTop = "500px";
     },
     login: async () => {
       window.scrollTo(0, 0);
       mainSection.innerHTML = loginPage;
       loginEvent(router);
+      sidebarArea.style.paddingTop = "100px";
     },
     signup: () => {
       window.scrollTo(0, 0);
       mainSection.innerHTML = sigupPage;
       signUpEvent();
+      sidebarArea.style.paddingTop = "100px";
     },
     "search/:id": async ({ data }) => {
       window.scrollTo(0, 0);
       mainSection.innerHTML = searchPage;
       await setResultPage(data.id, router);
+      sidebarArea.style.paddingTop = "100px";
     },
     coupon: () => {
       window.scrollTo(0, 0);
       mainSection.innerHTML = couponPage;
       handleCouponButton();
+      sidebarArea.style.paddingTop = "100px";
     },
     "productDetail/:id": async ({ data }) => {
       window.scrollTo(0, 0);
       mainSection.innerHTML = productDetailPage;
       await setProductDetailPage(data.id, router);
+      sidebarArea.style.paddingTop = "100px";
     },
     "products/:id": async ({ data }) => {
       window.scrollTo(0, 0);
       mainSection.innerHTML = productPage;
       await setProductPage(data.id, router);
+      sidebarArea.style.paddingTop = "100px";
     },
     cart: () => {
       window.scrollTo(0, 0);
       mainSection.innerHTML = cartPage;
       setCartPage(router);
+      sidebarArea.style.paddingTop = "100px";
     },
   })
   .resolve();
