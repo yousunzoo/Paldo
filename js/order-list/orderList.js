@@ -73,16 +73,6 @@ function manipulateOrderListData(orderListData) {
   deduplicateAndCheckQuantity(sortedList);
   return sortedList;
 }
-function changeDateFormatToKR(time) {
-  const utcDate = new Date(time);
-  const kstDate = new Date(utcDate.getTime() + (9 * 60 * 60 * 1000));
-  const year = kstDate.getFullYear();
-  const month = kstDate.getMonth() + 1;
-  const date = kstDate.getDate();
-  const hour = kstDate.getHours();
-  const minute = kstDate.getMinutes();
-  return `${year}-${month.toString().padStart(2, '0')}-${date.toString().padStart(2, '0')} ${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
-}
 function groupByMinutes(list) {
   return list.reduce((acc, order) => {
     const { timePaid, detailId, done, isCanceled, product } = order;
@@ -93,6 +83,15 @@ function groupByMinutes(list) {
     acc[formattedDate] ? acc[formattedDate].push(newFormattedProduct) : acc[formattedDate] = [newFormattedProduct];
     return acc;
   }, {})
+}
+function changeDateFormatToKR(time) {
+  const kstDate = new Date(time);
+  const year = kstDate.getFullYear();
+  const month = kstDate.getMonth() + 1;
+  const date = kstDate.getDate();
+  const hour = kstDate.getHours();
+  const minute = kstDate.getMinutes();
+  return `${year}-${month.toString().padStart(2, '0')}-${date.toString().padStart(2, '0')} ${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
 }
 function deduplicateAndCheckQuantity(list) {
   list.forEach((item) => {
@@ -289,8 +288,10 @@ function onClickConfirmBtn(event) {
 }
 function filterByFlatPickr(orderListData) {
   return orderListData.filter(order => {
-    const utcDate = new Date(order.timePaid);
-    const kstDate = new Date(utcDate.getTime() + (9 * 60 * 60 * 1000));
-    return kstDate.toISOString().slice(0, 10) === pickerEl.value
+    const kstDate = new Date(order.timePaid);
+    const year = kstDate.getFullYear();
+    const month = kstDate.getMonth() + 1;
+    const date = kstDate.getDate();
+    return `${year}-${month.toString().padStart(2, '0')}-${date.toString().padStart(2, '0')}` === pickerEl.value
   })
 }
