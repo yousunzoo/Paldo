@@ -15,7 +15,9 @@ export const renderDetailPage = async (id, router) => {
           <a href="editproduct/${productInfo.id}" class="edit-button">수정</a>
         </div>
         <div class="delete">
-          <a class="delete-button" href="/product" class="delete-button">삭제</a>
+          <a class="delete-button" href="admin/product" class="delete-button"
+            >삭제</a
+          >
         </div>
       </div>
     </div>
@@ -44,7 +46,11 @@ export const renderDetailPage = async (id, router) => {
             </div>
             <div class="tag">
               <div class="title">할인가</div>
-              <div class="val">${parseInt(productInfo.price * (1 - productInfo.discountRate / 100))}원</div>
+              <div class="val">
+                ${parseInt(
+                  productInfo.price * (1 - productInfo.discountRate / 100)
+                )}원
+              </div>
             </div>
           </div>
         </div>
