@@ -1,6 +1,8 @@
 import { getProducts } from "../api/getProducts";
 import link from "../../static/images/no-result.svg";
 import moveToDetail from "../movetoProductDetail";
+import { setSidebar } from "../sidebar";
+import { addCart } from "../product/setProductDetailPage";
 
 export default async function setResultPage(keyword, router) {
   const searchResult = await getProducts(keyword);
@@ -96,8 +98,16 @@ function setProductList(prdList, sort, originResult, router) {
                     </div>
                   </div>
                 </a>`;
+
+    const cartButton = productEl.querySelector(".add-cart-btn");
     productEl.querySelector("a").addEventListener("click", function (event) {
+      if (event.target === cartButton) {
+        event.preventDefault();
+        addCart(item);
+        return;
+      }
       moveToDetail(event, this, router);
+      setSidebar(item);
     });
     return productEl;
   });
