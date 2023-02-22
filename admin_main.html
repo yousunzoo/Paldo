@@ -7,113 +7,52 @@
     <title>OttogiAdmin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
-      rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet" />
     <!-- chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
-
+    <!-- sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="./scss/admin_common.scss" />
     <link rel="stylesheet" href="./scss/admin_main.scss" />
-    <script defer src="./js/library/chart.js"></script>
-    <script defer src="./js/main.js"></script>
+    <link rel="stylesheet" href="./scss/admin_goods.scss" />
+    <link rel="stylesheet" href="./scss/admin_list.scss" />
+    <link rel="stylesheet" href="./scss/admin_add.scss" />
+    <link rel="stylesheet" href="./scss/admin_detail_product.scss" />
+    <link rel="stylesheet" href="./scss/admin_detail_edit.scss" />
+    <link rel="stylesheet" href="./scss/admin_detail_history.scss" />
+
+    <script type="module" defer src="./js/main.js"></script>
   </head>
-  <body>
+  <body id="app">
     <header class="admin-header">
       <div class="header-wrapper">
-        <a class="logo" href="javascript:void(0)">
-          <img src="./static/images/logo-white.png" alt="오뚜기 몰" />
-        </a>
+        <a class="logo" href="report"></a>
         <div class="admin-info">
           <div class="info-name">관리자</div>
-          <a href="javascript:void(0)" class="info-logout">로그아웃</a>
+          <a href="logout" class="info-logout">로그아웃</a>
         </div>
       </div>
     </header>
     <section class="container">
       <div class="left-nav-bar">
         <div class="side-menu-wrapper">
-          <a href="javascript:void(0)" class="side-menu report">
+          <a href="report" class="side-menu report" data-navigo>
             <div class="menu-title">보고서</div>
           </a>
-          <a href="javascript:void(0)" class="side-menu management">
+          <a href="product" class="side-menu management" data-navigo>
             <div class="menu-title">상품 관리</div>
           </a>
-          <a href="javascript:void(0)" class="side-menu transaction-history">
+          <a href="transaction" class="side-menu transaction-history" data-navigo>
             <div class="menu-title">거래 내역 관리</div>
           </a>
         </div>
       </div>
-      <div class="right-nav-bar">
-        <div class="product-chart">
-          <div class="bar-chart-wrapper">
-            <canvas id="bar-chart" width="500px" height="300px"></canvas>
-          </div>
-          <div class="pie-chart-wrapper">
-            <canvas id="pie-chart" width="300px" height="300px"></canvas>
-          </div>
-        </div>
-        <div class="product-inner">
-          <div class="store-title">스토어 현황</div>
-          <div class="store-status">
-            <a href="javascript:void(0)" class="status-item status-orders">
-              <img
-                src="./static/images/order-status-order.jpg"
-                alt="orders"
-                class="status-img" />
-              <div class="title">주문 수</div>
-              <div class="order-score score">0</div>
-            </a>
-            <a href="javascript:void(0)" class="status-item status-withdraw">
-              <img
-                src="./static/images/order-status-cancel.jpg"
-                alt="withdraw"
-                class="status-img" />
-              <div class="title">주문 취소</div>
-              <div class="withdraw-score score">0</div>
-            </a>
-            <a
-              href="javascript:void(0)"
-              class="status-item status-confirmation">
-              <img
-                src="./static/images/order-status-confirm.jpg"
-                alt=""
-                class="status-img" />
-              <div class="title">구매 확정</div>
-              <div class="confirmation-score score">0</div>
-            </a>
-            <a href="javascript:void(0)" class="status-item status-sales">
-              <img
-                src="./static/images/order-status-sales.jpg"
-                alt=""
-                class="status-img" />
-              <div class="title">총 매출</div>
-              <div class="sales-score score">0</div>
-            </a>
-            <a href="javascript:void(0)" class="status-item status-current">
-              <img
-                src="./static/images/order-status-goods.jpg"
-                alt=""
-                class="status-img" />
-              <div class="title">현재 상품</div>
-              <div class="current-score score">0</div>
-            </a>
-            <a href="javascript:void(0)" class="status-item status-soldout">
-              <img
-                src="./static/images/order-status-soldout.jpg"
-                alt=""
-                class="status-img" />
-              <div class="title">품절 상품</div>
-              <div class="soldout-score score">0</div>
-            </a>
-          </div>
-        </div>
-      </div>
+      <div class="right-nav-bar" id="content"></div>
     </section>
   </body>
 </html>
