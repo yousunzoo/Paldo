@@ -2,10 +2,20 @@ import { count, transactionscount } from "../adminReport/getCountData";
 
 export function chartFn() {
   const bar = document.getElementById("bar-chart").getContext("2d");
+  Chart.defaults.font.size = 11;
   const barChart = new Chart(bar, {
     type: "bar",
     data: {
-      labels: ["전체상품", "스낵", "라면", "음료", "초콜릿/캔디류", "인기", "신상", "세일"],
+      labels: [
+        "전체상품",
+        "스낵",
+        "라면",
+        "음료",
+        "초콜릿/캔디류",
+        "인기",
+        "신상",
+        "세일",
+      ],
       datasets: [
         {
           label: "현재 제품 수량",
@@ -43,7 +53,16 @@ export function chartFn() {
   const pieChart = new Chart(pie, {
     type: "pie",
     data: {
-      labels: ["전체상품", "스낵", "라면", "음료", "초콜릿/캔디류", "인기", "신상", "세일"],
+      labels: [
+        "전체상품",
+        "스낵",
+        "라면",
+        "음료",
+        "초콜릿/캔디류",
+        "인기",
+        "신상",
+        "세일",
+      ],
       datasets: [
         {
           label: "현재판매 수량",
