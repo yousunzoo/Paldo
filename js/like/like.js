@@ -22,10 +22,10 @@ const { WISH_LIST } = SORT_TYPES
 //   }
 // })()
 
-export function setLikePage(router) {
-  initPage(router);
+export function setLikePage() {
+  initPage();
 
-  function initPage(router) {
+  function initPage() {
     // 찜목록 데이터 불러오기
     const wishList = getLocalStorageData(WISH_LIST)
     const totalEl = document.querySelector('.main-text > span');
@@ -40,12 +40,12 @@ export function setLikePage(router) {
       return;
     }
     // 찜목록이 있다면
-    const wishListEl = createWishList(wishList, router)
+    const wishListEl = createWishList(wishList)
     contentEl.innerHTML = '';
     contentEl.append(wishListEl);
     skeletonLoadingEl.classList.add('d-none');
   }
-  function createWishList(wishList, router) {
+  function createWishList(wishList) {
     const fragmentEl = document.createDocumentFragment();
     wishList.forEach((wish) => {
       const { id, title, price, discountRate = 0, thumbnail } = wish;
@@ -89,7 +89,7 @@ export function setLikePage(router) {
         })
         const loginId = JSON.parse(localStorage.getItem('loginInfo')).loginId;
         const userData = JSON.parse(localStorage.getItem(loginId))
-        localStorage.setItem(loginId, JSON.stringify({...userData, wish : filteredWishList}))
+        localStorage.setItem(loginId, JSON.stringify({...userData, wishList : filteredWishList}))
         initPage();
       })
       // take-button
@@ -140,12 +140,11 @@ export function setLikePage(router) {
       </div>
     `
   }
-  
 }
 
 function setMockData () {
   // 제품명, 가격, 수량, 썸네일이미지
-  const wish = [
+  const wishList = [
     { id : 'xr14ikmurlABzuizuDge', title : "이토엔쟈스민티(500ml*24)", price : 37950, thumbnailImage : "/images/product/이토엔쟈스민티.png" },
     { id : 'sm9RXKb3hpHe3MfEZyjb', title : "카프리썬 오렌지(200ml*10)", price : 6050, discountRate : 15, thumbnailImage : "/images/product/카프리썬오렌지.png" },
     { id : 'sWpLAtpN52bmwkhqiq1S', title : "파워오투 복숭아자몽(500ml*24)", price : 35200, thumbnailImage : "/images/product/파워오투복숭아자몽.png" },
@@ -153,5 +152,5 @@ function setMockData () {
   ]
   const loginId = JSON.parse(localStorage.getItem('loginInfo')).loginId;
   const userData = JSON.parse(localStorage.getItem(loginId))
-  localStorage.setItem(loginId, JSON.stringify({...userData, wish}))
+  localStorage.setItem(loginId, JSON.stringify({...userData, wishList}))
 }
