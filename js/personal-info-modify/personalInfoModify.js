@@ -2,6 +2,7 @@
 import { SORT_TYPES, getLocalStorageData } from '../localStorage/getLocalStorageData';
 import getAddress from '../library/postcode.js';
 import { requestPersonalInfoModify } from '../api/requestPersonalInfoModify.js'
+import { setProfile } from '../profile/profile.js'
 
 /* GLOBAL LOGIC */
 // ;(async function () {
@@ -62,6 +63,7 @@ export function setModifyPage() {
     // 서버에 회원정보 수정 요청
     await requestPersonalInfoModify(userInfo, userAddress);
     initPage();
+    setProfile();
   });
 
   // 현재 비밀번호
