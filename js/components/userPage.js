@@ -359,7 +359,7 @@ export const couponPage = /* html */ `<div class="inner-wrapper">
 export const productPage = /* html */ `
 <div class="inner-wrapper">
 <div class="product-banner"></div>
-<h3 class="product-title"></h3>
+<h3 class="product-page-title"></h3>
 <div class="product-wrapper">
   <div class="product-tab">
     <p class="total-count">총 <span class="count"></span>건</p>
@@ -398,7 +398,7 @@ export const productDetailPage = /* html */ `
       <div class="product-login-text">로그인 후 구매하실 수 있습니다.</div>
       <div class="product-quantity">
         <div class="title">수량 선택</div>
-        <button class="down-button">-</button>
+        <button class="down-button" disabled>-</button>
         <div class="count">1</div>
         <button class="up-button">+</button>
       </div>

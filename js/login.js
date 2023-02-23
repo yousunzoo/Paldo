@@ -1,7 +1,6 @@
 import { logInFn } from "./api/requestLogin";
 
 export default function loginEvent(router) {
-  let isLogined;
   const loginForm = document.querySelector(".login-form");
 
   loginForm.addEventListener("submit", async (event) => {
@@ -12,6 +11,6 @@ export default function loginEvent(router) {
       email,
       password,
     };
-    await logInFn(data);
+    await logInFn(data, router);
   });
 }
