@@ -1,5 +1,5 @@
 import { headers, url } from '../api/headers.js'
-import { SORT_TYPES, getDataFromLocalStorage } from './utils/localStorage.js'
+import { SORT_TYPES, getLocalStorageData } from '../localStorage/getLocalStorageData'
 
 const { ACCESS_TOKEN } = SORT_TYPES;
 
@@ -14,7 +14,7 @@ const { ACCESS_TOKEN } = SORT_TYPES;
     } 
  */
 export async function getBankList () {
-  const accessToken = getDataFromLocalStorage(ACCESS_TOKEN);
+  const accessToken = getLocalStorageData(ACCESS_TOKEN);
   const res = await fetch(`${url}account/banks`, {
     headers : {
       ...headers,
@@ -42,7 +42,7 @@ export async function getBankList () {
   }
  */
 export async function connectBankAccount (body) {
-  const accessToken = getDataFromLocalStorage(ACCESS_TOKEN);
+  const accessToken = getLocalStorageData(ACCESS_TOKEN);
   const res = await fetch(`${url}account`, {
     method: 'POST',
     headers : {
@@ -67,7 +67,7 @@ export async function connectBankAccount (body) {
   }
  */ 
 export async function getUserAccounts() {
-  const accessToken = getDataFromLocalStorage(ACCESS_TOKEN);
+  const accessToken = getLocalStorageData(ACCESS_TOKEN);
   const res = await fetch(`${url}account`, {
     method: 'GET',
     headers : {
@@ -89,7 +89,7 @@ export async function getUserAccounts() {
  * @return ResponseValue = true
  */
 export async function deleteAccount(body) {
-  const accessToken = getDataFromLocalStorage(ACCESS_TOKEN);
+  const accessToken = getLocalStorageData(ACCESS_TOKEN);
   const res = await fetch(`${url}account`, {
     method: 'DELETE',
     headers : {
