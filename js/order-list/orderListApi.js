@@ -1,10 +1,10 @@
-import { SORT_TYPES, getDataFromLocalStorage } from '../order-sheet/utils/localStorage.js';
+import { SORT_TYPES, getLocalStorageData } from '../localStorage/getLocalStorageData.js';
 import { headers, url } from "../api/headers.js";
 
 const { ACCESS_TOKEN } = SORT_TYPES;
 
 export async function getOrderList() {
-  const accessToken = getDataFromLocalStorage(ACCESS_TOKEN);
+  const accessToken = getLocalStorageData(ACCESS_TOKEN);
   const res = fetch(`${url}products/transactions/details`, {
     headers : {
         ...headers,
@@ -25,7 +25,7 @@ export async function getOrderList() {
 }
 
 export async function cancelTransaction(body) {
-  const accessToken = getDataFromLocalStorage(ACCESS_TOKEN);
+  const accessToken = getLocalStorageData(ACCESS_TOKEN);
   const res = fetch(`${url}products/cancel`, {
     method: 'POST',
     headers : {
@@ -44,7 +44,7 @@ export async function cancelTransaction(body) {
 }
 
 export async function confirmTransaction(body) {
-  const accessToken = getDataFromLocalStorage(ACCESS_TOKEN);
+  const accessToken = getLocalStorageData(ACCESS_TOKEN);
   const res = fetch(`${url}products/ok`, {
     method: 'POST',
     headers : {
