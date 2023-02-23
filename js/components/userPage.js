@@ -330,9 +330,9 @@ export const searchPage = /* html */ `
           </div>
         </div>`;
 
-export const couponPage = /* html */ `<div class="inner__wrapper">
+export const couponPage = /* html */ `<div class="inner-wrapper">
 <p class="sub-title">식품 쇼핑, 오뚜기몰이랑 함께 해!</p>
-<h2 class="title">오뚜기몰 신규회원 누구나 최대 10만원 할인</h2>
+<h2 class="coupon-title">오뚜기몰 신규회원 누구나 최대 10만원 할인</h2>
 <div class="coupon">
   <img src="${require("../../static/images/coupon-pack.png")}" alt="오뚜기몰 쿠폰 팩" />
   <div class="get-coupon-button">쿠폰팩 발급받기</div>
@@ -377,7 +377,7 @@ export const productPage = /* html */ `
 `;
 
 export const productDetailPage = /* html */ `
-<div class="inner__wrapper">
+<div class="inner-wrapper">
   <div class="product-detail-wrapper">
     <div class="sold-out">
         <p>해당 상품은 현재 품절되었습니다.</p>
@@ -511,7 +511,7 @@ export const cartPage = /* html */ `
         </div>
         `;
 
-export const myPage = /* html */`
+export const myPage = /* html */ `
   <!-- USER INFO -->
   <section class="user-info">
     <div class="inner-wrapper">
@@ -592,9 +592,9 @@ export const myPage = /* html */`
     <div class="main" id="myPageMain"></div>
   </div>
 
-`
+`;
 
-export const orderListPage = /* html */`
+export const orderListPage = /* html */ `
   <!-- USER INFO -->
   <section class="user-info">
     <div class="inner-wrapper">
@@ -696,9 +696,9 @@ export const orderListPage = /* html */`
     </div>
   </div>
 
-`
+`;
 
-export const accountPage = /* html */`
+export const accountPage = /* html */ `
   <!-- USER INFO -->
   <section class="user-info">
     <div class="inner-wrapper">
@@ -877,9 +877,9 @@ export const accountPage = /* html */`
     </div>
   </div>
 
-`
+`;
 
-export const likePage = /* html */`
+export const likePage = /* html */ `
     <!-- USER INFO -->
     <section class="user-info">
     <div class="inner-wrapper">
@@ -1002,9 +1002,9 @@ export const likePage = /* html */`
           </div>
     </div>
   </div>
-`
+`;
 
-export const modifyPage = /* html */`
+export const modifyPage = /* html */ `
         <!-- USER INFO -->
         <section class="user-info">
         <div class="inner-wrapper">
@@ -1158,9 +1158,9 @@ export const modifyPage = /* html */`
           </div>
         </div>
       </div>
-`
+`;
 
-export const orderSheetPage = /* html */`
+export const orderSheetPage = /* html */ `
       <div class="inner-wrapper order-sheet-wrapper">
         <h2>주문서</h2>
 
@@ -1434,4 +1434,4 @@ export const orderSheetPage = /* html */`
         </div>
       </div>
 
-`
+`;
