@@ -2,12 +2,12 @@ export const SORT_TYPES = {
   ACCESS_TOKEN: 'accessToken',
   USER_INFO: 'userInfo',
   USER_ADDRESS: 'userAddress',
-  CART: 'cart',
+  CART_LIST: 'cartList',
   COUPONS: 'coupons',
-  WISH: 'wish',
+  WISH_LIST: 'wishList',
 };
 
-export function getDataFromLocalStorage (sort) {
+export function getLocalStorageData (sort) {
   const loginInfo = JSON.parse(localStorage.getItem('loginInfo'));
   const userData = JSON.parse(localStorage.getItem(loginInfo.loginId));
 
@@ -21,13 +21,13 @@ export function getDataFromLocalStorage (sort) {
     case 'userAddress' :
       return userData?.userAddress;
       
-    case 'cart' :
-      return userData?.cart;
-    
+    case 'cartList' :
+      return userData?.cartList;
+
     case 'coupons' :
       return userData?.coupons;
 
-    case 'wish' :
-      return userData?.wish;
+    case 'wishList' :
+      return userData?.wishList;
   }
 }

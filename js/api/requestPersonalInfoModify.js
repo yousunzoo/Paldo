@@ -1,10 +1,10 @@
 import { headers, url } from "./headers";
-import { SORT_TYPES, getDataFromLocalStorage } from '../personal-info-modify/utils/localStorage';
+import { SORT_TYPES, getLocalStorageData } from '../localStorage/getLocalStorageData';
 
 const { ACCESS_TOKEN } = SORT_TYPES;
 
 export async function requestPersonalInfoModify(newData, userAddress) {
-  const accessToken = getDataFromLocalStorage(ACCESS_TOKEN);
+  const accessToken = getLocalStorageData(ACCESS_TOKEN);
   await fetch(`${url}auth/user`, {
     method: 'PUT',
     headers: {
