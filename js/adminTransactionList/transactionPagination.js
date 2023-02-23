@@ -46,18 +46,12 @@ export const transactionPagination = async (search = undefined, router) => {
 
   paginationEl.innerHTML = html;
 
-  const currentPageNums = document.querySelectorAll(
-    ".pagination-transaction button"
-  );
+  const currentPageNums = document.querySelectorAll(".pagination-transaction button");
   currentPageNums.forEach((button) => {
     button.addEventListener("click", () => {
       currentPage = button.innerText;
       transactionList.innerHTML = "";
-      renderTransactionsList(
-        router,
-        arr[currentPage - 1],
-        (currentPage - 1) * 10 + 1
-      );
+      renderTransactionsList(router, arr[currentPage - 1], (currentPage - 1) * 10 + 1);
     });
   });
 
@@ -81,9 +75,7 @@ const filterAll = (listEls) => {
 // 검색어 정렬
 const filterBySearch = (listEls, search) => {
   isRendered = false;
-  const searchFilters = listEls.filter((item) =>
-    item.user.displayName.includes(search)
-  );
+  const searchFilters = listEls.filter((item) => item.user.displayName.includes(search));
 
   if (searchFilters.length === 0) {
     Swal.fire({
@@ -108,10 +100,8 @@ const filterByDate = (listEls, search) => {
   isRendered = false;
   const searchFilters = listEls.filter((item) => {
     const utcDate = new Date(item.timePaid);
-    const krDate = new Date(utcDate.getTime() * 60 * 60 * 1000);
-    const formattedDate = krDate.slice(0, 10);
-    console.log(formattedDate);
-    if (formattedDate === search) {
+    const krDate = utcDate.toISOString().slice(0, 10);
+    if (krDate === search) {
       return item;
     }
   });

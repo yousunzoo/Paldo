@@ -147,7 +147,6 @@ router
             pagination(search, router);
           },
           "product/:id": ({ data }) => {
-            console.log(data);
             document.querySelector("#content").innerHTML = product_detail_page;
             renderDetailPage(data.id, router);
           },
@@ -188,8 +187,7 @@ router
             renderAddPage();
           },
           "transaction/:id": ({ data }) => {
-            document.querySelector("#content").innerHTML =
-              transaction_detail_page;
+            document.querySelector("#content").innerHTML = transaction_detail_page;
             renderDetailTransactionPage(data);
           },
         })

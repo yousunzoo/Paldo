@@ -14,6 +14,7 @@ export const renderGoodsList = async (router, itemListData, no) => {
       className: "info item-check",
     });
     const inputCheck = makeDOMwithProperties("input", {
+      className: "check-box",
       type: "checkbox",
     });
     const itemNo = makeDOMwithProperties("div", {
@@ -59,7 +60,6 @@ export const renderGoodsList = async (router, itemListData, no) => {
     itemEl.append(itemCheck, itemNo, itemId, itemThum, itemName, itemCategory, itemPrice, itemSale, itemOutstock);
     itemEl.addEventListener("click", function (event) {
       if (event.target === inputCheck) {
-        console.log(event.target);
         return;
       }
       event.preventDefault();

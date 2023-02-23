@@ -15,11 +15,7 @@ export const adminWrapper = /* html */ `
         <a href="report" class="side-menu report" data-navigo>
           <div class="menu-title">보고서</div>
         </a>
-<<<<<<< HEAD
-        <a href="adminproduct/" class="side-menu management" data-navigo>
-=======
         <a href="product" class="side-menu management" data-navigo>
->>>>>>> c54931047decbd97433e6b3dbb7a47678b85e523
           <div class="menu-title">상품 관리</div>
         </a>
         <a

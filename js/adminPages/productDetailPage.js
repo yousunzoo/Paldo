@@ -15,31 +15,25 @@ export default /* html */ `
       </div>
       <div class="goods-item-wrapper">
         <div class="bar"></div>
-        <div class="goods-info">
+        <div class="goods-info skeleton-loading">
           <div class="goods-info-wrapper">
             <div class="goods-thumbnail">
-              <img src="" alt="" />
             </div>
             <div class="goods-info-text">
               <div class="category">
-                <div class="title">카테고리</div>
-                <div class="val">스낵</div>
+                <div class="title"></div>
               </div>
               <div class="name">
-                <div class="title">상품명</div>
-                <div class="val">감자깡</div>
+                <div class="title"></div>
               </div>
               <div class="price">
-                <div class="title">가격</div>
-                <div class="val">50,000원</div>
+                <div class="title"></div>
               </div>
               <div class="sale">
-                <div class="title">할인율</div>
-                <div class="val">10%</div>
+                <div class="title"></div>
               </div>
               <div class="tag">
-                <div class="title">태그</div>
-                <div class="val">인기</div>
+                <div class="title"></div>
               </div>
             </div>
           </div>

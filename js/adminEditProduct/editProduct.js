@@ -25,14 +25,18 @@ export const renderEditDetailPage = async (id, router) => {
   const backButton = document.querySelector(".back-button");
   backButton.addEventListener("click", function (event) {
     event.preventDefault();
-    router.navigate(`admin/product/${id}`);
+    router.navigate(`/product/${id}`);
   });
 
   // 수정버튼
   const editButton = document.querySelector(".edit-button");
-  editButton.addEventListener("click", () => {
+  editButton.addEventListener("click", (event) => {
     try {
       editDataInfoSend(editProduct, id);
+      setTimeout(() => {
+        event.preventDefault();
+        router.navigate(`/product/${id}`);
+      }, 2000);
     } catch {
       Swal.fire("수정할 수 없습니다.", "상품 정보를 다시 확인해주세요.", "question");
     }

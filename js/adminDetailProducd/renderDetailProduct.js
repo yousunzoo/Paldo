@@ -15,7 +15,7 @@ export const renderDetailPage = async (id, router) => {
           <a href="editproduct/${productInfo.id}" class="edit-button">수정</a>
         </div>
         <div class="delete">
-          <a class="delete-button" href="/product" class="delete-button">삭제</a>
+          <a class="delete-button" data-navigo>삭제</a>
         </div>
       </div>
     </div>
@@ -65,7 +65,9 @@ export const renderDetailPage = async (id, router) => {
   });
 
   let deleteButton = document.querySelector(".delete-button");
-  deleteButton.addEventListener("click", async () => {
+  deleteButton.addEventListener("click", async (event) => {
     await deleteProduct(productInfo.id);
+    event.preventDefault();
+    router.navigate("/product/");
   });
 };

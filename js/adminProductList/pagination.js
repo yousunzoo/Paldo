@@ -1,5 +1,5 @@
 import { deleteProduct } from "../api/deleteProduct.js";
-import { memoizedGetProduct } from "../api/getProduct.js";
+import { getProduct } from "../api/getProduct.js";
 import { renderGoodsList } from "./renderGoodsList.js";
 
 let limit = 10;
@@ -21,7 +21,7 @@ export const pagination = async (search = undefined, router) => {
   });
   let paginationEl = document.querySelector(".pagination");
 
-  let listEls = await memoizedGetProduct();
+  let listEls = await getProduct();
 
   let arr;
   let totalCount;
@@ -69,6 +69,16 @@ export const pagination = async (search = undefined, router) => {
     renderGoodsList(router, arr[currentPage - 1]);
     isRendered = true;
   }
+  const checkboxWrapper = document.querySelectorAll(".item-check");
+  const myCheckbox = document.querySelectorAll(".check-box");
+
+  checkboxWrapper.forEach(function (wrapper, i) {
+    wrapper.addEventListener("click", function (event) {
+      if (event.target.type !== "checkbox") {
+        myCheckbox[i].checked = !myCheckbox[i].checked;
+      }
+    });
+  });
 
   allCheck = document.querySelector(".all-check input");
   itemCheck = document.querySelectorAll(".item-check input");
@@ -93,13 +103,8 @@ export const pagination = async (search = undefined, router) => {
         checkList.push(item);
       }
     });
-    console.log(count);
     if (count < 1) {
-      Swal.fire(
-        "선택한 항목이 없습니다.",
-        "삭제할 상품을 선택해주세요.",
-        "question"
-      );
+      Swal.fire("선택한 항목이 없습니다.", "삭제할 상품을 선택해주세요.", "question");
       return;
     } else {
       for (const item of checkList) {

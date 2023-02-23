@@ -1,5 +1,5 @@
 import { memoizedGetProduct } from "../api/getProduct";
-import { memoizedGetTransactions } from "../api/getTransactions";
+import { getTransactions } from "../api/getTransactions";
 
 export const count = async () => {
   return memoizedGetProduct().then((productList) => {
@@ -16,7 +16,7 @@ export const count = async () => {
 };
 
 export const transactionscount = async () => {
-  return memoizedGetTransactions().then((transactionsList) => {
+  return getTransactions().then((transactionsList) => {
     const all = transactionsList.length;
     const snack = transactionsList.reduce((count, item) => count + Number(item.product.tags.includes("스낵") === true), 0);
     const ramen = transactionsList.reduce((count, item) => count + Number(item.product.tags.includes("라면") === true), 0);
