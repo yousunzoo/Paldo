@@ -22,7 +22,10 @@ async function logoutFn(accessToken) {
       return response.json();
     })
     .then((result) => {
-      resetHeader();
+      const loginedId = JSON.parse(localStorage.getItem("loginInfo")).loginId;
+      if (loginedId != "admin@paldo.com") {
+        resetHeader();
+      }
       return result;
     });
   return res;

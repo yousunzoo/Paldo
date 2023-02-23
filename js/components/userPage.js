@@ -315,7 +315,7 @@ export const sigupPage = /* html */ `
 
 export const searchPage = /* html */ `
 <div class="inner-wrapper">
-          <h3 class="product-title"></h3>
+          <h3 class="product-page-title"></h3>
           <div class="product-wrapper">
             <div class="product-tab">
               <p class="total-count">총 <span class="count"></span>건</p>
