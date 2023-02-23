@@ -1,7 +1,7 @@
 import { headers, url } from "./headers";
 import { SORT_TYPES, getLocalStorageData } from '../localStorage/getLocalStorageData';
 
-const { ACCESS_TOKEN } = SORT_TYPES;
+const { ACCESS_TOKEN, USER_DATA } = SORT_TYPES;
 
 export async function requestPersonalInfoModify(newData, userAddress) {
   const accessToken = getLocalStorageData(ACCESS_TOKEN);
@@ -26,9 +26,10 @@ export async function requestPersonalInfoModify(newData, userAddress) {
         'success'
       )
       // localStorage 세팅
+      const userData = getLocalStorageData(USER_DATA)
       localStorage.setItem(
         result.email,
-        JSON.stringify({ userInfo: result, userAddress })
+        JSON.stringify({ ...userData, userInfo: result, userAddress })
       );
     })
     .catch((error) => {

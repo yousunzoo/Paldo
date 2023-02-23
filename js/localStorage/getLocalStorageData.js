@@ -5,6 +5,7 @@ export const SORT_TYPES = {
   CART_LIST: 'cartList',
   COUPONS: 'coupons',
   WISH_LIST: 'wishList',
+  USER_DATA: 'userData'
 };
 
 export function getLocalStorageData (sort) {
@@ -29,5 +30,7 @@ export function getLocalStorageData (sort) {
 
     case 'wishList' :
       return userData?.wishList;
+    case 'userData' :
+      return userData;
   }
 }
