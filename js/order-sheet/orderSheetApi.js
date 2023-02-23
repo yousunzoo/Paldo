@@ -1,11 +1,11 @@
-import { SORT_TYPES, getDataFromLocalStorage } from './utils/localStorage.js';
+import { SORT_TYPES, getLocalStorageData } from '../localStorage/getLocalStorageData';
 import { headers, url } from "../api/headers.js";
 
 const { ACCESS_TOKEN } = SORT_TYPES;
 
 export function requestTransaction(body) {
   return new Promise((resolve, reject) => {
-    const accessToken = getDataFromLocalStorage(ACCESS_TOKEN);
+    const accessToken = getLocalStorageData(ACCESS_TOKEN);
     fetch(`${url}products/buy`, {
       method: 'POST',
       headers: {

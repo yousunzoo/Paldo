@@ -9,7 +9,7 @@ import { addCart } from "./setProductDetailPage";
 
 export default async function setProductPage(tag, router) {
   // 타이틀 세팅
-  const keywordTitle = document.querySelector(".product-title");
+  const keywordTitle = document.querySelector(".product-page-title");
   const productBanner = document.querySelector(".product-banner");
   let url;
   let title;

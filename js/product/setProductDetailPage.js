@@ -35,6 +35,11 @@ export default async function setProductDetailPage(id, router) {
     originPrice.innerHTML = "";
   }
 
+  // btn-wrapper padding-top 조절
+  const btnWrapper = document.querySelector(".btn-wrapper");
+  if (productInfo.discountRate != 0) {
+    btnWrapper.style.paddingTop = "145px";
+  }
   const totalPrice = document.querySelector(".total-num");
   totalPrice.textContent = productInfo.price.toLocaleString();
 
