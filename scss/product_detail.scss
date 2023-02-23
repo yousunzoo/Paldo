@@ -11,22 +11,15 @@ $color_white: #ffffff;
 $color_copyright: rgb(247, 247, 247);
 $color_banner_btn: #fbcd57;
 $color_please_login: rgb(19, 0, 232);
-a {
-  text-decoration: none;
-  color: inherit;
-}
-#wrap {
+
+#content-wrapper {
   min-width: 1440px;
-  font-family: "Noto Sans KR", sans-serif;
   letter-spacing: -0.3px;
-}
+  .inner-wrapper {
+    width: 1050px;
+    margin: 0 auto;
+  }
 
-.inner-wrapper {
-  width: 1050px;
-  margin: 0 auto;
-}
-
-section {
   .product-detail-wrapper {
     padding-top: 50px;
     padding-bottom: 50px;
@@ -142,7 +135,7 @@ section {
         .btn-wrapper {
           display: flex;
           justify-content: space-between;
-          padding-top: 30px;
+          padding-top: 168px;
           padding-right: 50px;
 
           .wish-btn {

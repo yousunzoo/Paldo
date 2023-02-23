@@ -13,7 +13,7 @@ export default async function setResultPage(keyword, router) {
 }
 
 function showResult(searchResult, originResult, keyword, router) {
-  const keywordTitle = document.querySelector(".product-title");
+  const keywordTitle = document.querySelector(".product-page-title");
   const amount = document.querySelector(".count");
   keywordTitle.textContent = keyword;
   const productWrapperDiv = document.querySelector(".product-wrapper");

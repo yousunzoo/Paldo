@@ -10,18 +10,7 @@ $color_incorrect: #f03f40;
 $color_white: #ffffff;
 $color_copyright: rgb(247, 247, 247);
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
 #userWrapper {
-  min-width: 1440px;
-  font-family: "Noto Sans KR", sans-serif;
-  letter-spacing: -0.3px;
-  .inner__wrapper {
-    width: 1050px;
-    margin: 0 auto;
-  }
   #main {
     border-bottom: 1px solid #f7f7f7;
     padding-bottom: 170px;

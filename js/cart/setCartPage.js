@@ -19,12 +19,12 @@ export default async function setCartPage(router) {
   const loginedId = JSON.parse(localStorage.getItem("loginInfo")).loginId;
   const loginedIdData = JSON.parse(localStorage.getItem(loginedId));
   let cartListData = loginedIdData.cartList;
-  cartList = [...cartListData];
+  cartList = cartListData ? [...cartListData] : [];
   const cartListArea = document.querySelector(".product-list");
 
   cartListArea.innerHTML = "";
 
-  if (!cartList || cartList.length === 0) {
+  if (cartList.length === 0) {
     // localStorage에 cartList 없으면 없다는 정보 출력
     cartListArea.innerHTML = `<div class="no-list"><p>장바구니에 담긴 상품이 없습니다.</p></div>`;
   }

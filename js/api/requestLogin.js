@@ -3,7 +3,7 @@ import { setUserInfo } from "../localStorage/setLoginData";
 import { changeHeader } from "../main/changeHeader";
 
 // 이전 페이지로 이동하는 버튼을 클릭할 때
-export async function logInFn(data) {
+export async function logInFn(data, router) {
   const res = await fetch(`${url}auth/login`, {
     method: "POST",
     headers,
@@ -18,7 +18,7 @@ export async function logInFn(data) {
     .then((result) => {
       setUserInfo(result, data.email);
       changeHeader();
-      window.history.go(-1);
+      router.navigate("/");
     })
     .catch(() => {
       Swal.fire({

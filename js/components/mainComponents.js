@@ -5,7 +5,7 @@ export const adminWrapper = /* html */ `
       <a class="logo" href="report" data-navigo></a>
       <div class="admin-info">
         <div class="info-name">관리자</div>
-        <a href="logout" class="info-logout">로그아웃</a>
+        <a href="/" class="info-logout" data-navigo>로그아웃</a>
       </div>
     </div>
   </header>
@@ -56,7 +56,7 @@ export const userWrapper = /* html */ `
             <button class="search-btn"></button>
           </form>
           <ul class="header-icon-menus">
-            <li><a href="javascript:void(0)" aria-label="찜목록"></a></li>
+            <li><a href="/mypage/like" data-navigo aria-label="찜목록"></a></li>
             <li>
               <a href="/cart" data-navigo aria-label="장바구니"></a>
             </li>
@@ -100,7 +100,7 @@ export const userWrapper = /* html */ `
     <div class="inner-wrapper">
       <div class="footer-team-info1">
         <div class="team-name">
-          <img src="./static/images/team_logo.png" alt="전국팔도" />
+          <img src="${require("../../static/images/team_logo.png")}" alt="전국팔도" />
           <div class="team-name-desc">
             <div class="team-title-area">
               <p class="team-title">Team</p>

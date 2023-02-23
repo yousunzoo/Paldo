@@ -14,7 +14,7 @@ import {
   accountPage,
   likePage,
   modifyPage,
-  orderSheetPage
+  orderSheetPage,
 } from "./components/userPage";
 import handleCouponButton from "./coupon/coupon";
 import handleSearchInput from "./header/handleSearchInput";
@@ -35,9 +35,9 @@ import { setAccountPage } from "./account/account";
 import { setLikePage } from "./like/like";
 import { setModifyPage } from "./personal-info-modify/personalInfoModify";
 import { setOrderSheetPage } from "./order-sheet/orderSheet";
-import { setProfile } from './profile/profile.js'
+import { setProfile } from "./profile/profile.js";
 
-import { adminWrapper } from "./components/mainComponents";
+import { adminWrapper, userWrapper } from "./components/mainComponents";
 import { toggleClass } from "./adminProductList/adminGoodsPage.js";
 import { chartFn } from "./library/chart.js";
 
@@ -56,175 +56,190 @@ import { renderAddPage } from "./adminAddProduct/addPodouct.js";
 import { transactionPagination } from "./adminTransactionList/transactionPagination.js";
 import { renderDetailTransactionPage } from "./adminDetailTransaction/renderDetailTransaction";
 import { renderReportStatus } from "./adminReport/renderStoreStatus.js";
+import { requestLogout } from "./api/requestLogout";
 
-
-const router = new Navigo("/");
-const mainSection = document.querySelector("#main");
-const sidebarArea = document.querySelector("#sidebar-area");
+const mainRouter = new Navigo("/");
 const body = document.querySelector("body");
 
 // 처음 페이지가 로드 되었을 때
-(async () => {
-  const isLogin = await checkAuthorization();
+mainRouter.link("/");
 
-  if (isLogin) {
-    const loginId = JSON.parse(localStorage.getItem("loginInfo")).loginId;
-    if (loginId === "admin@paldo.com") {
-      router.navigate("admin");
-    } else {
-      changeHeader();
-    }
-  }
-})();
-
-router
+mainRouter
   .on({
     "/": async () => {
+      const sidebarArea = document.querySelector("#sidebar-area");
+      body.innerHTML = userWrapper;
       window.scrollTo(0, 0);
-      mainSection.innerHTML = mainPage;
-      setPrdList(router);
+      document.querySelector("#main").innerHTML = mainPage;
+      setSidebarSwiper(mainRouter);
+      // search input
+      handleSearchInput(mainRouter);
+      // to-top-button
+      goToTopFn();
+      setPrdList(mainRouter);
       swiperAction();
       sidebarArea.style.paddingTop = "500px";
+      const logoButton = document.querySelector("#userWrapper .logo");
+      logoButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        mainRouter.navigate("/");
+      });
+
+      const isLogin = await checkAuthorization();
+      if (isLogin) {
+        const loginId = JSON.parse(localStorage.getItem("loginInfo")).loginId;
+        if (loginId === "admin@paldo.com") {
+          mainRouter.navigate("admin");
+        } else {
+          changeHeader();
+        }
+      }
     },
     login: async () => {
+      const sidebarArea = document.querySelector("#sidebar-area");
       window.scrollTo(0, 0);
-      mainSection.innerHTML = loginPage;
-      loginEvent(router);
+      document.querySelector("#main").innerHTML = loginPage;
+      loginEvent(mainRouter);
       sidebarArea.style.paddingTop = "100px";
     },
     signup: () => {
+      const sidebarArea = document.querySelector("#sidebar-area");
       window.scrollTo(0, 0);
-      mainSection.innerHTML = sigupPage;
+      document.querySelector("#main").innerHTML = sigupPage;
       signUpEvent();
       sidebarArea.style.paddingTop = "100px";
     },
     "search/:id": async ({ data }) => {
+      const sidebarArea = document.querySelector("#sidebar-area");
       window.scrollTo(0, 0);
-      mainSection.innerHTML = searchPage;
-      await setResultPage(data.id, router);
+      document.querySelector("#main").innerHTML = searchPage;
+      await setResultPage(data.id, mainRouter);
       sidebarArea.style.paddingTop = "100px";
     },
     coupon: () => {
+      const sidebarArea = document.querySelector("#sidebar-area");
       window.scrollTo(0, 0);
-      mainSection.innerHTML = couponPage;
+      document.querySelector("#main").innerHTML = couponPage;
       handleCouponButton();
       sidebarArea.style.paddingTop = "100px";
     },
     "productDetail/:id": async ({ data }) => {
+      const sidebarArea = document.querySelector("#sidebar-area");
       window.scrollTo(0, 0);
-      mainSection.innerHTML = productDetailPage;
-      await setProductDetailPage(data.id, router);
+      document.querySelector("#main").innerHTML = productDetailPage;
+      await setProductDetailPage(data.id, mainRouter);
       sidebarArea.style.paddingTop = "100px";
     },
     "products/:id": async ({ data }) => {
+      const sidebarArea = document.querySelector("#sidebar-area");
       window.scrollTo(0, 0);
-      mainSection.innerHTML = productPage;
-      await setProductPage(data.id, router);
+      document.querySelector("#main").innerHTML = productPage;
+      await setProductPage(data.id, mainRouter);
       sidebarArea.style.paddingTop = "100px";
     },
     cart: () => {
+      const sidebarArea = document.querySelector("#sidebar-area");
       window.scrollTo(0, 0);
-      mainSection.innerHTML = cartPage;
-      setCartPage(router);
+      document.querySelector("#main").innerHTML = cartPage;
+      setCartPage(mainRouter);
       sidebarArea.style.paddingTop = "100px";
     },
-    // mypage: () => {
-    //   const mypageRouter = new Navigo("/");
-    //   window.scrollTo(0, 0);
-    //   mainSection.innerHTML = myPage;
-    //   const target = window.location.search.slice(8);
-    //   mypageRouter.navigate(`mypage/${target}`);
-    // },
     "mypage/orderList": async () => {
       window.scrollTo(0, 0);
-      mainSection.innerHTML = orderListPage;
+      document.querySelector("#main").innerHTML = orderListPage;
       const isValidUser = await checkAuthorization();
-      if(isValidUser) {
+      if (isValidUser) {
         setProfile();
-        setOrderListPage()
+        setOrderListPage();
       } else {
         Swal.fire({
-          icon: 'error',
-          title: '사용자 세션이 만료되었습니다.',
-          text: '로그인 페이지로 이동합니다.',
+          icon: "error",
+          title: "사용자 세션이 만료되었습니다.",
+          text: "로그인 페이지로 이동합니다.",
         }).then(() => {
-          router.navigate('/login')
-        })
+          mainRouter.navigate("/login");
+        });
       }
     },
     "mypage/account": async () => {
       window.scrollTo(0, 0);
-      mainSection.innerHTML = accountPage;
+      document.querySelector("#main").innerHTML = accountPage;
       const isValidUser = await checkAuthorization();
-      if(isValidUser) {
+      if (isValidUser) {
         setProfile();
-        setAccountPage()
+        setAccountPage();
       } else {
         Swal.fire({
-          icon: 'error',
-          title: '사용자 세션이 만료되었습니다.',
-          text: '로그인 페이지로 이동합니다.',
+          icon: "error",
+          title: "사용자 세션이 만료되었습니다.",
+          text: "로그인 페이지로 이동합니다.",
         }).then(() => {
-          router.navigate('/login')
-        })
+          mainRouter.navigate("/login");
+        });
       }
     },
     "mypage/like": async () => {
       window.scrollTo(0, 0);
-      mainSection.innerHTML = likePage;
+      document.querySelector("#main").innerHTML = likePage;
       const isValidUser = await checkAuthorization();
-      if(isValidUser) {
+      if (isValidUser) {
         setProfile();
-        setLikePage(router)
+        setLikePage(mainRouter);
       } else {
         Swal.fire({
-          icon: 'error',
-          title: '사용자 세션이 만료되었습니다.',
-          text: '로그인 페이지로 이동합니다.',
+          icon: "error",
+          title: "사용자 세션이 만료되었습니다.",
+          text: "로그인 페이지로 이동합니다.",
         }).then(() => {
-          router.navigate('/login')
-        })
+          mainRouter.navigate("/login");
+        });
       }
     },
     "mypage/modify": async () => {
       window.scrollTo(0, 0);
-      mainSection.innerHTML = modifyPage;
+      document.querySelector("#main").innerHTML = modifyPage;
       const isValidUser = await checkAuthorization();
-      if(isValidUser) {
+      if (isValidUser) {
         setProfile();
-        setModifyPage()
+        setModifyPage();
       } else {
         Swal.fire({
-          icon: 'error',
-          title: '사용자 세션이 만료되었습니다.',
-          text: '로그인 페이지로 이동합니다.',
+          icon: "error",
+          title: "사용자 세션이 만료되었습니다.",
+          text: "로그인 페이지로 이동합니다.",
         }).then(() => {
-          router.navigate('/login')
-        })
+          mainRouter.navigate("/login");
+        });
       }
     },
     payment: async () => {
       window.scrollTo(0, 0);
-      mainSection.innerHTML = orderSheetPage;
+      document.querySelector("#main").innerHTML = orderSheetPage;
       const isValidUser = await checkAuthorization();
-      if(isValidUser) {
-        setOrderSheetPage()
+      if (isValidUser) {
+        setOrderSheetPage();
       } else {
         Swal.fire({
-          icon: 'error',
-          title: '사용자 세션이 만료되었습니다.',
-          text: '로그인 페이지로 이동합니다.',
+          icon: "error",
+          title: "사용자 세션이 만료되었습니다.",
+          text: "로그인 페이지로 이동합니다.",
         }).then(() => {
-          router.navigate('/login')
-        })
+          mainRouter.navigate("/login");
+        });
       }
     },
     admin: () => {
+      body.innerHTML = adminWrapper;
       const router = new Navigo("/admin");
+      router.navigate("/report");
+      const logoutButton = document.querySelector(".info-logout");
+      logoutButton.addEventListener("click", async () => {
+        await requestLogout();
+        mainRouter.navigate("/");
+      });
       router
         .on({
           "/": () => {
-            body.innerHTML = adminWrapper;
             router.navigate("/report");
           },
           report: async () => {
@@ -311,11 +326,3 @@ router
     },
   })
   .resolve();
-
-router.link("/");
-
-// setSidebarSwiper(router);
-// // search input
-// handleSearchInput(router);
-// // to-top-button
-// goToTopFn();
