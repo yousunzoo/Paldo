@@ -1,4 +1,3 @@
-import { headers } from "./api/headers";
 import Navigo from "navigo"; // When using ES modules.
 import { checkAuthorization } from "./api/checkAuthorization";
 import {
@@ -64,12 +63,16 @@ const body = document.querySelector("body");
 // 처음 페이지가 로드 되었을 때
 mainRouter.link("/");
 
+mainRouter.hooks({
+  after: () => {
+    window.scroll(0, 0);
+  },
+});
 mainRouter
   .on({
     "/": async () => {
-      const sidebarArea = document.querySelector("#sidebar-area");
       body.innerHTML = userWrapper;
-      window.scrollTo(0, 0);
+
       document.querySelector("#main").innerHTML = mainPage;
       setSidebarSwiper(mainRouter);
       // search input
@@ -78,6 +81,8 @@ mainRouter
       goToTopFn();
       setPrdList(mainRouter);
       swiperAction();
+      sidebarAction();
+      const sidebarArea = document.querySelector("#sidebar-area");
       sidebarArea.style.paddingTop = "500px";
       const logoButton = document.querySelector("#userWrapper .logo");
       logoButton.addEventListener("click", (event) => {
@@ -97,55 +102,52 @@ mainRouter
     },
     login: async () => {
       const sidebarArea = document.querySelector("#sidebar-area");
-      window.scrollTo(0, 0);
       document.querySelector("#main").innerHTML = loginPage;
       loginEvent(mainRouter);
       sidebarArea.style.paddingTop = "100px";
     },
     signup: () => {
       const sidebarArea = document.querySelector("#sidebar-area");
-      window.scrollTo(0, 0);
       document.querySelector("#main").innerHTML = sigupPage;
       signUpEvent();
       sidebarArea.style.paddingTop = "100px";
     },
     "search/:id": async ({ data }) => {
       const sidebarArea = document.querySelector("#sidebar-area");
-      window.scrollTo(0, 0);
+
       document.querySelector("#main").innerHTML = searchPage;
       await setResultPage(data.id, mainRouter);
       sidebarArea.style.paddingTop = "100px";
     },
     coupon: () => {
       const sidebarArea = document.querySelector("#sidebar-area");
-      window.scrollTo(0, 0);
+
       document.querySelector("#main").innerHTML = couponPage;
       handleCouponButton();
       sidebarArea.style.paddingTop = "100px";
     },
     "productDetail/:id": async ({ data }) => {
       const sidebarArea = document.querySelector("#sidebar-area");
-      window.scrollTo(0, 0);
+
       document.querySelector("#main").innerHTML = productDetailPage;
       await setProductDetailPage(data.id, mainRouter);
       sidebarArea.style.paddingTop = "100px";
     },
     "products/:id": async ({ data }) => {
       const sidebarArea = document.querySelector("#sidebar-area");
-      window.scrollTo(0, 0);
+
       document.querySelector("#main").innerHTML = productPage;
       await setProductPage(data.id, mainRouter);
       sidebarArea.style.paddingTop = "100px";
     },
     cart: () => {
       const sidebarArea = document.querySelector("#sidebar-area");
-      window.scrollTo(0, 0);
+
       document.querySelector("#main").innerHTML = cartPage;
       setCartPage(mainRouter);
       sidebarArea.style.paddingTop = "100px";
     },
     "mypage/orderList": async () => {
-      window.scrollTo(0, 0);
       document.querySelector("#main").innerHTML = orderListPage;
       const isValidUser = await checkAuthorization();
       if (isValidUser) {
@@ -162,7 +164,6 @@ mainRouter
       }
     },
     "mypage/account": async () => {
-      window.scrollTo(0, 0);
       document.querySelector("#main").innerHTML = accountPage;
       const isValidUser = await checkAuthorization();
       if (isValidUser) {
@@ -179,7 +180,6 @@ mainRouter
       }
     },
     "mypage/like": async () => {
-      window.scrollTo(0, 0);
       document.querySelector("#main").innerHTML = likePage;
       const isValidUser = await checkAuthorization();
       if (isValidUser) {
@@ -196,7 +196,6 @@ mainRouter
       }
     },
     "mypage/modify": async () => {
-      window.scrollTo(0, 0);
       document.querySelector("#main").innerHTML = modifyPage;
       const isValidUser = await checkAuthorization();
       if (isValidUser) {
@@ -213,7 +212,6 @@ mainRouter
       }
     },
     payment: async () => {
-      window.scrollTo(0, 0);
       document.querySelector("#main").innerHTML = orderSheetPage;
       const isValidUser = await checkAuthorization();
       if (isValidUser) {
@@ -229,9 +227,10 @@ mainRouter
       }
     },
     admin: () => {
+      // localhost:1234/admin
       body.innerHTML = adminWrapper;
       const router = new Navigo("/admin");
-      router.navigate("/report");
+      router.navigate("/report"); // localhost:1234/admin/report
       const logoutButton = document.querySelector(".info-logout");
       logoutButton.addEventListener("click", async () => {
         await requestLogout();
@@ -324,5 +323,8 @@ mainRouter
         })
         .resolve();
     },
+  })
+  .notFound(() => {
+    console.log("not found");
   })
   .resolve();

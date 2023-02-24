@@ -328,7 +328,7 @@ export const searchPage = /* html */ `
             </div>
             <ul class="product-list"></ul>
           </div>
-        </div>`;
+</div>`;
 
 export const couponPage = /* html */ `<div class="inner-wrapper">
 <p class="sub-title">식품 쇼핑, 오뚜기몰이랑 함께 해!</p>
