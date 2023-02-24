@@ -1,3 +1,4 @@
+require("../scss/style.module.scss");
 import Navigo from "navigo"; // When using ES modules.
 import { checkAuthorization } from "./api/checkAuthorization";
 import {
