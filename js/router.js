@@ -38,7 +38,7 @@ import { setLikePage } from "./userLike/like";
 import { setModifyPage } from "./userModify/personalInfoModify";
 import { setPaymentPage } from "./userPayment/payment";
 import { setProfile } from './userProfile/profile'
-import { setPaymentCompletePage } from './userPaymentComplete/paymentComplete'
+import setPaymentCompletePage from './userPaymentComplete/paymentComplete'
 
 import { adminWrapper } from "./components/mainComponents";
 import { toggleClass } from "./adminProductList/adminGoodsPage.js";
@@ -223,11 +223,11 @@ router
         })
       }
     },
-    // paymentCompleted: function ({ data }) {
-    //   window.scrollTo(0, 0);
-    //   mainSection.innerHTML = paymentCompletePage;
-    //   setPaymentCompletePage();
-    // },
+    paymentComplete: () => {
+      window.scrollTo(0, 0);
+      mainSection.innerHTML = paymentCompletePage;
+      setPaymentCompletePage();
+    },
     admin: () => {
       const router = new Navigo("/admin");
       router

@@ -5,14 +5,14 @@ export default
       <img src="${require("../../../static/images/pay-check.png")}" alt="결제완료" />
     </div>
     <div class="order-desc">
-      <div class="text"><span class="name">권범준님</span>의 주문이 완료되었습니다.</div>
+      <div class="text"><span class="name"></span>의 주문이 완료되었습니다.</div>
       <div>내일 아침에 만나요!</div>
     </div>
     <div class="bar"></div>
 
     <div class="pay-price">
       <div class="title">결제금액</div>
-      <div class="price">50,000원</div>
+      <div class="price"></div>
     </div>
     <div class="takeout">
       <div class="desc">
@@ -31,7 +31,7 @@ export default
     <a href="/mypage/orderList" data-navigo>
       <button class="order-button">주문내역 가기</button>
     </a>
-    <a href="/mypage/orderList" data-navigo>
+    <a href="/" data-navigo>
       <button class="shop-button">쇼핑 계속하기</button>
     </a>
   </div>

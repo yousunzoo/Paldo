@@ -1,11 +1,15 @@
-export function setPaymentCompletePage() {
-  const queryString = window.location.search;
-  const parsedQueryString = queryString.match(/(?<==)[^&]+/g);
-  console.log(parsedQueryString)
+export default function () {
+  const queryString = window.location.search.slice(1);
+  const regex = /([^&=]+)=([^&]*)/g;
+  const params = {};
+  let match;
+  while ((match = regex.exec(queryString)) !== null) {
+    params[decodeURIComponent(match[1])] = decodeURIComponent(match[2]);
+  }
+  console.log(params)
+  const priceEl = document.querySelector('.price');
+  priceEl.textContent = `${Number(params.totalPrice).toLocaleString('ko-KR')}원`
 
-  const { totalPrice, username } = parseQueryString
-  // 총 주문 금액
-  
-  const priceTextEl = document.querySelector('.price');
-  priceTextEl.textContent = `${totalPrice}원`
+  const nameEl = document.querySelector('.name');
+  nameEl.textContent = `${params.displayName}님`
 }
