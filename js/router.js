@@ -10,12 +10,14 @@ import {
   productPage,
   searchPage,
   sigupPage,
-  orderListPage,
-  accountPage,
-  likePage,
-  modifyPage,
-  orderSheetPage
 } from "./components/userPage";
+import accountPage from './components/userPages/accountPage';
+import orderListPage from './components/userPages/orderListPage';
+import likePage from './components/userPages/likePage';
+import modifyPage from './components/userPages/modifyPage';
+import paymentPage from './components/userPages/paymentPage';
+import paymentCompletePage from './components/userPages/paymentCompletePage';
+
 import handleCouponButton from "./coupon/coupon";
 import handleSearchInput from "./header/handleSearchInput";
 import { swiperAction, sidebarAction } from "./library/swiper";
@@ -30,12 +32,13 @@ import { setSidebarSwiper } from "./sidebar";
 import setProductDetailPage from "./product/setProductDetailPage";
 import setCartPage from "./cart/setCartPage";
 
-import { setOrderListPage } from "./order-list/orderList";
-import { setAccountPage } from "./account/account";
-import { setLikePage } from "./like/like";
-import { setModifyPage } from "./personal-info-modify/personalInfoModify";
-import { setOrderSheetPage } from "./order-sheet/orderSheet";
-import { setProfile } from './profile/profile.js'
+import { setOrderListPage } from "./userOrderList/orderList";
+import { setAccountPage } from "./userAccount/account";
+import { setLikePage } from "./userLike/like";
+import { setModifyPage } from "./userModify/personalInfoModify";
+import { setPaymentPage } from "./userPayment/payment";
+import { setProfile } from './userProfile/profile'
+import { setPaymentCompletePage } from './userPaymentComplete/paymentComplete'
 
 import { adminWrapper } from "./components/mainComponents";
 import { toggleClass } from "./adminProductList/adminGoodsPage.js";
@@ -205,10 +208,11 @@ router
     },
     payment: async () => {
       window.scrollTo(0, 0);
-      mainSection.innerHTML = orderSheetPage;
+      mainSection.innerHTML = paymentPage;
       const isValidUser = await checkAuthorization();
       if(isValidUser) {
-        setOrderSheetPage()
+        setPaymentPage(router)
+        swiperAction();
       } else {
         Swal.fire({
           icon: 'error',
@@ -219,6 +223,11 @@ router
         })
       }
     },
+    // paymentCompleted: function ({ data }) {
+    //   window.scrollTo(0, 0);
+    //   mainSection.innerHTML = paymentCompletePage;
+    //   setPaymentCompletePage();
+    // },
     admin: () => {
       const router = new Navigo("/admin");
       router

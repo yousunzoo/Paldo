@@ -22,7 +22,7 @@ import { makeDOMwithProperties } from '../utils/dom.js';
 export function setAccountPage() {
   initPage();
 
-  const modalTrigger = document.querySelector('.add-account-btn');
+  const modalTrigger = document.querySelector('.add-account-button');
   modalTrigger.addEventListener('click', async () => {
     const modalSpinnerEl = document.querySelector('.modal-spinner');
     Object.assign(modalSpinnerEl.style, {
@@ -164,9 +164,9 @@ export function setAccountPage() {
       const accountNumberEl = makeDOMwithProperties('span', { 'id' : 'accountNumber', 'innerText': accountNumber});
       const accountBalanceEl = makeDOMwithProperties('span', { 'id' : 'accountBalance', 'innerText': formattedBalance });
 
-      const btnEl = makeDOMwithProperties('button', { 'className' : 'account-delete-btn', 'innerText' : '삭제'});
-      btnEl.dataset.accountId = id; // 버튼에 해당 계좌 id를 dataset로 저장
-      btnEl.addEventListener('click', (event) => {
+      const buttonEl = makeDOMwithProperties('button', { 'className' : 'account-delete-button', 'innerText' : '삭제'});
+      buttonEl.dataset.accountId = id; // 버튼에 해당 계좌 id를 dataset로 저장
+      buttonEl.addEventListener('click', (event) => {
         Swal.fire({
           title: '정말로 삭제하겠습니까 ?',
           text: "삭제한 계좌는 재연결해도 잔액이 반영되지 않습니다.(기본 금액으로 추가됩니다)",
@@ -215,7 +215,7 @@ export function setAccountPage() {
       });
 
       accountInfoEl.append(accountBankEl, accountNumberEl, accountBalanceEl);
-      liEl.append(accountInfoEl, btnEl);
+      liEl.append(accountInfoEl, buttonEl);
       fragmentEl.append(liEl);
     })
     return fragmentEl;
@@ -228,7 +228,7 @@ export function setAccountPage() {
           <span id="accountNumber">123-XXXX-XXXX-XX</span>
           <span id="accountBalance">3,000,000</span>
         </div>
-        <button class="account-delete-btn">삭제</button>
+        <button class="account-delete-button">삭제</button>
       </li>
     `
   }

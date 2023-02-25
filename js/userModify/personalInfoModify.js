@@ -2,7 +2,7 @@
 import { SORT_TYPES, getLocalStorageData } from '../localStorage/getLocalStorageData';
 import getAddress from '../library/postcode.js';
 import { requestPersonalInfoModify } from '../api/requestPersonalInfoModify.js'
-import { setProfile } from '../profile/profile.js'
+import { setProfile } from '../userProfile/profile.js'
 
 /* GLOBAL LOGIC */
 // ;(async function () {

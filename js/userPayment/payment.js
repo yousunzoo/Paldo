@@ -1,10 +1,8 @@
 // import { checkAuthorization } from '../api/checkAuthorization'
-import { getUserAccounts } from '../account/accountApi.js'
+import { getUserAccounts } from '../userAccount/accountApi.js'
 import { SORT_TYPES, getLocalStorageData } from '../localStorage/getLocalStorageData.js';
-import { requestTransaction } from './orderSheetApi.js';
-import { getOrderList } from '../order-list/orderListApi.js'
-
-
+import { requestTransaction } from './paymentApi.js';
+import { getOrderList } from '../userOrderList/orderListApi.js'
 
 /* GLOBAL LOGIC */
 // setMockData();
@@ -22,28 +20,29 @@ import { getOrderList } from '../order-list/orderListApi.js'
 //     // location.assign('로그인 페이지 경로')
 //   }
 // })()
-export function setOrderSheetPage() {
+export function setPaymentPage(router) {
   /* GLOBAL VARIABLES */
-  const { USER_INFO, USER_ADDRESS, COUPONS } = SORT_TYPES;
+  const { USER_INFO, USER_ADDRESS, COUPONS, CART_LIST, USER_DATA } = SORT_TYPES;
   const payInfo = {
     orderAmount : 0,
     originAmount : 0,
     saledAmount : 0,
     totalAmount : 0,
   }
+  let username; 
   const paymentList = JSON.parse(localStorage.getItem('paymentList'));
 
   /* DOM */
   const toggleOrderListEl = document.querySelector('#toggleOrderList');
   const toggleCouponListEl = document.querySelector('#toggleCouponList');
   const deliveryInfoTabEl = document.querySelector('.delivery-info-tab');
-  const transactionBtn = document.querySelector('.pay-btn-area > button');
+  const transactionButton = document.querySelector('.pay-button-area > button');
 
   /* EVENT LISTENER */
   toggleOrderListEl.addEventListener('click', toggleOrderList());
   toggleCouponListEl.addEventListener('click', toggleCouponList);
   deliveryInfoTabEl.addEventListener('click', toggleMessage);
-  transactionBtn.addEventListener('click', async () => {
+  transactionButton.addEventListener('click', async () => {
     // 스피너 로딩
     const spinnerWrapperEl = document.querySelector('.spinner-wrapper');
     Object.assign(spinnerWrapperEl.style, {
@@ -77,15 +76,12 @@ export function setOrderSheetPage() {
 
     // productId, Quantity Get !
     const requests = paymentList.reduce((acc, product) => {
-      const { productId, quantity } = product
+      const { id : productId , quantity } = product
       for(let i = 0; i < quantity; i++) {
         acc.push(requestTransaction({ productId, accountId }))
       }
       return acc;
     }, [])
-    console.log(requests)
-    console.log(await getOrderList())
-    
     // Promise.all(requests)
     // .then((result) => {
     //   // 결제 처리 성공
@@ -127,7 +123,7 @@ export function setOrderSheetPage() {
     let isActive = false;
     // closure
     return function (event) {
-      const btnEl = event.currentTarget;
+      const buttonEl = event.currentTarget;
 
       const ulEl = document.querySelector('.order-list-area > ul');
       const summaryEl = document.querySelector('.order-list-area > .summary');
@@ -137,8 +133,8 @@ export function setOrderSheetPage() {
 
       // close -> open
       if(!isActive) {
-        btnEl.alt = "닫기";
-        btnEl.style.transform = 'rotateX(0)';
+        buttonEl.alt = "닫기";
+        buttonEl.style.transform = 'rotateX(0)';
         summaryEl.style.display = 'none';
         
         // DOM Create & Render !
@@ -170,12 +166,12 @@ export function setOrderSheetPage() {
       if(isActive) {
         ulEl.innerHTML = '';
 
-        btnEl.alt = "펼치기";
-        btnEl.style.transform = 'rotateX(180deg)';
+        buttonEl.alt = "펼치기";
+        buttonEl.style.transform = 'rotateX(180deg)';
         summaryEl.style.display = 'block';
 
         let summaryTextEl = summaryEl.firstElementChild;
-        summaryTextEl.innerText = `${paymentList[0].title} 외 ${paymentList.length -1}개`
+        summaryTextEl.innerText = `${paymentList[0].title} 포함 ${paymentList.length}개`
       }
 
       // toggle state of flag variable
@@ -188,12 +184,12 @@ export function setOrderSheetPage() {
   }
   function toggleMessage(event) {
     const deliveryNoticeEl = this.querySelector('.delivery-notice');
-    const closeMessageBtn = this.querySelector('.close-message-btn');
+    const closeMessageButton = this.querySelector('.close-message-button');
     const deliveryNoticeMessageEl = this.querySelector('.delivery-notice-message');
     if(event.target === deliveryNoticeEl) {
       showMessage()
     }
-    if(event.target === closeMessageBtn) {
+    if(event.target === closeMessageButton) {
       closeMessage()
     }
     function closeMessage() {
@@ -273,8 +269,8 @@ export function setOrderSheetPage() {
     payInfo.totalAmount = payInfo.orderAmount;
     totalAmountEl.textContent = payInfo.totalAmount.toLocaleString('ko-KR');
     
-    const totalAmountInBtnEl = document.querySelector('#totalAmountInBtn');
-    totalAmountInBtnEl.textContent = payInfo.totalAmount.toLocaleString('ko-KR');
+    const totalAmountInButtonEl = document.querySelector('#totalAmountInButton');
+    totalAmountInButtonEl.textContent = payInfo.totalAmount.toLocaleString('ko-KR');
   }
   async function renderUserAccount() {
     try {
@@ -322,6 +318,7 @@ export function setOrderSheetPage() {
 
     const senderEl = document.querySelector('.orderer-area .sender');
     senderEl.textContent = userInfo.displayName;
+    username = userInfo.displayName;
 
     const emailEl = document.querySelector('.orderer-area .email');
     emailEl.textContent = userInfo.email;
@@ -330,13 +327,13 @@ export function setOrderSheetPage() {
 
 function setMockData () {
   // 제품명, 가격, 수량, 썸네일이미지
-  const cart = [
-    { productId : '7YQPOYVq4kgrNbQV04vS', title : "고구마깡(83g*1)", price : 15400, quantity : 1, thumbnailImage : "/images/product/이토엔쟈스민티.png" },
-    { productId : '9X6iWhN2C5KbJpS4uhDh', title : "둥지냉면비빔냉면(162g*32)", price : 51040, quantity : 1, thumbnailImage : "/images/product/파워오투복숭아자몽.png" },
-    { productId : '4dVCUFjymfEqskEuMAKy', title : "츄파춥스 사워게코(90g*124)", price : 57420, quantity : 1, thumbnailImage : "/images/product/오이오차녹차.png" },
-    { productId : '4vs61x7YOCYBHfZuIPPU', title : "양파링(80g*1)", price : 15400, quantity : 1, thumbnailImage : "/images/product/오이오차녹차.png" },
+  const paymentList = [
+    { id : '7YQPOYVq4kgrNbQV04vS', title : "고구마깡(83g*1)", price : 15400, quantity : 1, thumbnailImage : "/images/product/이토엔쟈스민티.png" },
+    { id : '9X6iWhN2C5KbJpS4uhDh', title : "둥지냉면비빔냉면(162g*32)", price : 51040, quantity : 1, thumbnailImage : "/images/product/파워오투복숭아자몽.png" },
+    { id : '4dVCUFjymfEqskEuMAKy', title : "츄파춥스 사워게코(90g*124)", price : 57420, quantity : 1, thumbnailImage : "/images/product/오이오차녹차.png" },
+    { id : '4vs61x7YOCYBHfZuIPPU', title : "양파링(80g*1)", price : 15400, quantity : 1, thumbnailImage : "/images/product/오이오차녹차.png" },
   ]
   const loginId = JSON.parse(localStorage.getItem('loginInfo')).loginId;
   const userData = JSON.parse(localStorage.getItem(loginId))
-  localStorage.setItem(loginId, JSON.stringify({...userData, cart}))
+  localStorage.setItem(loginId, JSON.stringify({...userData, paymentList}))
 }
