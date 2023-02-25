@@ -82,16 +82,24 @@ export function setPaymentPage(router) {
       }
       return acc;
     }, [])
-    // Promise.all(requests)
-    // .then((result) => {
-    //   // 결제 처리 성공
-    //   // localStorage cart목록
-    //   // productId 배열을 state로 넘기면서 History.pushState()로 결제완료 페이지로 이동
-    // })
-    // .catch((err) => {
-    //   // 결제 처리 실패
-    //   console.error(err)
-    // })
+    Promise.all(requests)
+    .then((result) => {
+      // 결제 처리 성공
+      router.navigate(`/paymentCompleted?totalPrice=${payInfo.totalAmount}&displayName=${username}`)
+      // localStorage cartList에서 결제 진행된 상품 제거
+      const cartList = getLocalStorageData(CART_LIST);
+      const newCartList = cartList.filter(cart => !paymentList.some(payment => cart.id === payment.id));
+      
+      const loginId = JSON.parse(localStorage.getItem('loginInfo')).loginId;
+      const userData = JSON.parse(localStorage.getItem(loginId))
+      localStorage.setItem(loginId, JSON.stringify({...userData, cartList: newCartList}))
+      // localStorage paymentList 비우기
+      localStorage.setItem('paymentList', JSON.stringify([]))
+    })
+    .catch((err) => {
+      // 결제 처리 실패
+      console.error(err)
+    })
   })
 
   initPage();
