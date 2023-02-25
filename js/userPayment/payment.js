@@ -3,6 +3,8 @@ import { getUserAccounts } from '../userAccount/accountApi.js'
 import { SORT_TYPES, getLocalStorageData } from '../localStorage/getLocalStorageData.js';
 import { requestTransaction } from './paymentApi.js';
 import { getOrderList } from '../userOrderList/orderListApi.js'
+import { analyzeOrderList } from "../userOrderList/orderList.js";
+import { cancelTransaction } from "../userOrderList/orderListApi.js";
 
 /* GLOBAL LOGIC */
 // setMockData();
@@ -22,7 +24,7 @@ import { getOrderList } from '../userOrderList/orderListApi.js'
 // })()
 export function setPaymentPage(router) {
   /* GLOBAL VARIABLES */
-  const { USER_INFO, USER_ADDRESS, COUPONS, CART_LIST, USER_DATA } = SORT_TYPES;
+  const { USER_INFO, USER_ADDRESS, COUPONS, CART_LIST } = SORT_TYPES;
   const payInfo = {
     orderAmount : 0,
     originAmount : 0,
@@ -82,24 +84,62 @@ export function setPaymentPage(router) {
       }
       return acc;
     }, [])
-    Promise.all(requests)
-    .then((result) => {
-      // 결제 처리 성공
-      router.navigate(`/paymentCompleted?totalPrice=${payInfo.totalAmount}&displayName=${username}`)
-      // localStorage cartList에서 결제 진행된 상품 제거
-      const cartList = getLocalStorageData(CART_LIST);
-      const newCartList = cartList.filter(cart => !paymentList.some(payment => cart.id === payment.id));
+    console.log(requests)
+
+    Promise.allSettled(requests)
+    .then(async results => {
+      const isFailed = results.some(result => result.status === "rejected")
+      if(isFailed) {
+        // 실패한 요청이 있을 경우
+        const orderListData = await getOrderList();
+        const analyzedData = analyzeOrderList(orderListData);
+        // 가장 최근의 거래 건에 대한 주문 취소 진행
+        analyzedData[0].detailId.forEach(transactionId => {
+          cancelTransaction({ detailId : transactionId})
+        })
+      } else {
+        // 모든 요청이 성공
+        // localStorage cartList에서 결제 진행된 상품 제거
+        const cartList = getLocalStorageData(CART_LIST);
+        const newCartList = cartList.filter(cart => !paymentList.some(payment => cart.id === payment.id));
+        
+        const loginId = JSON.parse(localStorage.getItem('loginInfo')).loginId;
+        const userData = JSON.parse(localStorage.getItem(loginId))
+        localStorage.setItem(loginId, JSON.stringify({...userData, cartList: newCartList}))
+
+        // localStorage paymentList 비우기
+        localStorage.setItem('paymentList', JSON.stringify([]))
+
+        // 결제 완료 페이지로 이동
+        router.navigate(`/paymentComplete?totalPrice=${payInfo.totalAmount}&displayName=${username}`)
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    })
+
+    // Promise.all(requests)
+    // .then((result) => {
+    //   // 결제 처리 성공
+
+    //   // localStorage cartList에서 결제 진행된 상품 제거
+    //   const cartList = getLocalStorageData(CART_LIST);
+    //   const newCartList = cartList.filter(cart => !paymentList.some(payment => cart.id === payment.id));
       
-      const loginId = JSON.parse(localStorage.getItem('loginInfo')).loginId;
-      const userData = JSON.parse(localStorage.getItem(loginId))
-      localStorage.setItem(loginId, JSON.stringify({...userData, cartList: newCartList}))
-      // localStorage paymentList 비우기
-      localStorage.setItem('paymentList', JSON.stringify([]))
-    })
-    .catch((err) => {
-      // 결제 처리 실패
-      console.error(err)
-    })
+    //   const loginId = JSON.parse(localStorage.getItem('loginInfo')).loginId;
+    //   const userData = JSON.parse(localStorage.getItem(loginId))
+    //   localStorage.setItem(loginId, JSON.stringify({...userData, cartList: newCartList}))
+
+    //   // localStorage paymentList 비우기
+    //   localStorage.setItem('paymentList', JSON.stringify([]))
+
+    //   // 결제 완료 페이지로 이동
+    //   router.navigate(`/paymentCompleted?totalPrice=${payInfo.totalAmount}&displayName=${username}`)
+    // })
+    // .catch((err) => {
+    //   // 결제 처리 실패
+    //   console.error(err)
+    // })
   })
 
   initPage();

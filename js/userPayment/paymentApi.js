@@ -4,21 +4,24 @@ import { headers, url } from "../api/headers.js";
 const { ACCESS_TOKEN } = SORT_TYPES;
 
 export function requestTransaction(body) {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     const accessToken = getLocalStorageData(ACCESS_TOKEN);
-    fetch(`${url}products/buy`, {
-      method: 'POST',
-      headers: {
-        ...headers,
-        Authorization: `Bearer ${accessToken}`
-      },
-      body: JSON.stringify(body)
-    })
-    .then((result) => {
-      resolve(result);
-    })
-    .catch((error) => {
+    try {
+      const res = await fetch(`${url}products/buy`, {
+        method: 'POST',
+        headers: {
+          ...headers,
+          Authorization: `Bearer ${accessToken}`
+        },
+        body: JSON.stringify(body)
+      })
+      if(res.ok) {
+        resolve(res);
+      } else {
+        throw new Error(res.status);
+      }
+    } catch(error) {
       reject(error);
-    })
+    }
   })
 }
