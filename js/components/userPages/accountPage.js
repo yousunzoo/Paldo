@@ -48,7 +48,7 @@ export default
             <i class="bi bi-chevron-right"></i>
           </a>
         </li>
-        <li class="item">
+        <li class="item active">
           <a href="mypage/account" data-navigo>
             계좌 관리
             <i class="bi bi-chevron-right"></i>

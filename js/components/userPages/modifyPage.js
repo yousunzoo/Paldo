@@ -26,7 +26,7 @@ export default
       </div>
       <div class="info">
         <a class="title" href="/mypage/modify" data-navigo>
-          <span>회원 정보 수정</span>
+          <span>개인 정보 수정</span>
         </a>
         <p class="sub-info">※ 마이페이지>개인정보 <br />수정에서 변경 가능합니다.</p>
       </div>
@@ -60,7 +60,7 @@ export default
             <i class="bi bi-chevron-right"></i>
           </a>
         </li>
-        <li class="item">
+        <li class="item active">
           <a href="mypage/modify" data-navigo>
             개인 정보 수정
             <i class="bi bi-chevron-right"></i>

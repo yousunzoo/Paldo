@@ -42,7 +42,7 @@ export default
     <aside class="side-bar">
       <h2>마이페이지</h2>
       <ul class="menu">
-        <li class="item">
+        <li class="item active">
           <a href="mypage/orderList" data-navigo>
             주문 내역
             <i class="bi bi-chevron-right"></i>

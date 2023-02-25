@@ -54,7 +54,7 @@ export default
             <i class="bi bi-chevron-right"></i>
           </a>
         </li>
-        <li class="item">
+        <li class="item active">
           <a href="mypage/like" data-navigo>
             찜한 상품
             <i class="bi bi-chevron-right"></i>
