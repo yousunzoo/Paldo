@@ -1,0 +1,81 @@
+#userWrapper {
+  .sub-title {
+    padding-top: 160px;
+    text-align: center;
+
+    margin-bottom: 16px;
+    font-size: 30px;
+    color: $color_sub_title;
+  }
+
+  .coupon-title {
+    text-align: center;
+    margin-bottom: 55px;
+    font-size: 42px;
+    color: $color_black;
+  }
+
+  .coupon {
+    text-align: center;
+    img {
+      margin-bottom: 60px;
+    }
+    .get-coupon-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 530px;
+      height: 80px;
+      margin: 0 auto;
+      box-sizing: border-box;
+      background-color: transparent;
+      border: 1px solid $color_primary;
+      font-size: 26px;
+      font-weight: normal;
+      color: $color_primary;
+      line-height: 80px;
+      vertical-align: top;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      &:hover {
+        background-color: $color_primary;
+        color: $color_white;
+      }
+      &.disabled {
+        cursor: default;
+      }
+      &.disabled:hover {
+        background-color: inherit;
+        color: inherit;
+      }
+    }
+  }
+
+  .coupon-notice {
+    width: 514px;
+    margin: 160px auto;
+    .notice-title {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 500;
+    }
+    .notice-list {
+      margin-top: 30px;
+      li {
+        position: relative;
+        padding-bottom: 8px;
+        padding-left: 12px;
+        line-height: 22px;
+        color: $color_product_tag;
+        &::before {
+          display: block;
+          position: absolute;
+          left: 0;
+          top: 0;
+          content: "-";
+        }
+      }
+    }
+  }
+}
