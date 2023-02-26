@@ -1,21 +1,20 @@
-require("../scss/style.module.scss");
 import Navigo from "navigo"; // When using ES modules.
 import { checkAuthorization } from "./api/checkAuthorization";
-import {
-  cartPage,
-  couponPage,
-  loginPage,
-  mainPage,
-  productDetailPage,
-  productPage,
-  searchPage,
-  sigupPage,
-  orderListPage,
-  accountPage,
-  likePage,
-  modifyPage,
-  orderSheetPage,
-} from "./components/userPage";
+import userWrapper from "./components/wrappers/userWrapper";
+import adminWrapper from "./components/wrappers/adminWrapper";
+import userMainPage from "./components/userPage/userMainPage";
+import userLoginPage from "./components/userPage/userLoginPage";
+import userSignupPage from "./components/userPage/userSignupPage";
+import userSearchPage from "./components/userPage/userSearchPage";
+import userCouponPage from "./components/userPage/userCouponPage";
+import userProductPage from "./components/userPage/userProductPage";
+import userProductDetailPage from "./components/userPage/userProductDetailPage";
+import userCartPage from "./components/userPage/userCartPage";
+import userOrderListPage from "./components/userPage/userOrderListPage";
+import userAccountPage from "./components/userPage/userAccountPage";
+import userLikePage from "./components/userPage/userLikePage";
+import userModifyPage from "./components/userPage/userModifyPage";
+import userOrderSheetPage from "./components/userPage/userOrderSheetPage";
 import handleCouponButton from "./coupon/coupon";
 import handleSearchInput from "./header/handleSearchInput";
 import { swiperAction, sidebarAction } from "./library/swiper";
@@ -36,8 +35,6 @@ import { setLikePage } from "./like/like";
 import { setModifyPage } from "./personal-info-modify/personalInfoModify";
 import { setOrderSheetPage } from "./order-sheet/orderSheet";
 import { setProfile } from "./profile/profile.js";
-
-import { adminWrapper, userWrapper } from "./components/mainComponents";
 import { toggleClass } from "./adminProductList/adminGoodsPage.js";
 import { chartFn } from "./library/chart.js";
 
@@ -74,7 +71,7 @@ mainRouter
     "/": async () => {
       body.innerHTML = userWrapper;
 
-      document.querySelector("#main").innerHTML = mainPage;
+      document.querySelector("#main").innerHTML = userMainPage;
       setSidebarSwiper(mainRouter);
       // search input
       handleSearchInput(mainRouter);
@@ -103,53 +100,53 @@ mainRouter
     },
     login: async () => {
       const sidebarArea = document.querySelector("#sidebar-area");
-      document.querySelector("#main").innerHTML = loginPage;
+      document.querySelector("#main").innerHTML = userLoginPage;
       loginEvent(mainRouter);
       sidebarArea.style.paddingTop = "100px";
     },
     signup: () => {
       const sidebarArea = document.querySelector("#sidebar-area");
-      document.querySelector("#main").innerHTML = sigupPage;
+      document.querySelector("#main").innerHTML = userSignupPage;
       signUpEvent();
       sidebarArea.style.paddingTop = "100px";
     },
     "search/:id": async ({ data }) => {
       const sidebarArea = document.querySelector("#sidebar-area");
 
-      document.querySelector("#main").innerHTML = searchPage;
+      document.querySelector("#main").innerHTML = userSearchPage;
       await setResultPage(data.id, mainRouter);
       sidebarArea.style.paddingTop = "100px";
     },
     coupon: () => {
       const sidebarArea = document.querySelector("#sidebar-area");
 
-      document.querySelector("#main").innerHTML = couponPage;
-      handleCouponButton();
+      document.querySelector("#main").innerHTML = userCouponPage;
+      handleCouponButton(mainRouter);
       sidebarArea.style.paddingTop = "100px";
     },
     "productDetail/:id": async ({ data }) => {
       const sidebarArea = document.querySelector("#sidebar-area");
 
-      document.querySelector("#main").innerHTML = productDetailPage;
+      document.querySelector("#main").innerHTML = userProductDetailPage;
       await setProductDetailPage(data.id, mainRouter);
       sidebarArea.style.paddingTop = "100px";
     },
     "products/:id": async ({ data }) => {
       const sidebarArea = document.querySelector("#sidebar-area");
 
-      document.querySelector("#main").innerHTML = productPage;
+      document.querySelector("#main").innerHTML = userProductPage;
       await setProductPage(data.id, mainRouter);
       sidebarArea.style.paddingTop = "100px";
     },
     cart: () => {
       const sidebarArea = document.querySelector("#sidebar-area");
 
-      document.querySelector("#main").innerHTML = cartPage;
+      document.querySelector("#main").innerHTML = userCartPage;
       setCartPage(mainRouter);
       sidebarArea.style.paddingTop = "100px";
     },
     "mypage/orderList": async () => {
-      document.querySelector("#main").innerHTML = orderListPage;
+      document.querySelector("#main").innerHTML = userOrderListPage;
       const isValidUser = await checkAuthorization();
       if (isValidUser) {
         setProfile();
@@ -165,7 +162,7 @@ mainRouter
       }
     },
     "mypage/account": async () => {
-      document.querySelector("#main").innerHTML = accountPage;
+      document.querySelector("#main").innerHTML = userAccountPage;
       const isValidUser = await checkAuthorization();
       if (isValidUser) {
         setProfile();
@@ -181,7 +178,7 @@ mainRouter
       }
     },
     "mypage/like": async () => {
-      document.querySelector("#main").innerHTML = likePage;
+      document.querySelector("#main").innerHTML = userLikePage;
       const isValidUser = await checkAuthorization();
       if (isValidUser) {
         setProfile();
@@ -197,7 +194,7 @@ mainRouter
       }
     },
     "mypage/modify": async () => {
-      document.querySelector("#main").innerHTML = modifyPage;
+      document.querySelector("#main").innerHTML = userModifyPage;
       const isValidUser = await checkAuthorization();
       if (isValidUser) {
         setProfile();
@@ -213,7 +210,7 @@ mainRouter
       }
     },
     payment: async () => {
-      document.querySelector("#main").innerHTML = orderSheetPage;
+      document.querySelector("#main").innerHTML = userOrderSheetPage;
       const isValidUser = await checkAuthorization();
       if (isValidUser) {
         setOrderSheetPage();
