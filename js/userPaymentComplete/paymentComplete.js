@@ -6,10 +6,10 @@ export default function () {
   while ((match = regex.exec(queryString)) !== null) {
     params[decodeURIComponent(match[1])] = decodeURIComponent(match[2]);
   }
-  console.log(params)
-  const priceEl = document.querySelector('.price');
-  priceEl.textContent = `${Number(params.totalPrice).toLocaleString('ko-KR')}원`
+  console.log(params);
+  const priceEl = document.querySelector(".price");
+  priceEl.textContent = `${Number(params.totalPrice).toLocaleString("ko-KR")}원`;
 
-  const nameEl = document.querySelector('.name');
-  nameEl.textContent = `${params.displayName}님`
+  const nameEl = document.querySelector(".name");
+  nameEl.textContent = `${params.displayName}님`;
 }
