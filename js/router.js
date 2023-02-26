@@ -19,8 +19,8 @@ import handleCouponButton from "./coupon/coupon";
 import handleSearchInput from "./header/handleSearchInput";
 import { swiperAction, sidebarAction } from "./library/swiper";
 import goToTopFn from "./library/toTop";
-import loginEvent from "./login";
-import { changeHeader } from "./main/changeHeader";
+import loginEvent from "./userLogin/login";
+import { changeHeader } from "./userMain/changeHeader";
 import setProductPage from "./product/setProductPage";
 import setResultPage from "./search/searchResult";
 import signUpEvent from "./signup/signup";
@@ -54,7 +54,7 @@ import { renderDetailTransactionPage } from "./adminDetailTransaction/renderDeta
 import { renderReportStatus } from "./adminReport/renderStoreStatus.js";
 import { requestLogout } from "./api/requestLogout";
 import { getLocalStorageData } from "./localStorage/getLocalStorageData";
-import setProductList from "./main/setPrdList";
+import setProductList from "./userMain/setProductList";
 import setSidebarStyle from "./userSidebar/setSidebarStyle";
 
 const mainRouter = new Navigo("/");
