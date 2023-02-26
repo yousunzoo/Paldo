@@ -1,6 +1,7 @@
 import { checkAuthorization } from "../api/checkAuthorization";
 import { getDetailProduct } from "../api/getDetailProduct";
-import { setSidebar, setSidebarSwiper } from "../sidebar";
+import { getLocalStorageData } from "../localStorage/getLocalStorageData";
+import { setSidebarSwiper } from "../sidebar";
 
 export default async function setProductDetailPage(id, router) {
   const productInfo = await getDetailProduct(id);
@@ -51,9 +52,7 @@ export default async function setProductDetailPage(id, router) {
   const loginText = document.querySelector(".product-login-text");
   if (isLogined) {
     loginText.style.display = "none";
-    const loginedId = JSON.parse(localStorage.getItem("loginInfo")).loginId;
-    const loginedIdData = JSON.parse(localStorage.getItem(loginedId));
-    let wishList = loginedIdData.wishList;
+    let wishList = getLocalStorageData("wishList");
     if (!wishList) wishList = [];
     const isWished = wishList.find((item) => item.id === productInfo.id);
     if (isWished) {
@@ -78,9 +77,9 @@ export default async function setProductDetailPage(id, router) {
 
       return;
     }
-    const loginedId = JSON.parse(localStorage.getItem("loginInfo")).loginId;
-    const loginedIdData = JSON.parse(localStorage.getItem(loginedId));
-    let wishList = loginedIdData.wishList;
+    const loginedId = getLocalStorageData("loginId");
+    let loginedIdData = getLocalStorageData("loginIdData");
+    let wishList = getLocalStorageData("wishList");
     const hasClass = wishButton.classList.contains("active");
     if (!wishList) {
       wishList = [];
@@ -158,9 +157,9 @@ export async function addCart(product, quantity = 1) {
 
     return;
   }
-  const loginedId = JSON.parse(localStorage.getItem("loginInfo")).loginId;
-  const loginedIdData = JSON.parse(localStorage.getItem(loginedId));
-  let cartList = loginedIdData.cartList;
+  const loginedId = getLocalStorageData("loginId");
+  let loginedIdData = getLocalStorageData("loginIdData");
+  let cartList = getLocalStorageData("cartList");
   if (!cartList) {
     cartList = [];
   }

@@ -54,6 +54,7 @@ import { transactionPagination } from "./adminTransactionList/transactionPaginat
 import { renderDetailTransactionPage } from "./adminDetailTransaction/renderDetailTransaction";
 import { renderReportStatus } from "./adminReport/renderStoreStatus.js";
 import { requestLogout } from "./api/requestLogout";
+import { getLocalStorageData } from "./localStorage/getLocalStorageData";
 
 const mainRouter = new Navigo("/");
 const body = document.querySelector("body");
@@ -90,7 +91,7 @@ mainRouter
 
       const isLogin = await checkAuthorization();
       if (isLogin) {
-        const loginId = JSON.parse(localStorage.getItem("loginInfo")).loginId;
+        const loginId = getLocalStorageData("loginId");
         if (loginId === "admin@paldo.com") {
           mainRouter.navigate("admin");
         } else {
@@ -119,7 +120,6 @@ mainRouter
     },
     coupon: () => {
       const sidebarArea = document.querySelector("#sidebar-area");
-
       document.querySelector("#main").innerHTML = userCouponPage;
       handleCouponButton(mainRouter);
       sidebarArea.style.paddingTop = "100px";

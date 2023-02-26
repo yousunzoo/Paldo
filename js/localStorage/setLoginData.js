@@ -1,10 +1,10 @@
+import { getLocalStorageData } from "./getLocalStorageData";
+
 export function setUserInfo(result, email, userAddress = "") {
   // localStorage에 loginInfoData 세팅
-  let loginInfoData = localStorage.getItem("loginInfo");
+  let loginInfoData = getLocalStorageData("loginInfo");
   if (!loginInfoData) {
     loginInfoData = { accessToken: "", loginId: "" };
-  } else {
-    loginInfoData = JSON.parse(loginInfoData);
   }
   loginInfoData.accessToken = result.accessToken;
   loginInfoData.loginId = email;

@@ -1,4 +1,5 @@
 import { checkAuthorization } from "../api/checkAuthorization";
+import { getLocalStorageData } from "../localStorage/getLocalStorageData";
 import { makeDOMwithProperties } from "../utils/dom";
 
 let cartList = [];
@@ -16,9 +17,8 @@ export default async function setCartPage(router) {
 
     return;
   }
-  const loginedId = JSON.parse(localStorage.getItem("loginInfo")).loginId;
-  const loginedIdData = JSON.parse(localStorage.getItem(loginedId));
-  let cartListData = loginedIdData.cartList;
+
+  let cartListData = getLocalStorageData("cartList");
   cartList = cartListData ? [...cartListData] : [];
   const cartListArea = document.querySelector(".product-list");
 
@@ -236,8 +236,8 @@ function toggleCountButton(cartLi, item) {
   let quantity = item.quantity;
   let originPrice = parseInt((item.price * 100) / (100 - item.discountRate));
 
-  const loginedId = JSON.parse(localStorage.getItem("loginInfo")).loginId;
-  const loginedIdData = JSON.parse(localStorage.getItem(loginedId));
+  const loginedId = getLocalStorageData("loginedId");
+  const loginedIdData = getLocalStorageData("loginIdData");
 
   if (quantity === 1) {
     downButton.disabled = true;

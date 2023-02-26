@@ -108,6 +108,7 @@ function setProductList(prdList, sort, originResult, router) {
     // 클릭 시 해당 페이지로 이동
     const cartButton = productEl.querySelector(".add-cart-btn");
     productEl.querySelector("a").addEventListener("click", function (event) {
+      // 장바구니 버튼 클릭 시 수량 1로 지정 후 장바구니에 해당 상품 담기
       if (event.target === cartButton) {
         event.preventDefault();
         addCart(item);
@@ -116,8 +117,6 @@ function setProductList(prdList, sort, originResult, router) {
       setSidebar(item);
       moveToDetail(event, this, router);
     });
-
-    // 장바구니 버튼 클릭 시 수량 1로 지정 후 장바구니에 해당 상품 담기
     return productEl;
   });
   productListUi.innerHTML = "";

@@ -1,33 +1,41 @@
 export const SORT_TYPES = {
-  ACCESS_TOKEN: 'accessToken',
-  USER_INFO: 'userInfo',
-  USER_ADDRESS: 'userAddress',
-  CART_LIST: 'cartList',
-  COUPONS: 'coupons',
-  WISH_LIST: 'wishList',
+  ACCESS_TOKEN: "accessToken",
+  USER_INFO: "userInfo",
+  USER_ADDRESS: "userAddress",
+  CART_LIST: "cartList",
+  COUPONS: "coupons",
+  WISH_LIST: "wishList",
 };
 
-export function getLocalStorageData (sort) {
-  const loginInfo = JSON.parse(localStorage.getItem('loginInfo'));
+export function getLocalStorageData(sort) {
+  const loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
   const userData = JSON.parse(localStorage.getItem(loginInfo.loginId));
-
-  switch(sort) {
-    case 'accessToken' :
+  const sidebarData = JSON.parse(localStorage.getItem("sidebarData"));
+  switch (sort) {
+    case "sidebarData":
+      return sidebarData || [];
+    case "loginInfo":
+      return loginInfo;
+    case "loginId":
+      return loginInfo.loginId;
+    case "loginIdData":
+      return userData;
+    case "accessToken":
       return loginInfo?.accessToken;
 
-    case 'userInfo' : 
+    case "userInfo":
       return userData?.userInfo;
 
-    case 'userAddress' :
+    case "userAddress":
       return userData?.userAddress;
-      
-    case 'cartList' :
+
+    case "cartList":
       return userData?.cartList;
 
-    case 'coupons' :
+    case "coupons":
       return userData?.coupons;
 
-    case 'wishList' :
+    case "wishList":
       return userData?.wishList;
   }
 }

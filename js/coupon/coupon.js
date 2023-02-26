@@ -1,4 +1,5 @@
 import { checkAuthorization } from "../api/checkAuthorization";
+import { getLocalStorageData } from "../localStorage/getLocalStorageData";
 export default function handleCouponButton(router) {
   const getCouponButton = document.querySelector(".get-coupon-button");
   const coupons = [
@@ -8,11 +9,9 @@ export default function handleCouponButton(router) {
     { name: "삼양 제품 최대 할인 쿠폰", discount: "2만원" },
     { name: "팔도 제품 최대 할인 쿠폰", discount: "1만원" },
   ];
-  const loginInfo = localStorage.getItem("loginInfo");
+  const loginInfo = getLocalStorageData("loginInfo");
   if (loginInfo) {
-    const loginId = JSON.parse(loginInfo).loginId;
-    const loginIdData = JSON.parse(localStorage.getItem(loginId));
-    const hasCoupon = loginIdData.coupons;
+    const hasCoupon = getLocalStorageData("coupons");
 
     // localStorage에 coupon 데이터 있으면 버튼 비활성화
     if (hasCoupon) {
@@ -34,10 +33,7 @@ export default function handleCouponButton(router) {
     }
     if (getCouponButton.classList.contains("disabled")) return;
 
-    const loginInfo = localStorage.getItem("loginInfo");
-
-    const loginId = JSON.parse(loginInfo).loginId;
-    const loginIdData = JSON.parse(localStorage.getItem(loginId));
+    const loginIdData = getLocalStorageData("loginIdData");
     loginIdData.coupons = coupons;
     localStorage.setItem(loginId, JSON.stringify(loginIdData));
 

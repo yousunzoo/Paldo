@@ -1,12 +1,10 @@
 import { sidebarAction } from "./library/swiper";
 import { makeDOMwithProperties } from "./utils/dom";
 import moveToDetail from "./movetoProductDetail";
+import { getLocalStorageData } from "./localStorage/getLocalStorageData";
 
 export function setSidebar(data, router) {
-  let sidebarData = JSON.parse(localStorage.getItem("sidebarData"));
-  if (!sidebarData) {
-    sidebarData = [];
-  }
+  let sidebarData = getLocalStorageData("sidebarData");
   // sidebarData에 이미 데이터가 있으면 배열에서 객체 삭제하고 배열 앞에 다시 삽입
   sidebarData.forEach((item, index) => {
     if (item.id === data.id) {
@@ -21,7 +19,7 @@ export function setSidebar(data, router) {
 }
 
 export function setSidebarSwiper(router) {
-  const sidebarData = JSON.parse(localStorage.getItem("sidebarData")) || [];
+  const sidebarData = getLocalStorageData("sidebarData");
   const swiperWrapperDiv = document.querySelector(
     "#sidebar-area .swiper-wrapper"
   );
