@@ -1,4 +1,6 @@
-import { logInFn } from "./api/requestLogin";
+import { loginFn } from "./api/requestLogin";
+import { setUserInfo } from "./localStorage/setLoginData";
+import { changeHeader } from "./main/changeHeader";
 
 export default function loginEvent(router) {
   const loginForm = document.querySelector(".login-form");
@@ -11,6 +13,15 @@ export default function loginEvent(router) {
       email,
       password,
     };
-    await logInFn(data, router);
+    const result = await loginFn(data);
+    if (result) {
+      setUserInfo(result, email);
+      router.navigate("/");
+    } else {
+      Swal.fire({
+        icon: "error",
+        text: "아이디 및 비밀번호를 확인해주세요!",
+      });
+    }
   });
 }

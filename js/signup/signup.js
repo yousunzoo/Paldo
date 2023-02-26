@@ -1,5 +1,6 @@
 import { requestSignup } from "../api/requestSignup";
 import getAddress from "../library/postcode";
+import { setUserInfo } from "../localStorage/setLoginData";
 
 // input에 입력 시 유효성 체크
 // 회원가입 정보 input 만들어서 서버 제출 및 localStorage 세팅
@@ -43,7 +44,16 @@ export default function signUpEvent() {
     addressCheck();
 
     // 서버에 회원가입 요청
-    await requestSignup(userInfo, userAddress);
+    const result = await requestSignup(userInfo, userAddress);
+    if (result == "Error: 401") {
+      Swal.fire({
+        icon: "error",
+        text: "이미 존재하는 아이디입니다!",
+      });
+    } else {
+      setUserInfo(result, userInfo.email, userAddress);
+      history.back();
+    }
   });
 
   // 이메일 유효성 검사

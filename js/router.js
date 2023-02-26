@@ -63,7 +63,7 @@ const body = document.querySelector("body");
 
 // 처음 페이지가 로드 되었을 때
 mainRouter.link("/");
-
+body.innerHTML = userWrapper;
 mainRouter.hooks({
   after: () => {
     window.scroll(0, 0);
@@ -97,7 +97,7 @@ mainRouter
         if (loginId === "admin@paldo.com") {
           mainRouter.navigate("admin");
         } else {
-          changeHeader();
+          changeHeader(mainRouter);
         }
       }
     },

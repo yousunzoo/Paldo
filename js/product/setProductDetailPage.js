@@ -1,9 +1,9 @@
 import { checkAuthorization } from "../api/checkAuthorization";
-import { getProductInfo } from "../api/getProductInfo";
+import { getDetailProduct } from "../api/getDetailProduct";
 import { setSidebar, setSidebarSwiper } from "../sidebar";
 
 export default async function setProductDetailPage(id, router) {
-  const productInfo = await getProductInfo(id);
+  const productInfo = await getDetailProduct(id);
   // 상품이 품절 상태일 때 품절 div 띄우기
   if (productInfo.isSoldOut) {
     const soldOutDiv = document.querySelector(".sold-out");
