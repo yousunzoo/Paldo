@@ -1,7 +1,7 @@
-import { sidebarAction } from "./library/swiper";
-import { makeDOMwithProperties } from "./utils/dom";
-import moveToDetail from "./movetoProductDetail";
-import { getLocalStorageData } from "./localStorage/getLocalStorageData";
+import { sidebarAction } from "../library/swiper";
+import { makeDOMwithProperties } from "../utils/dom";
+import moveToDetail from "../utils/movetoProductDetail";
+import { getLocalStorageData } from "../localStorage/getLocalStorageData";
 
 export function setSidebar(data, router) {
   let sidebarData = getLocalStorageData("sidebarData");

@@ -1,7 +1,7 @@
 import { checkAuthorization } from "../api/checkAuthorization";
 import { getDetailProduct } from "../api/getDetailProduct";
 import { getLocalStorageData } from "../localStorage/getLocalStorageData";
-import { setSidebarSwiper } from "../sidebar";
+import { setSidebarSwiper } from "../userSidebar/sidebar";
 
 export default async function setProductDetailPage(id, router) {
   const productInfo = await getDetailProduct(id);

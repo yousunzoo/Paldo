@@ -21,11 +21,10 @@ import { swiperAction, sidebarAction } from "./library/swiper";
 import goToTopFn from "./library/toTop";
 import loginEvent from "./login";
 import { changeHeader } from "./main/changeHeader";
-import setPrdList from "./main/setPrdList";
 import setProductPage from "./product/setProductPage";
 import setResultPage from "./search/searchResult";
 import signUpEvent from "./signup/signup";
-import { setSidebarSwiper } from "./sidebar";
+import { setSidebarSwiper } from "./userSidebar/sidebar";
 import setProductDetailPage from "./product/setProductDetailPage";
 import setCartPage from "./cart/setCartPage";
 
@@ -55,6 +54,8 @@ import { renderDetailTransactionPage } from "./adminDetailTransaction/renderDeta
 import { renderReportStatus } from "./adminReport/renderStoreStatus.js";
 import { requestLogout } from "./api/requestLogout";
 import { getLocalStorageData } from "./localStorage/getLocalStorageData";
+import setProductList from "./main/setPrdList";
+import setSidebarStyle from "./userSidebar/setSidebarStyle";
 
 const mainRouter = new Navigo("/");
 const body = document.querySelector("body");
@@ -71,18 +72,16 @@ mainRouter
   .on({
     "/": async () => {
       body.innerHTML = userWrapper;
-
       document.querySelector("#main").innerHTML = userMainPage;
       setSidebarSwiper(mainRouter);
       // search input
       handleSearchInput(mainRouter);
       // to-top-button
       goToTopFn();
-      setPrdList(mainRouter);
+      setProductList(mainRouter);
       swiperAction();
       sidebarAction();
-      const sidebarArea = document.querySelector("#sidebar-area");
-      sidebarArea.style.paddingTop = "500px";
+      setSidebarStyle(500);
       const logoButton = document.querySelector("#userWrapper .logo");
       logoButton.addEventListener("click", (event) => {
         event.preventDefault();
@@ -100,54 +99,43 @@ mainRouter
       }
     },
     login: async () => {
-      const sidebarArea = document.querySelector("#sidebar-area");
       document.querySelector("#main").innerHTML = userLoginPage;
       loginEvent(mainRouter);
-      sidebarArea.style.paddingTop = "100px";
     },
     signup: () => {
-      const sidebarArea = document.querySelector("#sidebar-area");
       document.querySelector("#main").innerHTML = userSignupPage;
       signUpEvent();
-      sidebarArea.style.paddingTop = "100px";
+      setSidebarStyle(100);
     },
     "search/:id": async ({ data }) => {
-      const sidebarArea = document.querySelector("#sidebar-area");
-
       document.querySelector("#main").innerHTML = userSearchPage;
       await setResultPage(data.id, mainRouter);
-      sidebarArea.style.paddingTop = "100px";
+      setSidebarStyle(100);
     },
     coupon: () => {
-      const sidebarArea = document.querySelector("#sidebar-area");
       document.querySelector("#main").innerHTML = userCouponPage;
       handleCouponButton(mainRouter);
-      sidebarArea.style.paddingTop = "100px";
+      setSidebarStyle(100);
     },
     "productDetail/:id": async ({ data }) => {
-      const sidebarArea = document.querySelector("#sidebar-area");
-
       document.querySelector("#main").innerHTML = userProductDetailPage;
       await setProductDetailPage(data.id, mainRouter);
-      sidebarArea.style.paddingTop = "100px";
+      setSidebarStyle(100);
     },
     "products/:id": async ({ data }) => {
-      const sidebarArea = document.querySelector("#sidebar-area");
-
       document.querySelector("#main").innerHTML = userProductPage;
       await setProductPage(data.id, mainRouter);
-      sidebarArea.style.paddingTop = "100px";
+      setSidebarStyle(100);
     },
     cart: () => {
-      const sidebarArea = document.querySelector("#sidebar-area");
-
       document.querySelector("#main").innerHTML = userCartPage;
       setCartPage(mainRouter);
-      sidebarArea.style.paddingTop = "100px";
+      setSidebarStyle(100);
     },
     "mypage/orderList": async () => {
       document.querySelector("#main").innerHTML = userOrderListPage;
       const isValidUser = await checkAuthorization();
+      setSidebarStyle(100);
       if (isValidUser) {
         setProfile();
         setOrderListPage();
@@ -163,6 +151,7 @@ mainRouter
     },
     "mypage/account": async () => {
       document.querySelector("#main").innerHTML = userAccountPage;
+      setSidebarStyle(100);
       const isValidUser = await checkAuthorization();
       if (isValidUser) {
         setProfile();
@@ -179,6 +168,7 @@ mainRouter
     },
     "mypage/like": async () => {
       document.querySelector("#main").innerHTML = userLikePage;
+      setSidebarStyle(100);
       const isValidUser = await checkAuthorization();
       if (isValidUser) {
         setProfile();
@@ -195,6 +185,7 @@ mainRouter
     },
     "mypage/modify": async () => {
       document.querySelector("#main").innerHTML = userModifyPage;
+      setSidebarStyle(100);
       const isValidUser = await checkAuthorization();
       if (isValidUser) {
         setProfile();
@@ -211,6 +202,7 @@ mainRouter
     },
     payment: async () => {
       document.querySelector("#main").innerHTML = userOrderSheetPage;
+      setSidebarStyle(100);
       const isValidUser = await checkAuthorization();
       if (isValidUser) {
         setOrderSheetPage();

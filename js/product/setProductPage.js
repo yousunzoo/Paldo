@@ -2,8 +2,8 @@ import bannerNew from "../../static/images/productBanner-new.png";
 import bannerBest from "../../static/images/productBanner-best.png";
 import bannerFrugal from "../../static/images/productBanner-frugal.png";
 import { getProducts } from "../api/getProducts";
-import moveToDetail from "../movetoProductDetail";
-import { setSidebar } from "../sidebar";
+import moveToDetail from "../utils/movetoProductDetail";
+import { setSidebar } from "../userSidebar/sidebar";
 import { addCart } from "./setProductDetailPage";
 
 export default async function setProductPage(tag, router) {

@@ -1,9 +1,9 @@
 import { makeDOMwithProperties } from "../utils/dom";
 import { getProducts } from "../api/getProducts";
-import moveToDetail from "../movetoProductDetail";
-import { setSidebar } from "../sidebar";
+import moveToDetail from "../utils/movetoProductDetail";
+import { setSidebar } from "../userSidebar/sidebar";
 import { addCart } from "../product/setProductDetailPage";
-export default async function setPrdList(router) {
+export default async function setProductList(router) {
   // variables
   const prdList1 = document.querySelector(".prd-list1 .swiper-wrapper");
   const prdList2 = document.querySelector(".prd-list2 .swiper-wrapper");

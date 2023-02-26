@@ -1,7 +1,7 @@
 import { getProducts } from "../api/getProducts";
 import link from "../../static/images/no-result.svg";
-import moveToDetail from "../movetoProductDetail";
-import { setSidebar } from "../sidebar";
+import moveToDetail from "../utils/movetoProductDetail";
+import { setSidebar } from "../userSidebar/sidebar";
 import { addCart } from "../product/setProductDetailPage";
 
 export default async function setResultPage(keyword, router) {
