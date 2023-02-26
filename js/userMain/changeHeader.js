@@ -1,5 +1,6 @@
 import { requestLogout } from "../api/requestLogout";
 import { makeDOMwithProperties } from "../utils/dom";
+import resetHeader from "./resetHeader";
 
 export function changeHeader(router) {
   // 로그인 한 유저 userName 가져오기
@@ -37,14 +38,4 @@ export function changeHeader(router) {
     event.preventDefault();
     router.navigate("mypage/orderList");
   });
-}
-
-function resetHeader() {
-  const headerMenu = document.querySelector(".header-menu");
-  headerMenu.innerHTML = `<li class="header-menu-item">
-  <a href="/signup" data-navigo>회원가입</a>
-</li>
-<li class="header-menu-item">
-  <a href="/login" data-navigo>로그인</a>
-</li>`;
 }

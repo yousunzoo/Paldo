@@ -1,7 +1,9 @@
 import { checkAuthorization } from "../api/checkAuthorization";
 import { getDetailProduct } from "../api/getDetailProduct";
 import { getLocalStorageData } from "../localStorage/getLocalStorageData";
-import { setSidebarSwiper } from "../userSidebar/sidebar";
+import setSidebarSwiper from "../userSidebar/setSidebarSwiper";
+import addCart from "../utils/addCart";
+import toggleCountButton from "./toggleCountButton";
 
 export async function setProductDetailPage(id, router) {
   const productInfo = await getDetailProduct(id);
@@ -116,72 +118,4 @@ export async function setProductDetailPage(id, router) {
   spinner.style.display = "none";
 
   setSidebarSwiper(router);
-}
-
-function toggleCountButton(price) {
-  // 버튼으로 구매할 수량 조절 및 총 구매 금액 설정
-  const upButton = document.querySelector(".product-quantity .up-button");
-  const downButton = document.querySelector(".product-quantity .down-button");
-  const quantityDiv = document.querySelector(".product-quantity .count");
-  const totalPrice = document.querySelector(".total-num");
-  let quantity = 1;
-
-  upButton.addEventListener("click", () => {
-    quantity += 1;
-    quantityDiv.textContent = quantity;
-    totalPrice.textContent = (quantity * price).toLocaleString();
-    if (quantity === 2) {
-      downButton.disabled = false;
-      downButton.style.opacity = 1;
-    }
-  });
-
-  downButton.addEventListener("click", () => {
-    quantity -= 1;
-    quantityDiv.textContent = quantity;
-    totalPrice.textContent = (quantity * price).toLocaleString();
-    if (quantity === 1) {
-      downButton.disabled = true;
-      downButton.style.opacity = 0.5;
-    }
-  });
-}
-
-export async function addCart(product, quantity, router) {
-  const isLogined = await checkAuthorization();
-  if (!isLogined) {
-    Swal.fire({
-      title: "로그인하셔야 본 기능을 이용하실 수 있습니다.",
-    }).then(() => {
-      router.navigate("/login");
-    });
-
-    return;
-  }
-  const loginedId = getLocalStorageData("loginId");
-  let loginedIdData = getLocalStorageData("loginIdData");
-  let cartList = getLocalStorageData("cartList");
-  if (!cartList) {
-    cartList = [];
-  }
-  const itemIndex = cartList.findIndex((item) => item.id === product.id);
-  if (itemIndex != -1) {
-    cartList[itemIndex].quantity += Number(quantity);
-  } else {
-    cartList.push({
-      id: product.id,
-      title: product.title,
-      price: product.price,
-      discountRate: product.discountRate,
-      quantity: Number(quantity),
-      thumbnail: product.thumbnail,
-    });
-  }
-  loginedIdData.cartList = cartList;
-  localStorage.setItem(loginedId, JSON.stringify(loginedIdData));
-  Swal.fire({
-    icon: "success",
-    title: "상품이 장바구니에 담겼습니다",
-    text: itemIndex != -1 ? "이미 담은 상품의 수량을 추가했습니다" : "",
-  });
 }

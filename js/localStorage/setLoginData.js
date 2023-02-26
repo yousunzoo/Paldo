@@ -1,6 +1,6 @@
 import { getLocalStorageData } from "./getLocalStorageData";
 
-export function setUserInfo(result, email, userAddress = "") {
+export default function setUserInfo(result, email, userAddress = "") {
   // localStorage에 loginInfoData 세팅
   let loginInfoData = getLocalStorageData("loginInfo");
   if (!loginInfoData) {

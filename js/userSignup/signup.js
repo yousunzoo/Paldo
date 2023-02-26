@@ -1,6 +1,6 @@
 import { requestSignup } from "../api/requestSignup";
 import getAddress from "../library/postcode";
-import { setUserInfo } from "../localStorage/setLoginData";
+import setUserInfo from "../localStorage/setLoginData";
 
 // input에 입력 시 유효성 체크
 // 회원가입 정보 input 만들어서 서버 제출 및 localStorage 세팅

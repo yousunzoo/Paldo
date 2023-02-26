@@ -1,5 +1,5 @@
-import { loginFn } from "../api/requestLogin";
-import { setUserInfo } from "../localStorage/setLoginData";
+import loginFn from "../api/requestLogin";
+import setUserInfo from "../localStorage/setLoginData";
 
 export default function loginEvent(router) {
   const loginForm = document.querySelector(".login-form");

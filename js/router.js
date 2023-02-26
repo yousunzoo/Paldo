@@ -24,7 +24,7 @@ import { changeHeader } from "./userMain/changeHeader.js";
 import setProductPage from "./userProduct/setProductPage.js";
 import setResultPage from "./userSearch/searchResult.js";
 import signUpEvent from "./userSignup/signup.js";
-import { setSidebarSwiper } from "./userSidebar/sidebar.js";
+import setSidebarSwiper from "./userSidebar/setSidebarSwiper.js";
 import { setProductDetailPage } from "./userProduct/setProductDetailPage.js";
 import setCartPage from "./userCart/setCartPage.js";
 

@@ -4,7 +4,7 @@ import {
   getLocalStorageData,
 } from "../localStorage/getLocalStorageData";
 import { makeDOMwithProperties } from "../utils/dom.js";
-import { addCart } from "../userProduct/setProductDetailPage";
+import addCart from "../utils/addCart";
 
 const { WISH_LIST } = SORT_TYPES;
 

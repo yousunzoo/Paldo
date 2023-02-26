@@ -1,7 +1,7 @@
 import { headers, url } from "./headers";
 
 // 이전 페이지로 이동하는 버튼을 클릭할 때
-export async function loginFn(data) {
+export default async function loginFn(data) {
   try {
     const res = await fetch(`${url}auth/login`, {
       method: "POST",
