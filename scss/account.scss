@@ -1,50 +1,34 @@
-/* Color styles */
-$color_product_tag: #999999;
-$color_black: #333333;
-$color_discount_rate: #fa622f;
-$color_original_price: #b5b5b5;
-$color_primary: #414141;
-$color_btn_border: rgb(221, 221, 221);
-$color_incorrect: #f03f40;
-$color_white: #ffffff;
-$color_copyright: rgb(247, 247, 247);
-$bg_sidebar : rgb(250,250,250);
-
-// skeleton-loading
-@keyframes blinker {
-  100% {
-    background-position: -100% 0;
-  }
-}
-
-// spinner loading
 .spinner {
   width: 50px;
   height: 50px;
-  border: 5px solid #f3f3f3;
+  border: 5px solid $color_account;
   border-top: 5px solid $color_primary;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 #main {
   > .mypage-wrapper {
     /* MAIN SECTION */
     .account-wrapper {
-      width : 820px;
-      padding : 0;
+      width: 820px;
+      padding: 0;
       .header {
-        display : flex;
+        display: flex;
         justify-content: space-between;
-        width : 100%;
-        padding-bottom : 27px;
+        width: 100%;
+        padding-bottom: 27px;
         .wrapper {
-          display : flex;
+          display: flex;
           align-items: center;
           h2 {
             font-weight: 500;
@@ -73,38 +57,32 @@ $bg_sidebar : rgb(250,250,250);
         position: relative;
         .skeleton-loading {
           box-sizing: border-box;
-          position : absolute;
-          background-color: #fff;
-          width : 100%;
-          height : 100%;
+          position: absolute;
+          background-color: $color_white;
+          width: 100%;
+          height: 100%;
           top: 0;
           &.d-none {
             display: none;
           }
           .skeleton {
             height: 75px;
-            margin-bottom : 20px;
-            background: linear-gradient(
-              120deg,
-              #e5e5e5 30%,
-              #f0f0f0 38%,
-              #f0f0f0 40%,
-              #e5e5e5 48%
-            );
+            margin-bottom: 20px;
+            background: $color_gradient;
             background-size: 200% 100%;
             background-position: 100% 0;
             animation: blinker 1s linear infinite;
           }
           .skeleton-button {
-            margin : 40px auto 0;
+            margin: 40px auto 0;
             width: 120px;
             height: 40px;
           }
         }
         .no-list-wrapper {
           .no-list {
-            height : 75px;
-            margin : 30px 0;
+            height: 75px;
+            margin: 30px 0;
             text-align: center;
             letter-spacing: 0.3px;
             line-height: 75px;
@@ -112,121 +90,120 @@ $bg_sidebar : rgb(250,250,250);
         }
 
         .account-list {
-          margin-top : 30px;
+          margin-top: 30px;
           > .item {
-            height : 75px;
+            height: 75px;
             box-sizing: border-box;
-            display : flex;
+            display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px;
             background-color: #fafafa;
             border: 1px solid #eee;
-            margin-bottom : 20px;
+            margin-bottom: 20px;
             .account-info {
               > span {
-                display :inline-block;
-                margin-right : 10px;
+                display: inline-block;
+                margin-right: 10px;
                 &:not(:first-child)::before {
                   content: "";
-                  display : inline-block;
-                  width : 1px;
-                  height : 12px;
+                  display: inline-block;
+                  width: 1px;
+                  height: 12px;
                   background-color: #dadce0;
-                  margin-right : 10px;
+                  margin-right: 10px;
                 }
               }
-      
             }
             .account-delete-btn {
               background-color: $color_primary;
-              padding : 6px 11px;
-              border : 1px solid $color_primary;
-              color : #fff;
+              padding: 6px 11px;
+              border: 1px solid $color_primary;
+              color: $color_white;
               cursor: pointer;
-              transition : .3s ease;
+              transition: 0.3s ease;
               &:hover {
                 box-sizing: border-box;
-                color : $color_primary;
-                border : 1px solid $color_primary;
-                background-color: #fff;
+                color: $color_primary;
+                border: 1px solid $color_primary;
+                background-color: $color_white;
               }
             }
           }
         }
         /* 계좌 등록 모달창 */
         #modal {
-          display : none;
-          &:checked ~ .modal{
-            opacity : 1;
-            visibility : visible;
+          display: none;
+          &:checked ~ .modal {
+            opacity: 1;
+            visibility: visible;
           }
           + .add-account-btn {
-            display :block;
+            display: block;
             margin: 40px auto 0; // top : margin-collapse
             box-sizing: border-box;
-            width : 120px;
-            height : 40px;
-            line-height : 40px;
-            border : 1px solid $color_primary;
+            width: 120px;
+            height: 40px;
+            line-height: 40px;
+            border: 1px solid $color_primary;
             border-radius: 0;
             background-color: $color_primary;
-            color : #fff;
+            color: $color_white;
             text-align: center;
-            cursor:pointer;
-            transition : .3s ease;
-              &:hover {
-                box-sizing: border-box;
-                color : $color_primary;
-                border : 1px solid $color_primary;
-                background-color: #fff;
-              }
+            cursor: pointer;
+            transition: 0.3s ease;
+            &:hover {
+              box-sizing: border-box;
+              color: $color_primary;
+              border: 1px solid $color_primary;
+              background-color: $color_white;
+            }
           }
           ~ .modal {
-            opacity : 0;
-            visibility : hidden;
-            position : fixed;
-            width : 100vw;
-            height : 100vh;
+            opacity: 0;
+            visibility: hidden;
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
             top: 0;
             left: 0;
-            transition : .2s ease;
+            transition: 0.2s ease;
             .modal-overlay {
-              background-color: rgba(0,0,0,.4);
-              position : absolute;
-              width : 100%;
-              height : 100%;
+              background-color: rgba(0, 0, 0, 0.4);
+              position: absolute;
+              width: 100%;
+              height: 100%;
             }
             .modal-contents {
               box-sizing: border-box;
-              position : absolute;
-              width : 550px;
-              top : 50%;
-              left : 50%;
+              position: absolute;
+              width: 550px;
+              top: 50%;
+              left: 50%;
               transform: translate(-50%, -50%);
-              background-color: #fff;
-              padding : 40px 50px;
+              background-color: $color_white;
+              padding: 40px 50px;
               h2 {
-                font-size : 24px;
+                font-size: 24px;
                 text-align: center;
                 margin-bottom: 40px;
                 font-weight: bold;
               }
               form {
-                width : 100%;
+                width: 100%;
                 .bank-list {
-                  display : flex;
-                  flex-wrap : wrap;
+                  display: flex;
+                  flex-wrap: wrap;
                   justify-content: space-between;
-                  width : 100%;
+                  width: 100%;
                   row-gap: 15px;
                   .item {
-                    width : 45%;
-                    display : flex;
-                    gap : 5px;
+                    width: 45%;
+                    display: flex;
+                    gap: 5px;
                     align-items: center;
                     input {
-                      width : 18px;
+                      width: 18px;
                       height: 18px;
                     }
                     label {
@@ -236,71 +213,70 @@ $bg_sidebar : rgb(250,250,250);
                 }
                 .input-wrapper {
                   margin-top: 20px;
-                  display : flex;
-                  gap : 10px;
+                  display: flex;
+                  gap: 10px;
                   &:nth-of-type(1) {
-                    margin-top : 40px;
+                    margin-top: 40px;
                   }
                   label {
-                    width : 100px;
+                    width: 100px;
                     line-height: 40px;
                   }
                   input {
                     height: 40px;
-                    flex-grow : 1;
-                    outline : none;
+                    flex-grow: 1;
+                    outline: none;
                     font-size: 16px;
-                    padding : 4px 10px;
+                    padding: 4px 10px;
                     border: 1px solid #dadce0;
                   }
                 }
                 .account-info {
-                  margin-top : 20px;
+                  margin-top: 20px;
                   font-size: 13px;
-                  color : #b0afaf;
+                  color: #b0afaf;
                   p {
-                    display : flex;
+                    display: flex;
                     line-height: 16px;
                     &::before {
                       content: "※";
-                      display : inline-block;
-                      margin-right : 3px;
+                      display: inline-block;
+                      margin-right: 3px;
                     }
                   }
                 }
                 .confirm-btn {
-                  display : block;
-                  width : 100px;
-                  height : 40px;
-                  margin : 40px auto 0;
+                  display: block;
+                  width: 100px;
+                  height: 40px;
+                  margin: 40px auto 0;
                   box-sizing: border-box;
-                  border : 1px solid $color_primary;
-                  color : #fff;
+                  border: 1px solid $color_primary;
+                  color: $color_white;
                   background-color: $color_primary;
                   font-size: 14px;
                   cursor: pointer;
-                  transition : .3s ease;
+                  transition: 0.3s ease;
                   &:hover {
-                    color :$color_primary;
-                    background-color: #fff;
+                    color: $color_primary;
+                    background-color: $color_white;
                   }
                 }
               }
               .modal-spinner {
-                position : absolute;
-                top : 0;
+                position: absolute;
+                top: 0;
                 left: 0;
-                width : 100%;
-                height : 100%;
-                display : flex;
+                width: 100%;
+                height: 100%;
+                display: flex;
                 justify-content: center;
                 align-items: center;
-                background-color: #fff;
+                background-color: $color_white;
               }
             }
           }
-          
-        } 
+        }
       }
     }
   }

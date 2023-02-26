@@ -1,41 +1,16 @@
-/* Color styles */
-$color_product_tag: #999999;
-$color_black: #333333;
-$color_discount_rate: #fa622f;
-$color_original_price: #b5b5b5;
-$color_primary: #414141;
-$color_btn_border: rgb(221, 221, 221);
-$color_incorrect: #f03f40;
-$color_white: #ffffff;
-$color_copyright: rgb(247, 247, 247);
-$bg_sidebar : rgb(250,250,250);
-
-// skeleton-loading
-@keyframes blinker {
-  100% {
-    background-position: -100% 0;
-  }
-}
-
-// spinner-loading
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
 #main {
   > .mypage-wrapper {
     /* MAIN SECTION */
     .order-list-wrapper {
-      width : 820px;
-      padding : 0;
+      width: 820px;
+      padding: 0;
       .header {
-        display : flex;
+        display: flex;
         justify-content: space-between;
-        width : 100%;
-        padding-bottom : 27px;
+        width: 100%;
+        padding-bottom: 27px;
         .wrapper {
-          display : flex;
+          display: flex;
           align-items: center;
           h2 {
             font-weight: 500;
@@ -55,7 +30,7 @@ $bg_sidebar : rgb(250,250,250);
         }
         input {
           outline: none;
-          width : 115px;
+          width: 115px;
           padding: 0 10px;
           box-sizing: border-box;
           border: 1px solid $color_primary;
@@ -75,15 +50,15 @@ $bg_sidebar : rgb(250,250,250);
         .skeleton-loading {
           box-sizing: border-box;
           background-color: #fff;
-          width : 100%;
-          height : 100%;
+          width: 100%;
+          height: 100%;
           top: 0;
           &.d-none {
-            display : none;
+            display: none;
           }
           .skeleton {
             height: 112px;
-            margin-bottom : 20px;
+            margin-bottom: 20px;
             background: linear-gradient(
               120deg,
               #e5e5e5 30%,
@@ -105,36 +80,36 @@ $bg_sidebar : rgb(250,250,250);
             line-height: 75px;
           }
           .list-group {
-            border : 1px solid #e6e6e6;
+            border: 1px solid #e6e6e6;
             background-color: #f9f9f9;
-            margin-bottom : 20px;
+            margin-bottom: 20px;
             &:last-child {
               border-bottom: 1px solid #e6e6e6;
             }
             .list-title {
-              display : flex;
+              display: flex;
               justify-content: space-between;
               align-items: center;
               padding: 20px;
-              cursor : pointer;
-              transition : .3s ease;
+              cursor: pointer;
+              transition: 0.3s ease;
               &:hover {
                 background-color: #e7e7e7;
               }
               .title-info {
-                display : flex;
+                display: flex;
                 flex-direction: column;
-                gap : 7px;
+                gap: 7px;
                 .transaction-date {
                   color: #b4b4b4;
-                  font-size : 14px;
-                  margin-bottom : 10px;
+                  font-size: 14px;
+                  margin-bottom: 10px;
                 }
                 .transaction-name {
-                  font-size : 18px;
+                  font-size: 18px;
                 }
                 .transaction-price {
-                  font-size : 16px;
+                  font-size: 16px;
                 }
               }
               // spinner loading
@@ -147,14 +122,14 @@ $bg_sidebar : rgb(250,250,250);
                 animation: spin 1s linear infinite;
                 display: none;
                 &.active {
-                  display : block;
+                  display: block;
                 }
               }
             }
             > ul {
-              display : none;
+              display: none;
               background-color: #fff;
-              border-top : 1px solid #e6e6e6;
+              border-top: 1px solid #e6e6e6;
               .item {
                 position: relative;
                 .order-area {
@@ -171,7 +146,7 @@ $bg_sidebar : rgb(250,250,250);
                       background-color: rgb(245, 245, 245);
                     }
                     .info-list {
-                      display : flex;
+                      display: flex;
                       flex-direction: column;
                       dl {
                         display: flex;
@@ -180,7 +155,7 @@ $bg_sidebar : rgb(250,250,250);
                         color: rgb(0, 0, 0);
                         line-height: 20px;
                         dt {
-                          width : 60px;
+                          width: 60px;
                           line-height: 1.58;
                           margin-right: 10px;
                           font-size: 12px;
@@ -199,7 +174,6 @@ $bg_sidebar : rgb(250,250,250);
                           -webkit-box-orient: vertical;
                           font-size: 14px;
                         }
-                        
                       }
                     }
                   }
@@ -227,16 +201,16 @@ $bg_sidebar : rgb(250,250,250);
                         background-color: #fff;
                         border: 1px solid $color_primary;
                         cursor: pointer;
-                        transition : .3s ease;
+                        transition: 0.3s ease;
                         font-size: 12px;
                         box-sizing: border-box;
                         &:hover {
                           background-color: $color_primary;
-                          color : #fff;
+                          color: #fff;
                         }
                       }
                       .order-cancel-button {
-                        margin-bottom : 10px;
+                        margin-bottom: 10px;
                         &.inactive {
                           border: 1px solid rgba($color_primary, 0.6);
                           opacity: 0.6;
@@ -250,7 +224,7 @@ $bg_sidebar : rgb(250,250,250);
                       .order-confirm-button {
                         &.true {
                           background-color: $color_primary;
-                          color : #fff;
+                          color: #fff;
                           cursor: default;
                         }
                       }
@@ -259,22 +233,22 @@ $bg_sidebar : rgb(250,250,250);
                 }
                 .cancelled {
                   background-color: rgba(225, 225, 225, 0.5);
-                  width : 100%;
-                  height : 100%;
-                  position : absolute;
+                  width: 100%;
+                  height: 100%;
+                  position: absolute;
                   top: 0;
                   left: 0;
-                  z-index : 1;
+                  z-index: 1;
                   justify-content: center;
                   align-items: center;
                   &.true {
-                    display : flex;
+                    display: flex;
                   }
                   &.false {
                     display: none;
                   }
                   span {
-                    font-size : 28px;
+                    font-size: 28px;
                     color: red;
                   }
                 }

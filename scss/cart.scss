@@ -1,16 +1,3 @@
-// 변수
-/* Color styles */
-$color_product_tag: #999999;
-$color_black: #333333;
-$color_discount_rate: #fa622f;
-$color_original_price: #b5b5b5;
-$color_primary: #414141;
-$color_btn_border: rgb(221, 221, 221);
-$color_incorrect: #f03f40;
-$color_white: #ffffff;
-$color_copyright: rgb(247, 247, 247);
-$color_devide_line: rgb(244, 244, 244);
-
 #main {
   .cart-wrapper {
     .main-title {
@@ -94,12 +81,12 @@ $color_devide_line: rgb(244, 244, 244);
           .skeleton-li {
             width: 100%;
             height: 100px;
-            background-color: #fff;
+            background-color: $color_white;
             display: flex;
             align-items: center;
             .skeleton {
               border-radius: 10px;
-              background: linear-gradient(120deg, #e5e5e5 30%, #f0f0f0 38%, #f0f0f0 40%, #e5e5e5 48%);
+              background: $color_gradient;
               background-size: 200% 100%;
               background-position: 100% 0;
               animation: blinker 1s linear infinite;
@@ -169,7 +156,7 @@ $color_devide_line: rgb(244, 244, 244);
               .product-thumbnail {
                 width: 60px;
                 height: 100%;
-                background-color: #eee;
+                background-color: $color_thumbnail;
 
                 img {
                   width: 100%;
@@ -214,15 +201,15 @@ $color_devide_line: rgb(244, 244, 244);
               button {
                 width: 25px;
                 height: 25px;
-                border: 1px solid #b5b5b5;
+                border: 1px solid $color_quantity_button;
                 line-height: 25px;
                 font-size: 18px;
               }
               .count {
                 width: 25px;
                 height: 25px;
-                border-top: 1px solid #b5b5b5;
-                border-bottom: 1px solid #b5b5b5;
+                border-top: 1px solid $color_quantity_button;
+                border-bottom: 1px solid $color_quantity_button;
                 text-align: center;
                 font-size: 14px;
                 display: flex;
@@ -258,7 +245,7 @@ $color_devide_line: rgb(244, 244, 244);
         }
         .center-text-box {
           padding: 115px 0px;
-          border-top: 1px solid rgb(51, 51, 51);
+          border-top: 1px solid $color_text_border;
           font-size: 16px;
           line-height: 24px;
           text-align: center;
@@ -279,7 +266,7 @@ $color_devide_line: rgb(244, 244, 244);
         .cart-bills-top {
           width: 100%;
           height: 190px;
-          border: 1px solid #f2f2f2;
+          border: 1px solid $color_bills_border;
           border-bottom: 0;
           background-image: url("../static/images/cart_banner.png");
           background-size: cover;
@@ -287,8 +274,8 @@ $color_devide_line: rgb(244, 244, 244);
         }
         .cart-bills-main {
           padding: 19px 18px 18px 20px;
-          border: 1px solid #f2f2f2;
-          background-color: #fafafa;
+          border: 1px solid $color_bills_border;
+          background-color: $color_bills_background;
           .cart-bills-line {
             font-size: 16px;
             justify-content: space-between;
@@ -298,7 +285,7 @@ $color_devide_line: rgb(244, 244, 244);
             &:last-child {
               margin-top: 16px;
               padding-top: 18px;
-              border-top: 1px solid #f4f4f4;
+              border-top: 1px solid $color_account;
             }
             .price-text {
               width: 100px;
@@ -318,10 +305,10 @@ $color_devide_line: rgb(244, 244, 244);
             overflow: hidden;
             width: 100%;
             height: 56px;
-            color: #fff;
+            color: $color_white;
             border: 0 none;
             font-weight: 500;
-            background-color: #ddd;
+            background-color: $color_payment_background;
             box-sizing: border-box;
             &.active {
               background-color: $color_primary;
@@ -341,7 +328,7 @@ $color_devide_line: rgb(244, 244, 244);
               line-height: 16px;
               padding-left: 7px;
               padding-top: 4px;
-              color: #666;
+              color: $color_description;
             }
           }
         }
