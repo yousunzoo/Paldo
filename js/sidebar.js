@@ -21,24 +21,33 @@ export function setSidebar(data, router) {
 }
 
 export function setSidebarSwiper(router) {
-  const sidebarData = JSON.parse(localStorage.getItem("sidebarData"));
+  const sidebarData = JSON.parse(localStorage.getItem("sidebarData")) || [];
   const swiperWrapperDiv = document.querySelector(
     "#sidebar-area .swiper-wrapper"
   );
-
-  const swiperDivs = sidebarData.map((item) => {
+  if (sidebarData.length === 0) {
     const swiperDiv = makeDOMwithProperties("div", {
-      className: "swiper-slide",
+      className: "no-sidebar-data",
+      textContent: "최근 본 상품이 없습니다",
     });
-    swiperDiv.innerHTML = `<a href="productDetail/${item.id}" data-navigo><img src="${item.thumbnail}" alt="${item.title}"/></a>`;
-    swiperDiv.querySelector("a").addEventListener("click", function (event) {
-      setSidebar(item, router);
-      moveToDetail(event, this, router);
-    });
-    return swiperDiv;
-  });
 
-  swiperWrapperDiv.innerHTML = ``;
-  swiperWrapperDiv.append(...swiperDivs);
-  sidebarAction();
+    swiperWrapperDiv.innerHTML = ``;
+    swiperWrapperDiv.append(swiperDiv);
+  } else {
+    const swiperDivs = sidebarData.map((item) => {
+      const swiperDiv = makeDOMwithProperties("div", {
+        className: "swiper-slide",
+      });
+      swiperDiv.innerHTML = `<a href="productDetail/${item.id}" data-navigo><img src="${item.thumbnail}" alt="${item.title}"/></a>`;
+      swiperDiv.querySelector("a").addEventListener("click", function (event) {
+        setSidebar(item, router);
+        moveToDetail(event, this, router);
+      });
+      return swiperDiv;
+    });
+
+    swiperWrapperDiv.innerHTML = ``;
+    swiperWrapperDiv.append(...swiperDivs);
+    sidebarAction();
+  }
 }
