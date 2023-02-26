@@ -1,36 +1,4 @@
-export const adminWrapper = /* html */ `
-<div id="adminWrapper">
-  <header class="admin-header">
-    <div class="header-wrapper">
-      <a class="logo" href="report" data-navigo></a>
-      <div class="admin-info">
-        <div class="info-name">관리자</div>
-        <a href="/" class="info-logout" data-navigo>로그아웃</a>
-      </div>
-    </div>
-  </header>
-  <section class="container">
-    <div class="left-nav-bar">
-      <div class="side-menu-wrapper">
-        <a href="report" class="side-menu report" data-navigo>
-          <div class="menu-title">보고서</div>
-        </a>
-        <a href="product" class="side-menu management" data-navigo>
-          <div class="menu-title">상품 관리</div>
-        </a>
-        <a
-          href="transaction"
-          class="side-menu transaction-history"
-          data-navigo>
-          <div class="menu-title">거래 내역 관리</div>
-        </a>
-      </div>
-    </div>
-    <div class="right-nav-bar" id="content"></div>
-  </section>
-</div>`;
-
-export const userWrapper = /* html */ `
+export default /* html */ `
 <div id="userWrapper">
   <header>
     <div class="inner-wrapper">
@@ -46,7 +14,7 @@ export const userWrapper = /* html */ `
 
         <div class="header-items">
           <a class="logo" href="/" data-navigo>
-            <img src="${require("../../static/images/logo.png")}" alt="오뚜기 몰" />
+            <img src="${require("../../../static/images/logo.png")}" alt="오뚜기 몰" />
           </a>
           <form class="search">
             <input
@@ -100,7 +68,7 @@ export const userWrapper = /* html */ `
     <div class="inner-wrapper">
       <div class="footer-team-info1">
         <div class="team-name">
-          <img src="${require("../../static/images/team_logo.png")}" alt="전국팔도" />
+          <img src="${require("../../../static/images/team_logo.png")}" alt="전국팔도" />
           <div class="team-name-desc">
             <div class="team-title-area">
               <p class="team-title">Team</p>
@@ -180,18 +148,18 @@ export const userWrapper = /* html */ `
         <div class="team-skillset">
           <p class="footer-title">Our skills</p>
           <div class="skill-list">
-            <img src="${require("../../static/images/icon-html.svg")}" alt="HTML5" />
-            <img src="${require("../../static/images/icon-css.svg")}" alt="CSS3" />
+            <img src="${require("../../../static/images/icon-html.svg")}" alt="HTML5" />
+            <img src="${require("../../../static/images/icon-css.svg")}" alt="CSS3" />
             <img
-              src="${require("../../static/images/icon-javascript.svg")}"
+              src="${require("../../../static/images/icon-javascript.svg")}"
               alt="JavaScript" />
-            <img src='${require("../../static/images/icon-sass.svg")}' alt="Sass" />
+            <img src='${require("../../../static/images/icon-sass.svg")}' alt="Sass" />
           </div>
           <div class="tool-list">
-            <img src="${require("../../static/images/icon-figma.svg")}" alt="Figma" />
-            <img src="${require("../../static/images/icon-vscode.svg")}" alt="VSCode" />
-            <img src="${require("../../static/images/icon-github.svg")}" alt="Github" />
-            <img src="${require("../../static/images/icon-psd.svg")}" alt="Photoshop" />
+            <img src="${require("../../../static/images/icon-figma.svg")}" alt="Figma" />
+            <img src="${require("../../../static/images/icon-vscode.svg")}" alt="VSCode" />
+            <img src="${require("../../../static/images/icon-github.svg")}" alt="Github" />
+            <img src="${require("../../../static/images/icon-psd.svg")}" alt="Photoshop" />
           </div>
         </div>
         <div class="team-inquiry">
