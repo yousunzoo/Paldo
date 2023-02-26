@@ -1,7 +1,7 @@
 // import { checkAuthorization } from '../api/checkAuthorization'
-import { getUserAccounts } from '../userAccount/accountApi.js'
+import getUserAccounts from '../api/getUserAccounts.js'
 import { SORT_TYPES, getLocalStorageData } from '../localStorage/getLocalStorageData.js';
-import { requestTransaction } from './paymentApi.js';
+import requestTransaction from '../api/requestTransaction.js';
 import { getOrderList } from '../userOrderList/orderListApi.js'
 import { analyzeOrderList } from "../userOrderList/orderList.js";
 import { cancelTransaction } from "../userOrderList/orderListApi.js";

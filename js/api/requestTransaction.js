@@ -1,9 +1,9 @@
 import { SORT_TYPES, getLocalStorageData } from '../localStorage/getLocalStorageData';
-import { headers, url } from "../api/headers.js";
+import { headers, url } from "./headers.js";
 
 const { ACCESS_TOKEN } = SORT_TYPES;
 
-export function requestTransaction(body) {
+export default function (body) {
   return new Promise(async (resolve, reject) => {
     const accessToken = getLocalStorageData(ACCESS_TOKEN);
     try {

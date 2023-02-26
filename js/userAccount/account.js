@@ -1,25 +1,14 @@
 // import { checkAuthorization } from '../api/checkAuthorization.js';
-import { getBankList, connectBankAccount, getUserAccounts, deleteAccount } from './accountApi.js';
 import { makeDOMwithProperties } from '../utils/dom.js';
+import getUserAccounts from '../api/getUserAccounts.js';
+import connectBankAccount from '../api/connectBankAccount.js';
+import getBankList from '../api/getBankList.js'
+import deleteAccount from '../api/deleteAccount.js';
 
 /* GLOBAL LOGIC */
 
-// ;(async function () {
-//   const isValidUser = await checkAuthorization();
-//   if(isValidUser) {
-//     initPage();
-//   } else {
-//     Swal.fire({
-//       icon: 'error',
-//       title: '사용자 세션이 만료되었습니다.',
-//       text: '로그인 페이지로 이동합니다.',
-//     })
-//     // 로그인 페이지로 redirect
-//     // location.assign('로그인 페이지 경로')
-//   }
-// })()
-
 export function setAccountPage() {
+  // 페이지 초기화
   initPage();
 
   const modalTrigger = document.querySelector('.add-account-button');
@@ -31,6 +20,7 @@ export function setAccountPage() {
 
     // 계좌 목록 조회 API !
     let bankList = await getBankList();
+    if(!bankList) return
 
     // DOM 생성 !
     const templateEl = createBankList(bankList);
@@ -52,9 +42,7 @@ export function setAccountPage() {
 
     // MODAL FUNCTIONS
     function createBankList(bankList) {
-      bankList = bankList.filter(bank => {
-        return bank.name !== "케이뱅크" // 케이뱅크는 목록에서 제외합니다.
-      });
+      bankList = bankList.filter(bank => bank.name !== "케이뱅크"); // 케이뱅크는 목록에서 제외합니다.
     
       const templateEl = document.createElement('template');
       bankList.forEach(bank => {
@@ -78,8 +66,8 @@ export function setAccountPage() {
       if(event.target.matches('input[type="radio"]')) {
         const str = event.target.labels[0].innerText;
         const matches = str.match(/\d+/g) || [];
-        totalDigits = matches.reduce((acc,cur) => {
-          return acc + Number(cur);
+        totalDigits = matches.reduce((acc,digit) => {
+          return acc + Number(digit);
         }, 0)
       }
     }
@@ -106,37 +94,26 @@ export function setAccountPage() {
 
       const submitData = { bankCode, accountNumber, phoneNumber, signature : true }
       // 계좌 연결 API
-      try {
-        const res = await connectBankAccount(submitData);
-        if(typeof res !== 'string') {
-          // 연결 요청 성공 시
-          Swal.fire(
-            '연결 성공!',
-            '계좌가 성공적으로 연결되었습니다.',
-            'success'
-          )
+      const res = await connectBankAccount(submitData);
+      if(!res) return
+      else {
+        // 연결 요청 성공 시
+        Swal.fire(
+          '연결 성공!',
+          '계좌가 성공적으로 연결되었습니다.', 
+          'success'
+        )
 
-          //리렌더링
-          initPage();
+        //리렌더링
+        initPage();
 
-          // 모달창 닫기
-          const modalEl = document.querySelector('input[type="checkbox"]#modal');
-          modalEl.checked = false;
-    
-          // 내부에서 사용한 이벤트 핸들러 제거
-          ulEl.removeEventListener('change', getTotalAccountDigits)
-          accountFormEl.removeEventListener('submit', submitAccountForm)
-        } else {
-          // 연결 요청 실패 시
-          throw new Error('계좌 연결에 실패했습니다.') // 에러 처리 고도화 필요
-        }
-      } catch(err) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: err.message,
-        })
-        console.error(err);
+        // 모달창 닫기
+        const modalEl = document.querySelector('input[type="checkbox"]#modal');
+        modalEl.checked = false;
+  
+        // 내부에서 사용한 이벤트 핸들러 제거
+        ulEl.removeEventListener('change', getTotalAccountDigits)
+        accountFormEl.removeEventListener('submit', submitAccountForm)
       }
     }
   })
@@ -144,14 +121,15 @@ export function setAccountPage() {
   // FUNCTIONS
   async function initPage() {
     // 사용자 계좌 목록 조회
-    const accountList = await getUserAccounts();
+    const result = await getUserAccounts();
+    if(!result) return
+    const accountList = result.accounts
 
     accountList.length === 0 ? renderEmptyList() : renderAccountList(accountList);
 
     const skeletonLoadingEl = document.querySelector('.skeleton-loading');
     skeletonLoadingEl.classList.add('d-none');
   }
-
   function createAccountList (accountList) {
     const fragmentEl = document.createDocumentFragment();
     accountList.forEach(account => {
@@ -179,36 +157,24 @@ export function setAccountPage() {
         }).then(async (result) => {
           if (result.isConfirmed) {
             const body = { accountId : event.target.dataset.accountId, signature : true };
-            console.log(body)
 
-            try {
-              // 삭제 요청 API 전송
-              const res = await deleteAccount(body);
-              if(res) {
-                // 삭제 요청 성공 시
-                Swal.fire(
-                  '삭제 성공!',
-                  '계좌가 성공적으로 삭제되었습니다.',
-                  'success'
-                )
-                // 리렌더링
-                const accountList = await getUserAccounts()
-                if(accountList.length === 0) {
-                  renderEmptyList()
-                } else {
-                  renderAccountList(accountList);
-                }
-              } else {
-                throw new Error('계좌 삭제에 실패했습니다.')
-              }
-            } catch(err) {
-              Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: err.message,
-              })
-              console.error(err);
-              return;
+            // 삭제 요청 API 전송
+            const res = await deleteAccount(body);
+            if(!res) return;
+            // 삭제 요청 성공 시
+            Swal.fire(
+              '삭제 성공!',
+              '계좌가 성공적으로 삭제되었습니다.',
+              'success'
+            )
+            // 리렌더링
+            const result = await getUserAccounts()
+            if(!result) return
+            const accountList = result.accounts
+            if(accountList.length === 0) {
+              renderEmptyList()
+            } else {
+              renderAccountList(accountList);
             }
           }
         })
