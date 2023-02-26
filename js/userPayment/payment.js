@@ -1,27 +1,11 @@
 // import { checkAuthorization } from '../api/checkAuthorization'
-import getUserAccounts from '../api/getUserAccounts.js'
 import { SORT_TYPES, getLocalStorageData } from '../localStorage/getLocalStorageData.js';
+import getUserAccounts from '../api/getUserAccounts.js'
 import requestTransaction from '../api/requestTransaction.js';
-import { getOrderList } from '../userOrderList/orderListApi.js'
+import getOrderList from '../api/getOrderList.js'
+import cancelTransaction from "../api/cancelTransaction.js";
 import { analyzeOrderList } from "../userOrderList/orderList.js";
-import { cancelTransaction } from "../userOrderList/orderListApi.js";
 
-/* GLOBAL LOGIC */
-// setMockData();
-// ;(async function () {
-//   const isValidUser = await checkAuthorization();
-//   if(isValidUser) {
-//     initPage();
-//   } else {
-//     Swal.fire({
-//       icon: 'error',
-//       title: '사용자 세션이 만료되었습니다.',
-//       text: '로그인 페이지로 이동합니다.',
-//     })
-//     // 로그인 페이지로 redirect
-//     // location.assign('로그인 페이지 경로')
-//   }
-// })()
 export function setPaymentPage(router) {
   /* GLOBAL VARIABLES */
   const { USER_INFO, USER_ADDRESS, COUPONS, CART_LIST } = SORT_TYPES;

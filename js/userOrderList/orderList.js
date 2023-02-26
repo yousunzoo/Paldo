@@ -1,9 +1,8 @@
 // import { checkAuthorization } from '../api/checkAuthorization.js'
-import { getOrderList, cancelTransaction, confirmTransaction } from './orderListApi.js'
+import getOrderList from '../api/getOrderList.js'
+import cancelTransaction from '../api/cancelTransaction.js'
+import confirmTransaction from '../api/confirmTransaction.js'
 import { makeDOMwithProperties } from '../utils/dom.js'
-
-/* GLOBAL LOGIC */
-
 
 /* FUNCTIONS */
 export function setOrderListPage () {
@@ -29,6 +28,7 @@ export function setOrderListPage () {
   
     // 사용자 전체 거래내역 조회
     const orderListData = await getOrderList();
+    if(!orderListData) return
     const data = pickerEl.value ? filterByFlatPickr(orderListData) : orderListData
   
     // 거래 내역이 없을 때
@@ -269,37 +269,25 @@ function onClickConfirmButton(event) {
     cancelButtonText: '취소'
   }).then(async (result) => {
     if (result.isConfirmed) {
-      try {
-        const body = { detailId : buttonsEl.dataset.id }
-        // 거래 확정 요청 API 전송
-        const res = await confirmTransaction(body);
-        if(res) {
-          // 거래 확정 요청 성공 시
-          Swal.fire(
-            '구매 확정 성공!',
-            '성공적으로 구매 확정되었습니다.',
-            'success'
-          )
-          // 거래 확정 관련 렌더링
-          const orderConfirmButtonEl = liEl.querySelector('.order-confirm-button');
-          orderConfirmButtonEl.classList.remove('false');
-          orderConfirmButtonEl.classList.add('true');
-          orderConfirmButtonEl.disabled = true;
-          const orderCancelButtonEl = liEl.querySelector('.order-cancel-button');
-          orderCancelButtonEl.classList.add('inactive');
-          orderCancelButtonEl.disabled = true;
-        } else {
-          throw new Error('알 수 없는 오류가 발생했습니다.')
-        }
-      } catch(err) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: err.message,
-        })
-        console.error(err);
-        return;
-      }
+      const body = { detailId : buttonsEl.dataset.id }
+      // 거래 확정 요청 API 전송
+      const res = await confirmTransaction(body);
+      if(!res) return
+
+      // 거래 확정 요청 성공 시
+      Swal.fire(
+        '구매 확정 성공!',
+        '성공적으로 구매 확정되었습니다.',
+        'success'
+      )
+      // 거래 확정 관련 렌더링
+      const orderConfirmButtonEl = liEl.querySelector('.order-confirm-button');
+      orderConfirmButtonEl.classList.remove('false');
+      orderConfirmButtonEl.classList.add('true');
+      orderConfirmButtonEl.disabled = true;
+      const orderCancelButtonEl = liEl.querySelector('.order-cancel-button');
+      orderCancelButtonEl.classList.add('inactive');
+      orderCancelButtonEl.disabled = true;
     }
   })
 }
