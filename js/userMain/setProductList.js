@@ -97,7 +97,7 @@ function setRecommendList(prdList, data, router) {
 
     // 장바구니 버튼 누르면 해당 상품 장바구니에 담기
     recommendLi.querySelector("button").addEventListener("click", () => {
-      addCart(item);
+      addCart(item, 1, router);
     });
     return recommendLi;
   });

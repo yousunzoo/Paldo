@@ -107,7 +107,8 @@ export async function setProductDetailPage(id, router) {
     const quantity = document.querySelector(
       ".product-quantity .count"
     ).textContent;
-    addCart(productInfo, quantity);
+
+    addCart(productInfo, quantity, router);
   });
 
   // 세팅되면 스피너 사라지도록
@@ -146,7 +147,7 @@ function toggleCountButton(price) {
   });
 }
 
-export async function addCart(product, quantity = 1) {
+export async function addCart(product, quantity, router) {
   const isLogined = await checkAuthorization();
   if (!isLogined) {
     Swal.fire({

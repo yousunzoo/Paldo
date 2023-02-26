@@ -103,7 +103,7 @@ function setProductList(prdList, sort, originResult, router) {
     productEl.querySelector("a").addEventListener("click", function (event) {
       if (event.target === cartButton) {
         event.preventDefault();
-        addCart(item);
+        addCart(item, 1, router);
         return;
       }
       moveToDetail(event, this, router);
