@@ -1,5 +1,6 @@
 import { checkAuthorization } from "../api/checkAuthorization";
 import { getProductInfo } from "../api/getProductInfo";
+import { setSidebar, setSidebarSwiper } from "../sidebar";
 
 export default async function setProductDetailPage(id, router) {
   const productInfo = await getProductInfo(id);
@@ -113,6 +114,8 @@ export default async function setProductDetailPage(id, router) {
   // 세팅되면 스피너 사라지도록
   const spinner = document.querySelector(".spinner-wrapper");
   spinner.style.display = "none";
+
+  setSidebarSwiper(router);
 }
 
 function toggleCountButton(price) {

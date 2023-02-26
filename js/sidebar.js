@@ -7,7 +7,6 @@ export function setSidebar(data, router) {
   if (!sidebarData) {
     sidebarData = [];
   }
-
   // sidebarData에 이미 데이터가 있으면 배열에서 객체 삭제하고 배열 앞에 다시 삽입
   sidebarData.forEach((item, index) => {
     if (item.id === data.id) {
@@ -32,10 +31,9 @@ export function setSidebarSwiper(router) {
       className: "swiper-slide",
     });
     swiperDiv.innerHTML = `<a href="productDetail/${item.id}" data-navigo><img src="${item.thumbnail}" alt="${item.title}"/></a>`;
-
     swiperDiv.querySelector("a").addEventListener("click", function (event) {
-      moveToDetail(event, this, router);
       setSidebar(item, router);
+      moveToDetail(event, this, router);
     });
     return swiperDiv;
   });

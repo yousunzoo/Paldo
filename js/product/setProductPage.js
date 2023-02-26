@@ -4,7 +4,6 @@ import bannerFrugal from "../../static/images/productBanner-frugal.png";
 import { getProducts } from "../api/getProducts";
 import moveToDetail from "../movetoProductDetail";
 import { setSidebar } from "../sidebar";
-import { checkAuthorization } from "../api/checkAuthorization";
 import { addCart } from "./setProductDetailPage";
 
 export default async function setProductPage(tag, router) {
@@ -108,17 +107,15 @@ function setProductList(prdList, sort, originResult, router) {
 
     // 클릭 시 해당 페이지로 이동
     const cartButton = productEl.querySelector(".add-cart-btn");
-    productEl
-      .querySelector("a")
-      .addEventListener("click", async function (event) {
-        if (event.target === cartButton) {
-          event.preventDefault();
-          addCart(item);
-          return;
-        }
-        moveToDetail(event, this, router);
-        setSidebar(item);
-      });
+    productEl.querySelector("a").addEventListener("click", function (event) {
+      if (event.target === cartButton) {
+        event.preventDefault();
+        addCart(item);
+        return;
+      }
+      setSidebar(item);
+      moveToDetail(event, this, router);
+    });
 
     // 장바구니 버튼 클릭 시 수량 1로 지정 후 장바구니에 해당 상품 담기
     return productEl;
