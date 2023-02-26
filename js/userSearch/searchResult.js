@@ -2,7 +2,7 @@ import { getProducts } from "../api/getProducts";
 import link from "../../static/images/no-result.svg";
 import moveToDetail from "../utils/movetoProductDetail";
 import { setSidebar } from "../userSidebar/sidebar";
-import { addCart } from "../product/setProductDetailPage";
+import { addCart } from "../userProduct/setProductDetailPage";
 
 export default async function setResultPage(keyword, router) {
   const searchResult = await getProducts(keyword);

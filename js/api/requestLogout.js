@@ -1,4 +1,3 @@
-import { resetHeader } from "../main/changeHeader";
 import { headers, url } from "./headers";
 
 export async function requestLogout() {

@@ -9,15 +9,15 @@ export const SORT_TYPES = {
 
 export function getLocalStorageData(sort) {
   const loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
-  const userData = JSON.parse(localStorage.getItem(loginInfo.loginId));
+  const userData = JSON.parse(localStorage.getItem(loginInfo?.loginId));
   const sidebarData = JSON.parse(localStorage.getItem("sidebarData"));
   switch (sort) {
     case "sidebarData":
       return sidebarData || [];
     case "loginInfo":
-      return loginInfo;
+      return loginInfo || null;
     case "loginId":
-      return loginInfo.loginId;
+      return loginInfo?.loginId;
     case "loginIdData":
       return userData;
     case "accessToken":

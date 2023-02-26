@@ -19,7 +19,7 @@ const validCheck = {
 
 const userAddress = {};
 
-export function signUpEvent() {
+export default function signUpEvent() {
   const emailInput = document.querySelector("#email");
   const passwordInput = document.querySelector("#password");
   const passwordCheckInput = document.querySelector("#passwordCheck");
