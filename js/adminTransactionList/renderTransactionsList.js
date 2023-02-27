@@ -41,7 +41,6 @@ export const renderTransactionsList = async (router, itemListData, no) => {
     });
     itemEl.href = "/transaction/" + item.detailId;
     let koreaTime = new Date(item.timePaid);
-    koreaTime.getTime();
     itemNo.textContent = no++;
     itemName.textContent = item.product.title;
     itemPrice.textContent = item.product.price;
@@ -52,7 +51,16 @@ export const renderTransactionsList = async (router, itemListData, no) => {
     });
     itemCancel.textContent = item.isCanceled ? "YES" : "NO";
     itemConfirm.textContent = item.done ? "YES" : "NO";
-    itemEl.append(itemNo, itemName, itemPrice, itemCoustmer, itemBank, itemTime, itemCancel, itemConfirm);
+    itemEl.append(
+      itemNo,
+      itemName,
+      itemPrice,
+      itemCoustmer,
+      itemBank,
+      itemTime,
+      itemCancel,
+      itemConfirm
+    );
     liEl.append(itemEl);
     itemEl.addEventListener("click", function (event) {
       event.preventDefault();
