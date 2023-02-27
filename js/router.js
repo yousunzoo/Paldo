@@ -1,77 +1,68 @@
-import { headers } from "./api/headers";
 import Navigo from "navigo"; // When using ES modules.
-import { checkAuthorization } from "./api/checkAuthorization";
-import { cartPage, couponPage, loginPage, mainPage, productDetailPage, productPage, searchPage, sigupPage } from "./components/userPage";
-import myPage from "./components/userPages/myPage";
-import accountPage from "./components/userPages/accountPage";
-import orderListPage from "./components/userPages/orderListPage";
-import likePage from "./components/userPages/likePage";
-import modifyPage from "./components/userPages/modifyPage";
-import paymentPage from "./components/userPages/paymentPage";
-import paymentCompletePage from "./components/userPages/paymentCompletePage";
+import { checkAuthorization } from "./api/checkAuthorization.js";
+import userWrapper from "./components/wrappers/userWrapper.js";
+import adminWrapper from "./components/wrappers/adminWrapper.js";
+import userMainPage from "./components/userPage/userMainPage.js";
+import userLoginPage from "./components/userPage/userLoginPage.js";
+import userSignupPage from "./components/userPage/userSignupPage.js";
+import userSearchPage from "./components/userPage/userSearchPage.js";
+import userCouponPage from "./components/userPage/userCouponPage.js";
+import userProductPage from "./components/userPage/userProductPage.js";
+import userProductDetailPage from "./components/userPage/userProductDetailPage.js";
+import userCartPage from "./components/userPage/userCartPage.js";
+import userOrderListPage from "./components/userPage/userOrderListPage.js";
+import userAccountPage from "./components/userPage/userAccountPage.js";
+import userLikePage from "./components/userPage/userLikePage.js";
+import userModifyPage from "./components/userPage/userModifyPage.js";
+import handleCouponButton from "./userCoupon/coupon.js";
+import handleSearchInput from "./userHeader/handleSearchInput.js";
+import { swiperAction, sidebarAction } from "./library/swiper.js";
+import goToTopFn from "./library/toTop.js";
+import loginEvent from "./userLogin/login.js";
+import { changeHeader } from "./userMain/changeHeader.js";
+import setProductPage from "./userProduct/setProductPage.js";
+import setResultPage from "./userSearch/searchResult.js";
+import signUpEvent from "./userSignup/signup.js";
+import setSidebarSwiper from "./userSidebar/setSidebarSwiper.js";
+import { setProductDetailPage } from "./userProduct/setProductDetailPage.js";
+import setCartPage from "./userCart/setCartPage.js";
 
-import handleCouponButton from "./coupon/coupon";
-import handleSearchInput from "./header/handleSearchInput";
-import { swiperAction, sidebarAction } from "./library/swiper";
-import goToTopFn from "./library/toTop";
-import loginEvent from "./login";
-import { changeHeader } from "./main/changeHeader";
-import setPrdList from "./main/setPrdList";
-import setProductPage from "./product/setProductPage";
-import setResultPage from "./search/searchResult";
-import signUpEvent from "./signup/signup";
-import { setSidebarSwiper } from "./sidebar";
-import setProductDetailPage from "./product/setProductDetailPage";
-import setCartPage from "./cart/setCartPage";
-
-import { setOrderListPage } from "./userOrderList/orderList";
-import { setAccountPage } from "./userAccount/account";
-import { setLikePage } from "./userLike/like";
-import { setModifyPage } from "./userModify/personalInfoModify";
-import { setPaymentPage } from "./userPayment/payment";
-import { setProfile } from "./userProfile/profile";
-import setPaymentCompletePage from "./userPaymentComplete/paymentComplete";
-
-import { adminWrapper } from "./components/mainComponents";
+import setProductList from "./userMain/setProductList.js";
+import setSidebarStyle from "./userSidebar/setSidebarStyle.js";
+import { setOrderListPage } from "./userOrderList/orderList.js";
+import { setAccountPage } from "./userAccount/account.js";
+import { setLikePage } from "./userLike/like.js";
+import { setModifyPage } from "./userPersonalInfoModify/personalInfoModify.js";
+import { setPaymentPage } from "./userPayment/payment.js";
+import { setPaymentCompletePage } from "./userPaymentComplete/paymentComplete.js";
+import { setProfile } from "./userProfile/profile.js";
 import { toggleClass } from "./adminProductList/adminGoodsPage.js";
 import { chartFn } from "./library/chart.js";
 
-import report_page from "./adminPages/reportPage";
-import product_page from "./adminPages/productPage";
-import add_product_page from "./adminPages/addProductPage";
-import product_detail_page from "./adminPages/productDetailPage";
-import product_edit_page from "./adminPages/productEditPage";
-import transaction_page from "./adminPages/transactionPage";
-import transaction_detail_page from "./adminPages/detailTransacitonPage";
+import report_page from "./adminPages/reportPage.js";
+import product_page from "./adminPages/productPage.js";
+import add_product_page from "./adminPages/addProductPage.js";
+import product_detail_page from "./adminPages/productDetailPage.js";
+import product_edit_page from "./adminPages/productEditPage.js";
+import transaction_page from "./adminPages/transactionPage.js";
+import transaction_detail_page from "./adminPages/detailTransacitonPage.js";
 
 import { pagination } from "./adminProductList/pagination.js";
 import { renderDetailPage } from "./adminDetailProducd/renderDetailProduct.js";
 import { renderEditDetailPage } from "./adminEditProduct/editProduct.js";
 import { renderAddPage } from "./adminAddProduct/addPodouct.js";
 import { transactionPagination } from "./adminTransactionList/transactionPagination.js";
-import { renderDetailTransactionPage } from "./adminDetailTransaction/renderDetailTransaction";
+import { renderDetailTransactionPage } from "./adminDetailTransaction/renderDetailTransaction.js";
 import { renderReportStatus } from "./adminReport/renderStoreStatus.js";
+import { requestLogout } from "./api/requestLogout.js";
+import { getLocalStorageData } from "./localStorage/getLocalStorageData.js";
 
-const router = new Navigo("/");
+const mainRouter = new Navigo("/");
 const mainSection = document.querySelector("#main");
 const sidebarArea = document.querySelector("#sidebar-area");
 const body = document.querySelector("body");
 
-// 처음 페이지가 로드 되었을 때
-(async () => {
-  const isLogin = await checkAuthorization();
-
-  if (isLogin) {
-    const loginId = JSON.parse(localStorage.getItem("loginInfo"))?.loginId;
-    if (loginId === "admin@paldo.com") {
-      router.navigate("admin");
-    } else {
-      changeHeader();
-    }
-  }
-})();
-
-router.hooks({
+mainRouter.hooks({
   async before(done, match) {
     window.scrollTo(0, 0);
     const isLogin = await checkAuthorization();
@@ -83,7 +74,7 @@ router.hooks({
         title: "로그인이 필요한 서비스입니다.",
         text: "로그인 페이지로 이동합니다.",
       }).then(() => {
-        router.navigate("/login");
+        mainRouter.navigate("/login");
         done();
       });
     }
@@ -91,95 +82,115 @@ router.hooks({
   },
 });
 
-router
+// 처음 페이지가 로드 되었을 때
+mainRouter.link("/");
+body.innerHTML = userWrapper;
+mainRouter
   .on({
     "/": async () => {
-      mainSection.innerHTML = mainPage;
-      setPrdList(router);
+      body.innerHTML = userWrapper;
+      document.querySelector("#main").innerHTML = userMainPage;
+      setSidebarSwiper(mainRouter);
+      // search input
+      handleSearchInput(mainRouter);
+      // to-top-button
+      goToTopFn();
+      setProductList(mainRouter);
       swiperAction();
-      sidebarArea.style.paddingTop = "500px";
+      sidebarAction();
+      setSidebarStyle(500);
+      const logoButton = document.querySelector("#userWrapper .logo");
+      logoButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        mainRouter.navigate("/");
+      });
+
+      const isLogin = await checkAuthorization();
+      if (isLogin) {
+        const loginId = getLocalStorageData("loginId");
+        if (loginId === "admin@paldo.com") {
+          mainRouter.navigate("admin");
+        } else {
+          changeHeader(mainRouter);
+        }
+      }
     },
     login: async () => {
-      mainSection.innerHTML = loginPage;
-      loginEvent(router);
-      sidebarArea.style.paddingTop = "100px";
+      document.querySelector("#main").innerHTML = userLoginPage;
+      loginEvent(mainRouter);
     },
     signup: () => {
-      mainSection.innerHTML = sigupPage;
+      document.querySelector("#main").innerHTML = userSignupPage;
       signUpEvent();
-      sidebarArea.style.paddingTop = "100px";
+      setSidebarStyle(100);
     },
     "search/:id": async ({ data }) => {
-      mainSection.innerHTML = searchPage;
-      await setResultPage(data.id, router);
-      sidebarArea.style.paddingTop = "100px";
+      document.querySelector("#main").innerHTML = userSearchPage;
+      await setResultPage(data.id, mainRouter);
+      setSidebarStyle(100);
     },
     coupon: () => {
-      mainSection.innerHTML = couponPage;
-      handleCouponButton();
-      sidebarArea.style.paddingTop = "100px";
+      document.querySelector("#main").innerHTML = userCouponPage;
+      handleCouponButton(mainRouter);
+      setSidebarStyle(100);
     },
     "productDetail/:id": async ({ data }) => {
-      mainSection.innerHTML = productDetailPage;
-      await setProductDetailPage(data.id, router);
-      sidebarArea.style.paddingTop = "100px";
+      document.querySelector("#main").innerHTML = userProductDetailPage;
+      await setProductDetailPage(data.id, mainRouter);
+      setSidebarStyle(100);
     },
     "products/:id": async ({ data }) => {
-      mainSection.innerHTML = productPage;
-      await setProductPage(data.id, router);
-      sidebarArea.style.paddingTop = "100px";
+      document.querySelector("#main").innerHTML = userProductPage;
+      await setProductPage(data.id, mainRouter);
+      setSidebarStyle(100);
     },
     cart: () => {
-      mainSection.innerHTML = cartPage;
-      setCartPage(router);
-      sidebarArea.style.paddingTop = "100px";
+      document.querySelector("#main").innerHTML = userCartPage;
+      setCartPage(mainRouter);
+      setSidebarStyle(100);
     },
-    // mypage: {
-    //   uses: () => {},
-    //   hooks: {
-    //     before(done) {
-    //       router.navigate("/nested/apple", {
-    //         historyAPIMethod: "replaceState",
-    //       });
-    //       done();
-    //     },
-    //   },
-    // },
     "mypage/orderList": async () => {
-      mainSection.innerHTML = orderListPage;
+      document.querySelector("#main").innerHTML = userOrderListPage;
       setProfile();
-      setOrderListPage(router);
+      setOrderListPage(mainRouter);
     },
     "mypage/account": async () => {
-      mainSection.innerHTML = accountPage;
+      document.querySelector("#main").innerHTML = userAccountPage;
       setProfile();
-      setAccountPage(router);
+      setAccountPage(mainRouter);
     },
     "mypage/like": async () => {
-      mainSection.innerHTML = likePage;
+      document.querySelector("#main").innerHTML = userLikePage;
       setProfile();
       setLikePage();
     },
     "mypage/modify": async () => {
-      mainSection.innerHTML = modifyPage;
+      document.querySelector("#main").innerHTML = userModifyPage;
       setProfile();
-      setModifyPage(router);
+      setModifyPage(mainRouter);
     },
     payment: async () => {
-      mainSection.innerHTML = paymentPage;
-      setPaymentPage(router);
+      document.querySelector("#main").innerHTML = userPaymentPage;
+      setPaymentPage(mainRouter);
       swiperAction();
     },
     paymentComplete: () => {
-      mainSection.innerHTML = paymentCompletePage;
+      document.querySelector("#main").innerHTML = paymentCompletePage;
       setPaymentCompletePage();
     },
     admin: () => {
+      // localhost:1234/admin
+      body.innerHTML = adminWrapper;
       const router = new Navigo("/admin");
+      router.navigate("/report"); // localhost:1234/admin/report
+      const logoutButton = document.querySelector(".info-logout");
+      logoutButton.addEventListener("click", async () => {
+        await requestLogout();
+        mainRouter.navigate("/");
+      });
       router
         .on({
           "/": () => {
-            body.innerHTML = adminWrapper;
             router.navigate("/report");
           },
           report: async () => {
@@ -264,12 +275,7 @@ router
         .resolve();
     },
   })
+  .notFound(() => {
+    console.log("not found");
+  })
   .resolve();
-
-router.link("/");
-
-// setSidebarSwiper(router);
-// // search input
-// handleSearchInput(router);
-// // to-top-button
-// goToTopFn();

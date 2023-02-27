@@ -57,8 +57,8 @@ export function sidebarAction() {
 
     // Navigation arrows
     navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
+      nextEl: "#sidebar .swiper-button-next",
+      prevEl: "#sidebar .swiper-button-prev",
     },
   });
 }
