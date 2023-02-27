@@ -1,26 +1,9 @@
-// import { checkAuthorization } from '../api/checkAuthorization'
 import { SORT_TYPES, getLocalStorageData } from "../localStorage/getLocalStorageData";
 import getAddress from "../library/postcode";
 import { requestPersonalInfoModify } from "../api/requestPersonalInfoModify";
 import { setProfile } from "../userProfile/profile";
 
-/* GLOBAL LOGIC */
-// ;(async function () {
-//   const isValidUser = await checkAuthorization();
-//   if(isValidUser) {
-//     initPage();
-//   } else {
-//     Swal.fire({
-//       icon: 'error',
-//       title: '사용자 세션이 만료되었습니다.',
-//       text: '로그인 페이지로 이동합니다.',
-//     })
-//     // 로그인 페이지로 redirect
-//     // location.assign('로그인 페이지 경로')
-//   }
-// })()
-
-export function setModifyPage() {
+export async function setModifyPage() {
   /* GLOBAL VARIABLES */
   const { USER_INFO, USER_ADDRESS } = SORT_TYPES;
   const userInfo = {

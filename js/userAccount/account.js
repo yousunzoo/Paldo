@@ -1,4 +1,3 @@
-// import { checkAuthorization } from '../api/checkAuthorization';
 import { makeDOMwithProperties } from "../utils/dom";
 import getUserAccounts from "../api/getUserAccounts";
 import connectBankAccount from "../api/connectBankAccount";
@@ -7,7 +6,7 @@ import deleteAccount from "../api/deleteAccount";
 
 /* GLOBAL LOGIC */
 
-export function setAccountPage() {
+export async function setAccountPage() {
   // 페이지 초기화
   initPage();
 

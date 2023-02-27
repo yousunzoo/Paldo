@@ -1,28 +1,11 @@
-// import { checkAuthorization } from '../api/checkAuthorization.js';
 import { SORT_TYPES, getLocalStorageData } from "../localStorage/getLocalStorageData";
 import { makeDOMwithProperties } from "../utils/dom.js";
 import { addCart } from "../product/setProductDetailPage";
 
 const { WISH_LIST } = SORT_TYPES;
 
-/* GLOBAL LOGIC */
-// setMockData();
-// ;(async function () {
-//   const isValidUser = await checkAuthorization();
-//   if(isValidUser) {
-//     initPage();
-//   } else {
-//     Swal.fire({
-//       icon: 'error',
-//       title: '사용자 세션이 만료되었습니다.',
-//       text: '로그인 페이지로 이동합니다.',
-//     })
-//     // 로그인 페이지로 redirect
-//     // location.assign('로그인 페이지 경로')
-//   }
-// })()
-
-export function setLikePage() {
+export async function setLikePage() {
+  // 페이지 초기화
   initPage();
 
   function initPage() {
