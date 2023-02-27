@@ -1,42 +1,43 @@
 import Navigo from "navigo"; // When using ES modules.
-import { checkAuthorization } from "./api/checkAuthorization";
-import {
-  cartPage,
-  couponPage,
-  loginPage,
-  mainPage,
-  productDetailPage,
-  productPage,
-  searchPage,
-  sigupPage,
-  orderListPage,
-  accountPage,
-  likePage,
-  modifyPage,
-  orderSheetPage,
-} from "./components/userPage";
-import handleCouponButton from "./coupon/coupon";
-import handleSearchInput from "./header/handleSearchInput";
-import { swiperAction, sidebarAction } from "./library/swiper";
-import goToTopFn from "./library/toTop";
-import loginEvent from "./login";
-import { changeHeader } from "./main/changeHeader";
-import setPrdList from "./main/setPrdList";
-import setProductPage from "./product/setProductPage";
-import setResultPage from "./search/searchResult";
-import signUpEvent from "./signup/signup";
-import { setSidebarSwiper } from "./sidebar";
-import setProductDetailPage from "./product/setProductDetailPage";
-import setCartPage from "./cart/setCartPage";
+import { checkAuthorization } from "./api/checkAuthorization.js";
+import userWrapper from "./components/wrappers/userWrapper.js";
+import adminWrapper from "./components/wrappers/adminWrapper.js";
+import userMainPage from "./components/userPage/userMainPage.js";
+import userLoginPage from "./components/userPage/userLoginPage.js";
+import userSignupPage from "./components/userPage/userSignupPage.js";
+import userSearchPage from "./components/userPage/userSearchPage.js";
+import userCouponPage from "./components/userPage/userCouponPage.js";
+import userProductPage from "./components/userPage/userProductPage.js";
+import userProductDetailPage from "./components/userPage/userProductDetailPage.js";
+import userCartPage from "./components/userPage/userCartPage.js";
+import userOrderListPage from "./components/userPage/userOrderListPage.js";
+import userAccountPage from "./components/userPage/userAccountPage.js";
+import userLikePage from "./components/userPage/userLikePage.js";
+import userModifyPage from "./components/userPage/userModifyPage.js";
+import userPaymentPage from "./components/userPage/userPaymentPage.js";
+import paymentCompletePage from "./components/userPage/paymentCompletePage";
+import handleCouponButton from "./userCoupon/coupon.js";
+import handleSearchInput from "./userHeader/handleSearchInput.js";
+import { swiperAction, sidebarAction } from "./library/swiper.js";
+import goToTopFn from "./library/toTop.js";
+import loginEvent from "./userLogin/login.js";
+import { changeHeader } from "./userMain/changeHeader.js";
+import setProductPage from "./userProduct/setProductPage.js";
+import setResultPage from "./userSearch/searchResult.js";
+import signUpEvent from "./userSignup/signup.js";
+import setSidebarSwiper from "./userSidebar/setSidebarSwiper.js";
+import { setProductDetailPage } from "./userProduct/setProductDetailPage.js";
+import setCartPage from "./userCart/setCartPage.js";
 
-import { setOrderListPage } from "./order-list/orderList";
-import { setAccountPage } from "./account/account";
-import { setLikePage } from "./like/like";
-import { setModifyPage } from "./personal-info-modify/personalInfoModify";
-import { setOrderSheetPage } from "./order-sheet/orderSheet";
-import { setProfile } from "./profile/profile.js";
-
-import { adminWrapper, userWrapper } from "./components/mainComponents";
+import setProductList from "./userMain/setProductList.js";
+import setSidebarStyle from "./userSidebar/setSidebarStyle.js";
+import { setOrderListPage } from "./userOrderList/orderList.js";
+import { setAccountPage } from "./userAccount/account.js";
+import { setLikePage } from "./userLike/like.js";
+import { setModifyPage } from "./userPersonalInfoModify/personalInfoModify.js";
+import { setPaymentPage } from "./userPayment/payment.js";
+import setPaymentCompletePage from "./userPaymentComplete/paymentComplete.js";
+import { setProfile } from "./userProfile/profile.js";
 import { chartFn } from "./library/chart.js";
 
 import notFoundPage from "./components/notFoundPage";
@@ -55,7 +56,7 @@ import { renderDetailPage } from "./adminDetailProducd/renderDetailProduct.js";
 import { renderEditDetailPage } from "./adminEditProduct/editProduct.js";
 import { renderAddPage } from "./adminAddProduct/addPodouct.js";
 import { transactionPagination } from "./adminTransactionList/transactionPagination.js";
-import { renderDetailTransactionPage } from "./adminDetailTransaction/renderDetailTransaction";
+import { renderDetailTransactionPage } from "./adminDetailTransaction/renderDetailTransaction.js";
 import { renderReportStatus } from "./adminReport/renderStoreStatus.js";
 import { requestLogout } from "./api/requestLogout";
 import { searchTransaction } from "./adminTransactionList/searchTransaction";
@@ -65,27 +66,54 @@ import { productFilterList } from "./adminProductList/productFilter";
 import { memoizedGetTransactions } from "./api/getTransactions";
 import { transctionFilterList } from "./adminTransactionList/transctionFilter";
 
+import { getLocalStorageData } from "./localStorage/getLocalStorageData.js";
+
 const mainRouter = new Navigo("/");
 const body = document.querySelector("body");
 
+mainRouter.hooks({
+  async before(done, match) {
+    window.scrollTo(0, 0);
+    const isLogin = await checkAuthorization();
+    const requiredLogInPaths = [
+      "cart",
+      "mypage/orderList",
+      "mypage/account",
+      "mypage/modify",
+      "mypage/like",
+      "payment",
+    ];
+    if (requiredLogInPaths.includes(match.url) && !isLogin) {
+      Swal.fire({
+        icon: "info",
+        title: "로그인이 필요한 서비스입니다.",
+        text: "로그인 페이지로 이동합니다.",
+      }).then(() => {
+        mainRouter.navigate("/login");
+        done();
+      });
+    }
+    done();
+  },
+});
+
 // 처음 페이지가 로드 되었을 때
 mainRouter.link("/");
-
+body.innerHTML = userWrapper;
 mainRouter
   .on({
     "/": async () => {
       body.innerHTML = userWrapper;
-      document.querySelector("#main").innerHTML = mainPage;
+      document.querySelector("#main").innerHTML = userMainPage;
       setSidebarSwiper(mainRouter);
       // search input
       handleSearchInput(mainRouter);
       // to-top-button
       goToTopFn();
-      setPrdList(mainRouter);
+      setProductList(mainRouter);
       swiperAction();
       sidebarAction();
-      const sidebarArea = document.querySelector("#sidebar-area");
-      sidebarArea.style.paddingTop = "500px";
+      setSidebarStyle(500);
       const logoButton = document.querySelector("#userWrapper .logo");
       logoButton.addEventListener("click", (event) => {
         event.preventDefault();
@@ -93,135 +121,76 @@ mainRouter
       });
       const isLogin = await checkAuthorization();
       if (isLogin) {
-        const loginId = JSON.parse(localStorage.getItem("loginInfo")).loginId;
+        const loginId = getLocalStorageData("loginId");
         if (loginId === "admin@paldo.com") {
           mainRouter.navigate("admin");
         } else {
-          changeHeader();
+          changeHeader(mainRouter);
         }
       }
     },
     login: async () => {
-      const sidebarArea = document.querySelector("#sidebar-area");
-      document.querySelector("#main").innerHTML = loginPage;
+      document.querySelector("#main").innerHTML = userLoginPage;
       loginEvent(mainRouter);
-      sidebarArea.style.paddingTop = "100px";
     },
     signup: () => {
-      const sidebarArea = document.querySelector("#sidebar-area");
-      document.querySelector("#main").innerHTML = sigupPage;
+      document.querySelector("#main").innerHTML = userSignupPage;
       signUpEvent();
-      sidebarArea.style.paddingTop = "100px";
+      setSidebarStyle(100);
     },
     "search/:id": async ({ data }) => {
-      const sidebarArea = document.querySelector("#sidebar-area");
-
-      document.querySelector("#main").innerHTML = searchPage;
+      document.querySelector("#main").innerHTML = userSearchPage;
       await setResultPage(data.id, mainRouter);
-      sidebarArea.style.paddingTop = "100px";
+      setSidebarStyle(100);
     },
     coupon: () => {
-      const sidebarArea = document.querySelector("#sidebar-area");
-      document.querySelector("#main").innerHTML = couponPage;
-      handleCouponButton();
-      sidebarArea.style.paddingTop = "100px";
+      document.querySelector("#main").innerHTML = userCouponPage;
+      handleCouponButton(mainRouter);
+      setSidebarStyle(100);
     },
     "productDetail/:id": async ({ data }) => {
-      const sidebarArea = document.querySelector("#sidebar-area");
-      document.querySelector("#main").innerHTML = productDetailPage;
+      document.querySelector("#main").innerHTML = userProductDetailPage;
       await setProductDetailPage(data.id, mainRouter);
-      sidebarArea.style.paddingTop = "100px";
+      setSidebarStyle(100);
     },
     "products/:id": async ({ data }) => {
-      const sidebarArea = document.querySelector("#sidebar-area");
-      document.querySelector("#main").innerHTML = productPage;
+      document.querySelector("#main").innerHTML = userProductPage;
       await setProductPage(data.id, mainRouter);
-      sidebarArea.style.paddingTop = "100px";
+      setSidebarStyle(100);
     },
     cart: () => {
-      const sidebarArea = document.querySelector("#sidebar-area");
-      document.querySelector("#main").innerHTML = cartPage;
+      document.querySelector("#main").innerHTML = userCartPage;
       setCartPage(mainRouter);
-      sidebarArea.style.paddingTop = "100px";
+      setSidebarStyle(100);
     },
-    "mypage/orderList": async () => {
-      document.querySelector("#main").innerHTML = orderListPage;
-      const isValidUser = await checkAuthorization();
-      if (isValidUser) {
-        setProfile();
-        setOrderListPage();
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "사용자 세션이 만료되었습니다.",
-          text: "로그인 페이지로 이동합니다.",
-        }).then(() => {
-          mainRouter.navigate("/login");
-        });
-      }
+    "mypage/orderList": () => {
+      document.querySelector("#main").innerHTML = userOrderListPage;
+      setProfile();
+      setOrderListPage(mainRouter);
     },
-    "mypage/account": async () => {
-      document.querySelector("#main").innerHTML = accountPage;
-      const isValidUser = await checkAuthorization();
-      if (isValidUser) {
-        setProfile();
-        setAccountPage();
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "사용자 세션이 만료되었습니다.",
-          text: "로그인 페이지로 이동합니다.",
-        }).then(() => {
-          mainRouter.navigate("/login");
-        });
-      }
+    "mypage/account": () => {
+      document.querySelector("#main").innerHTML = userAccountPage;
+      setProfile();
+      setAccountPage(mainRouter);
     },
-    "mypage/like": async () => {
-      document.querySelector("#main").innerHTML = likePage;
-      const isValidUser = await checkAuthorization();
-      if (isValidUser) {
-        setProfile();
-        setLikePage(mainRouter);
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "사용자 세션이 만료되었습니다.",
-          text: "로그인 페이지로 이동합니다.",
-        }).then(() => {
-          mainRouter.navigate("/login");
-        });
-      }
+    "mypage/like": () => {
+      document.querySelector("#main").innerHTML = userLikePage;
+      setProfile();
+      setLikePage();
     },
-    "mypage/modify": async () => {
-      document.querySelector("#main").innerHTML = modifyPage;
-      const isValidUser = await checkAuthorization();
-      if (isValidUser) {
-        setProfile();
-        setModifyPage();
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "사용자 세션이 만료되었습니다.",
-          text: "로그인 페이지로 이동합니다.",
-        }).then(() => {
-          mainRouter.navigate("/login");
-        });
-      }
+    "mypage/modify": () => {
+      document.querySelector("#main").innerHTML = userModifyPage;
+      setProfile();
+      setModifyPage(mainRouter);
     },
-    payment: async () => {
-      document.querySelector("#main").innerHTML = orderSheetPage;
-      const isValidUser = await checkAuthorization();
-      if (isValidUser) {
-        setOrderSheetPage();
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "사용자 세션이 만료되었습니다.",
-          text: "로그인 페이지로 이동합니다.",
-        }).then(() => {
-          mainRouter.navigate("/login");
-        });
-      }
+    payment: () => {
+      document.querySelector("#main").innerHTML = userPaymentPage;
+      setPaymentPage(mainRouter);
+      swiperAction();
+    },
+    paymentComplete: () => {
+      document.querySelector("#main").innerHTML = paymentCompletePage;
+      setPaymentCompletePage();
     },
     admin: () => {
       // localhost:1234/admin

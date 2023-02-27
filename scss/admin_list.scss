@@ -1,14 +1,4 @@
-// 변수
-/* Color styles */
-$color_product_tag: #999999;
-$color_black: #333333;
-$color_discount_rate: #fa622f;
-$color_original_price: #b5b5b5;
-$color_primary: #414141;
-$color_btn_border: rgb(221, 221, 221);
-$color_incorrect: #f03f40;
-$color_white: #ffffff;
-$color_copyright: rgb(247, 247, 247);
+@import "colors";
 
 .right-nav-bar {
   padding: 25px;

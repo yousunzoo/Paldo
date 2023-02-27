@@ -10,24 +10,20 @@ export async function checkAuthorization() {
 }
 
 async function checkAuthorizationAPI(accessToken) {
-  const res = await fetch(`${url}auth/me`, {
-    method: "POST",
-    headers: {
-      ...headers,
-      Authorization: `Bearer ${accessToken}`,
-    },
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(response.status);
-      }
-      return response.json();
-    })
-    .then((result) => {
-      return result ? true : false;
-    })
-    .catch((error) => {
-      return null;
+  try {
+    const res = await fetch(`${url}auth/me`, {
+      method: "POST",
+      headers: {
+        ...headers,
+        Authorization: `Bearer ${accessToken}`,
+      },
     });
-  return res;
+    if (!res.ok) {
+      throw new Error(res.status);
+    }
+    const json = await res.json();
+    return json ? true : false;
+  } catch (error) {
+    return null;
+  }
 }
