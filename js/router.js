@@ -61,13 +61,28 @@ const mainRouter = new Navigo("/");
 const body = document.querySelector("body");
 
 // 처음 페이지가 로드 되었을 때
-mainRouter.link("/");
-body.innerHTML = userWrapper;
 mainRouter.hooks({
-  after: () => {
-    window.scroll(0, 0);
+  async before(done, match) {
+    window.scrollTo(0, 0);
+    const isLogin = await checkAuthorization();
+    const requiredLogInPaths = ["cart", "mypage/orderList", "mypage/account", "mypage/modify", "mypage/like", "payment"];
+    console.log(match);
+    if (requiredLogInPaths.includes(match.url) && !isLogin) {
+      Swal.fire({
+        icon: "info",
+        title: "로그인이 필요한 서비스입니다.",
+        text: "로그인 페이지로 이동합니다.",
+      }).then(() => {
+        mainRouter.navigate("/login");
+        done();
+      });
+    }
+    done();
   },
 });
+
+mainRouter.link("/");
+body.innerHTML = userWrapper;
 mainRouter
   .on({
     "/": async () => {
@@ -306,8 +321,7 @@ mainRouter
             renderAddPage();
           },
           "transaction/:id": ({ data }) => {
-            document.querySelector("#content").innerHTML =
-              transaction_detail_page;
+            document.querySelector("#content").innerHTML = transaction_detail_page;
             renderDetailTransactionPage(data);
           },
         })
