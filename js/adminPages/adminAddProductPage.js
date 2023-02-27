@@ -33,7 +33,7 @@ export default /* html */ `
             <label for="thumbnail-title">썸네일 등록</label>
             <div class="thumbnail-info-wrapper">
               <input id="thumbnail" type="file" class="goods-thumbnail" />
-              <img class="thumbnail-img thumbnail" require('no-img.jpg') }  />
+              <img class="thumbnail-img thumbnail" src="${require("../../static/images/no-img.jpg")}" />
             </div>
           </div>
           <div class="right-bar"></div>
@@ -41,7 +41,7 @@ export default /* html */ `
             <label for="detail">상세이미지 등록</label>
             <div class="thumbnail-info-wrapper">
               <input id="detail" type="file" class="goods-detail" />
-              <img class="thumbnail-img detail" require('no-img.jpg') />
+              <img class="thumbnail-img detail" src="${require("../../static/images/no-img.jpg")}"" />
             </div>
           </div>
         </div>

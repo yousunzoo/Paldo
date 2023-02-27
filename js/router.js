@@ -38,37 +38,51 @@ import { setModifyPage } from "./userPersonalInfoModify/personalInfoModify.js";
 import { setPaymentPage } from "./userPayment/payment.js";
 import setPaymentCompletePage from "./userPaymentComplete/paymentComplete.js";
 import { setProfile } from "./userProfile/profile.js";
-import { toggleClass } from "./adminProductList/adminGoodsPage.js";
 import { chartFn } from "./library/chart.js";
 
-import report_page from "./adminPages/reportPage.js";
-import product_page from "./adminPages/productPage.js";
-import add_product_page from "./adminPages/addProductPage.js";
-import product_detail_page from "./adminPages/productDetailPage.js";
-import product_edit_page from "./adminPages/productEditPage.js";
-import transaction_page from "./adminPages/transactionPage.js";
-import transaction_detail_page from "./adminPages/detailTransacitonPage.js";
+import notFoundPage from "./components/notFoundPage";
+import adminReportPage from "./adminPages/adminReportPage";
+import adminProductListPage from "./adminPages/adminProductListPage";
+import adminAddProductPage from "./adminPages/adminAddProductPage";
+import adminProductDetailPage from "./adminPages/adminProductDetailPage";
+import adminProductEditPage from "./adminPages/adminProductEditPage";
+import adminTransactionPage from "./adminPages/adminTransactionPage";
+import adminTransactionDetailPage from "./adminPages/adminTransactionDetailPage";
 
-import { pagination } from "./adminProductList/pagination.js";
+import { productPagination } from "./adminProductList/productPagination";
+import { productPageButton } from "./adminProductList/productPageFunc";
+
 import { renderDetailPage } from "./adminDetailProducd/renderDetailProduct.js";
 import { renderEditDetailPage } from "./adminEditProduct/editProduct.js";
 import { renderAddPage } from "./adminAddProduct/addPodouct.js";
 import { transactionPagination } from "./adminTransactionList/transactionPagination.js";
 import { renderDetailTransactionPage } from "./adminDetailTransaction/renderDetailTransaction.js";
 import { renderReportStatus } from "./adminReport/renderStoreStatus.js";
-import { requestLogout } from "./api/requestLogout.js";
+import { requestLogout } from "./api/requestLogout";
+import { searchTransaction } from "./adminTransactionList/searchTransaction";
+import { pickr } from "./library/pickr";
+import { memoizedGetProduct } from "./api/getProduct";
+import { productFilterList } from "./adminProductList/productFilter";
+import { memoizedGetTransactions } from "./api/getTransactions";
+import { transctionFilterList } from "./adminTransactionList/transctionFilter";
+
 import { getLocalStorageData } from "./localStorage/getLocalStorageData.js";
 
 const mainRouter = new Navigo("/");
-const mainSection = document.querySelector("#main");
-const sidebarArea = document.querySelector("#sidebar-area");
 const body = document.querySelector("body");
 
 mainRouter.hooks({
   async before(done, match) {
     window.scrollTo(0, 0);
     const isLogin = await checkAuthorization();
-    const requiredLogInPaths = ["cart", "mypage/orderList", "mypage/account", "mypage/modify", "mypage/like", "payment"];
+    const requiredLogInPaths = [
+      "cart",
+      "mypage/orderList",
+      "mypage/account",
+      "mypage/modify",
+      "mypage/like",
+      "payment",
+    ];
     if (requiredLogInPaths.includes(match.url) && !isLogin) {
       Swal.fire({
         icon: "info",
@@ -105,7 +119,6 @@ mainRouter
         event.preventDefault();
         mainRouter.navigate("/");
       });
-
       const isLogin = await checkAuthorization();
       if (isLogin) {
         const loginId = getLocalStorageData("loginId");
@@ -195,81 +208,48 @@ mainRouter
             router.navigate("/report");
           },
           report: async () => {
-            document.querySelector("#content").innerHTML = report_page;
+            document.querySelector("#content").innerHTML = adminReportPage;
             chartFn();
             renderReportStatus();
           },
-          "product/": () => {
-            document.querySelector("#content").innerHTML = product_page;
-            const categorybutton = document.querySelector(".button-category");
-            const categoryList = document.querySelector(".category-list");
-            const soldoutbutton = document.querySelector(".button-soldout");
-            const soldoutList = document.querySelector(".soldout-list");
-
-            toggleClass(categorybutton, categoryList);
-            toggleClass(soldoutbutton, soldoutList);
-
-            // 검색 버튼 입력 했을때
-            const inputEl = document.querySelector(".search-goodsname");
-            const inputbuttonEl = document.querySelector(".search");
-            inputEl.addEventListener("keyup", (event) => {
-              if (event.key === "Enter" && !event.isComposing) {
-                search = inputEl.value;
-                pagination(search, router);
-              }
-            });
-
-            inputbuttonEl.addEventListener("click", () => {
-              search = inputEl.value;
-              pagination(search, router);
-            });
-
+          "product/": async () => {
+            document.querySelector("#content").innerHTML = adminProductListPage;
             let search;
-            pagination(search, router);
+            const listEls = await memoizedGetProduct();
+            const listTag = document.querySelector(".search-wrapper");
+            listTag.addEventListener("click", (e) => {
+              if (e.target.className !== "list-tag") return;
+              const filterRes = productFilterList(listEls, e.target.textContent);
+              productPagination(filterRes, router);
+            });
+            const filterRes = productFilterList(listEls, search);
+            productPagination(filterRes, router);
+            productPageButton(router);
           },
+
           "product/:id": ({ data }) => {
-            console.log(data);
-            document.querySelector("#content").innerHTML = product_detail_page;
+            document.querySelector("#content").innerHTML = adminProductDetailPage;
             renderDetailPage(data.id, router);
           },
-          transaction: () => {
-            document.querySelector("#content").innerHTML = transaction_page;
-            // 검색 버튼 입력 했을때
-            const inputEl = document.querySelector(".search-username");
-            const inputbuttonEl = document.querySelector(".search");
-            inputEl.addEventListener("keyup", (event) => {
-              if (event.key === "Enter" && !event.isComposing) {
-                search = inputEl.value;
-                transactionPagination(search, router);
-              }
-            });
-            inputbuttonEl.addEventListener("click", () => {
-              search = inputEl.value;
-              transactionPagination(search, router);
-            });
-
-            let search;
-            transactionPagination(search, router);
-            flatpickr("#myDatepicker", {
-              dateFormat: "Y-m-d", // set the date format
-              disableMobile: true, // disable mobile optimizations
-            });
-
-            const pickerEl = document.querySelector(".flatpickr-input");
-            pickerEl.addEventListener("change", () => {
-              transactionPagination(pickerEl.value, router);
-            });
-          },
           "editproduct/:id": ({ data }) => {
-            document.querySelector("#content").innerHTML = product_edit_page;
+            document.querySelector("#content").innerHTML = adminProductEditPage;
             renderEditDetailPage(data.id, router);
           },
           registration: () => {
-            document.querySelector("#content").innerHTML = add_product_page;
-            renderAddPage();
+            document.querySelector("#content").innerHTML = adminAddProductPage;
+            renderAddPage(router);
+          },
+          transaction: async () => {
+            document.querySelector("#content").innerHTML = adminTransactionPage;
+            let search;
+            const listEls = await memoizedGetTransactions();
+            const filterRes = transctionFilterList(listEls, search);
+            transactionPagination(filterRes, router);
+            searchTransaction(filterRes, router);
+            pickr(router);
           },
           "transaction/:id": ({ data }) => {
-            document.querySelector("#content").innerHTML = transaction_detail_page;
+            document.querySelector("#content").innerHTML = adminTransactionDetailPage;
             renderDetailTransactionPage(data);
           },
         })
@@ -277,6 +257,7 @@ mainRouter
     },
   })
   .notFound(() => {
-    console.log("not found");
+    body.innerHTML = userWrapper;
+    document.querySelector("#main").innerHTML = notFoundPage;
   })
   .resolve();

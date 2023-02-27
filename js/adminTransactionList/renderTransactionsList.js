@@ -41,7 +41,6 @@ export const renderTransactionsList = async (router, itemListData, no) => {
     });
     itemEl.href = "/transaction/" + item.detailId;
     let koreaTime = new Date(item.timePaid);
-    koreaTime.getTime();
     itemNo.textContent = no++;
     itemName.textContent = item.product.title;
     itemPrice.textContent = item.product.price;
@@ -50,8 +49,8 @@ export const renderTransactionsList = async (router, itemListData, no) => {
     itemTime.textContent = koreaTime.toLocaleString("ko-KR", {
       timeZone: "Asia/Seoul",
     });
-    itemCancel.textContent = item.isCanceled;
-    itemConfirm.textContent = item.done;
+    itemCancel.textContent = item.isCanceled ? "YES" : "NO";
+    itemConfirm.textContent = item.done ? "YES" : "NO";
     itemEl.append(
       itemNo,
       itemName,

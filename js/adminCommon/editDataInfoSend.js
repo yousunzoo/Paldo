@@ -1,7 +1,5 @@
 import { addSwal } from "../adminAddProduct/btnAlert.js";
-import { getDetailProduct } from "../api/getDetailProduct";
 export const editDataInfoSend = async (callback, id) => {
-  const originalData = await getDetailProduct(id);
   let addGoods = {
     title: null,
     price: null,
@@ -10,7 +8,6 @@ export const editDataInfoSend = async (callback, id) => {
     discountRate: null,
     isSoldOut: false,
   };
-  console.log(originalData);
   addGoods.title = document.querySelector(".goods-name").value;
   addGoods.price = Number(document.querySelector(".goods-price").value);
   let tagsArr = document.querySelector(".goods-tag").value.trim();

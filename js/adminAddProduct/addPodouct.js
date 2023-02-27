@@ -1,6 +1,6 @@
 import { addDataInfoSend } from "../adminCommon/addDataInfoSend";
 import { addProduct } from "../api/addProduct";
-export const renderAddPage = () => {
+export const renderAddPage = (router) => {
   const inputPrice = document.querySelector(".goods-price");
   const inputSale = document.querySelector(".goods-sale");
   const cost = document.querySelector(".sale-cost");
@@ -8,9 +8,13 @@ export const renderAddPage = () => {
   const detailIng = document.querySelector(".detail");
 
   const resButton = document.querySelector(".res-button");
-  resButton.addEventListener("click", () => {
+  resButton.addEventListener("click", (event) => {
     try {
       addDataInfoSend(addProduct);
+      setTimeout(() => {
+        event.preventDefault();
+        router.navigate("/product");
+      }, 2000);
     } catch {
       Swal.fire("등록할 수 없습니다.", "상품 정보를 다시 확인해주세요.", "question");
     }
