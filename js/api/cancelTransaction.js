@@ -3,10 +3,10 @@ import { headers, url } from "../api/headers";
 
 const { ACCESS_TOKEN } = SORT_TYPES;
 
-export async function cancelTransaction(body) {
+export default async function (body) {
   const accessToken = getLocalStorageData(ACCESS_TOKEN);
   try {
-    const res = fetch(`${url}products/cancel`, {
+    const res = await fetch(`${url}products/cancel`, {
       method: "POST",
       headers: {
         ...headers,

@@ -6,7 +6,7 @@ const { ACCESS_TOKEN } = SORT_TYPES;
 export default async function (body) {
   const accessToken = getLocalStorageData(ACCESS_TOKEN);
   try {
-    const res = fetch(`${url}products/ok`, {
+    const res = await fetch(`${url}products/ok`, {
       method: "POST",
       headers: {
         ...headers,

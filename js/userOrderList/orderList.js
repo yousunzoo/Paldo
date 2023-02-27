@@ -1,11 +1,10 @@
-// import { checkAuthorization } from '../api/checkAuthorization'
 import getOrderList from "../api/getOrderList";
 import cancelTransaction from "../api/cancelTransaction";
 import confirmTransaction from "../api/confirmTransaction";
 import { makeDOMwithProperties } from "../utils/dom";
 
 /* FUNCTIONS */
-export function setOrderListPage() {
+export async function setOrderListPage() {
   // flatPickr
   flatpickr("#myDatepicker", {
     dateFormat: "Y-m-d", // set the date format
@@ -222,29 +221,29 @@ function onClickCancelButton(event) {
       try {
         // 주문 취소 요청 API 전송
         const transactionIds = JSON.parse(buttonsEl.dataset.id);
-        console.log(transactionIds);
         const results = transactionIds.map(async (transactionId) => {
-          console.log(transactionId);
           const res = await cancelTransaction({ detailId: transactionId });
           return res;
         });
-        if (results.some((result) => result === true)) {
-          // 삭제 요청 성공 시
-          Swal.fire("취소 성공!", "주문이 성공적으로 취소되었습니다.", "success");
-          // 주문 취소 관련 렌더링
-          const cancelledEl = liEl.querySelector(".cancelled");
-          cancelledEl.classList.remove("false");
-          cancelledEl.classList.add("true");
-        } else {
-          throw new Error("알 수 없는 오류가 발생했습니다.");
-        }
-      } catch (err) {
+        Promise.allSettled(results).then((results) => {
+          if (!results.find((result) => result.value === false)) {
+            // 삭제 요청 성공 시
+            Swal.fire("취소 성공!", "주문이 성공적으로 취소되었습니다.", "success");
+            // 주문 취소 관련 렌더링
+            const cancelledEl = liEl.querySelector(".cancelled");
+            cancelledEl.classList.remove("false");
+            cancelledEl.classList.add("true");
+          } else {
+            throw new Error("알 수 없는 오류가 발생했습니다.");
+          }
+        });
+      } catch (error) {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: err.message,
+          text: error.message,
         });
-        console.error(err);
+        console.error(error);
         return;
       }
     }
@@ -264,21 +263,38 @@ function onClickConfirmButton(event) {
     cancelButtonText: "취소",
   }).then(async (result) => {
     if (result.isConfirmed) {
-      const body = { detailId: buttonsEl.dataset.id };
-      // 거래 확정 요청 API 전송
-      const res = await confirmTransaction(body);
-      if (!res) return;
-
-      // 거래 확정 요청 성공 시
-      Swal.fire("구매 확정 성공!", "성공적으로 구매 확정되었습니다.", "success");
-      // 거래 확정 관련 렌더링
-      const orderConfirmButtonEl = liEl.querySelector(".order-confirm-button");
-      orderConfirmButtonEl.classList.remove("false");
-      orderConfirmButtonEl.classList.add("true");
-      orderConfirmButtonEl.disabled = true;
-      const orderCancelButtonEl = liEl.querySelector(".order-cancel-button");
-      orderCancelButtonEl.classList.add("inactive");
-      orderCancelButtonEl.disabled = true;
+      try {
+        // 거래 확정 요청 API 전송
+        const transactionIds = JSON.parse(buttonsEl.dataset.id);
+        const results = transactionIds.map(async (transactionId) => {
+          const res = await confirmTransaction({ detailId: transactionId });
+          return res;
+        });
+        Promise.allSettled(results).then((results) => {
+          if (!results.find((result) => result.value === false)) {
+            // 거래 확정 요청 성공 시
+            Swal.fire("구매 확정 성공!", "성공적으로 구매 확정되었습니다.", "success");
+            // 거래 확정 관련 렌더링
+            const orderConfirmButtonEl = liEl.querySelector(".order-confirm-button");
+            orderConfirmButtonEl.classList.remove("false");
+            orderConfirmButtonEl.classList.add("true");
+            orderConfirmButtonEl.disabled = true;
+            const orderCancelButtonEl = liEl.querySelector(".order-cancel-button");
+            orderCancelButtonEl.classList.add("inactive");
+            orderCancelButtonEl.disabled = true;
+          } else {
+            throw new Error("알 수 없는 오류가 발생했습니다.");
+          }
+        });
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.message,
+        });
+        console.error(error);
+        return;
+      }
     }
   });
 }
