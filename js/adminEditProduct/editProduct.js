@@ -63,7 +63,7 @@ export const renderEditDetailPage = async (id, router) => {
   toggleButtons.forEach((toggleButton) => {
     toggleButton.addEventListener("click", () => {
       // Get the value of the selected radio button
-      const selectedValue = document.querySelector('input[name="soldout"]:checked').value;
+      document.querySelector('input[name="soldout"]:checked').value;
     });
   });
 

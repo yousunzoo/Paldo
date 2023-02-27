@@ -36,7 +36,7 @@ export const renderDetailPage = async (id, router) => {
             </div>
             <div class="price">
               <div class="title">원가격</div>
-              <div class="val">${productInfo.price}원</div>
+              <div class="val">${productInfo.price.toLocaleString()}원</div>
             </div>
             <div class="sale">
               <div class="title">할인율</div>

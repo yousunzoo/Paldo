@@ -55,7 +55,7 @@ export const renderDetailTransactionPage = async (id) => {
       </div>
     </div>
   `;
-
+  // 거래 완료, 해제 버튼
   const confirmWrapper = document.querySelector(".completed");
   const confirmInfo = document.querySelector(".transaction-confirm");
   const confirmButtonEl = makeDOMwithProperties("button", {
@@ -78,6 +78,10 @@ export const renderDetailTransactionPage = async (id) => {
   confirmWrapper.append(confirmButtonEl);
   confirmInfo.append(confirmInfoText);
   confirmButtonEl.addEventListener("click", () => {
+    if (cancelButtonEl.textContent === "거래취소해제") {
+      Swal.fire("거래상태를 확인해주세요.", "거래취소된 상품은 거래완료를 할 수 없습니다.", "error");
+      return;
+    }
     let reservation = {
       done: !confirmIsToggled,
     };
@@ -87,6 +91,7 @@ export const renderDetailTransactionPage = async (id) => {
     detailTransaction(reservation, renderItem.detailId);
   });
 
+  // 거래 취소, 해제 버튼
   const cancelWrapper = document.querySelector(".cancel");
   const cancelInfo = document.querySelector(".transaction-calcel");
   const cancelButtonEl = makeDOMwithProperties("button", {
@@ -106,6 +111,10 @@ export const renderDetailTransactionPage = async (id) => {
   cancelWrapper.append(cancelButtonEl);
   cancelInfo.append(cancelInfoText);
   cancelButtonEl.addEventListener("click", () => {
+    if (confirmButtonEl.textContent === "거래완료해제") {
+      Swal.fire("거래완료상태를 확인해주세요.", "거래완료된 상품은 거래취소를 할 수 없습니다.", "error");
+      return;
+    }
     let reservation = {
       isCanceled: !isToggled,
     };
