@@ -51,6 +51,7 @@ export async function setModifyPage() {
     await requestPersonalInfoModify(userInfo, userAddress);
     initPage();
     setProfile();
+    window.scrollTo(0, 0);
   });
 
   // 현재 비밀번호
