@@ -1,12 +1,8 @@
-import { headers } from "./headers";
+import { headers, url } from "./headers";
 
 export const editProduct = async (payload, id) => {
-  console.log(payload);
-  const { title, price, description, tags, thumbnailBase64, photoBase64, isSoldOut, discountRate } = payload;
-  const res = await fetch(`https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/${id}`, {
-    method: "PUT",
-    headers,
-    body: JSON.stringify({
+  try {
+    const {
       title,
       price,
       description,
@@ -15,8 +11,26 @@ export const editProduct = async (payload, id) => {
       photoBase64,
       isSoldOut,
       discountRate,
-    }),
-  });
-  const result = await res.json();
-  console.log(result);
+    } = payload;
+    const res = await fetch(`${url}products/${id}`, {
+      method: "PUT",
+      headers,
+      body: JSON.stringify({
+        title,
+        price,
+        description,
+        tags,
+        thumbnailBase64,
+        photoBase64,
+        isSoldOut,
+        discountRate,
+      }),
+    });
+    const result = await res.json();
+  } catch {
+    Swal.fire({
+      icon: "error",
+      text: "요청이 실패했습니다!",
+    });
+  }
 };
