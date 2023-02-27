@@ -2,7 +2,7 @@
   .product-detail-wrapper {
     padding-top: 50px;
     padding-bottom: 50px;
-    border-bottom: 1px solid $color_btn_border;
+    border-bottom: 1px solid $color_button_border;
     display: flex;
     justify-content: space-between;
     position: relative;
@@ -27,10 +27,10 @@
       height: 500px;
       border: 1px solid $color_thumbnail;
     }
-    .info-wrapper {
+    .information-wrapper {
       width: 450px;
       padding-top: 50px;
-      .top-info {
+      .top-information {
         .product-title {
           font-size: 20px;
           line-height: 1.4;
@@ -93,14 +93,14 @@
           }
         }
       }
-      .low-info {
+      .low-information {
         padding-top: 38px;
-        .price-info {
+        .price-information {
           display: flex;
           align-items: flex-end;
           justify-content: end;
           padding-right: 50px;
-          .desc {
+          .description {
             font-size: 12px;
             padding-bottom: 3px;
           }
@@ -110,13 +110,13 @@
             padding-left: 10px;
           }
         }
-        .btn-wrapper {
+        .button-wrapper {
           display: flex;
           justify-content: space-between;
           padding-top: 168px;
           padding-right: 50px;
 
-          .wish-btn {
+          .wish-button {
             width: 40px;
             height: 40px;
             border: 1px solid $color_quantity_button;
@@ -131,12 +131,12 @@
               background-image: url("../static/images/wish-active.svg");
             }
           }
-          .cart-btn {
+          .cart-button {
             width: 300px;
             height: 40px;
             font-size: 14px;
-            color: $color-white;
-            background-color: $color-primary;
+            color: $color_white;
+            background-color: $color_primary;
             display: flex;
             justify-content: center;
             align-items: center;

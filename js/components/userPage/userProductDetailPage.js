@@ -10,8 +10,8 @@ export default /* html */ `
   <div class="thumbnail">
     <img src="" alt="" />
   </div>
-  <div class="info-wrapper">
-    <div class="top-info">
+  <div class="information-wrapper">
+    <div class="top-information">
       <p class="product-title"></p>
       <div class="product-price-area">
       <div class="product-price"><span class="price-num"></span>원</div>
@@ -25,15 +25,15 @@ export default /* html */ `
         <button class="up-button">+</button>
       </div>
     </div>
-    <div class="low-info">
-      <div class="price-info">
-        <div class="desc">총 상품금액</div>
+    <div class="low-information">
+      <div class="price-information">
+        <div class="description">총 상품금액</div>
         <div class="total-price"><span class="total-num"></span>원</div>
       </div>
-      <div class="btn-wrapper">
-        <button class="wish-btn">
+      <div class="button-wrapper">
+        <button class="wish-button">
         </button>
-        <button class="cart-btn">장바구니담기</button>
+        <button class="cart-button">장바구니 담기</button>
       </div>
     </div>
   </div>

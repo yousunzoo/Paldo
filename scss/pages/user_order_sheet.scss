@@ -1,16 +1,3 @@
-@import "colors";
-
-// spinner loading
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* MAIN SECTION */
 #main {
   .order-sheet-wrapper {
     h2 {
@@ -304,7 +291,7 @@
           .content {
             flex: 1 1 0%;
             .payment {
-              background-color: $color-primary;
+              background-color: $color_primary;
               color: #fff !important;
               display: block;
               line-height: 44px !important;
@@ -380,18 +367,18 @@
               .swiper-pagination {
                 bottom: 15px;
                 span {
-                  background-color: $color-primary;
+                  background-color: $color_primary;
                 }
               }
               .swiper-button-prev::after {
                 font-size: 16px;
-                color: $color-primary;
+                color: $color_primary;
                 opacity: 0;
                 transition: opacity 0.2s ease;
               }
               .swiper-button-next::after {
                 font-size: 16px;
-                color: $color-primary;
+                color: $color_primary;
                 opacity: 0;
                 transition: opacity 0.2s ease;
               }
@@ -630,7 +617,7 @@
           box-sizing: border-box;
           border: 1px solid $color_primary;
           background-color: #fff;
-          color: $color-primary;
+          color: $color_primary;
         }
         .spinner-wrapper {
           position: absolute;

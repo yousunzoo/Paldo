@@ -21,7 +21,7 @@ export default /* html */ `
               type="text"
               id="gnbSearch"
               placeholder="검색어를 입력해주세요" />
-            <button class="search-btn"></button>
+            <button class="search-button"></button>
           </form>
           <ul class="header-icon-menus">
             <li><a href="/mypage/like" data-navigo aria-label="찜목록"></a></li>
@@ -66,13 +66,13 @@ export default /* html */ `
   </div>
   <footer>
     <div class="inner-wrapper">
-      <div class="footer-team-info1">
+      <div class="footer-team-information1">
         <div class="team-name">
           <img src="${require("../../../static/images/team_logo.png")}" alt="전국팔도" />
-          <div class="team-name-desc">
+          <div class="team-name-description">
             <div class="team-title-area">
               <p class="team-title">Team</p>
-              <p class="team-desc">전국팔도</p>
+              <p class="team-description">전국팔도</p>
             </div>
             <a
               href="https://github.com/KDT4-team6/Ottogi"
@@ -84,8 +84,8 @@ export default /* html */ `
         <ul class="team-members">
           <li class="team-member">
             <div class="profile-thumbnail"></div>
-            <div class="profile-info">
-              <div class="profile-info-title">
+            <div class="profile-information">
+              <div class="profile-information-title">
                 <p class="profile-tag">팀장</p>
                 <p class="member-name">권범준</p>
               </div>
@@ -96,8 +96,8 @@ export default /* html */ `
           </li>
           <li class="team-member">
             <div class="profile-thumbnail"></div>
-            <div class="profile-info">
-              <div class="profile-info-title">
+            <div class="profile-information">
+              <div class="profile-information-title">
                 <p class="profile-tag">팀원</p>
                 <p class="member-name">고봉석</p>
               </div>
@@ -108,8 +108,8 @@ export default /* html */ `
           </li>
           <li class="team-member">
             <div class="profile-thumbnail"></div>
-            <div class="profile-info">
-              <div class="profile-info-title">
+            <div class="profile-information">
+              <div class="profile-information-title">
                 <p class="profile-tag">팀원</p>
                 <p class="member-name">유선주</p>
               </div>
@@ -120,8 +120,8 @@ export default /* html */ `
           </li>
           <li class="team-member">
             <div class="profile-thumbnail"></div>
-            <div class="profile-info">
-              <div class="profile-info-title">
+            <div class="profile-information">
+              <div class="profile-information-title">
                 <p class="profile-tag">팀원</p>
                 <p class="member-name">조성민</p>
               </div>
@@ -132,8 +132,8 @@ export default /* html */ `
           </li>
           <li class="team-member">
             <div class="profile-thumbnail"></div>
-            <div class="profile-info">
-              <div class="profile-info-title">
+            <div class="profile-information">
+              <div class="profile-information-title">
                 <p class="profile-tag">팀원</p>
                 <p class="member-name">김재도</p>
               </div>
@@ -144,7 +144,7 @@ export default /* html */ `
           </li>
         </ul>
       </div>
-      <div class="footer-team-info2">
+      <div class="footer-team-information2">
         <div class="team-skillset">
           <p class="footer-title">Our skills</p>
           <div class="skill-list">
@@ -166,7 +166,7 @@ export default /* html */ `
           <p class="footer-title">1:1 문의</p>
           <div class="inquiry-area">
             <a
-              class="inquiry-btn"
+              class="inquiry-button"
               href="https://github.com/KDT4-team6/Ottogi"
               >문의하기</a
             >
