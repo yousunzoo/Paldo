@@ -1,21 +1,12 @@
 import { checkAuthorization } from "../api/checkAuthorization";
 import { makeDOMwithProperties } from "../utils/dom";
 
-let cartList = [];
 let paymentList = [];
-
+let cartList = [];
 export default async function setCartPage(router) {
-  // 로그인 되었는지 확인
-  const isLogined = await checkAuthorization();
-  if (!isLogined) {
-    Swal.fire({
-      title: "로그인하셔야 본 기능을 이용하실 수 있습니다.",
-    }).then(() => {
-      router.navigate("/login");
-    });
+  paymentList = [];
+  cartList = [];
 
-    return;
-  }
   const loginedId = JSON.parse(localStorage.getItem("loginInfo")).loginId;
   const loginedIdData = JSON.parse(localStorage.getItem(loginedId));
   let cartListData = loginedIdData.cartList;
@@ -36,9 +27,7 @@ export default async function setCartPage(router) {
       <div class="checkbox-icon"></div>
     </label>
     <a href="/productDetail/${item.id}" class="product-area" data-navigo>
-      <div class="product-thumbnail"><img src="${item.thumbnail}" alt="${
-      item.title
-    }" /></div>
+      <div class="product-thumbnail"><img src="${item.thumbnail}" alt="${item.title}" /></div>
 
       <div class="product-detail-title">
         <p class="product-title-text">${item.title}</p>
@@ -50,15 +39,11 @@ export default async function setCartPage(router) {
       <button class="up-button">+</button>
     </div>
     <div class="product-price">
-      <p class="product-total-price"><span>${(
-        item.price * item.quantity
-      ).toLocaleString()}</span>원</p>
+      <p class="product-total-price"><span>${(item.price * item.quantity).toLocaleString()}</span>원</p>
       ${
         item.discountRate
           ? `<p class="product-origin-price">
-            <span>${Math.floor(
-              (item.price * 100) / (100 - item.discountRate)
-            ).toLocaleString()}</span>원
+            <span>${Math.floor((item.price * 100) / (100 - item.discountRate)).toLocaleString()}</span>원
           </p>`
           : ""
       }
@@ -201,15 +186,9 @@ function toggleCheckbox(item, event) {
 
 function changeBillArea() {
   const totalArea = document.querySelector(".cart-total");
-  const totalOriginPrice = totalArea
-    .querySelector(".origin-price")
-    .querySelector("span");
-  const totalDiscountPrice = totalArea
-    .querySelector(".discount-price")
-    .querySelector("span");
-  const totalPrice = totalArea
-    .querySelector(".total-price")
-    .querySelector("span");
+  const totalOriginPrice = totalArea.querySelector(".origin-price").querySelector("span");
+  const totalDiscountPrice = totalArea.querySelector(".discount-price").querySelector("span");
+  const totalPrice = totalArea.querySelector(".total-price").querySelector("span");
 
   let origin = 0;
   let discount = 0;
@@ -230,9 +209,7 @@ function toggleCountButton(cartLi, item) {
   const downButton = cartLi.querySelector(".product-quantity .down-button");
   const quantityDiv = cartLi.querySelector(".product-quantity .count");
   const totalPriceText = cartLi.querySelector(".product-total-price span");
-  const totalOriginPriceText = cartLi.querySelector(
-    ".product-origin-price span"
-  );
+  const totalOriginPriceText = cartLi.querySelector(".product-origin-price span");
   let quantity = item.quantity;
   let originPrice = parseInt((item.price * 100) / (100 - item.discountRate));
 
@@ -264,9 +241,7 @@ function toggleCountButton(cartLi, item) {
     quantityDiv.textContent = quantity;
     totalPriceText.textContent = (quantity * item.price).toLocaleString();
     if (item.discountRate) {
-      totalOriginPriceText.textContent = (
-        quantity * originPrice
-      ).toLocaleString();
+      totalOriginPriceText.textContent = (quantity * originPrice).toLocaleString();
     }
     if (quantity === 2) {
       downButton.disabled = false;
@@ -294,9 +269,7 @@ function toggleCountButton(cartLi, item) {
     quantityDiv.textContent = quantity;
     totalPriceText.textContent = (quantity * item.price).toLocaleString();
     if (item.discountRate) {
-      totalOriginPriceText.textContent = (
-        quantity * originPrice
-      ).toLocaleString();
+      totalOriginPriceText.textContent = (quantity * originPrice).toLocaleString();
     }
     if (quantity === 1) {
       downButton.disabled = true;

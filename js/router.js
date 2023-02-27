@@ -1,22 +1,14 @@
 import { headers } from "./api/headers";
 import Navigo from "navigo"; // When using ES modules.
 import { checkAuthorization } from "./api/checkAuthorization";
-import {
-  cartPage,
-  couponPage,
-  loginPage,
-  mainPage,
-  productDetailPage,
-  productPage,
-  searchPage,
-  sigupPage,
-} from "./components/userPage";
-import accountPage from './components/userPages/accountPage';
-import orderListPage from './components/userPages/orderListPage';
-import likePage from './components/userPages/likePage';
-import modifyPage from './components/userPages/modifyPage';
-import paymentPage from './components/userPages/paymentPage';
-import paymentCompletePage from './components/userPages/paymentCompletePage';
+import { cartPage, couponPage, loginPage, mainPage, productDetailPage, productPage, searchPage, sigupPage } from "./components/userPage";
+import myPage from "./components/userPages/myPage";
+import accountPage from "./components/userPages/accountPage";
+import orderListPage from "./components/userPages/orderListPage";
+import likePage from "./components/userPages/likePage";
+import modifyPage from "./components/userPages/modifyPage";
+import paymentPage from "./components/userPages/paymentPage";
+import paymentCompletePage from "./components/userPages/paymentCompletePage";
 
 import handleCouponButton from "./coupon/coupon";
 import handleSearchInput from "./header/handleSearchInput";
@@ -37,8 +29,8 @@ import { setAccountPage } from "./userAccount/account";
 import { setLikePage } from "./userLike/like";
 import { setModifyPage } from "./userModify/personalInfoModify";
 import { setPaymentPage } from "./userPayment/payment";
-import { setProfile } from './userProfile/profile'
-import setPaymentCompletePage from './userPaymentComplete/paymentComplete'
+import { setProfile } from "./userProfile/profile";
+import setPaymentCompletePage from "./userPaymentComplete/paymentComplete";
 
 import { adminWrapper } from "./components/mainComponents";
 import { toggleClass } from "./adminProductList/adminGoodsPage.js";
@@ -60,7 +52,6 @@ import { transactionPagination } from "./adminTransactionList/transactionPaginat
 import { renderDetailTransactionPage } from "./adminDetailTransaction/renderDetailTransaction";
 import { renderReportStatus } from "./adminReport/renderStoreStatus.js";
 
-
 const router = new Navigo("/");
 const mainSection = document.querySelector("#main");
 const sidebarArea = document.querySelector("#sidebar-area");
@@ -71,7 +62,7 @@ const body = document.querySelector("body");
   const isLogin = await checkAuthorization();
 
   if (isLogin) {
-    const loginId = JSON.parse(localStorage.getItem("loginInfo")).loginId;
+    const loginId = JSON.parse(localStorage.getItem("loginInfo"))?.loginId;
     if (loginId === "admin@paldo.com") {
       router.navigate("admin");
     } else {
@@ -80,151 +71,106 @@ const body = document.querySelector("body");
   }
 })();
 
+router.hooks({
+  async before(done, match) {
+    window.scrollTo(0, 0);
+    const isLogin = await checkAuthorization();
+    const requiredLogInPaths = ["cart", "mypage/orderList", "mypage/account", "mypage/modify", "mypage/like", "payment"];
+    console.log(match);
+    if (requiredLogInPaths.includes(match.url) && !isLogin) {
+      Swal.fire({
+        icon: "info",
+        title: "로그인이 필요한 서비스입니다.",
+        text: "로그인 페이지로 이동합니다.",
+      }).then(() => {
+        router.navigate("/login");
+        done();
+      });
+    }
+    done();
+  },
+});
+
 router
   .on({
     "/": async () => {
-      window.scrollTo(0, 0);
       mainSection.innerHTML = mainPage;
       setPrdList(router);
       swiperAction();
       sidebarArea.style.paddingTop = "500px";
     },
     login: async () => {
-      window.scrollTo(0, 0);
       mainSection.innerHTML = loginPage;
       loginEvent(router);
       sidebarArea.style.paddingTop = "100px";
     },
     signup: () => {
-      window.scrollTo(0, 0);
       mainSection.innerHTML = sigupPage;
       signUpEvent();
       sidebarArea.style.paddingTop = "100px";
     },
     "search/:id": async ({ data }) => {
-      window.scrollTo(0, 0);
       mainSection.innerHTML = searchPage;
       await setResultPage(data.id, router);
       sidebarArea.style.paddingTop = "100px";
     },
     coupon: () => {
-      window.scrollTo(0, 0);
       mainSection.innerHTML = couponPage;
       handleCouponButton();
       sidebarArea.style.paddingTop = "100px";
     },
     "productDetail/:id": async ({ data }) => {
-      window.scrollTo(0, 0);
       mainSection.innerHTML = productDetailPage;
       await setProductDetailPage(data.id, router);
       sidebarArea.style.paddingTop = "100px";
     },
     "products/:id": async ({ data }) => {
-      window.scrollTo(0, 0);
       mainSection.innerHTML = productPage;
       await setProductPage(data.id, router);
       sidebarArea.style.paddingTop = "100px";
     },
     cart: () => {
-      window.scrollTo(0, 0);
       mainSection.innerHTML = cartPage;
       setCartPage(router);
       sidebarArea.style.paddingTop = "100px";
     },
-    // mypage: () => {
-    //   const mypageRouter = new Navigo("/");
-    //   window.scrollTo(0, 0);
-    //   mainSection.innerHTML = myPage;
-    //   const target = window.location.search.slice(8);
-    //   mypageRouter.navigate(`mypage/${target}`);
+    // mypage: {
+    //   uses: () => {},
+    //   hooks: {
+    //     before(done) {
+    //       router.navigate("/nested/apple", {
+    //         historyAPIMethod: "replaceState",
+    //       });
+    //       done();
+    //     },
+    //   },
     // },
     "mypage/orderList": async () => {
-      window.scrollTo(0, 0);
       mainSection.innerHTML = orderListPage;
-      const isValidUser = await checkAuthorization();
-      if(isValidUser) {
-        setProfile();
-        setOrderListPage()
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: '사용자 세션이 만료되었습니다.',
-          text: '로그인 페이지로 이동합니다.',
-        }).then(() => {
-          router.navigate('/login')
-        })
-      }
+      setProfile();
+      setOrderListPage(router);
     },
     "mypage/account": async () => {
-      window.scrollTo(0, 0);
       mainSection.innerHTML = accountPage;
-      const isValidUser = await checkAuthorization();
-      if(isValidUser) {
-        setProfile();
-        setAccountPage()
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: '사용자 세션이 만료되었습니다.',
-          text: '로그인 페이지로 이동합니다.',
-        }).then(() => {
-          router.navigate('/login')
-        })
-      }
+      setProfile();
+      setAccountPage(router);
     },
     "mypage/like": async () => {
-      window.scrollTo(0, 0);
       mainSection.innerHTML = likePage;
-      const isValidUser = await checkAuthorization();
-      if(isValidUser) {
-        setProfile();
-        setLikePage(router)
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: '사용자 세션이 만료되었습니다.',
-          text: '로그인 페이지로 이동합니다.',
-        }).then(() => {
-          router.navigate('/login')
-        })
-      }
+      setProfile();
+      setLikePage();
     },
     "mypage/modify": async () => {
-      window.scrollTo(0, 0);
       mainSection.innerHTML = modifyPage;
-      const isValidUser = await checkAuthorization();
-      if(isValidUser) {
-        setProfile();
-        setModifyPage()
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: '사용자 세션이 만료되었습니다.',
-          text: '로그인 페이지로 이동합니다.',
-        }).then(() => {
-          router.navigate('/login')
-        })
-      }
+      setProfile();
+      setModifyPage(router);
     },
     payment: async () => {
-      window.scrollTo(0, 0);
       mainSection.innerHTML = paymentPage;
-      const isValidUser = await checkAuthorization();
-      if(isValidUser) {
-        setPaymentPage(router)
-        swiperAction();
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: '사용자 세션이 만료되었습니다.',
-          text: '로그인 페이지로 이동합니다.',
-        }).then(() => {
-          router.navigate('/login')
-        })
-      }
+      setPaymentPage(router);
+      swiperAction();
     },
     paymentComplete: () => {
-      window.scrollTo(0, 0);
       mainSection.innerHTML = paymentCompletePage;
       setPaymentCompletePage();
     },
@@ -311,8 +257,7 @@ router
             renderAddPage();
           },
           "transaction/:id": ({ data }) => {
-            document.querySelector("#content").innerHTML =
-              transaction_detail_page;
+            document.querySelector("#content").innerHTML = transaction_detail_page;
             renderDetailTransactionPage(data);
           },
         })
