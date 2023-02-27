@@ -24,9 +24,7 @@ function setMainPrdList(prdList, data, router) {
       className: "swiper-slide",
     });
     const discountRate = item.discountRate > 0;
-    const originPrice = Math.floor(
-      (item.price * 100) / (100 - item.discountRate)
-    );
+    const originPrice = Math.floor((item.price * 100) / (100 - item.discountRate));
 
     swiperDiv.innerHTML = /* html */ ` 
     <a href="/productDetail/${item.id}">
@@ -37,11 +35,7 @@ function setMainPrdList(prdList, data, router) {
       <h3 class="product-name">${item.title}</h3>
       <div class="product-price">
         <div>
-          ${
-            discountRate
-              ? `<span class="discount-rate">${item.discountRate}%</span>`
-              : ""
-          }
+          ${discountRate ? `<span class="discount-rate">${item.discountRate}%</span>` : ""}
           <span class="sales-price">${item.price.toLocaleString()}원<span>
         </div>
         <div>
