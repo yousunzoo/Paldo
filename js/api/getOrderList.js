@@ -33,6 +33,8 @@ export default async function () {
       }
       return false;
     }
+    const json = await res.json();
+    return json;
   } catch (error) {
     console.error(error);
     Swal.fire({
@@ -42,6 +44,4 @@ export default async function () {
     });
     return false;
   }
-  const json = await res.json();
-  return json;
 }
