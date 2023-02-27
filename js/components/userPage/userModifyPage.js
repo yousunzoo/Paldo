@@ -146,7 +146,12 @@ export default /* html */ `
                 <figure class="check-thumbnail"></figure>
               </div>
             </div>
-            <button class="modify-button">수정하기</button>
+            <div class="modify-button-wrapper">
+              <button class="modify-button">수정하기</button>
+              <div class="spinner-wrapper">
+                <div class="spinner"></div>
+              </div>
+            </div>
           </fieldset>
         </form>
       </div>

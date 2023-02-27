@@ -9,7 +9,7 @@ export async function setModifyPage() {
   if (!isLogin) return;
 
   /* GLOBAL VARIABLES */
-  const { USER_INFO, USER_ADDRESS } = SORT_TYPES;
+  const { USER_INFO, USER_ADDRESS, USER_DATA } = SORT_TYPES;
   const userInfo = {
     oldPassword: "",
     newPassword: "",
@@ -36,22 +36,32 @@ export async function setModifyPage() {
   // 수정 버튼 클릭
   modifyButton.addEventListener("click", async (event) => {
     event.preventDefault();
+    const spinnerEl = document.querySelector(".spinner-wrapper");
+    spinnerEl.classList.add("active");
     const isInvalid = Object.values(validCheck).includes(false);
     if (isInvalid) {
       Swal.fire({
         icon: "error",
         text: "입력하신 정보를 확인해주세요.",
       });
+      spinnerEl.classList.remove("active");
       return;
     }
     // 주소 체크
     addressCheck();
 
     // 서버에 회원정보 수정 요청
-    await requestPersonalInfoModify(userInfo, userAddress);
+    const result = await requestPersonalInfoModify(userInfo, userAddress);
+    if (!result) return;
+    Swal.fire("수정 성공!", "개인 정보가 수정되었습니다.", "success");
+    // localStorage 세팅
+    const userData = getLocalStorageData(USER_DATA);
+    localStorage.setItem(result.email, JSON.stringify({ ...userData, userInfo: result, userAddress }));
+
+    // 리렌더
     initPage();
     setProfile();
-    window.scrollTo(0, 0);
+    spinnerEl.classList.remove("active");
   });
 
   // 현재 비밀번호
