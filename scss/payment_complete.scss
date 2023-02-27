@@ -19,7 +19,7 @@ $color_banner_button: #fbcd57;
     align-items: center;
     padding: 30px;
     border: 1px solid $color_button_border;
-    margin : 30px auto 0;
+    margin: 30px auto 0;
     .icon img {
       width: 60px;
       padding-top: 30px;
@@ -101,7 +101,7 @@ $color_banner_button: #fbcd57;
       margin-top: 20px;
       box-sizing: border-box;
       border: 1px solid $color_primary;
-      transition: .3s ease;
+      transition: 0.3s ease;
       &:hover {
         background-color: $color-white;
         color: $color-primary;

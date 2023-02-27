@@ -9,15 +9,15 @@ $color_button_border: rgb(221, 221, 221);
 $color_incorrect: #f03f40;
 $color_white: #ffffff;
 $color_copyright: rgb(247, 247, 247);
-$bg_sidebar : rgb(250,250,250);
+$bg_sidebar: rgb(250, 250, 250);
 
 #main {
   > .mypage-wrapper {
     /* MAIN SECTION */
     .modify-wrapper {
-      width : 820px;
+      width: 820px;
       .header {
-        width : 100%;
+        width: 100%;
         padding-bottom: 27px;
         border-bottom: 2px solid $color_primary;
         h2 {
@@ -28,7 +28,7 @@ $bg_sidebar : rgb(250,250,250);
         }
       }
       > .content {
-        width : 560px;
+        width: 560px;
         box-sizing: border-box;
         margin: 0px auto;
         form {

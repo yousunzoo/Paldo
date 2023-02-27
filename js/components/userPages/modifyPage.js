@@ -1,5 +1,4 @@
-export default
-/* html */`
+export default /* html */ `
   <!-- USER INFO -->
   <section class="user-info">
     <div class="inner-wrapper">
@@ -153,4 +152,4 @@ export default
       </div>
     </div>
   </div>
-`
+`;
