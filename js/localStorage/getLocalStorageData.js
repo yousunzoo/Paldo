@@ -12,7 +12,6 @@ export function getLocalStorageData(sort) {
   const loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
   const userData = JSON.parse(localStorage.getItem(loginInfo?.loginId));
   const sidebarData = JSON.parse(localStorage.getItem("sidebarData"));
-  const paymentList = JSON.parse(localStorage.getItem("paymentList"));
   switch (sort) {
     case "sidebarData":
       return sidebarData || [];
