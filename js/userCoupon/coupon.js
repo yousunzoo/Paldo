@@ -36,7 +36,7 @@ export default async function handleCouponButton(router) {
       return;
     }
     if (getCouponButton.classList.contains("disabled")) return;
-
+    const loginId = getLocalStorageData("loginId");
     const loginIdData = getLocalStorageData("loginIdData");
     loginIdData.coupons = coupons;
     localStorage.setItem(loginId, JSON.stringify(loginIdData));
