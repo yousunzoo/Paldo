@@ -75,14 +75,7 @@ mainRouter.hooks({
   async before(done, match) {
     window.scrollTo(0, 0);
     const isLogin = await checkAuthorization();
-    const requiredLogInPaths = [
-      "cart",
-      "mypage/orderList",
-      "mypage/account",
-      "mypage/modify",
-      "mypage/like",
-      "payment",
-    ];
+    const requiredLogInPaths = ["cart", "mypage/orderList", "mypage/account", "mypage/modify", "mypage/like", "payment"];
     if (requiredLogInPaths.includes(match.url) && !isLogin) {
       Swal.fire({
         icon: "info",

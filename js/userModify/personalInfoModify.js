@@ -1,9 +1,13 @@
+import { checkAuthorization } from "../api/checkAuthorization";
 import { SORT_TYPES, getLocalStorageData } from "../localStorage/getLocalStorageData";
 import getAddress from "../library/postcode";
 import { requestPersonalInfoModify } from "../api/requestPersonalInfoModify";
 import { setProfile } from "../userProfile/profile";
 
 export async function setModifyPage() {
+  const isLogin = await checkAuthorization();
+  if (!isLogin) return;
+
   /* GLOBAL VARIABLES */
   const { USER_INFO, USER_ADDRESS } = SORT_TYPES;
   const userInfo = {

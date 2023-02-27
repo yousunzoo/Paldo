@@ -1,8 +1,11 @@
+import { checkAuthorization } from "../api/checkAuthorization";
 import { SORT_TYPES, getLocalStorageData } from "../localStorage/getLocalStorageData";
 
 const { COUPONS, USER_INFO } = SORT_TYPES;
 
-export function setProfile() {
+export async function setProfile() {
+  const isLogin = await checkAuthorization();
+  if (!isLogin) return;
   // 쿠폰 개수 출력
   const coupons = getLocalStorageData(COUPONS);
   const couponAmountTextEl = document.querySelector("#couponAmount");

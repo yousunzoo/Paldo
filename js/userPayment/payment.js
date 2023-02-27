@@ -1,3 +1,4 @@
+import { checkAuthorization } from "../api/checkAuthorization";
 import { SORT_TYPES, getLocalStorageData } from "../localStorage/getLocalStorageData";
 import getUserAccounts from "../api/getUserAccounts";
 import requestTransaction from "../api/requestTransaction";
@@ -6,6 +7,8 @@ import cancelTransaction from "../api/cancelTransaction";
 import { analyzeOrderList } from "../userOrderList/orderList";
 
 export async function setPaymentPage(router) {
+  const isLogin = await checkAuthorization();
+  if (!isLogin) return;
   /* GLOBAL VARIABLES */
   const { USER_INFO, USER_ADDRESS, COUPONS, CART_LIST } = SORT_TYPES;
   const payInfo = {

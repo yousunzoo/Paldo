@@ -1,3 +1,4 @@
+import { checkAuthorization } from "../api/checkAuthorization";
 import { SORT_TYPES, getLocalStorageData } from "../localStorage/getLocalStorageData";
 import { makeDOMwithProperties } from "../utils/dom.js";
 import addCart from "../utils/addCart";
@@ -5,6 +6,8 @@ import addCart from "../utils/addCart";
 const { WISH_LIST } = SORT_TYPES;
 
 export async function setLikePage() {
+  const isLogin = await checkAuthorization();
+  if (!isLogin) return;
   // 페이지 초기화
   initPage();
 

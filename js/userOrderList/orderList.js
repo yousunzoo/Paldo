@@ -1,3 +1,4 @@
+import { checkAuthorization } from "../api/checkAuthorization";
 import getOrderList from "../api/getOrderList";
 import cancelTransaction from "../api/cancelTransaction";
 import confirmTransaction from "../api/confirmTransaction";
@@ -5,6 +6,8 @@ import { makeDOMwithProperties } from "../utils/dom";
 
 /* FUNCTIONS */
 export async function setOrderListPage() {
+  const isLogin = await checkAuthorization();
+  if (!isLogin) return;
   // flatPickr
   flatpickr("#myDatepicker", {
     dateFormat: "Y-m-d", // set the date format
