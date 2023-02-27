@@ -10,9 +10,7 @@ export default async function setCartPage(router) {
   paymentList = [];
 
   let cartListData = getLocalStorageData("cartList");
-  let paymentListData = getLocalStorageData("paymentList");
   cartList = [...cartListData];
-  paymentList = [...paymentListData];
   const cartListArea = document.querySelector(".product-list");
 
   let loginedId = getLocalStorageData("loginId");

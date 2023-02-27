@@ -71,28 +71,48 @@ import { getLocalStorageData } from "./localStorage/getLocalStorageData.js";
 const mainRouter = new Navigo("/");
 const body = document.querySelector("body");
 
+// 처음 페이지가 로드 되었을 때
+(async () => {
+  body.innerHTML = userWrapper;
+  setSidebarSwiper(mainRouter);
+  handleSearchInput(mainRouter);
+  goToTopFn();
+  swiperAction();
+  sidebarAction();
+  setSidebarStyle(500);
+  mainRouter.link("/");
+  const isLogin = await checkAuthorization();
+  if (isLogin) {
+    const loginId = getLocalStorageData("loginId");
+    if (loginId === "admin@paldo.com") {
+      mainRouter.navigate("admin");
+    } else {
+      changeHeader(mainRouter);
+    }
+  }
+})();
+
 mainRouter.hooks({
   async before(done, match) {
     window.scrollTo(0, 0);
-    const isLogin = await checkAuthorization();
     const requiredLogInPaths = ["cart", "mypage/orderList", "mypage/account", "mypage/modify", "mypage/like", "payment"];
-    if (requiredLogInPaths.includes(match.url) && !isLogin) {
-      Swal.fire({
-        icon: "info",
-        title: "로그인이 필요한 서비스입니다.",
-        text: "로그인 페이지로 이동합니다.",
-      }).then(() => {
-        mainRouter.navigate("/login");
-        done();
-      });
+    if (requiredLogInPaths.includes(match.url)) {
+      const isLogin = await checkAuthorization();
+      if (!isLogin) {
+        Swal.fire({
+          icon: "info",
+          title: "로그인이 필요한 서비스입니다.",
+          text: "로그인 페이지로 이동합니다.",
+        }).then(() => {
+          mainRouter.navigate("/login");
+          done();
+        });
+      }
     }
     done();
   },
 });
 
-// 처음 페이지가 로드 되었을 때
-mainRouter.link("/");
-body.innerHTML = userWrapper;
 mainRouter
   .on({
     "/": async () => {
@@ -160,16 +180,19 @@ mainRouter
       document.querySelector("#main").innerHTML = userOrderListPage;
       setProfile();
       setOrderListPage(mainRouter);
+      setSidebarStyle(500);
     },
     "mypage/account": () => {
       document.querySelector("#main").innerHTML = userAccountPage;
       setProfile();
       setAccountPage(mainRouter);
+      setSidebarStyle(500);
     },
     "mypage/like": () => {
       document.querySelector("#main").innerHTML = userLikePage;
       setProfile();
       setLikePage();
+      setSidebarStyle(500);
     },
     "mypage/modify": () => {
       document.querySelector("#main").innerHTML = userModifyPage;
