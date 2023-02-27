@@ -1,4 +1,4 @@
-import { count, transactionscount } from "../adminReport/getCountData";
+import { productCount, transactionsCount } from "../adminReport/getCountData";
 
 export function chartFn() {
   const bar = document.getElementById("bar-chart").getContext("2d");
@@ -6,16 +6,7 @@ export function chartFn() {
   const barChart = new Chart(bar, {
     type: "bar",
     data: {
-      labels: [
-        "전체상품",
-        "스낵",
-        "라면",
-        "음료",
-        "초콜릿/캔디류",
-        "인기",
-        "신상",
-        "세일",
-      ],
+      labels: ["전체상품", "스낵", "라면", "음료", "초콜릿/캔디류", "인기", "신상", "세일"],
       datasets: [
         {
           label: "현재 제품 수량",
@@ -45,7 +36,7 @@ export function chartFn() {
       ],
     },
   });
-  count().then((countArr) => {
+  productCount().then((countArr) => {
     barChart.config._config.data.datasets[0].data = countArr;
     barChart.update();
   });
@@ -53,20 +44,11 @@ export function chartFn() {
   const pieChart = new Chart(pie, {
     type: "pie",
     data: {
-      labels: [
-        "전체상품",
-        "스낵",
-        "라면",
-        "음료",
-        "초콜릿/캔디류",
-        "인기",
-        "신상",
-        "세일",
-      ],
+      labels: ["전체상품", "스낵", "라면", "음료", "초콜릿/캔디류", "인기", "신상", "세일"],
       datasets: [
         {
           label: "현재판매 수량",
-          data: [12, 19, 3, 5, 2, 3, 20, 10],
+          data: [1, 2, 3, 4, 3, 2, 4, 2],
           backgroundColor: [
             "rgba(255, 99, 132, 0.2)",
             "rgba(54, 162, 235, 0.2)",
@@ -101,7 +83,7 @@ export function chartFn() {
       },
     },
   });
-  transactionscount().then((countArr) => {
+  transactionsCount().then((countArr) => {
     pieChart.config._config.data.datasets[0].data = countArr;
     pieChart.update();
   });
