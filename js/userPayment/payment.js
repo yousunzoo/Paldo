@@ -310,7 +310,6 @@ export async function setPaymentPage(router) {
 
     const senderEl = document.querySelector(".orderer-area .sender");
     senderEl.textContent = userInfo.displayName;
-    username = userInfo.displayName;
 
     const emailEl = document.querySelector(".orderer-area .email");
     emailEl.textContent = userInfo.email;

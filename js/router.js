@@ -14,6 +14,8 @@ import userOrderListPage from "./components/userPage/userOrderListPage.js";
 import userAccountPage from "./components/userPage/userAccountPage.js";
 import userLikePage from "./components/userPage/userLikePage.js";
 import userModifyPage from "./components/userPage/userModifyPage.js";
+import userPaymentPage from "./components/userPage/userPaymentPage.js";
+import paymentCompletePage from "./components/userPage/paymentCompletePage";
 import handleCouponButton from "./userCoupon/coupon.js";
 import handleSearchInput from "./userHeader/handleSearchInput.js";
 import { swiperAction, sidebarAction } from "./library/swiper.js";
@@ -34,7 +36,7 @@ import { setAccountPage } from "./userAccount/account.js";
 import { setLikePage } from "./userLike/like.js";
 import { setModifyPage } from "./userPersonalInfoModify/personalInfoModify.js";
 import { setPaymentPage } from "./userPayment/payment.js";
-import { setPaymentCompletePage } from "./userPaymentComplete/paymentComplete.js";
+import setPaymentCompletePage from "./userPaymentComplete/paymentComplete.js";
 import { setProfile } from "./userProfile/profile.js";
 import { toggleClass } from "./adminProductList/adminGoodsPage.js";
 import { chartFn } from "./library/chart.js";
@@ -67,7 +69,6 @@ mainRouter.hooks({
     window.scrollTo(0, 0);
     const isLogin = await checkAuthorization();
     const requiredLogInPaths = ["cart", "mypage/orderList", "mypage/account", "mypage/modify", "mypage/like", "payment"];
-    console.log(match);
     if (requiredLogInPaths.includes(match.url) && !isLogin) {
       Swal.fire({
         icon: "info",
@@ -149,27 +150,27 @@ mainRouter
       setCartPage(mainRouter);
       setSidebarStyle(100);
     },
-    "mypage/orderList": async () => {
+    "mypage/orderList": () => {
       document.querySelector("#main").innerHTML = userOrderListPage;
       setProfile();
       setOrderListPage(mainRouter);
     },
-    "mypage/account": async () => {
+    "mypage/account": () => {
       document.querySelector("#main").innerHTML = userAccountPage;
       setProfile();
       setAccountPage(mainRouter);
     },
-    "mypage/like": async () => {
+    "mypage/like": () => {
       document.querySelector("#main").innerHTML = userLikePage;
       setProfile();
       setLikePage();
     },
-    "mypage/modify": async () => {
+    "mypage/modify": () => {
       document.querySelector("#main").innerHTML = userModifyPage;
       setProfile();
       setModifyPage(mainRouter);
     },
-    payment: async () => {
+    payment: () => {
       document.querySelector("#main").innerHTML = userPaymentPage;
       setPaymentPage(mainRouter);
       swiperAction();

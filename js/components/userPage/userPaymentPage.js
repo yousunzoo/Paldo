@@ -234,7 +234,7 @@ export default /* html */ `
     </div>
 
     <div class="pay-button-area">
-      <button type="button" width="240" height="56" radius="3">
+      <button class="pay-button" type="button" width="240" height="56" radius="3">
         <span>
           <span id="totalAmountInButton"></span>원 결제하기
         </span>

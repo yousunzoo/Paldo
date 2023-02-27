@@ -1,6 +1,6 @@
 import { SORT_TYPES, getLocalStorageData } from "../localStorage/getLocalStorageData";
 import { makeDOMwithProperties } from "../utils/dom.js";
-import { addCart } from "../product/setProductDetailPage";
+import addCart from "../utils/addCart";
 
 const { WISH_LIST } = SORT_TYPES;
 

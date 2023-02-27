@@ -1,15 +1,22 @@
+import { checkAuthorization } from "../api/checkAuthorization";
 import { getLocalStorageData } from "../localStorage/getLocalStorageData";
 import { makeDOMwithProperties } from "../utils/dom";
 
-let paymentList = [];
 let cartList = [];
+let paymentList = [];
+
 export default async function setCartPage(router) {
-  paymentList = [];
   cartList = [];
+  paymentList = [];
 
   let cartListData = getLocalStorageData("cartList");
-  cartList = cartListData ? [...cartListData] : [];
+  let paymentListData = getLocalStorageData("paymentList");
+  cartList = [...cartListData];
+  paymentList = [...paymentListData];
   const cartListArea = document.querySelector(".product-list");
+
+  let loginedId = getLocalStorageData("loginId");
+  let loginedIdData = getLocalStorageData("loginIdData");
 
   cartListArea.innerHTML = "";
 

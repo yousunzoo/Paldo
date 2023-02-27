@@ -12,8 +12,12 @@ $color_copyright: rgb(247, 247, 247);
 
 // spinner loading
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* MAIN SECTION */
@@ -104,7 +108,7 @@ $color_copyright: rgb(247, 247, 247);
         .button-icon {
           width: 30px;
           height: 30px;
-          transform: rotateX(180deg)
+          transform: rotateX(180deg);
         }
       }
     }
@@ -126,7 +130,7 @@ $color_copyright: rgb(247, 247, 247);
           border-bottom: 1px solid rgb(244, 244, 244);
           .thumbnail {
             height: 78px;
-            margin-right : 10px;
+            margin-right: 10px;
           }
           .title-wrapper {
             width: 720px;
@@ -144,7 +148,7 @@ $color_copyright: rgb(247, 247, 247);
             }
           }
           .quantity-wrapper {
-            display:flex;
+            display: flex;
             align-items: center;
             width: 100px;
             font-size: 14px;
@@ -152,7 +156,7 @@ $color_copyright: rgb(247, 247, 247);
             text-align: center;
           }
           .price-wrapper {
-            display : flex;
+            display: flex;
             flex-direction: column;
             align-items: center;
             text-align: right;
@@ -187,7 +191,7 @@ $color_copyright: rgb(247, 247, 247);
           .content {
             display: inline-flex;
             align-items: center;
-            line-height: 24px;            
+            line-height: 24px;
           }
           .additional-info {
             margin-top: 10px;
@@ -203,7 +207,7 @@ $color_copyright: rgb(247, 247, 247);
     .delivery-area {
       .destination-wrapper {
         display: flex;
-        padding: 20px 0px;    
+        padding: 20px 0px;
         .info-title {
           display: inline-block;
           width: 160px;
@@ -250,7 +254,7 @@ $color_copyright: rgb(247, 247, 247);
         .coupon-area {
           display: flex;
           padding: 20px 0px;
-          
+
           .coupon-selector-wrapper {
             position: relative;
             flex: 1 1 0%;
@@ -265,7 +269,7 @@ $color_copyright: rgb(247, 247, 247);
               text-align: left;
               background: rgb(250, 250, 250);
               color: rgb(204, 204, 204);
-              cursor:pointer;
+              cursor: pointer;
               i {
                 position: absolute;
                 top: 10px;
@@ -274,18 +278,18 @@ $color_copyright: rgb(247, 247, 247);
             }
             .coupon-list {
               width: 100%;
-              height : 0;
+              height: 0;
               position: absolute;
-              top:90%;
+              top: 90%;
               opacity: 0;
               background: rgb(250, 250, 250);
               color: rgb(204, 204, 204);
-              transition : .3s;
+              transition: 0.3s;
               .coupon {
                 display: flex;
-                align-items:center;
-                margin : auto 0;
-                height : 100%;
+                align-items: center;
+                margin: auto 0;
+                height: 100%;
                 font-size: 16px;
                 line-height: 20px;
                 text-align: left;
@@ -298,8 +302,8 @@ $color_copyright: rgb(247, 247, 247);
               }
             }
             .opened {
-              height : 100%;
-              top : 100%;
+              height: 100%;
+              top: 100%;
               opacity: 1;
             }
           }
@@ -311,15 +315,15 @@ $color_copyright: rgb(247, 247, 247);
             flex: 1 1 0%;
             .payment {
               background-color: $color-primary;
-              color: #fff!important;
+              color: #fff !important;
               display: block;
-              line-height: 44px!important;
+              line-height: 44px !important;
               margin-top: 16px;
               text-align: center;
               width: 100%;
             }
             .no-list {
-              margin-top : 20px;
+              margin-top: 20px;
               align-items: center;
               background-color: #fafafa;
               border: 1px solid #f2f2f2;
@@ -335,24 +339,23 @@ $color_copyright: rgb(247, 247, 247);
                 display: none;
               }
               p {
-                margin-bottom : 10px;
-                font-size : 16px;
+                margin-bottom: 10px;
+                font-size: 16px;
               }
-              a{
+              a {
                 span {
-                  font-size :14px;
+                  font-size: 14px;
                   &:hover {
                     text-decoration: underline;
                   }
                 }
               }
-  
             }
             .swiper {
               width: 552px;
-              height : 180px;
+              height: 180px;
               box-sizing: border-box;
-              margin-top : 20px;
+              margin-top: 20px;
               &:hover .swiper-button-prev::after {
                 opacity: 1;
               }
@@ -365,13 +368,13 @@ $color_copyright: rgb(247, 247, 247);
               .swiper-wrapper {
                 .swiper-slide {
                   box-sizing: border-box;
-                  padding : 30px 70px;
+                  padding: 30px 70px;
                   background-color: #fafafa;
                   border: 1px solid #f2f2f2;
                   .account-info {
-                    display : flex;
+                    display: flex;
                     flex-direction: column;
-                    gap : 4px;
+                    gap: 4px;
                     #bankName {
                       font-weight: bold;
                     }
@@ -385,22 +388,22 @@ $color_copyright: rgb(247, 247, 247);
                 }
               }
               .swiper-pagination {
-                bottom : 15px;
+                bottom: 15px;
                 span {
-                  background-color : $color-primary;
+                  background-color: $color-primary;
                 }
               }
               .swiper-button-prev::after {
                 font-size: 16px;
-                color : $color-primary;
+                color: $color-primary;
                 opacity: 0;
-                transition : opacity .2s ease;
+                transition: opacity 0.2s ease;
               }
               .swiper-button-next::after {
                 font-size: 16px;
-                color : $color-primary;
+                color: $color-primary;
                 opacity: 0;
-                transition : opacity .2s ease;
+                transition: opacity 0.2s ease;
               }
             }
           }
@@ -410,14 +413,14 @@ $color_copyright: rgb(247, 247, 247);
           padding: 20px 0px;
           .wrapper {
             flex: 1 1 0%;
-            gap : 5px;
+            gap: 5px;
             > div {
-              display : flex;
+              display: flex;
             }
             > div:first-child {
               .accumulated-cash {
                 display: flex;
-                align-items:center;
+                align-items: center;
                 width: 168px;
                 margin-right: 8px;
                 height: 44px;
@@ -429,7 +432,6 @@ $color_copyright: rgb(247, 247, 247);
                 text-align: left;
                 background: rgb(250, 250, 250);
                 color: rgb(204, 204, 204);
-                
               }
               button {
                 background: rgb(250, 250, 250);
@@ -446,13 +448,13 @@ $color_copyright: rgb(247, 247, 247);
               }
             }
             > div:nth-child(2) {
-              margin-top : 10px;
+              margin-top: 10px;
               font-size: 14px;
               line-height: 20px;
               color: rgb(102, 102, 102);
             }
             > div:nth-child(3) {
-              margin-top : 16px;
+              margin-top: 16px;
               font-size: 12px;
               line-height: 18px;
               color: rgb(102, 102, 102);
@@ -463,7 +465,7 @@ $color_copyright: rgb(247, 247, 247);
       .area-right {
         width: 284px;
         .area-amount {
-          margin : 60px 0 20px;
+          margin: 60px 0 20px;
           .wrapper {
             display: flex;
             justify-content: space-between;
@@ -549,26 +551,26 @@ $color_copyright: rgb(247, 247, 247);
               margin-top: 16px;
               padding: 16px 0px 1px;
               .amount-wrapper {
-                display : flex;
+                display: flex;
                 align-items: center;
               }
               #totalAmount {
                 font-size: 22px;
-                margin-right : 7px;
+                margin-right: 7px;
               }
             }
           }
         }
         .sticky {
-          position : sticky;
+          position: sticky;
           top: 0;
         }
       }
     }
     .private-info-consent {
-      padding : 20px 0;
+      padding: 20px 0;
       div {
-        display : flex;
+        display: flex;
         align-items: center;
         span {
           color: rgb(51, 51, 51);
@@ -579,7 +581,7 @@ $color_copyright: rgb(247, 247, 247);
       .list {
         padding-top: 16px;
         .item {
-          display:flex;
+          display: flex;
           align-items: center;
           font-size: 14px;
           line-height: 24px;
@@ -597,7 +599,7 @@ $color_copyright: rgb(247, 247, 247);
         width: 24px;
         height: 24px;
         margin-right: 12px;
-        stroke : black;
+        stroke: black;
       }
     }
     .sub-info {
@@ -614,7 +616,7 @@ $color_copyright: rgb(247, 247, 247);
     }
     .pay-button-area {
       text-align: center;
-      button {
+      .pay-button {
         box-sizing: border-box;
         display: block;
         position: relative;
@@ -629,28 +631,28 @@ $color_copyright: rgb(247, 247, 247);
         margin: 40px auto 30px;
         font-weight: bold;
         cursor: pointer;
-        transition : .3s ease;
+        transition: 0.3s ease;
         span {
           display: inline-block;
           font-size: 16px;
         }
         &:hover {
           box-sizing: border-box;
-          border : 1px solid $color_primary;
+          border: 1px solid $color_primary;
           background-color: #fff;
-          color : $color-primary;
+          color: $color-primary;
         }
         .spinner-wrapper {
           position: absolute;
-          width : 100%;
-          height : 100%;
+          width: 100%;
+          height: 100%;
           top: 0;
           left: 0;
-          display : none;
+          display: none;
           justify-content: center;
           align-items: center;
           background-color: $color_primary;
-          transition : background-color .3s ease;
+          transition: background-color 0.3s ease;
           &:hover {
             background-color: #fff;
           }
