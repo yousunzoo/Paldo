@@ -1,42 +1,20 @@
-// import { checkAuthorization } from '../api/checkAuthorization.js';
-import {
-  SORT_TYPES,
-  getLocalStorageData,
-} from "../localStorage/getLocalStorageData";
+import { SORT_TYPES, getLocalStorageData } from "../localStorage/getLocalStorageData";
 import { makeDOMwithProperties } from "../utils/dom.js";
 import addCart from "../utils/addCart";
 
 const { WISH_LIST } = SORT_TYPES;
 
-/* GLOBAL LOGIC */
-// setMockData();
-// ;(async function () {
-//   const isValidUser = await checkAuthorization();
-//   if(isValidUser) {
-//     initPage();
-//   } else {
-//     Swal.fire({
-//       icon: 'error',
-//       title: '사용자 세션이 만료되었습니다.',
-//       text: '로그인 페이지로 이동합니다.',
-//     })
-//     // 로그인 페이지로 redirect
-//     // location.assign('로그인 페이지 경로')
-//   }
-// })()
+export async function setLikePage() {
+  // 페이지 초기화
+  initPage();
 
-export function setLikePage(router) {
-  initPage(router);
-
-  function initPage(router) {
+  function initPage() {
     // 찜목록 데이터 불러오기
     const wishList = getLocalStorageData(WISH_LIST);
     const totalEl = document.querySelector(".main-text > span");
     totalEl.textContent = wishList?.length || 0;
     const contentEl = document.querySelector(".likelist-container > .content");
-    const skeletonLoadingEl = document.querySelector(
-      ".likelist-container > .skeleton-loading"
-    );
+    const skeletonLoadingEl = document.querySelector(".likelist-container > .skeleton-loading");
 
     // 찜목록이 없다면
     if (!wishList?.length) {
@@ -45,85 +23,47 @@ export function setLikePage(router) {
       return;
     }
     // 찜목록이 있다면
-    const wishListEl = createWishList(wishList, router);
+    const wishListEl = createWishList(wishList);
     contentEl.innerHTML = "";
     contentEl.append(wishListEl);
     skeletonLoadingEl.classList.add("d-none");
   }
-  function createWishList(wishList, router) {
+  function createWishList(wishList) {
     const fragmentEl = document.createDocumentFragment();
     wishList.forEach((wish) => {
       const { id, title, price, discountRate = 0, thumbnail } = wish;
       // 할인율이 있는 상품은 원가를 계산한 값을 originPrice 변수에 담아 화면에 같이 렌더링
-      const costPrice = discountRate
-        ? Math.floor((price * 100) / (100 - discountRate))
-        : price;
+      const costPrice = discountRate ? Math.floor((price * 100) / (100 - discountRate)) : price;
 
       /* product-list-container > thumbnailImage + product-detail-section */
-      const productListContainerEl = makeDOMwithProperties("div", {
-        className: "product-list-container",
-      });
-      const thumbnailImageEl = makeDOMwithProperties("img", {
-        alt: "썸네일 이미지",
-        src: thumbnail,
-      });
+      const productListContainerEl = makeDOMwithProperties("div", { className: "product-list-container" });
+      const thumbnailImageEl = makeDOMwithProperties("img", { alt: "썸네일 이미지", src: thumbnail });
 
       /* product-detail-section > product-text-container + product-button-section */
-      const productDetailSectionEl = makeDOMwithProperties("div", {
-        className: "product-detail-section",
-      });
+      const productDetailSectionEl = makeDOMwithProperties("div", { className: "product-detail-section" });
 
       /* product-text-container > product-title + product-price */
-      const productTextContainerEl = makeDOMwithProperties("div", {
-        className: "product-text-container",
-      });
+      const productTextContainerEl = makeDOMwithProperties("div", { className: "product-text-container" });
       // product-title
-      const productTitleEl = makeDOMwithProperties("div", {
-        className: "product-title",
-      });
-      const productLinkEl = makeDOMwithProperties("a", {
-        href: "javascript:void(0)",
-        className: "product-name",
-        textContent: title,
-      });
+      const productTitleEl = makeDOMwithProperties("div", { className: "product-title" });
+      const productLinkEl = makeDOMwithProperties("a", { href: "javascript:void(0)", className: "product-name", textContent: title });
       productTitleEl.append(productLinkEl);
       // product-price
-      const productPriceEl = makeDOMwithProperties("div", {
-        className: "product-price",
-      });
-      const productDiscountRateEl = makeDOMwithProperties("div", {
-        className: "product-discount-rate",
-      });
+      const productPriceEl = makeDOMwithProperties("div", { className: "product-price" });
+      const productDiscountRateEl = makeDOMwithProperties("div", { className: "product-discount-rate" });
       if (discountRate) {
         productDiscountRateEl.textContent = `${discountRate}%`;
       }
-      const productDiscountPriceEl = makeDOMwithProperties("div", {
-        className: "product-discount-price",
-        textContent: `${price.toLocaleString("ko-KR")}원`,
-      });
-      const productCostPriceEl = makeDOMwithProperties("div", {
-        className: "product-cost-price",
-        textContent: "",
-      });
-      productCostPriceEl.textContent = discountRate
-        ? `${costPrice.toLocaleString("ko-KR")}원`
-        : "";
-      productPriceEl.append(
-        productDiscountRateEl,
-        productDiscountPriceEl,
-        productCostPriceEl
-      );
+      const productDiscountPriceEl = makeDOMwithProperties("div", { className: "product-discount-price", textContent: `${price.toLocaleString("ko-KR")}원` });
+      const productCostPriceEl = makeDOMwithProperties("div", { className: "product-cost-price", textContent: "" });
+      productCostPriceEl.textContent = discountRate ? `${costPrice.toLocaleString("ko-KR")}원` : "";
+      productPriceEl.append(productDiscountRateEl, productDiscountPriceEl, productCostPriceEl);
 
       /* product-button-section > delete-button + take-button */
-      const productButtonSectionEl = makeDOMwithProperties("div", {
-        className: "product-button-section",
-      });
+      const productButtonSectionEl = makeDOMwithProperties("div", { className: "product-button-section" });
       productButtonSectionEl.dataset.id = id;
       // delete-button
-      const deleteButtonEl = makeDOMwithProperties("button", {
-        className: "delete-button",
-        textContent: "삭제",
-      });
+      const deleteButtonEl = makeDOMwithProperties("button", { className: "delete-button", textContent: "삭제" });
       deleteButtonEl.addEventListener("click", function () {
         const id = deleteButtonEl.closest(".product-button-section").dataset.id;
         const wishList = getLocalStorageData(WISH_LIST);
@@ -132,17 +72,11 @@ export function setLikePage(router) {
         });
         const loginId = JSON.parse(localStorage.getItem("loginInfo")).loginId;
         const userData = JSON.parse(localStorage.getItem(loginId));
-        localStorage.setItem(
-          loginId,
-          JSON.stringify({ ...userData, wish: filteredWishList })
-        );
+        localStorage.setItem(loginId, JSON.stringify({ ...userData, wishList: filteredWishList }));
         initPage();
       });
       // take-button
-      const takeButtonEl = makeDOMwithProperties("button", {
-        className: "take-button",
-        textContent: "담기",
-      });
+      const takeButtonEl = makeDOMwithProperties("button", { className: "take-button", textContent: "담기" });
       takeButtonEl.addEventListener("click", function () {
         const id = takeButtonEl.closest(".product-button-section").dataset.id;
         // 추가할 wish
@@ -160,10 +94,7 @@ export function setLikePage(router) {
 
       productTextContainerEl.append(productTitleEl, productPriceEl);
       productButtonSectionEl.append(deleteButtonEl, takeButtonEl);
-      productDetailSectionEl.append(
-        productTextContainerEl,
-        productButtonSectionEl
-      );
+      productDetailSectionEl.append(productTextContainerEl, productButtonSectionEl);
       productListContainerEl.append(thumbnailImageEl, productDetailSectionEl);
       fragmentEl.append(productListContainerEl);
     });
@@ -199,34 +130,13 @@ export function setLikePage(router) {
 
 function setMockData() {
   // 제품명, 가격, 수량, 썸네일이미지
-  const wish = [
-    {
-      id: "xr14ikmurlABzuizuDge",
-      title: "이토엔쟈스민티(500ml*24)",
-      price: 37950,
-      thumbnailImage: "/images/product/이토엔쟈스민티.png",
-    },
-    {
-      id: "sm9RXKb3hpHe3MfEZyjb",
-      title: "카프리썬 오렌지(200ml*10)",
-      price: 6050,
-      discountRate: 15,
-      thumbnailImage: "/images/product/카프리썬오렌지.png",
-    },
-    {
-      id: "sWpLAtpN52bmwkhqiq1S",
-      title: "파워오투 복숭아자몽(500ml*24)",
-      price: 35200,
-      thumbnailImage: "/images/product/파워오투복숭아자몽.png",
-    },
-    {
-      id: "sCTHoWGOEdROxEuiMb4v",
-      title: "오이오차녹차(525ml*24)",
-      price: 38060,
-      thumbnailImage: "/images/product/오이오차녹차.png",
-    },
+  const wishList = [
+    { id: "xr14ikmurlABzuizuDge", title: "이토엔쟈스민티(500ml*24)", price: 37950, thumbnailImage: "/images/product/이토엔쟈스민티.png" },
+    { id: "sm9RXKb3hpHe3MfEZyjb", title: "카프리썬 오렌지(200ml*10)", price: 6050, discountRate: 15, thumbnailImage: "/images/product/카프리썬오렌지.png" },
+    { id: "sWpLAtpN52bmwkhqiq1S", title: "파워오투 복숭아자몽(500ml*24)", price: 35200, thumbnailImage: "/images/product/파워오투복숭아자몽.png" },
+    { id: "sCTHoWGOEdROxEuiMb4v", title: "오이오차녹차(525ml*24)", price: 38060, thumbnailImage: "/images/product/오이오차녹차.png" },
   ];
   const loginId = JSON.parse(localStorage.getItem("loginInfo")).loginId;
   const userData = JSON.parse(localStorage.getItem(loginId));
-  localStorage.setItem(loginId, JSON.stringify({ ...userData, wish }));
+  localStorage.setItem(loginId, JSON.stringify({ ...userData, wishList }));
 }

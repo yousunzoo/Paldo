@@ -31,5 +31,5 @@ function showResult(searchResult, originResult, keyword, router) {
     "<span class="search-word">${keyword}</span>"에 대한 검색결과`;
   amount.textContent = searchResult.length;
   setSearchProductList(searchResult, "최신순", originResult, router);
-  changeTabs(searchResult, originResult);
+  changeTabs(searchResult, originResult, router);
 }

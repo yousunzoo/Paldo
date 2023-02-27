@@ -1,0 +1,111 @@
+// 변수
+/* Color styles */
+$color_product_tag: #999999;
+$color_black: #333333;
+$color_discount_rate: #fa622f;
+$color_original_price: #b5b5b5;
+$color_primary: #414141;
+$color_button_border: #dddddd;
+$color_incorrect: #f03f40;
+$color_white: #ffffff;
+$color_copyright: rgb(247, 247, 247);
+$color_banner_button: #fbcd57;
+
+#main {
+  .payment-wrapper {
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    border: 1px solid $color_button_border;
+    margin: 30px auto 0;
+    .icon img {
+      width: 60px;
+      padding-top: 30px;
+    }
+    .order-desc {
+      padding-top: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-weight: 500;
+      font-size: 18px;
+      padding-bottom: 40px;
+    }
+    .bar {
+      width: 460px;
+      border-top: 1px solid $color_button_border;
+      padding-top: 40px;
+    }
+    .pay-price {
+      width: 400px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 30px;
+      .title {
+        font-weight: 500;
+      }
+      .price {
+        font-size: 20px;
+        font-weight: 600;
+      }
+    }
+    .takeout {
+      width: 400px;
+      height: 80px;
+      background-color: #f6f2f1;
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 20px;
+      .desc {
+        padding: 20px 10px;
+        .first-desc {
+          font-weight: 600;
+          font-size: 16px;
+          color: #564a48;
+        }
+        .second-desc {
+          font-weight: 400;
+          font-size: 15px;
+          color: #786b68;
+        }
+      }
+      .logo img {
+        width: 80px;
+        padding-right: 20px;
+      }
+    }
+    .desc {
+      width: 430px;
+      font-size: 15px;
+      padding: 25px 0;
+      color: rgb(82, 82, 82);
+      p {
+        padding-bottom: 10px;
+      }
+    }
+    .order-button {
+      width: 430px;
+      height: 60px;
+      border: 1px solid $color_button_border;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .shop-button {
+      width: 430px;
+      height: 60px;
+      color: $color-white;
+      background-color: $color-primary;
+      margin-top: 20px;
+      box-sizing: border-box;
+      border: 1px solid $color_primary;
+      transition: 0.3s ease;
+      &:hover {
+        background-color: $color-white;
+        color: $color-primary;
+      }
+    }
+  }
+}

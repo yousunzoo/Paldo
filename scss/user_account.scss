@@ -7,15 +7,6 @@
   animation: spin 1s linear infinite;
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 #main {
   > .mypage-wrapper {
     /* MAIN SECTION */
@@ -115,7 +106,7 @@
                 }
               }
             }
-            .account-delete-btn {
+            .account-delete-button {
               background-color: $color_primary;
               padding: 6px 11px;
               border: 1px solid $color_primary;
@@ -138,7 +129,7 @@
             opacity: 1;
             visibility: visible;
           }
-          + .add-account-btn {
+          + .add-account-button {
             display: block;
             margin: 40px auto 0; // top : margin-collapse
             box-sizing: border-box;
@@ -245,7 +236,7 @@
                     }
                   }
                 }
-                .confirm-btn {
+                .confirm-button {
                   display: block;
                   width: 100px;
                   height: 40px;

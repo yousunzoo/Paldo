@@ -1,6 +1,6 @@
 export default /* html */ `
-    <!-- USER INFO -->
-    <section class="user-info">
+  <!-- USER INFO -->
+  <section class="user-info">
     <div class="inner-wrapper">
       <div class="info">
         <div class="wrapper">
@@ -53,7 +53,7 @@ export default /* html */ `
             <i class="bi bi-chevron-right"></i>
           </a>
         </li>
-        <li class="item">
+        <li class="item active">
           <a href="mypage/like" data-navigo>
             찜한 상품
             <i class="bi bi-chevron-right"></i>
@@ -77,24 +77,48 @@ export default /* html */ `
 
     <!-- MAIN SECTION -->
     <div class="likelist-wrapper">
-    <div class="main-head">
-            <h2 class="main-text">찜한상품(<span></span>)</h2>
-            <span class="text-side">찜한 상품은 최대 200개까지 저장됩니다.</span>
-          </div>
+      <div class="main-head">
+        <h2 class="main-text">찜한상품(<span></span>)</h2>
+        <span class="text-side">찜한 상품은 최대 200개까지 저장됩니다.</span>
+      </div>
 
-          <div class="likelist-container">
-            <!-- skeleton-loading -->
-            <div class="skeleton-loading">
-              <div class="skeleton"></div>
-              <div class="skeleton"></div>
-              <div class="skeleton"></div>
-              <div class="skeleton"></div>
-              <div class="skeleton"></div>
-            </div>
-            <div class="content">
+      <div class="likelist-container">
+        <!-- skeleton-loading -->
+        <div class="skeleton-loading">
+          <div class="skeleton"></div>
+          <div class="skeleton"></div>
+          <div class="skeleton"></div>
+          <div class="skeleton"></div>
+          <div class="skeleton"></div>
+        </div>
+        <div class="content">
+          <!-- <p class="no-list">찜한 상품이 없습니다.</p>
 
+          <div class="product-list-container">
+            <img alt="" src="https://img-cf.kurly.com/shop/data/goods/1648206780555l0.jpeg" />
+            <div class="product-detail-section">
+              <div class="product-text-container">
+                <div class="product-title">
+                  <a href="javascript:void(0)" class="product-name">[사미헌] 갈비탕</a>
+                </div>
+                <div class="product-price">
+                  <span class="product-discount-price">11,000원</span>
+                  <span class="product-cost-price">12,000원</span>
+                </div>
+              </div>
+              <div class="product-button-section">
+                <button class="delete-button">삭제</button>
+                <button class="take-button">
+                  <img
+                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzYiIGhlaWdodD0iMzYiIHZpZXdCb3g9IjAgMCAzNiAzNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTTM2IDM2SDBWMGgzNnoiLz4KICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1LjE2NCA2LjU0NykiIHN0cm9rZT0iIzVmMDA4MCIgc3Ryb2tlLWxpbmVjYXA9InNxdWFyZSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjciPgogICAgICAgICAgICA8cGF0aCBkPSJtMjUuNjggMy42Ni0yLjcyIDExLjU3SDcuMzdMNC42NiAzLjY2eiIvPgogICAgICAgICAgICA8Y2lyY2xlIGN4PSIyMC41MiIgY3k9IjIwLjc4IiByPSIyLjE0Ii8+CiAgICAgICAgICAgIDxjaXJjbGUgY3g9IjkuODEiIGN5PSIyMC43OCIgcj0iMi4xNCIvPgogICAgICAgICAgICA8cGF0aCBkPSJNMCAwaDMuOGwxLjc2IDcuNSIvPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+Cg=="
+                    alt="장바구니 담기" />
+                  담기
+                </button>
+              </div>
             </div>
-          </div>
+          </div> -->
+        </div>
+      </div>
     </div>
   </div>
 `;
