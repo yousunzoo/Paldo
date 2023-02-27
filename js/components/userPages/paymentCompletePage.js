@@ -1,5 +1,4 @@
-export default 
-/* html */`
+export default /* html */ `
   <div class="payment-wrapper">
     <div class="icon">
       <img src="${require("../../../static/images/pay-check.png")}" alt="결제완료" />
@@ -35,4 +34,4 @@ export default
       <button class="shop-button">쇼핑 계속하기</button>
     </a>
   </div>
-`
+`;

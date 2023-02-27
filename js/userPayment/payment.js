@@ -1,4 +1,3 @@
-// import { checkAuthorization } from '../api/checkAuthorization'
 import { SORT_TYPES, getLocalStorageData } from "../localStorage/getLocalStorageData";
 import getUserAccounts from "../api/getUserAccounts";
 import requestTransaction from "../api/requestTransaction";
@@ -6,7 +5,7 @@ import getOrderList from "../api/getOrderList";
 import cancelTransaction from "../api/cancelTransaction";
 import { analyzeOrderList } from "../userOrderList/orderList";
 
-export function setPaymentPage(router) {
+export async function setPaymentPage(router) {
   /* GLOBAL VARIABLES */
   const { USER_INFO, USER_ADDRESS, COUPONS, CART_LIST } = SORT_TYPES;
   const payInfo = {
@@ -15,7 +14,6 @@ export function setPaymentPage(router) {
     saledAmount: 0,
     totalAmount: 0,
   };
-  let username;
   const paymentList = JSON.parse(localStorage.getItem("paymentList"));
 
   /* DOM */
@@ -40,37 +38,32 @@ export function setPaymentPage(router) {
     const accountId = accountEl.children["accountId"].dataset.accountId;
 
     // 계좌 잔액보다 결제금액이 클 때
-    try {
-      const accountList = await getUserAccounts();
-      const targetAccount = accountList.find((account) => account.id === accountId);
-      if (targetAccount.balance < payInfo.totalAmount) {
-        Swal.fire({
-          icon: "error",
-          title: "잔액이 부족합니다.",
-          text: err.message,
-        });
-        return;
-      }
-    } catch (err) {
+    const res = await getUserAccounts();
+    if (!res) return;
+    const accountList = res.accounts;
+    const targetAccount = accountList.find((account) => account.id === accountId);
+    if (targetAccount.balance < payInfo.totalAmount) {
       Swal.fire({
         icon: "error",
-        title: "계좌 정보를 불러오는데 실패했습니다.",
+        title: "잔액이 부족합니다.",
         text: err.message,
       });
+      return;
     }
 
     // productId, Quantity Get !
     const requests = paymentList.reduce((acc, product) => {
       const { id: productId, quantity } = product;
+      // console.log(productId);
       for (let i = 0; i < quantity; i++) {
         acc.push(requestTransaction({ productId, accountId }));
       }
       return acc;
     }, []);
-    console.log(requests);
 
     Promise.allSettled(requests)
       .then(async (results) => {
+        console.log(results);
         const isFailed = results.some((result) => result.status === "rejected");
         if (isFailed) {
           // 실패한 요청이 있을 경우
@@ -90,39 +83,13 @@ export function setPaymentPage(router) {
           const userData = JSON.parse(localStorage.getItem(loginId));
           localStorage.setItem(loginId, JSON.stringify({ ...userData, cartList: newCartList }));
 
-          // localStorage paymentList 비우기
-          localStorage.setItem("paymentList", JSON.stringify([]));
-
           // 결제 완료 페이지로 이동
-          router.navigate(`/paymentComplete?totalPrice=${payInfo.totalAmount}&displayName=${username}`);
+          router.navigate("/paymentComplete");
         }
       })
       .catch((error) => {
         console.log(error);
       });
-
-    // Promise.all(requests)
-    // .then((result) => {
-    //   // 결제 처리 성공
-
-    //   // localStorage cartList에서 결제 진행된 상품 제거
-    //   const cartList = getLocalStorageData(CART_LIST);
-    //   const newCartList = cartList.filter(cart => !paymentList.some(payment => cart.id === payment.id));
-
-    //   const loginId = JSON.parse(localStorage.getItem('loginInfo')).loginId;
-    //   const userData = JSON.parse(localStorage.getItem(loginId))
-    //   localStorage.setItem(loginId, JSON.stringify({...userData, cartList: newCartList}))
-
-    //   // localStorage paymentList 비우기
-    //   localStorage.setItem('paymentList', JSON.stringify([]))
-
-    //   // 결제 완료 페이지로 이동
-    //   router.navigate(`/paymentCompleted?totalPrice=${payInfo.totalAmount}&displayName=${username}`)
-    // })
-    // .catch((err) => {
-    //   // 결제 처리 실패
-    //   console.error(err)
-    // })
   });
 
   initPage();
@@ -304,16 +271,10 @@ export function setPaymentPage(router) {
     totalAmountInButtonEl.textContent = payInfo.totalAmount.toLocaleString("ko-KR");
   }
   async function renderUserAccount() {
-    try {
-      const accountList = await getUserAccounts();
-      accountList.length === 0 ? renderEmptyList() : renderAccountList(accountList);
-    } catch (err) {
-      Swal.fire({
-        icon: "error",
-        title: "계좌 정보를 불러오는데 실패했습니다.",
-        text: err.message,
-      });
-    }
+    const res = await getUserAccounts();
+    if (!res) return;
+    const accountList = res.accounts;
+    accountList.length === 0 ? renderEmptyList() : renderAccountList(accountList);
   }
   function renderCouponList() {
     const coupons = getLocalStorageData(COUPONS);
