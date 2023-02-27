@@ -1,0 +1,48 @@
+@font-face {
+  font-family: "VitroCore";
+  font-weight: normal;
+  font-style: normal;
+  src: url("https://cdn.jsdelivr.net/gh/webfontworld/vitro/VitroCore.eot");
+  src: url("https://cdn.jsdelivr.net/gh/webfontworld/vitro/VitroCore.eot?#iefix") format("embedded-opentype"), url("https://cdn.jsdelivr.net/gh/webfontworld/vitro/VitroCore.woff2") format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/webfontworld/vitro/VitroCore.woff") format("woff"), url("https://cdn.jsdelivr.net/gh/webfontworld/vitro/VitroCore.ttf") format("truetype");
+  font-display: swap;
+}
+$color_primary: #414141;
+.not-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "VitroCore";
+  color: $color_primary;
+  .top-wrapper {
+    font-size: 100px;
+    font-weight: 600;
+    padding: 30px 0;
+  }
+  .bottom-wrapper {
+    display: flex;
+    .left-wrapper {
+      img {
+        width: 560px;
+        height: 560px;
+        margin: -7px;
+      }
+    }
+    .right-wrapper {
+      align-self: flex-end;
+      padding-left: 20px;
+      padding-bottom: 30px;
+      .number {
+        font-size: 200px;
+        font-weight: 00;
+      }
+      .desc {
+        font-size: 40px;
+        font-weight: 700;
+      }
+    }
+  }
+}
+#userWrapper #main {
+  padding-bottom: 0;
+}

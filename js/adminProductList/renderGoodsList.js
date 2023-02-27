@@ -14,6 +14,7 @@ export const renderGoodsList = async (router, itemListData, no) => {
       className: "info item-check",
     });
     const inputCheck = makeDOMwithProperties("input", {
+      className: "check-box",
       type: "checkbox",
     });
     const itemNo = makeDOMwithProperties("div", {
@@ -50,33 +51,22 @@ export const renderGoodsList = async (router, itemListData, no) => {
     itemName.textContent = item.title;
     itemImg.src = item.thumbnail;
     itemCategory.textContent = item.tags;
-    itemPrice.textContent = item.price;
+    itemPrice.textContent = item.price.toLocaleString();
     itemSale.textContent = item.discountRate;
     itemOutstock.textContent = soldOutcheck;
     itemCheck.append(inputCheck);
     itemThum.append(itemImg);
 
-    itemEl.append(
-      itemCheck,
-      itemNo,
-      itemId,
-      itemThum,
-      itemName,
-      itemCategory,
-      itemPrice,
-      itemSale,
-      itemOutstock
-    );
-    itemEl.addEventListener("click", function (event) {
+    itemEl.append(itemCheck, itemNo, itemId, itemThum, itemName, itemCategory, itemPrice, itemSale, itemOutstock);
+    itemEl.addEventListener("click", (event) => {
       if (event.target === inputCheck) {
-        console.log(event.target);
         return;
       }
       event.preventDefault();
       if (event.target === itemCheck) {
         return;
       } else {
-        let targetID = this.getAttribute("href");
+        let targetID = itemEl.getAttribute("href");
         router.navigate(targetID);
       }
     });

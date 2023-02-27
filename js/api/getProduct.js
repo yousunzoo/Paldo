@@ -1,6 +1,4 @@
-import { headers } from "./headers";
-
-const url = "https://asia-northeast3-heropy-api.cloudfunctions.net/api/products";
+import { headers, url } from "./headers";
 
 export const memoizedGetProduct = (() => {
   let product;
@@ -14,13 +12,16 @@ export const memoizedGetProduct = (() => {
 
 export const getProduct = async () => {
   try {
-    const res = await fetch(url, {
+    const res = await fetch(`${url}products`, {
       method: "GET",
       headers,
     });
     const json = await res.json();
     return json;
   } catch (error) {
-    console.error(error);
+    Swal.fire({
+      icon: "error",
+      text: "요청이 실패했습니다!",
+    });
   }
 };

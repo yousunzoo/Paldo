@@ -14,9 +14,7 @@ export const renderEditDetailPage = async (id, router) => {
   const cost = document.querySelector(".sale-cost");
   const toggleButtons = document.getElementsByName("soldout");
   inputName.value = productInfo.title;
-  inputPrice.value = parseInt(
-    productInfo.price * (1 - productInfo.discountRate / 100)
-  );
+  inputPrice.value = parseInt(productInfo.price * (1 - productInfo.discountRate / 100));
   inputTag.value = productInfo.tags;
   thumbnailImg.src = productInfo.thumbnail;
   detailIng.src = productInfo.photo;
@@ -27,20 +25,20 @@ export const renderEditDetailPage = async (id, router) => {
   const backButton = document.querySelector(".back-button");
   backButton.addEventListener("click", function (event) {
     event.preventDefault();
-    router.navigate(`admin/product/${id}`);
+    router.navigate(`/product/${id}`);
   });
 
   // 수정버튼
   const editButton = document.querySelector(".edit-button");
-  editButton.addEventListener("click", () => {
+  editButton.addEventListener("click", (event) => {
     try {
       editDataInfoSend(editProduct, id);
+      setTimeout(() => {
+        event.preventDefault();
+        router.navigate(`/product/${id}`);
+      }, 2000);
     } catch {
-      Swal.fire(
-        "수정할 수 없습니다.",
-        "상품 정보를 다시 확인해주세요.",
-        "question"
-      );
+      Swal.fire("수정할 수 없습니다.", "상품 정보를 다시 확인해주세요.", "question");
     }
   });
 
@@ -65,9 +63,7 @@ export const renderEditDetailPage = async (id, router) => {
   toggleButtons.forEach((toggleButton) => {
     toggleButton.addEventListener("click", () => {
       // Get the value of the selected radio button
-      const selectedValue = document.querySelector(
-        'input[name="soldout"]:checked'
-      ).value;
+      document.querySelector('input[name="soldout"]:checked').value;
     });
   });
 

@@ -41,7 +41,7 @@ export default /* html */ `
     <aside class="side-bar">
       <h2>마이페이지</h2>
       <ul class="menu">
-        <li class="item">
+        <li class="item active">
           <a href="mypage/orderList" data-navigo>
             주문 내역
             <i class="bi bi-chevron-right"></i>
@@ -77,26 +77,25 @@ export default /* html */ `
 
     <!-- MAIN SECTION -->
     <div class="order-list-wrapper">
-    <div class="header">
-    <div class="wrapper">
-      <h2>주문 내역</h2>
-      <p>최대 지난 3년간의 주문 내역까지 확인할 수 있어요</p>
-    </div>
-    <input type="text" id="myDatepicker" placeholder="날짜 선택" />
-  </div>
-  <div class="divider"></div>
-  <ul class="order-list">
-    <div class="skeleton-loading">
-      <div class="skeleton"></div>
-      <div class="skeleton"></div>
-      <div class="skeleton"></div>
-      <div class="skeleton"></div>
-      <div class="skeleton"></div>
-    </div>
+      <div class="header">
+        <div class="wrapper">
+          <h2>주문 내역</h2>
+          <p>최대 지난 3년간의 주문 내역까지 확인할 수 있어요</p>
+        </div>
+        <input type="text" id="myDatepicker" placeholder="날짜 선택" />
+      </div>
+      <div class="divider"></div>
+      <ul class="order-list">
+        <div class="skeleton-loading">
+          <div class="skeleton"></div>
+          <div class="skeleton"></div>
+          <div class="skeleton"></div>
+          <div class="skeleton"></div>
+          <div class="skeleton"></div>
+        </div>
 
-    <div class="content"></div>
-  </ul>
-
+        <div class="content"></div>
+      </ul>
     </div>
   </div>
 

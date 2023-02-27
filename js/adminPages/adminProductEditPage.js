@@ -46,12 +46,12 @@ export default /* HTML*/ `
 		        </div>
           </div>
         </div>
-        <div class="form-item last-item">
+        <div class="form-item last-item skeleton-loading">
           <div class="thumbnail-wrapper">
             <label for="thumbnail-title">썸네일 등록</label>
             <div class="thumbnail-info-wrapper">
               <input id="thumbnail" type="file" class="goods-thumbnail" />
-              <img class="thumbnail-img thumbnail" src="" />
+              <img class="thumbnail-img thumbnail" require('no-img.jpg') />
             </div>
           </div>
           <div class="right-bar"></div>
@@ -59,8 +59,7 @@ export default /* HTML*/ `
             <label for="detail">상세이미지 등록</label>
             <div class="thumbnail-info-wrapper">
               <input id="detail" type="file" class="goods-detail" />
-              <img class="thumbnail-img detail" src="" />
-            </div>
+              <img class="thumbnail-img detail" require('no-img.jpg') />
           </div>
         </div>
       </fieldset>

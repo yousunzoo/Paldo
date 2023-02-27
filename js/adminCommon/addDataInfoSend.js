@@ -26,7 +26,6 @@ export const addDataInfoSend = (callback, id) => {
     const detailInput = document.querySelector(".goods-detail");
     const detailFile = detailInput.files[0];
     const detailReader = new FileReader();
-    console.log(addGoods);
     detailReader.addEventListener("load", () => {
       addGoods.photoBase64 = detailReader.result;
       Promise.all([thumbnailReader.result, detailReader.result])

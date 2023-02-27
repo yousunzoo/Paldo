@@ -6,23 +6,17 @@ let cartList = [];
 let paymentList = [];
 
 export default async function setCartPage(router) {
-  // 로그인 되었는지 확인
-  const isLogined = await checkAuthorization();
-  if (!isLogined) {
-    Swal.fire({
-      title: "로그인하셔야 본 기능을 이용하실 수 있습니다.",
-    }).then(() => {
-      router.navigate("/login");
-    });
-
-    return;
-  }
+  cartList = [];
+  paymentList = [];
 
   let cartListData = getLocalStorageData("cartList");
   let paymentListData = getLocalStorageData("paymentList");
   cartList = [...cartListData];
   paymentList = [...paymentListData];
   const cartListArea = document.querySelector(".product-list");
+
+  let loginedId = getLocalStorageData("loginId");
+  let loginedIdData = getLocalStorageData("loginIdData");
 
   cartListArea.innerHTML = "";
 
