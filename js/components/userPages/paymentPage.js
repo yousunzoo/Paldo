@@ -1,5 +1,4 @@
-export default 
-/* html */`
+export default /* html */ `
   <div class="inner-wrapper order-sheet-wrapper">
     <h2>주문서</h2>
 
@@ -245,4 +244,4 @@ export default
       </button>
     </div>
   </div>
-`
+`;

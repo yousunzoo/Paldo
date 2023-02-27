@@ -2,7 +2,7 @@ export function swiperAction() {
   const mainbanner = document.querySelector(".main-banner .swiper");
   const prdList1 = document.querySelector(".prd-list1 .swiper");
   const prdList2 = document.querySelector(".prd-list2 .swiper");
-  const accountListEl = document.querySelector('.account-list.swiper');
+  const accountListEl = document.querySelector(".account-list.swiper");
 
   new Swiper(mainbanner, {
     slidesPerView: 1,
@@ -35,16 +35,16 @@ export function swiperAction() {
     },
   });
 
-  new Swiper( accountListEl, {
+  new Swiper(accountListEl, {
     slidesPerView: 1,
-    rewind:true,
+    rewind: true,
     pagination: {
-      el: '.swiper-pagination',
+      el: ".swiper-pagination",
     },
     navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    }
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
   });
 }
 
