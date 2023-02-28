@@ -60,7 +60,7 @@ export async function setLikePage() {
       const productDiscountPriceEl = makeDOMwithProperties("div", { className: "product-discount-price", textContent: `${price.toLocaleString("ko-KR")}원` });
       const productCostPriceEl = makeDOMwithProperties("div", { className: "product-cost-price", textContent: "" });
       productCostPriceEl.textContent = discountRate ? `${costPrice.toLocaleString("ko-KR")}원` : "";
-      productPriceEl.append(productDiscountRateEl, productDiscountPriceEl, productCostPriceEl);
+      discountRate ? productPriceEl.append(productDiscountRateEl, productDiscountPriceEl, productCostPriceEl) : productPriceEl.append(productDiscountPriceEl, productCostPriceEl);
 
       /* product-button-section > delete-button + take-button */
       const productButtonSectionEl = makeDOMwithProperties("div", { className: "product-button-section" });
