@@ -54,17 +54,19 @@ export async function setPaymentPage(router) {
       return;
     }
 
-    // productId, Quantity Get !
-    const requests = paymentList.reduce((acc, product) => {
-      const { id: productId, quantity } = product;
+    // 거래 요청 api 전송
+    let requests = [];
+    for (const payment of paymentList) {
+      const { id: productId, quantity } = payment;
       for (let i = 0; i < quantity; i++) {
-        acc.push(requestTransaction({ productId, accountId }));
+        const transactionResult = await requestTransaction({ productId, accountId });
+        requests.push(transactionResult);
       }
-      return acc;
-    }, []);
+    }
 
     Promise.allSettled(requests)
       .then(async (results) => {
+        console.log(results);
         const isFailed = results.some((result) => result.status === "rejected");
         if (isFailed) {
           // 실패한 요청이 있을 경우
