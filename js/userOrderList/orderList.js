@@ -223,10 +223,11 @@ function onClickCancelButton(event) {
       try {
         // 주문 취소 요청 API 전송
         const transactionIds = JSON.parse(buttonsEl.dataset.id);
-        const results = transactionIds.map(async (transactionId) => {
-          const res = await cancelTransaction({ detailId: transactionId });
-          return res;
-        });
+        const results = [];
+        for (let transactionId of transactionIds) {
+          const result = await cancelTransaction({ detailId: transactionId });
+          results.push(result);
+        }
         Promise.allSettled(results).then((results) => {
           if (!results.find((result) => result.value === false)) {
             // 삭제 요청 성공 시
