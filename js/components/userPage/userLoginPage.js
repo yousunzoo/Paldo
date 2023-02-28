@@ -15,8 +15,8 @@ export default /* html */ `
               type="password"
               placeholder="패스워드를 입력해주세요"
               required />
-            <button class="login-btn">로그인</button>
-            <a class="signup-btn" href="/signup" data-navigo>회원가입</a>
+            <button class="login-button">로그인</button>
+            <a class="signup-button" href="/signup" data-navigo>회원가입</a>
           </fieldset>
         </form>
       </div>`;

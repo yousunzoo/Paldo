@@ -3,7 +3,7 @@ import addCart from "../utils/addCart";
 import { makeDOMwithProperties } from "../utils/dom";
 import moveToDetail from "../utils/movetoProductDetail";
 
-export default function setRecommendList(prdList, data, router) {
+export default function setRecommendList(productList, data, router) {
   data = data.splice(0, 4);
   const recommendLis = data.map((item) => {
     const recommendLi = makeDOMwithProperties("li", {
@@ -16,13 +16,13 @@ export default function setRecommendList(prdList, data, router) {
         src="${item.thumbnail}"
         alt="${item.title}" />
     </div>
-    <div class="product-info">
+    <div class="product-information">
       <p class="product-name">${item.title}</p>
       <p class="product-price">
         <span class="sales-price">${item.price.toLocaleString()}</span>원
       </p>
     </div></a>
-    <button class="add-cart-btn"></button>
+    <button class="add-cart-button"></button>
   `;
     // 해당 li 클릭하면 상품 페이지로 이동
     recommendLi.querySelector("a").addEventListener("click", function (event) {
@@ -36,6 +36,6 @@ export default function setRecommendList(prdList, data, router) {
     });
     return recommendLi;
   });
-  prdList.innerHTML = "";
-  prdList.append(...recommendLis);
+  productList.innerHTML = "";
+  productList.append(...recommendLis);
 }

@@ -1,15 +1,3 @@
-@import "colors";
-
-// spinner loading
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 /* MAIN SECTION */
 #main {
   .order-sheet-wrapper {
@@ -304,7 +292,7 @@
           .content {
             flex: 1 1 0%;
             .payment {
-              background-color: $color-primary;
+              background-color: $color_primary;
               color: #fff !important;
               display: block;
               line-height: 44px !important;
@@ -380,18 +368,18 @@
               .swiper-pagination {
                 bottom: 15px;
                 span {
-                  background-color: $color-primary;
+                  background-color: $color_primary;
                 }
               }
               .swiper-button-prev::after {
                 font-size: 16px;
-                color: $color-primary;
+                color: $color_primary;
                 opacity: 0;
                 transition: opacity 0.2s ease;
               }
               .swiper-button-next::after {
                 font-size: 16px;
-                color: $color-primary;
+                color: $color_primary;
                 opacity: 0;
                 transition: opacity 0.2s ease;
               }
@@ -455,7 +443,7 @@
       .area-right {
         width: 284px;
         .area-amount {
-          position: sticky;
+          margin: 60px 0 20px;
           .wrapper {
             display: flex;
             justify-content: space-between;
@@ -604,9 +592,9 @@
         content: "※";
       }
     }
-    .pay-btn-area {
+    .pay-button-area {
       text-align: center;
-      button {
+      .pay-button {
         box-sizing: border-box;
         display: block;
         position: relative;
@@ -630,7 +618,7 @@
           box-sizing: border-box;
           border: 1px solid $color_primary;
           background-color: #fff;
-          color: $color-primary;
+          color: $color_primary;
         }
         .spinner-wrapper {
           position: absolute;

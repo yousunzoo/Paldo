@@ -1,10 +1,9 @@
 #userWrapper {
   #main {
-    border-bottom: 1px solid #f7f7f7;
-    padding-bottom: 170px;
-    .inner-wrapper {
+    .inner-signup-wrapper {
       width: 1050px;
       margin: 0 auto;
+      padding-bottom: 100px;
       .signup-form {
         width: 640px;
         margin: 0 auto;
@@ -91,7 +90,7 @@
                 margin-top: 10px;
                 width: 150px;
                 height: 150px;
-                border: 1px solid $color_btn_border;
+                border: 1px solid $color_button_border;
                 img {
                   width: 100%;
                   height: 100%;
@@ -125,10 +124,10 @@
                     font-weight: normal;
                     transition: 0.3s ease;
                     &:hover {
-                      border: 1px solid $color-primary;
+                      border: 1px solid $color_primary;
                       box-sizing: border-box;
-                      background-color: $color-white;
-                      color: $color-primary;
+                      background-color: $color_white;
+                      color: $color_primary;
                     }
                   }
                 }
@@ -155,10 +154,10 @@
             border: 1px solid transparent;
           }
           .register-push:hover {
-            border: 1px solid $color-primary;
+            border: 1px solid $color_primary;
             box-sizing: border-box;
-            background-color: $color-white;
-            color: $color-primary;
+            background-color: $color_white;
+            color: $color_primary;
           }
         }
       }

@@ -71,7 +71,7 @@ export default /* html */ `
                 </div>
                 <div class="payment-area">
                   <button class="payment-button" disabled>
-                    <span class="push-btn-txt">상품을 선택해주세요</span>
+                    <span class="push-button-txt">상품을 선택해주세요</span>
                   </button>
                   <ul class="description">
                     <li class="description-option">

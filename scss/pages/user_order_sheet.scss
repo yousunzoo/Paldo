@@ -1,26 +1,3 @@
-// 변수
-/* Color styles */
-$color_product_tag: #999999;
-$color_black: #333333;
-$color_discount_rate: #fa622f;
-$color_original_price: #b5b5b5;
-$color_primary: #414141;
-$color_button_border: rgb(221, 221, 221);
-$color_incorrect: #f03f40;
-$color_white: #ffffff;
-$color_copyright: rgb(247, 247, 247);
-
-// spinner loading
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* MAIN SECTION */
 #main {
   .order-sheet-wrapper {
     h2 {
@@ -314,7 +291,7 @@ $color_copyright: rgb(247, 247, 247);
           .content {
             flex: 1 1 0%;
             .payment {
-              background-color: $color-primary;
+              background-color: $color_primary;
               color: #fff !important;
               display: block;
               line-height: 44px !important;
@@ -390,18 +367,18 @@ $color_copyright: rgb(247, 247, 247);
               .swiper-pagination {
                 bottom: 15px;
                 span {
-                  background-color: $color-primary;
+                  background-color: $color_primary;
                 }
               }
               .swiper-button-prev::after {
                 font-size: 16px;
-                color: $color-primary;
+                color: $color_primary;
                 opacity: 0;
                 transition: opacity 0.2s ease;
               }
               .swiper-button-next::after {
                 font-size: 16px;
-                color: $color-primary;
+                color: $color_primary;
                 opacity: 0;
                 transition: opacity 0.2s ease;
               }
@@ -465,7 +442,7 @@ $color_copyright: rgb(247, 247, 247);
       .area-right {
         width: 284px;
         .area-amount {
-          margin: 60px 0 20px;
+          position: sticky;
           .wrapper {
             display: flex;
             justify-content: space-between;
@@ -614,9 +591,9 @@ $color_copyright: rgb(247, 247, 247);
         content: "※";
       }
     }
-    .pay-button-area {
+    .pay-btn-area {
       text-align: center;
-      .pay-button {
+      button {
         box-sizing: border-box;
         display: block;
         position: relative;
@@ -640,7 +617,7 @@ $color_copyright: rgb(247, 247, 247);
           box-sizing: border-box;
           border: 1px solid $color_primary;
           background-color: #fff;
-          color: $color-primary;
+          color: $color_primary;
         }
         .spinner-wrapper {
           position: absolute;

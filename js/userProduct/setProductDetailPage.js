@@ -6,57 +6,55 @@ import addCart from "../utils/addCart";
 import toggleCountButton from "./toggleCountButton";
 
 export async function setProductDetailPage(id, router) {
-  const productInfo = await getDetailProduct(id);
+  const productInformation = await getDetailProduct(id);
   // 상품이 품절 상태일 때 품절 div 띄우기
-  if (productInfo.isSoldOut) {
+  if (productInformation.isSoldOut) {
     const soldOutDiv = document.querySelector(".sold-out");
     soldOutDiv.style.display = "flex";
   }
   // 상품 정보 뿌리기
   const title = document.querySelector(".product-title");
-  title.textContent = productInfo.title;
+  title.textContent = productInformation.title;
 
   const thumbnail = document.querySelector(".thumbnail img");
-  thumbnail.src = productInfo.thumbnail;
-  thumbnail.alt = productInfo.title;
+  thumbnail.src = productInformation.thumbnail;
+  thumbnail.alt = productInformation.title;
 
   const price = document.querySelector(".product-price .price-num");
-  price.textContent = productInfo.price.toLocaleString();
+  price.textContent = productInformation.price.toLocaleString();
 
   const productDetail = document.querySelector(".detail-img img");
-  productDetail.src = productInfo.photo;
+  productDetail.src = productInformation.photo;
   thumbnail.alt = "상품 상세정보";
 
   const discountRate = document.querySelector(".discount-rate");
   const originPrice = document.querySelector(".origin-price");
-  if (productInfo.discountRate) {
-    discountRate.querySelector("span").textContent = productInfo.discountRate;
-    originPrice.querySelector("span").textContent = parseInt(
-      (productInfo.price * 100) / (100 - productInfo.discountRate)
-    ).toLocaleString();
+  if (productInformation.discountRate) {
+    discountRate.querySelector("span").textContent = productInformation.discountRate;
+    originPrice.querySelector("span").textContent = parseInt((productInformation.price * 100) / (100 - productInformation.discountRate)).toLocaleString();
   } else {
     discountRate.innerHTML = "";
     originPrice.innerHTML = "";
   }
 
-  // btn-wrapper padding-top 조절
-  const btnWrapper = document.querySelector(".btn-wrapper");
-  if (productInfo.discountRate != 0) {
-    btnWrapper.style.paddingTop = "145px";
+  // button-wrapper padding-top 조절
+  const buttonWrapper = document.querySelector(".button-wrapper");
+  if (productInformation.discountRate != 0) {
+    buttonWrapper.style.paddingTop = "145px";
   }
   const totalPrice = document.querySelector(".total-num");
-  totalPrice.textContent = productInfo.price.toLocaleString();
+  totalPrice.textContent = productInformation.price.toLocaleString();
 
   // 로그인한 상태이면 로그인해야 이용가능 텍스트 안보이게
   // 로그인한 상태이면 찜목록에 해당 제품 있는지 확인
-  const wishButton = document.querySelector(".wish-btn");
+  const wishButton = document.querySelector(".wish-button");
   const isLogined = await checkAuthorization();
   const loginText = document.querySelector(".product-login-text");
   if (isLogined) {
     loginText.style.display = "none";
     let wishList = getLocalStorageData("wishList");
     if (!wishList) wishList = [];
-    const isWished = wishList.find((item) => item.id === productInfo.id);
+    const isWished = wishList.find((item) => item.id === productInformation.id);
     if (isWished) {
       wishButton.classList.add("active");
     }
@@ -65,7 +63,7 @@ export async function setProductDetailPage(id, router) {
   }
 
   // 수량 조절 기능
-  toggleCountButton(productInfo.price);
+  toggleCountButton(productInformation.price);
 
   // 찜하기 버튼 토글 기능
   wishButton.addEventListener("click", () => {
@@ -88,15 +86,15 @@ export async function setProductDetailPage(id, router) {
     }
     if (hasClass) {
       wishButton.classList.remove("active");
-      wishList = wishList.filter((item) => item.id != productInfo.id);
+      wishList = wishList.filter((item) => item.id != productInformation.id);
     } else {
       wishButton.classList.add("active");
       wishList.push({
-        id: productInfo.id,
-        title: productInfo.title,
-        thumbnail: productInfo.thumbnail,
-        discountRate: productInfo.discountRate,
-        price: productInfo.price,
+        id: productInformation.id,
+        title: productInformation.title,
+        thumbnail: productInformation.thumbnail,
+        discountRate: productInformation.discountRate,
+        price: productInformation.price,
       });
     }
     loginedIdData.wishList = wishList;
@@ -104,13 +102,11 @@ export async function setProductDetailPage(id, router) {
   });
 
   // 장바구니에 담기 기능
-  const cartButton = document.querySelector(".cart-btn");
+  const cartButton = document.querySelector(".cart-button");
   cartButton.addEventListener("click", async () => {
-    const quantity = document.querySelector(
-      ".product-quantity .count"
-    ).textContent;
+    const quantity = document.querySelector(".product-quantity .count").textContent;
 
-    addCart(productInfo, quantity, router);
+    addCart(productInformation, quantity, router);
   });
 
   // 세팅되면 스피너 사라지도록
