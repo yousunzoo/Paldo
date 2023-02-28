@@ -38,17 +38,17 @@ export default /* html */ `
       <h3>주문자 정보</h3>
     </div>
     <div class="orderer-area">
-      <div class="info">
-        <span class="info-title">보내는 분</span>
+      <div class="information">
+        <span class="information-title">보내는 분</span>
         <div class="content-wrapper">
           <span class="content sender"></span>
         </div>
       </div>
-      <div class="info">
-        <span class="info-title">이메일</span>
+      <div class="information">
+        <span class="information-title">이메일</span>
         <div class="content-wrapper">
           <span class="content email"></span>
-          <div class="additional-info">
+          <div class="additional-information">
             <p>이메일을 통해 주문처리과정을 보내드립니다.</p>
             <p>정보 변경은 마이페이지 > 개인정보 수정 메뉴에서 가능합니다.</p>
           </div>
@@ -58,7 +58,7 @@ export default /* html */ `
 
     <div class="order-category">
       <h3>배송 정보</h3>
-      <div class="delivery-info-tab">
+      <div class="delivery-information-tab">
         <button class="delivery-notice">배송지 변경 안내</button>
         <div class="delivery-notice-message">
           <p>개인정보 수정에서<br />배송지를 변경할 수 있어요</p>
@@ -69,7 +69,7 @@ export default /* html */ `
 
     <div class="delivery-area">
       <div class="destination-wrapper">
-        <span class="info-title">배송지</span>
+        <span class="information-title">배송지</span>
         <div class="content">
           <span class="badge">기본배송지</span>
           <p class="destination"></p>
@@ -83,7 +83,7 @@ export default /* html */ `
           <h3>쿠폰 / 적립금</h3>
         </div>
         <div class="coupon-area">
-          <span class="info-title">쿠폰 적용</span>
+          <span class="information-title">쿠폰 적용</span>
           <div class="coupon-selector-wrapper" id="toggleCouponList">
             <button class="coupon-selector">
               <span></span>
@@ -109,7 +109,7 @@ export default /* html */ `
           </div>
         </div>
         <div class="accumulated-cash-area">
-          <span class="info-title">적립금 적용</span>
+          <span class="information-title">적립금 적용</span>
           <div class="wrapper">
             <div>
               <div class="accumulated-cash">0</div>
@@ -121,7 +121,7 @@ export default /* html */ `
           <h3>결제 수단</h3>
         </div>
         <div class="payment-area">
-          <div class="info-title">결제 수단 선택</div>
+          <div class="information-title">결제 수단 선택</div>
           <div class="content">
             <div class="payment">계좌 간편 결제</div>
             <div class="no-list">
@@ -135,21 +135,21 @@ export default /* html */ `
               <div class="swiper-wrapper">
                 <!-- Slides -->
                 <!-- <div class="swiper-slide">
-                  <div class="account-info">
+                  <div class="account-information">
                     <h4 id="bankName">NH농협은행</h4>
                     <p id="accountNumber">123-XXXX-XXXX-XX</p>
                     <span id="balance">3,000,000</span>
                   </div>
                 </div>
                 <div class="swiper-slide">
-                  <div class="account-info">
+                  <div class="account-information">
                     <h4 id="bankName">하나은행</h4>
                     <p id="accountNumber">123-XXXX-XXXX-XX</p>
                     <span id="balance">3,000,000</span>
                   </div>
                 </div>
                 <div class="swiper-slide">
-                  <div class="account-info">
+                  <div class="account-information">
                     <h4 id="bankName">카카오뱅크</h4>
                     <p id="accountNumber">123-XXXX-XXXX-XX</p>
                     <span id="balance">3,000,000</span>
@@ -221,7 +221,7 @@ export default /* html */ `
               </div>
             </li>
             <li>
-              <div class="info">
+              <div class="information">
                 <span class="badge">적립</span>
                 구매 시 50원(0.1%)
               </div>

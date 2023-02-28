@@ -1,33 +1,33 @@
 export default /* html */ `
-  <!-- USER INFO -->
-  <section class="user-info">
+  <!-- USER information -->
+  <section class="user-information">
     <div class="inner-wrapper">
-      <div class="info">
+      <div class="information">
         <div class="wrapper">
           <div class="profile-image"></div>
           <div class="title" id="displayName"></div>
         </div>
         <p class="sub-link"><a href="/mypage/modify" data-navigo>프로필 사진 변경하러 가기</a></p>
       </div>
-      <div class="info">
+      <div class="information">
         <a class="title" href="javascript:void(0)">
           <span>적립금</span>
           <p class="content">0 p</p>
         </a>
-        <p class="sub-info">※ 100,000 포인트 <br /> 이상부터 사용 가능합니다.</p>
+        <p class="sub-information">※ 100,000 포인트 <br /> 이상부터 사용 가능합니다.</p>
       </div>
-      <div class="info">
+      <div class="information">
         <a class="title" href="/coupon" data-navigo>
           <span>쿠폰</span>
           <p class="content" id="couponAmount"></p>
         </a>
-        <p class="sub-info">※ 팔도, 삼양 제품에 한해 쿠폰을 사용할 수 있습니다.</p>
+        <p class="sub-information">※ 팔도, 삼양 제품에 한해 쿠폰을 사용할 수 있습니다.</p>
       </div>
-      <div class="info">
+      <div class="information">
         <a class="title" href="/mypage/modify" data-navigo>
           <span>회원 정보 수정</span>
         </a>
-        <p class="sub-info">※ 마이페이지>개인정보 <br />수정에서 변경 가능합니다.</p>
+        <p class="sub-information">※ 마이페이지>개인정보 <br />수정에서 변경 가능합니다.</p>
       </div>
       <a class="banner" href="javascript:void(0)">
         <div class="banner-image"></div>

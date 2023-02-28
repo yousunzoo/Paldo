@@ -1,6 +1,6 @@
 export const SORT_TYPES = {
   ACCESS_TOKEN: "accessToken",
-  USER_INFO: "userInfo",
+  USER_INFORMATION: "userInfo",
   USER_ADDRESS: "userAddress",
   CART_LIST: "cartList",
   COUPONS: "coupons",

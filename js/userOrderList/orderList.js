@@ -1,3 +1,4 @@
+import { checkAuthorization } from "../api/checkAuthorization";
 import getOrderList from "../api/getOrderList";
 import cancelTransaction from "../api/cancelTransaction";
 import confirmTransaction from "../api/confirmTransaction";
@@ -5,6 +6,8 @@ import { makeDOMwithProperties } from "../utils/dom";
 
 /* FUNCTIONS */
 export async function setOrderListPage() {
+  const isLogin = await checkAuthorization();
+  if (!isLogin) return;
   // flatPickr
   flatpickr("#myDatepicker", {
     dateFormat: "Y-m-d", // set the date format
@@ -41,7 +44,6 @@ export async function setOrderListPage() {
 
     // 거래 내역이 있을 때
     const analyzedData = analyzeOrderList(data);
-    console.log(analyzedData);
 
     // ul 요소 생성
     const orderListUls = createOrderListUls(analyzedData);
@@ -89,14 +91,14 @@ export function analyzeOrderList(orderlist) {
   const newGroupsArray = [];
   groupsArray.forEach((group) => {
     // group 내부의 거래 건수를 분석
-    const parsedObj = group.reduce((acc, transaction) => {
-      if (acc[transaction.product.productId]) {
+    const parsedObj = group.reduce((accumulator, transaction) => {
+      if (accumulator[transaction.product.productId]) {
         // 동일한 productId가 존재하면, detailId를 추가하고, quantity를 1 더해준다.
-        acc[transaction.product.productId].detailId.push(transaction.detailId);
-        acc[transaction.product.productId].quantity += 1;
+        accumulator[transaction.product.productId].detailId.push(transaction.detailId);
+        accumulator[transaction.product.productId].quantity += 1;
       } else {
         // 새로운 productId라면, 새롭게 data를 추가.
-        acc[transaction.product.productId] = {
+        accumulator[transaction.product.productId] = {
           detailId: [transaction.detailId],
           done: transaction.done,
           isCanceled: transaction.isCanceled,
@@ -105,7 +107,7 @@ export function analyzeOrderList(orderlist) {
           quantity: 1,
         };
       }
-      return acc;
+      return accumulator;
     }, {});
     const newGroup = Object.values(parsedObj);
     newGroupsArray.push(newGroup);
@@ -115,10 +117,10 @@ export function analyzeOrderList(orderlist) {
 function createOrderListUls(groups) {
   return groups.map((group, index) => {
     // 총 상품 금액
-    const totalPrice = group.reduce((acc, transaction) => {
+    const totalPrice = group.reduce((accumulator, transaction) => {
       const { product, quantity } = transaction;
-      acc += product.price * quantity;
-      return acc;
+      accumulator += product.price * quantity;
+      return accumulator;
     }, 0);
 
     // timePaid 한국 시간으로 변환
@@ -128,7 +130,7 @@ function createOrderListUls(groups) {
     const orderListUl = makeDOMwithProperties("div", { className: "list-group" });
     orderListUl.innerHTML = /* html */ `
       <div class='list-title' id=${index}>
-        <div class='title-info'>
+        <div class='title-information'>
           <span class='transaction-date'>${time} 결제</span>
           <span class='transaction-name'>${group[0].product.title} 포함 총 ${group.length}건</span>
           <span class='transaction-price'>${totalPrice.toLocaleString("ko-KR")}원</span>
@@ -163,9 +165,9 @@ function createOrderListLis(group) {
     const liEl = makeDOMwithProperties("li", { className: "item" });
     liEl.innerHTML = /* html */ `
       <div class='order-area'>
-        <div class='info'>
+        <div class='information'>
           <img class='thumbnail' src=${product.thumbnail} alt='감자깡' height='60px' />
-          <div class='info-list'>
+          <div class='information-list'>
             <dl>
               <dt>상품명</dt>
               <dd id='name'>${product.title}</dd>
@@ -184,7 +186,7 @@ function createOrderListLis(group) {
             </dl>
           </div>
         </div>
-        <div class='side-info'>
+        <div class='side-information'>
           <span>상품 준비중</span>
           <div class='buttons' data-id=${JSON.stringify(detailId)}>
             <button class='order-cancel-button ${done ? "inactive" : ""}' ${done ? "disabled" : ""}>주문 취소</button>
@@ -221,10 +223,11 @@ function onClickCancelButton(event) {
       try {
         // 주문 취소 요청 API 전송
         const transactionIds = JSON.parse(buttonsEl.dataset.id);
-        const results = transactionIds.map(async (transactionId) => {
-          const res = await cancelTransaction({ detailId: transactionId });
-          return res;
-        });
+        const results = [];
+        for (let transactionId of transactionIds) {
+          const result = await cancelTransaction({ detailId: transactionId });
+          results.push(result);
+        }
         Promise.allSettled(results).then((results) => {
           if (!results.find((result) => result.value === false)) {
             // 삭제 요청 성공 시
