@@ -277,17 +277,18 @@ body {
         width: 50%;
         .team-name {
           display: flex;
-          padding-bottom: 20px;
+          padding-bottom: 30px;
           img {
-            width: 100px;
-            height: 100px;
+            width: 150px;
+            height: 150px;
             margin-right: 20px;
           }
           .team-name-description {
-            padding-top: 20px;
+            padding-top: 34px;
             .team-title-area {
               display: flex;
               align-items: center;
+              padding-bottom: 10px;
               .team-title {
                 background-color: $color_primary;
                 padding: 3px 10px;
@@ -307,13 +308,14 @@ body {
           .github-link {
             font-size: 12px;
             display: block;
-            padding-top: 6px;
+            padding-bottom: 8px;
+            line-height: 1.4;
           }
         }
         .team-members {
           display: flex;
           flex-wrap: wrap;
-          @for $i from 1 through 5 {
+          @for $i from 1 through 4 {
             .team-member:nth-child(#{$i}) {
               .profile-thumbnail {
                 background-image: url("../static/images/member_0#{$i}.png");
@@ -349,7 +351,7 @@ body {
                   border-radius: 4px;
                   padding: 2px 4px;
                   text-align: center;
-                  line-height: 18px;
+                  line-height: 20px;
                 }
                 .member-name {
                   font-size: 16px;

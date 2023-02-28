@@ -25,8 +25,16 @@ export const productPageButton = (router) => {
   const inputbuttonEl = document.querySelector(".search");
   const inputEl = document.querySelector(".search-productname");
   inputEl.addEventListener("keyup", async (event) => {
+<<<<<<< HEAD
     if (timer) {
       clearTimeout(timer);
+=======
+    if (event.isComposing) return;
+    if (event.key === "Enter") {
+      const listEls = await memoizedGetProduct();
+      const filterRes = productFilterList(listEls, inputEl.value);
+      productPagination(filterRes, router);
+>>>>>>> 2985f12b8f12799eb309e28c0bf86e86531ed6db
     }
     timer = setTimeout(async function () {
       if (event.isComposing) return;

@@ -1,36 +1,53 @@
 import { headers, url } from "./headers";
 import { SORT_TYPES, getLocalStorageData } from "../localStorage/getLocalStorageData";
 
-const { ACCESS_TOKEN, USER_DATA } = SORT_TYPES;
+const { ACCESS_TOKEN } = SORT_TYPES;
 
-export async function requestPersonalInfoModify(newData, userAddress) {
+export async function requestPersonalInfoModify(newData) {
   const accessToken = getLocalStorageData(ACCESS_TOKEN);
-  await fetch(`${url}auth/user`, {
-    method: "PUT",
-    headers: {
-      ...headers,
-      Authorization: `Bearer ${accessToken}`,
-    },
-    body: JSON.stringify(newData),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(response.status);
-      }
-      return response.json();
-    })
-    .then((result) => {
-      Swal.fire("수정 성공!", "개인 정보가 수정되었습니다.", "success");
-      // localStorage 세팅
-      const userData = getLocalStorageData(USER_DATA);
-      localStorage.setItem(result.email, JSON.stringify({ ...userData, userInfo: result, userAddress }));
-    })
-    .catch((error) => {
-      if (error == "Error: 401") {
-        Swal.fire({
-          icon: "error",
-          text: "요청이 실패했습니다!",
-        });
-      }
+  try {
+    const res = await fetch(`${url}auth/user`, {
+      method: "PUT",
+      headers: {
+        ...headers,
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(newData),
     });
+    if (!res.ok) {
+      const errorMessage = await res.json();
+      switch (res.status) {
+        case 400:
+          Swal.fire({
+            icon: "error",
+            title: errorMessage,
+          });
+          break;
+        case 401:
+          Swal.fire({
+            icon: "error",
+            title: errorMessage,
+            text: "재로그인 후 다시 시도해주세요.",
+          });
+          break;
+        default:
+          Swal.fire({
+            icon: "error",
+            title: "Oops..",
+            text: "알 수 없는 오류가 발생했습니다.",
+          });
+      }
+      return false;
+    }
+    const json = await res.json();
+    return json;
+  } catch (error) {
+    console.error(error);
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "일시적인 네트워크 오류가 발생했습니다.",
+    });
+    return false;
+  }
 }

@@ -34,7 +34,7 @@ import setSidebarStyle from "./userSidebar/setSidebarStyle.js";
 import { setOrderListPage } from "./userOrderList/orderList.js";
 import { setAccountPage } from "./account/account.js";
 import { setLikePage } from "./userLike/like.js";
-import { setModifyPage } from "./userPersonalInfoModify/personalInfoModify.js";
+import { setModifyPage } from "./userModify/personalInfoModify.js";
 import { setPaymentPage } from "./userPayment/payment.js";
 import setPaymentCompletePage from "./userPaymentComplete/paymentComplete.js";
 import { setProfile } from "./userProfile/profile.js";
