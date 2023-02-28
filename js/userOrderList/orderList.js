@@ -44,7 +44,6 @@ export async function setOrderListPage() {
 
     // 거래 내역이 있을 때
     const analyzedData = analyzeOrderList(data);
-    console.log(analyzedData);
 
     // ul 요소 생성
     const orderListUls = createOrderListUls(analyzedData);

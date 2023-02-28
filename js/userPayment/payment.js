@@ -57,7 +57,6 @@ export async function setPaymentPage(router) {
     // productId, Quantity Get !
     const requests = paymentList.reduce((acc, product) => {
       const { id: productId, quantity } = product;
-      // console.log(productId);
       for (let i = 0; i < quantity; i++) {
         acc.push(requestTransaction({ productId, accountId }));
       }
@@ -66,7 +65,6 @@ export async function setPaymentPage(router) {
 
     Promise.allSettled(requests)
       .then(async (results) => {
-        console.log(results);
         const isFailed = results.some((result) => result.status === "rejected");
         if (isFailed) {
           // 실패한 요청이 있을 경우
