@@ -54,15 +54,12 @@
                 padding: 0 20px;
                 outline: none;
                 box-sizing: border-box;
-                border: 1px solid #eaeaea;
+                border: 1px solid $color_input_border;
                 margin-bottom: 4px;
                 &#userThumbnail {
                   border: none;
                   padding: 0;
                   padding-top: 10px;
-                }
-                &#email {
-                  background-color: #ededed;
                 }
               }
               .error-message {

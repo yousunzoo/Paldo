@@ -4,7 +4,7 @@
     width: 100%;
     padding: 50px 0px;
     margin-bottom: -20px;
-    background-color: rgb(247, 247, 247);
+    background-color: $color_profile_bg;
     > .inner-wrapper {
       position: relative;
       display: flex;
@@ -53,14 +53,14 @@
         .sub-link {
           line-height: 20px;
           margin-top: 20px;
-          color: #969696;
+          color: $color_sub_information;
           text-decoration: underline;
         }
         .sub-info {
           font-size: 15px;
           line-height: 20px;
           margin-top: 30px;
-          color: #b1b1b1;
+          color: $color_sub_information;
         }
       }
       .banner {
@@ -88,7 +88,6 @@
     /* SIDE BAR */
     .side-bar {
       width: 200px;
-      // background-color: wheat;
       h2 {
         padding: 5px 0px 35px 1px;
         font-weight: 500;
@@ -98,15 +97,14 @@
         letter-spacing: -1px;
       }
       .menu {
-        border: 1px solid rgb(242, 242, 242);
+        border: 1px solid $color_sidebar_border;
         .item {
-          color: rgb(102, 102, 102);
           &:active {
-            background-color: $bg_sidebar;
+            background-color: $color_sidebar_bg;
             color: $color_black;
           }
           &:hover {
-            background-color: $bg_sidebar;
+            background-color: $color_sidebar_bg;
           }
           a {
             display: flex;
@@ -121,7 +119,7 @@
           }
         }
         > .active {
-          background-color: $bg_sidebar;
+          background-color: $color_sidebar_bg;
         }
       }
       > a {
@@ -132,7 +130,7 @@
         justify-content: space-between;
         align-items: center;
         border-radius: 0px 100px 100px 0px;
-        background-color: $bg_sidebar;
+        background-color: $color_sidebar_bg;
         line-height: 20px;
 
         div {
