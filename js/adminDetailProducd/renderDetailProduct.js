@@ -1,6 +1,5 @@
-import { deleteProduct } from "../api/deleteProduct";
 import { getDetailProduct } from "../api/getDetailProduct";
-
+import { deleteProduct } from "../api/deleteProduct";
 export const renderDetailPage = async (id, router) => {
   const productInfo = await getDetailProduct(id);
   const productList = document.querySelector(".all-wrapper");

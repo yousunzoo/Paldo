@@ -1,4 +1,4 @@
-import { makeDOMwithProperties } from "../utils/dom.js";
+import { makeDOMwithProperties } from "../../utils/dom.js";
 export const renderTransactionsList = async (router, itemListData, no) => {
   const transactionList = document.querySelector(".transaction-list");
   if (no === undefined) {

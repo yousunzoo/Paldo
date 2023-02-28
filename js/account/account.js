@@ -1,7 +1,11 @@
 // import { checkAuthorization } from '../api/checkAuthorization.js';
-import { getBankList, connectBankAccount, getUserAccounts, deleteAccount } from "./accountApi.js";
 import { makeDOMwithProperties } from "../utils/dom.js";
-
+import {
+  getBankList,
+  connectBankAccount,
+  getUserAccounts,
+  deleteAccount,
+} from "../api/getBankList.js";
 /* GLOBAL LOGIC */
 
 // ;(async function () {

@@ -48,7 +48,7 @@
       box-sizing: border-box;
       .bar {
         margin: 0 20px;
-        border: 0.25px solid #dadce0;
+        border: 1px solid #dadce0;
       }
       .product-info {
         display: flex;
@@ -60,7 +60,7 @@
             margin-left: 40px;
             width: 500px;
             height: 500px;
-            border: 0.1px solid rgb(184, 184, 184);
+            border: 1px solid rgb(184, 184, 184);
           }
           .product-info-text {
             padding: 40px;
@@ -87,7 +87,7 @@
         .product-thumbnail {
           border-radius: 10px;
           height: 249px;
-          background: linear-gradient(120deg, #e5e5e5 30%, #f0f0f0 38%, #f0f0f0 40%, #e5e5e5 48%);
+          background: $color_gradient;
           background-size: 200% 100%;
           background-position: 100% 0;
           animation: blinker 1s linear infinite;
@@ -104,7 +104,7 @@
           width: 500px;
           height: 50px;
           border-radius: 10px;
-          background: linear-gradient(120deg, #e5e5e5 30%, #f0f0f0 38%, #f0f0f0 40%, #e5e5e5 48%);
+          background: $color_gradient;
           background-size: 200% 100%;
           background-position: 100% 0;
           animation: blinker 1s linear infinite;
@@ -114,7 +114,7 @@
           height: 500px;
           display: flex;
           border-radius: 10px;
-          background: linear-gradient(120deg, #e5e5e5 30%, #f0f0f0 38%, #f0f0f0 40%, #e5e5e5 48%);
+          background: $color_gradient;
           background-size: 200% 100%;
           background-position: 100%;
           animation: blinker 1s linear infinite;

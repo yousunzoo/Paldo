@@ -32,7 +32,7 @@ import setCartPage from "./userCart/setCartPage.js";
 import setProductList from "./userMain/setProductList.js";
 import setSidebarStyle from "./userSidebar/setSidebarStyle.js";
 import { setOrderListPage } from "./userOrderList/orderList.js";
-import { setAccountPage } from "./userAccount/account.js";
+import { setAccountPage } from "./account/account.js";
 import { setLikePage } from "./userLike/like.js";
 import { setModifyPage } from "./userPersonalInfoModify/personalInfoModify.js";
 import { setPaymentPage } from "./userPayment/payment.js";

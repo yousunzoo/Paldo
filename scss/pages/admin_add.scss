@@ -1,5 +1,3 @@
-@import "colors";
-
 .admin-product-wrapper {
   width: 1085px;
   height: 100%;
@@ -82,7 +80,7 @@
       .sale-cost {
         width: 100px;
         height: 30px;
-        border: 1px solid $color_btn_border;
+        border: 1px solid $color-button-border;
         background-color: $color_input_background;
         box-sizing: border-box;
         padding-left: 10px;

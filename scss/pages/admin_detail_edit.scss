@@ -41,7 +41,7 @@
 
   .bar {
     margin: 0 20px;
-    border: 1px solid rgb(184, 184, 184);
+    border: 1px solid $color_quantity_button;
   }
   .form-wrapper {
     input[type="text"] {
@@ -56,7 +56,7 @@
       height: 70px;
       display: flex;
       align-items: center;
-      border-bottom: 1px solid rgb(184, 184, 184);
+      border-bottom: 1px solid $color_quantity_button;
       margin: 0 20px;
       label {
         display: flex;
@@ -71,28 +71,28 @@
       .product-tag {
         width: 500px;
         height: 30px;
-        border: 1px solid #dfdfdf;
-        background-color: #f3f3f4;
+        border: 1px solid $color_input_border;
+        background-color: $color_input_background;
       }
 
       .product-price {
         width: 100px;
         height: 30px;
-        border: 1px solid #dfdfdf;
-        background-color: #f3f3f4;
+        border: 1px solid $color_input_border;
+        background-color: $color_input_background;
       }
       .price-desc,
       .sale-desc {
         width: 30px;
         height: 30px;
-        border: 1px solid #dfdfdf;
+        border: 1px solid $color_input_border;
         border-left: none;
-        background-color: #f3f3f4;
+        background-color: $color_input_background;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 14px;
-        color: rgb(63, 63, 63);
+        color: #3f3f3f;
         box-sizing: border-box;
       }
       .sale-cost-title {
@@ -102,8 +102,8 @@
       .sale-cost {
         width: 100px;
         height: 30px;
-        border: 1px solid #dfdfdf;
-        background-color: #f3f3f4;
+        border: 1px solid $color_input_border;
+        background-color: $color_input_background;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -115,20 +115,20 @@
       }
       .desc {
         font-size: 14px;
-        color: rgb(154, 13, 13);
+        color: #9a0d0d;
         padding-left: 20px;
       }
       .product-sale {
         width: 100px;
         height: 30px;
-        border: 1px solid #dfdfdf;
-        background-color: #f3f3f4;
+        border: 1px solid $color_input_border;
+        background-color: $color_input_background;
       }
       .product-cost input[type="file"]::file-selector-button {
         width: 150px;
         height: 30px;
-        background-color: #f3f3f4;
-        border: 1px solid #dfdfdf;
+        background-color: $color_input_background;
+        border: 1px solid $color_input_border;
         cursor: pointer;
         &:hover {
           background: rgb(77, 77, 77);
@@ -139,7 +139,7 @@
         display: inline-block;
         width: 200px;
         height: 200px;
-        border: 1px solid rgb(184, 184, 184);
+        border: 1px solid $color_quantity_button;
         object-fit: contain;
       }
       .soldout-toggle {
@@ -154,7 +154,7 @@
           width: 120px;
           display: flex;
           align-items: center;
-          border: 1px solid rgb(184, 184, 184);
+          border: 1px solid $color_quantity_button;
           label {
             display: flex;
             justify-content: center;
@@ -188,7 +188,7 @@
         display: flex;
         height: 200px;
         margin-top: 80px;
-        border-right: 1px solid rgb(184, 184, 184);
+        border-right: 1px solid $color_quantity_button;
       }
 
       .thumbnail-wrapper,

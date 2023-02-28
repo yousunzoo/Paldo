@@ -3,18 +3,21 @@
   font-weight: normal;
   font-style: normal;
   src: url("https://cdn.jsdelivr.net/gh/webfontworld/vitro/VitroCore.eot");
-  src: url("https://cdn.jsdelivr.net/gh/webfontworld/vitro/VitroCore.eot?#iefix") format("embedded-opentype"), url("https://cdn.jsdelivr.net/gh/webfontworld/vitro/VitroCore.woff2") format("woff2"),
-    url("https://cdn.jsdelivr.net/gh/webfontworld/vitro/VitroCore.woff") format("woff"), url("https://cdn.jsdelivr.net/gh/webfontworld/vitro/VitroCore.ttf") format("truetype");
+  src: url("https://cdn.jsdelivr.net/gh/webfontworld/vitro/VitroCore.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://cdn.jsdelivr.net/gh/webfontworld/vitro/VitroCore.woff2") format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/webfontworld/vitro/VitroCore.woff") format("woff"),
+    url("https://cdn.jsdelivr.net/gh/webfontworld/vitro/VitroCore.ttf") format("truetype");
   font-display: swap;
 }
-$color_primary: #414141;
+$color_primary: $color_primary;
 .not-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   font-family: "VitroCore";
   color: $color_primary;
-  margin-bottom: -170px;
+  margin-bottom: -39px;
   .top-wrapper {
     font-size: 100px;
     font-weight: 600;

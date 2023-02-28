@@ -25,7 +25,7 @@
         .button-soldout {
           width: 80px;
           height: 20px;
-          border: 1px solid #b5b5b5;
+          border: 1px solid $color_quantity_button;
           padding: 10px;
           margin-right: 20px;
         }
@@ -45,7 +45,7 @@
           li {
             width: 100px;
             height: 40px;
-            border: 1px solid #b5b5b5;
+            border: 1px solid $color_quantity_button;
             background-color: $color_white;
             display: flex;
             justify-content: center;
@@ -67,7 +67,7 @@
           width: 260px;
           height: 40px;
           font-size: 14px;
-          border: 1px solid #b5b5b5;
+          border: 1px solid $color_quantity_button;
           padding-left: 10px;
           margin-right: 10px;
         }
@@ -103,13 +103,13 @@
         align-items: center;
         line-height: 12px;
         padding: 5px;
-        border-top: 2px solid #cdcdcd;
-        border-bottom: 2px solid #cdcdcd;
-        border-right: 1px solid #e7e6e6;
+        border-top: 2px solid $color_product_tag;
+        border-bottom: 2px solid $color_product_tag;
+        border-right: 1px solid $color_border_line;
       }
       .all-check {
         width: 40px;
-        border-left: 1px solid #e7e6e6;
+        border-left: 1px solid $color_border_line;
       }
       .item-no {
         width: 30px;
@@ -151,13 +151,13 @@
           align-items: center;
           line-height: 12px;
           padding: 5px;
-          border-bottom: 1px solid #e7e6e6;
-          border-right: 1px solid #e7e6e6;
+          border-bottom: 1px solid $color_border_line;
+          border-right: 1px solid $color_border_line;
           flex-basis: 1;
         }
         .item-check {
           width: 40px;
-          border-left: 1px solid #e7e6e6;
+          border-left: 1px solid $color_border_line;
         }
         .item-no {
           width: 30px;
@@ -218,7 +218,7 @@
       .prev,
       .next {
         width: 50px;
-        background-color: #414141;
+        background-color: $color_primary;
         color: $color_white;
         font-size: 14px;
         text-align: center;

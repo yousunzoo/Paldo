@@ -1,16 +1,33 @@
-import { makeDOMwithProperties } from "../utils/dom";
-import getUserAccounts from "../api/getUserAccounts";
-import connectBankAccount from "../api/connectBankAccount";
-import getBankList from "../api/getBankList";
-import deleteAccount from "../api/deleteAccount";
+// import { checkAuthorization } from '../api/checkAuthorization.js';
+import {
+  getBankList,
+  connectBankAccount,
+  getUserAccounts,
+  deleteAccount,
+} from "./accountApi.js.js.js.js";
+import { makeDOMwithProperties } from "../utils/dom.js";
 
 /* GLOBAL LOGIC */
 
-export async function setAccountPage() {
-  // 페이지 초기화
+// ;(async function () {
+//   const isValidUser = await checkAuthorization();
+//   if(isValidUser) {
+//     initPage();
+//   } else {
+//     Swal.fire({
+//       icon: 'error',
+//       title: '사용자 세션이 만료되었습니다.',
+//       text: '로그인 페이지로 이동합니다.',
+//     })
+//     // 로그인 페이지로 redirect
+//     // location.assign('로그인 페이지 경로')
+//   }
+// })()
+
+export function setAccountPage() {
   initPage();
 
-  const modalTrigger = document.querySelector(".add-account-button");
+  const modalTrigger = document.querySelector(".add-account-btn");
   modalTrigger.addEventListener("click", async () => {
     const modalSpinnerEl = document.querySelector(".modal-spinner");
     Object.assign(modalSpinnerEl.style, {
@@ -19,7 +36,6 @@ export async function setAccountPage() {
 
     // 계좌 목록 조회 API !
     let bankList = await getBankList();
-    if (!bankList) return;
 
     // DOM 생성 !
     const templateEl = createBankList(bankList);
@@ -41,7 +57,9 @@ export async function setAccountPage() {
 
     // MODAL FUNCTIONS
     function createBankList(bankList) {
-      bankList = bankList.filter((bank) => bank.name !== "케이뱅크"); // 케이뱅크는 목록에서 제외합니다.
+      bankList = bankList.filter((bank) => {
+        return bank.name !== "케이뱅크"; // 케이뱅크는 목록에서 제외합니다.
+      });
 
       const templateEl = document.createElement("template");
       bankList.forEach((bank) => {
@@ -65,8 +83,8 @@ export async function setAccountPage() {
       if (event.target.matches('input[type="radio"]')) {
         const str = event.target.labels[0].innerText;
         const matches = str.match(/\d+/g) || [];
-        totalDigits = matches.reduce((acc, digit) => {
-          return acc + Number(digit);
+        totalDigits = matches.reduce((acc, cur) => {
+          return acc + Number(cur);
         }, 0);
       }
     }
@@ -93,35 +111,48 @@ export async function setAccountPage() {
 
       const submitData = { bankCode, accountNumber, phoneNumber, signature: true };
       // 계좌 연결 API
-      const res = await connectBankAccount(submitData);
-      if (!res) return;
-      // 연결 요청 성공 시
-      Swal.fire("연결 성공!", "계좌가 성공적으로 연결되었습니다.", "success");
+      try {
+        const res = await connectBankAccount(submitData);
+        if (typeof res !== "string") {
+          // 연결 요청 성공 시
+          Swal.fire("연결 성공!", "계좌가 성공적으로 연결되었습니다.", "success");
 
-      //리렌더링
-      initPage();
+          //리렌더링
+          initPage();
 
-      // 모달창 닫기
-      const modalEl = document.querySelector('input[type="checkbox"]#modal');
-      modalEl.checked = false;
+          // 모달창 닫기
+          const modalEl = document.querySelector('input[type="checkbox"]#modal');
+          modalEl.checked = false;
 
-      // 내부에서 사용한 이벤트 핸들러 제거
-      ulEl.removeEventListener("change", getTotalAccountDigits);
-      accountFormEl.removeEventListener("submit", submitAccountForm);
+          // 내부에서 사용한 이벤트 핸들러 제거
+          ulEl.removeEventListener("change", getTotalAccountDigits);
+          accountFormEl.removeEventListener("submit", submitAccountForm);
+        } else {
+          // 연결 요청 실패 시
+          throw new Error("계좌 연결에 실패했습니다."); // 에러 처리 고도화 필요
+        }
+      } catch (err) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: err.message,
+        });
+        console.error(err);
+      }
     }
   });
+
   // FUNCTIONS
   async function initPage() {
     // 사용자 계좌 목록 조회
-    const result = await getUserAccounts();
-    if (!result) return;
-    const accountList = result.accounts;
+    const accountList = await getUserAccounts();
 
     accountList.length === 0 ? renderEmptyList() : renderAccountList(accountList);
 
     const skeletonLoadingEl = document.querySelector(".skeleton-loading");
     skeletonLoadingEl.classList.add("d-none");
   }
+
   function createAccountList(accountList) {
     const fragmentEl = document.createDocumentFragment();
     accountList.forEach((account) => {
@@ -130,13 +161,25 @@ export async function setAccountPage() {
 
       const liEl = makeDOMwithProperties("li", { className: "item" });
       const accountInfoEl = makeDOMwithProperties("div", { className: "account-info" });
-      const accountBankEl = makeDOMwithProperties("span", { id: "accountBank", innerText: bankName });
-      const accountNumberEl = makeDOMwithProperties("span", { id: "accountNumber", innerText: accountNumber });
-      const accountBalanceEl = makeDOMwithProperties("span", { id: "accountBalance", innerText: formattedBalance });
+      const accountBankEl = makeDOMwithProperties("span", {
+        id: "accountBank",
+        innerText: bankName,
+      });
+      const accountNumberEl = makeDOMwithProperties("span", {
+        id: "accountNumber",
+        innerText: accountNumber,
+      });
+      const accountBalanceEl = makeDOMwithProperties("span", {
+        id: "accountBalance",
+        innerText: formattedBalance,
+      });
 
-      const buttonEl = makeDOMwithProperties("button", { className: "account-delete-button", innerText: "삭제" });
-      buttonEl.dataset.accountId = id; // 버튼에 해당 계좌 id를 dataset로 저장
-      buttonEl.addEventListener("click", (event) => {
+      const btnEl = makeDOMwithProperties("button", {
+        className: "account-delete-btn",
+        innerText: "삭제",
+      });
+      btnEl.dataset.accountId = id; // 버튼에 해당 계좌 id를 dataset로 저장
+      btnEl.addEventListener("click", (event) => {
         Swal.fire({
           title: "정말로 삭제하겠습니까 ?",
           text: "삭제한 계좌는 재연결해도 잔액이 반영되지 않습니다.(기본 금액으로 추가됩니다)",
@@ -149,27 +192,37 @@ export async function setAccountPage() {
         }).then(async (result) => {
           if (result.isConfirmed) {
             const body = { accountId: event.target.dataset.accountId, signature: true };
-
-            // 삭제 요청 API 전송
-            const res = await deleteAccount(body);
-            if (!res) return;
-            // 삭제 요청 성공 시
-            Swal.fire("삭제 성공!", "계좌가 성공적으로 삭제되었습니다.", "success");
-            // 리렌더링
-            const result = await getUserAccounts();
-            if (!result) return;
-            const accountList = result.accounts;
-            if (accountList.length === 0) {
-              renderEmptyList();
-            } else {
-              renderAccountList(accountList);
+            try {
+              // 삭제 요청 API 전송
+              const res = await deleteAccount(body);
+              if (res) {
+                // 삭제 요청 성공 시
+                Swal.fire("삭제 성공!", "계좌가 성공적으로 삭제되었습니다.", "success");
+                // 리렌더링
+                const accountList = await getUserAccounts();
+                if (accountList.length === 0) {
+                  renderEmptyList();
+                } else {
+                  renderAccountList(accountList);
+                }
+              } else {
+                throw new Error("계좌 삭제에 실패했습니다.");
+              }
+            } catch (err) {
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: err.message,
+              });
+              console.error(err);
+              return;
             }
           }
         });
       });
 
       accountInfoEl.append(accountBankEl, accountNumberEl, accountBalanceEl);
-      liEl.append(accountInfoEl, buttonEl);
+      liEl.append(accountInfoEl, btnEl);
       fragmentEl.append(liEl);
     });
     return fragmentEl;
@@ -182,7 +235,7 @@ export async function setAccountPage() {
           <span id="accountNumber">123-XXXX-XXXX-XX</span>
           <span id="accountBalance">3,000,000</span>
         </div>
-        <button class="account-delete-button">삭제</button>
+        <button class="account-delete-btn">삭제</button>
       </li>
     `;
   }

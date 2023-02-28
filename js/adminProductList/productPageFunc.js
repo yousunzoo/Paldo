@@ -9,7 +9,9 @@ export const productPageButton = (router) => {
 
   const toggleClass = (button, list) => {
     button.addEventListener("click", () => {
-      list.classList.contains("active") ? list.classList.remove("active") : list.classList.add("active");
+      list.classList.contains("active")
+        ? list.classList.remove("active")
+        : list.classList.add("active");
     });
     button.addEventListener("focusout", () => {
       list.classList.remove("active");

@@ -77,7 +77,9 @@ export async function setPaymentPage(router) {
           // 모든 요청이 성공
           // localStorage cartList에서 결제 진행된 상품 제거
           const cartList = getLocalStorageData(CART_LIST);
-          const newCartList = cartList.filter((cart) => !paymentList.some((payment) => cart.id === payment.id));
+          const newCartList = cartList.filter(
+            (cart) => !paymentList.some((payment) => cart.id === payment.id)
+          );
 
           const loginId = JSON.parse(localStorage.getItem("loginInfo")).loginId;
           const userData = JSON.parse(localStorage.getItem(loginId));
@@ -140,7 +142,9 @@ export async function setPaymentPage(router) {
         paymentList.forEach((product) => {
           const { title, price, quantity, thumbnail, discountRate } = product;
           // 할인율이 있는 상품은 원가를 계산한 값을 originPrice 변수에 담아 화면에 같이 렌더링
-          const originPrice = discountRate ? Math.floor((price * 100) / (100 - discountRate)) : price;
+          const originPrice = discountRate
+            ? Math.floor((price * 100) / (100 - discountRate))
+            : price;
           templateEl.innerHTML += /* html */ `
             <li class="item">
               <img class="thumbnail" src=${thumbnail}></img>
@@ -152,7 +156,11 @@ export async function setPaymentPage(router) {
               </div>
               <span class="price-wrapper">
                 <span class="discount-price">${(price * quantity).toLocaleString("ko-KR")}원</span>
-                <span class="cost-price">${originPrice === price ? "" : (originPrice * quantity).toLocaleString("ko-KR") + "원"}</span>
+                <span class="cost-price">${
+                  originPrice === price
+                    ? ""
+                    : (originPrice * quantity).toLocaleString("ko-KR") + "원"
+                }</span>
               </span>
             </li>
           `;
@@ -319,10 +327,34 @@ export async function setPaymentPage(router) {
 function setMockData() {
   // 제품명, 가격, 수량, 썸네일이미지
   const paymentList = [
-    { id: "7YQPOYVq4kgrNbQV04vS", title: "고구마깡(83g*1)", price: 15400, quantity: 1, thumbnailImage: "/images/product/이토엔쟈스민티.png" },
-    { id: "9X6iWhN2C5KbJpS4uhDh", title: "둥지냉면비빔냉면(162g*32)", price: 51040, quantity: 1, thumbnailImage: "/images/product/파워오투복숭아자몽.png" },
-    { id: "4dVCUFjymfEqskEuMAKy", title: "츄파춥스 사워게코(90g*124)", price: 57420, quantity: 1, thumbnailImage: "/images/product/오이오차녹차.png" },
-    { id: "4vs61x7YOCYBHfZuIPPU", title: "양파링(80g*1)", price: 15400, quantity: 1, thumbnailImage: "/images/product/오이오차녹차.png" },
+    {
+      id: "7YQPOYVq4kgrNbQV04vS",
+      title: "고구마깡(83g*1)",
+      price: 15400,
+      quantity: 1,
+      thumbnailImage: "/images/product/이토엔쟈스민티.png",
+    },
+    {
+      id: "9X6iWhN2C5KbJpS4uhDh",
+      title: "둥지냉면비빔냉면(162g*32)",
+      price: 51040,
+      quantity: 1,
+      thumbnailImage: "/images/product/파워오투복숭아자몽.png",
+    },
+    {
+      id: "4dVCUFjymfEqskEuMAKy",
+      title: "츄파춥스 사워게코(90g*124)",
+      price: 57420,
+      quantity: 1,
+      thumbnailImage: "/images/product/오이오차녹차.png",
+    },
+    {
+      id: "4vs61x7YOCYBHfZuIPPU",
+      title: "양파링(80g*1)",
+      price: 15400,
+      quantity: 1,
+      thumbnailImage: "/images/product/오이오차녹차.png",
+    },
   ];
   const loginId = JSON.parse(localStorage.getItem("loginInfo")).loginId;
   const userData = JSON.parse(localStorage.getItem(loginId));
