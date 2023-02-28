@@ -1,7 +1,6 @@
-import { transactionPagination } from "../adminTransactionList/transactionPagination";
-import { transctionFilterList } from "../adminTransactionList/transctionFilter";
+import { transactionPagination } from "../adminFunctions/adminTransactionList/transactionPagination";
+import { transctionFilterList } from "../adminFunctions/adminTransactionList/transctionFilter";
 import { memoizedGetTransactions } from "../api/getTransactions";
-
 export const pickr = (router) => {
   flatpickr("#myDatepicker", {
     dateFormat: "Y-m-d", // set the date format

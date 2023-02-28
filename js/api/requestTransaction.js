@@ -1,4 +1,4 @@
-import { SORT_TYPES, getLocalStorageData } from "../localStorage/getLocalStorageData";
+import { SORT_TYPES, getLocalStorageData } from "../utils/localStorage/getLocalStorageData";
 import { headers, url } from "./headers";
 
 const { ACCESS_TOKEN } = SORT_TYPES;

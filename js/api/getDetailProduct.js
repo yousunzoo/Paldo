@@ -6,12 +6,10 @@ export const getDetailProduct = async (id) => {
       method: "GET",
       headers,
     });
+    if (!res.ok) throw new Error(res.status);
     const json = await res.json();
     return json;
   } catch (error) {
-    Swal.fire({
-      icon: "error",
-      text: "요청이 실패했습니다!",
-    });
+    return false;
   }
 };

@@ -3,8 +3,8 @@
   width: 1100px;
   min-width: 300px;
   .all-wrapper {
-    background-color: $color_white;
-    .goods-title-wrapper {
+    background-color: $color-white;
+    .product-title-wrapper {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -41,28 +41,28 @@
         }
       }
     }
-    .goods-item-wrapper {
+    .product-item-wrapper {
       width: 1085px;
       display: flex;
       flex-direction: column;
       box-sizing: border-box;
       .bar {
         margin: 0 20px;
-        border: 0.25px solid #dadce0;
+        border: 1px solid #dadce0;
       }
-      .goods-info {
+      .product-info {
         display: flex;
         flex-direction: column;
-        .goods-info-wrapper {
+        .product-info-wrapper {
           display: flex;
-          .goods-thumbnail img {
+          .product-thumbnail img {
             margin-top: 40px;
             margin-left: 40px;
             width: 500px;
             height: 500px;
-            border: 0.1px solid rgb(184, 184, 184);
+            border: 1px solid rgb(184, 184, 184);
           }
-          .goods-info-text {
+          .product-info-text {
             padding: 40px;
             .title {
               font-size: 18px;
@@ -84,10 +84,10 @@
         background: $color_white;
         width: 100%;
         height: 100%;
-        .goods-thumbnail {
+        .product-thumbnail {
           border-radius: 10px;
           height: 249px;
-          background: linear-gradient(120deg, #e5e5e5 30%, #f0f0f0 38%, #f0f0f0 40%, #e5e5e5 48%);
+          background: $color_gradient;
           background-size: 200% 100%;
           background-position: 100% 0;
           animation: blinker 1s linear infinite;
@@ -104,7 +104,7 @@
           width: 500px;
           height: 50px;
           border-radius: 10px;
-          background: linear-gradient(120deg, #e5e5e5 30%, #f0f0f0 38%, #f0f0f0 40%, #e5e5e5 48%);
+          background: $color_gradient;
           background-size: 200% 100%;
           background-position: 100% 0;
           animation: blinker 1s linear infinite;
@@ -114,7 +114,7 @@
           height: 500px;
           display: flex;
           border-radius: 10px;
-          background: linear-gradient(120deg, #e5e5e5 30%, #f0f0f0 38%, #f0f0f0 40%, #e5e5e5 48%);
+          background: $color_gradient;
           background-size: 200% 100%;
           background-position: 100%;
           animation: blinker 1s linear infinite;
