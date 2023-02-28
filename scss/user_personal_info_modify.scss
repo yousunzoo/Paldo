@@ -40,11 +40,6 @@
                 font-size: 14px;
                 font-weight: 500;
                 line-height: 20px;
-
-                #ico {
-                  padding-right: 2px;
-                  color: #ee6a7b;
-                }
               }
             }
 
@@ -173,12 +168,12 @@
                 display: flex;
               }
               &:hover {
-                background-color: #fff;
+                background-color: $color-white;
               }
               .spinner {
                 width: 20px;
                 height: 20px;
-                border: 3px solid #f3f3f3;
+                border: 3px solid $color-account;
                 border-top: 3px solid $color_primary;
                 border-radius: 50%;
                 animation: spin 1s linear infinite;
