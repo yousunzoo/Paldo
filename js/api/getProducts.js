@@ -19,26 +19,22 @@ export async function getProducts(keyword = "", tag = []) {
   } else {
     data.searchTags = tag;
   }
-  const res = await fetch(
-    `${url}products/search
+  try {
+    const res = await fetch(
+      `${url}products/search
   `,
-    {
-      method: "POST",
-      headers,
-      body: JSON.stringify(data),
-    }
-  )
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(response.status);
+      {
+        method: "POST",
+        headers,
+        body: JSON.stringify(data),
       }
-      return response.json();
-    })
-    .then((result) => {
-      return result;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  return res;
+    );
+    if (!res.ok) {
+      throw new Error(respons.status);
+    }
+    const result = await res.json();
+    return result;
+  } catch {
+    return null;
+  }
 }

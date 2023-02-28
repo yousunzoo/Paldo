@@ -72,13 +72,17 @@ export default /* html */ `
           <div class="team-name-description">
             <div class="team-title-area">
               <p class="team-title">Team</p>
-              <p class="team-description">전국팔도</p>
+              <p class="team-description">JeonGukPaldo</p>
             </div>
             <a
               href="https://github.com/KDT4-team6/Ottogi"
               class="github-link"
               >https://github.com/KDT4-team6/Ottogi</a
             >
+            <p class="github-link">
+              안녕하세요 여러분 모두 반가워요. 여기까지 살펴본 당신은 멋쟁이<br>
+              저희는 아직 코딩 애기니까 예쁘게 봐주세요 응애
+            </p>
           </div>
         </div>
         <ul class="team-members">
@@ -130,18 +134,7 @@ export default /* html */ `
               >
             </div>
           </li>
-          <li class="team-member">
-            <div class="profile-thumbnail"></div>
-            <div class="profile-information">
-              <div class="profile-information-title">
-                <p class="profile-tag">팀원</p>
-                <p class="member-name">김재도</p>
-              </div>
-              <a href="https://github.com/KJDsports" class="member-github"
-                >https://github.com/KJDsports</a
-              >
-            </div>
-          </li>
+          
         </ul>
       </div>
       <div class="footer-team-information2">
