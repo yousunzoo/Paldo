@@ -11,7 +11,7 @@ export async function setPaymentPage(router) {
   if (!isLogin) return;
   /* GLOBAL VARIABLES */
   const { USER_INFO, USER_ADDRESS, COUPONS, CART_LIST } = SORT_TYPES;
-  const payInfo = {
+  const payInformation = {
     orderAmount: 0,
     originAmount: 0,
     saledAmount: 0,
@@ -22,13 +22,13 @@ export async function setPaymentPage(router) {
   /* DOM */
   const toggleOrderListEl = document.querySelector("#toggleOrderList");
   const toggleCouponListEl = document.querySelector("#toggleCouponList");
-  const deliveryInfoTabEl = document.querySelector(".delivery-information-tab");
+  const deliveryInformationTabEl = document.querySelector(".delivery-information-tab");
   const transactionButton = document.querySelector(".pay-button-area > button");
 
   /* EVENT LISTENER */
   toggleOrderListEl.addEventListener("click", toggleOrderList());
   toggleCouponListEl.addEventListener("click", toggleCouponList);
-  deliveryInfoTabEl.addEventListener("click", toggleMessage);
+  deliveryInformationTabEl.addEventListener("click", toggleMessage);
   transactionButton.addEventListener("click", async () => {
     // 스피너 로딩
     const spinnerWrapperEl = document.querySelector(".spinner-wrapper");
@@ -45,7 +45,7 @@ export async function setPaymentPage(router) {
     if (!res) return;
     const accountList = res.accounts;
     const targetAccount = accountList.find((account) => account.id === accountId);
-    if (targetAccount.balance < payInfo.totalAmount) {
+    if (targetAccount.balance < payInformation.totalAmount) {
       Swal.fire({
         icon: "error",
         title: "잔액이 부족합니다.",
@@ -105,7 +105,7 @@ export async function setPaymentPage(router) {
     summaryTextEl.textContent = `${paymentList[0].title} 포함 ${paymentList.length}개`;
 
     /* 주문자 정보 */
-    renderOrdererInfo();
+    renderOrdererInformation();
 
     /* 배송지 정보 */
     renderUserAddress();
@@ -246,32 +246,32 @@ export async function setPaymentPage(router) {
     const areaAmountEl = document.querySelector(".area-amount > ul");
 
     const orderAmountEl = areaAmountEl.querySelector("#orderAmount");
-    payInfo.orderAmount = paymentList.reduce((acc, product) => {
+    payInformation.orderAmount = paymentList.reduce((acc, product) => {
       const { price, quantity } = product;
       acc += price * quantity;
       return acc;
     }, 0);
-    orderAmountEl.textContent = payInfo.orderAmount.toLocaleString("ko-KR");
+    orderAmountEl.textContent = payInformation.orderAmount.toLocaleString("ko-KR");
 
     const originAmountEl = areaAmountEl.querySelector("#originAmount");
-    payInfo.originAmount = paymentList.reduce((acc, product) => {
+    payInformation.originAmount = paymentList.reduce((acc, product) => {
       const { price, quantity, discountRate } = product;
       // 할인율이 있으면 원가를 계산하여 누적(DB에 저장된 상품 가격은 할인율이 적용된 가격)
       acc += (discountRate ? Math.floor((price * 100) / (100 - discountRate)) : price) * quantity;
       return acc;
     }, 0);
-    originAmountEl.textContent = payInfo.originAmount.toLocaleString("ko-KR");
+    originAmountEl.textContent = payInformation.originAmount.toLocaleString("ko-KR");
 
     const saledAmountEl = areaAmountEl.querySelector("#saledAmount");
-    payInfo.saledAmount = payInfo.originAmount - payInfo.orderAmount;
-    saledAmountEl.textContent = "-" + payInfo.saledAmount.toLocaleString("ko-KR");
+    payInformation.saledAmount = payInformation.originAmount - payInformation.orderAmount;
+    saledAmountEl.textContent = "-" + payInformation.saledAmount.toLocaleString("ko-KR");
 
     const totalAmountEl = areaAmountEl.querySelector("#totalAmount");
-    payInfo.totalAmount = payInfo.orderAmount;
-    totalAmountEl.textContent = payInfo.totalAmount.toLocaleString("ko-KR");
+    payInformation.totalAmount = payInformation.orderAmount;
+    totalAmountEl.textContent = payInformation.totalAmount.toLocaleString("ko-KR");
 
     const totalAmountInButtonEl = document.querySelector("#totalAmountInButton");
-    totalAmountInButtonEl.textContent = payInfo.totalAmount.toLocaleString("ko-KR");
+    totalAmountInButtonEl.textContent = payInformation.totalAmount.toLocaleString("ko-KR");
   }
   async function renderUserAccount() {
     const res = await getUserAccounts();
@@ -308,14 +308,14 @@ export async function setPaymentPage(router) {
       destinationEl.textContent = "등록된 배송지 정보가 없습니다.";
     }
   }
-  function renderOrdererInfo() {
-    const userInfo = getLocalStorageData(USER_INFO);
+  function renderOrdererInformation() {
+    const userInformation = getLocalStorageData(USER_INFO);
 
     const senderEl = document.querySelector(".orderer-area .sender");
-    senderEl.textContent = userInfo.displayName;
+    senderEl.textContent = userInformation.displayName;
 
     const emailEl = document.querySelector(".orderer-area .email");
-    emailEl.textContent = userInfo.email;
+    emailEl.textContent = userInformation.email;
   }
 }
 

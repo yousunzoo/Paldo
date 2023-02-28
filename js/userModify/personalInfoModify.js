@@ -10,7 +10,7 @@ export async function setModifyPage() {
 
   /* GLOBAL VARIABLES */
   const { USER_INFO, USER_ADDRESS, USER_DATA } = SORT_TYPES;
-  const userInfo = {
+  const userInformation = {
     oldPassword: "",
     newPassword: "",
     displayName: "",
@@ -51,7 +51,7 @@ export async function setModifyPage() {
     addressCheck();
 
     // 서버에 회원정보 수정 요청
-    const result = await requestPersonalInfoModify(userInfo, userAddress);
+    const result = await requestPersonalInfoModify(userInformation, userAddress);
     if (!result) return;
     Swal.fire("수정 성공!", "개인 정보가 수정되었습니다.", "success");
     // localStorage 세팅
@@ -66,7 +66,7 @@ export async function setModifyPage() {
 
   // 현재 비밀번호
   passwordInput.addEventListener("input", (event) => {
-    userInfo.oldPassword = event.target.value;
+    userInformation.oldPassword = event.target.value;
   });
 
   // 새 비밀번호 유효성 검사
@@ -153,7 +153,7 @@ export async function setModifyPage() {
         passwordErrorMesssage.classList.remove("active");
         newPasswordInputEl.classList.remove("error");
         validCheck.newPassword = true;
-        userInfo.newPassword = password;
+        userInformation.newPassword = password;
       }
     }
   }
@@ -184,7 +184,7 @@ export async function setModifyPage() {
         userNameInput.classList.remove("error");
       }
       validCheck.displayName = true;
-      userInfo.displayName = userName;
+      userInformation.displayName = userName;
     }
   }
   function addressCheck() {
@@ -218,7 +218,7 @@ export async function setModifyPage() {
         const profileImgBase64 = e.target.result;
         thumbnailFigure.innerHTML = `<img src=${profileImgBase64} alt='선택한 사진' />`;
         validCheck.thumbnail = true;
-        userInfo.profileImgBase64 = profileImgBase64;
+        userInformation.profileImgBase64 = profileImgBase64;
       });
     }
   }
