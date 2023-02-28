@@ -22,6 +22,7 @@ async function checkAuthorizationAPI(accessToken) {
       throw new Error(res.status);
     }
     const json = await res.json();
+    console.log(json);
     return json ? true : false;
   } catch (error) {
     return null;
