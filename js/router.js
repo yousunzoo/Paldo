@@ -2,72 +2,72 @@ import Navigo from "navigo"; // When using ES modules.
 import { checkAuthorization } from "./api/checkAuthorization.js";
 import userWrapper from "./components/wrappers/userWrapper.js";
 import adminWrapper from "./components/wrappers/adminWrapper.js";
-import userMainPage from "./components/userPage/userMainPage.js";
-import userLoginPage from "./components/userPage/userLoginPage.js";
-import userSignupPage from "./components/userPage/userSignupPage.js";
-import userSearchPage from "./components/userPage/userSearchPage.js";
-import userCouponPage from "./components/userPage/userCouponPage.js";
-import userProductPage from "./components/userPage/userProductPage.js";
-import userProductDetailPage from "./components/userPage/userProductDetailPage.js";
-import userCartPage from "./components/userPage/userCartPage.js";
-import userOrderListPage from "./components/userPage/userOrderListPage.js";
-import userAccountPage from "./components/userPage/userAccountPage.js";
-import userLikePage from "./components/userPage/userLikePage.js";
-import userModifyPage from "./components/userPage/userModifyPage.js";
-import userPaymentPage from "./components/userPage/userPaymentPage.js";
-import paymentCompletePage from "./components/userPage/paymentCompletePage";
-import handleCouponButton from "./userCoupon/coupon.js";
-import handleSearchInput from "./userHeader/handleSearchInput.js";
+import userMainPage from "./components/userPages/userMainPage.js";
+import userLoginPage from "./components/userPages/userLoginPage.js";
+import userSignupPage from "./components/userPages/userSignupPage.js";
+import userSearchPage from "./components/userPages/userSearchPage.js";
+import userCouponPage from "./components/userPages/userCouponPage.js";
+import userProductPage from "./components/userPages/userProductPage.js";
+import userProductDetailPage from "./components/userPages/userProductDetailPage.js";
+import userCartPage from "./components/userPages/userCartPage.js";
+import userOrderListPage from "./components/userPages/userOrderListPage.js";
+import userAccountPage from "./components/userPages/userAccountPage.js";
+import userLikePage from "./components/userPages/userLikePage.js";
+import userModifyPage from "./components/userPages/userModifyPage.js";
+import userPaymentPage from "./components/userPages/userPaymentPage.js";
+import paymentCompletePage from "./components/userPages/paymentCompletePage";
+import handleCouponButton from "./userFunctions/userCoupon/coupon.js";
+import handleSearchInput from "./userFunctions/userHeader/handleSearchInput.js";
 import { swiperAction, sidebarAction } from "./library/swiper.js";
 import goToTopFn from "./library/toTop.js";
-import loginEvent from "./userLogin/login.js";
-import { changeHeader } from "./userMain/changeHeader.js";
-import setProductPage from "./userProduct/setProductPage.js";
-import setResultPage from "./userSearch/searchResult.js";
-import signUpEvent from "./userSignup/signup.js";
-import setSidebarSwiper from "./userSidebar/setSidebarSwiper.js";
-import { setProductDetailPage } from "./userProduct/setProductDetailPage.js";
-import setCartPage from "./userCart/setCartPage.js";
+import loginEvent from "./userFunctions/userLogin/login.js";
+import { changeHeader } from "./userFunctions/userMain/changeHeader.js";
+import setProductPage from "./userFunctions/userProduct/setProductPage.js";
+import setResultPage from "./userFunctions/userSearch/searchResult.js";
+import signUpEvent from "./userFunctions/userSignup/signup.js";
+import setSidebarSwiper from "./userFunctions/userSidebar/setSidebarSwiper.js";
+import { setProductDetailPage } from "./userFunctions/userProduct/setProductDetailPage.js";
+import setCartPage from "./userFunctions/userCart/setCartPage.js";
 
-import setProductList from "./userMain/setProductList.js";
-import setSidebarStyle from "./userSidebar/setSidebarStyle.js";
-import { setOrderListPage } from "./userOrderList/orderList.js";
-import { setAccountPage } from "./account/account.js";
-import { setLikePage } from "./userLike/like.js";
-import { setModifyPage } from "./userModify/personalInfoModify.js";
-import { setPaymentPage } from "./userPayment/payment.js";
-import setPaymentCompletePage from "./userPaymentComplete/paymentComplete.js";
-import { setProfile } from "./userProfile/profile.js";
+import setProductList from "./userFunctions/userMain/setProductList.js";
+import setSidebarStyle from "./userFunctions/userSidebar/setSidebarStyle.js";
+import { setOrderListPage } from "./userFunctions/userOrderList/orderList.js";
+import { setAccountPage } from "./userFunctions/userAccount/account.js";
+import { setLikePage } from "./userFunctions/userLike/like.js";
+import { setModifyPage } from "./userFunctions/userModify/personalInfoModify.js";
+import { setPaymentPage } from "./userFunctions/userPayment/payment.js";
+import setPaymentCompletePage from "./userFunctions/userPaymentComplete/paymentComplete.js";
+import { setProfile } from "./userFunctions/userProfile/profile.js";
 import { chartFn } from "./library/chart.js";
 
 import notFoundPage from "./components/notFoundPage";
-import adminReportPage from "./adminPages/adminReportPage";
-import adminProductListPage from "./adminPages/adminProductListPage";
-import adminAddProductPage from "./adminPages/adminAddProductPage";
-import adminProductDetailPage from "./adminPages/adminProductDetailPage";
-import adminProductEditPage from "./adminPages/adminProductEditPage";
-import adminTransactionPage from "./adminPages/adminTransactionPage";
-import adminTransactionDetailPage from "./adminPages/adminTransactionDetailPage";
+import adminReportPage from "./components/adminPages/adminReportPage";
+import adminProductListPage from "./components/adminPages/adminProductListPage";
+import adminAddProductPage from "./components/adminPages/adminAddProductPage";
+import adminProductDetailPage from "./components/adminPages/adminProductDetailPage";
+import adminProductEditPage from "./components/adminPages/adminProductEditPage";
+import adminTransactionPage from "./components/adminPages/adminTransactionPage";
+import adminTransactionDetailPage from "./components/adminPages/adminTransactionDetailPage";
 
-import { productPagination } from "./adminProductList/productPagination";
-import { productPageButton } from "./adminProductList/productPageFunc";
+import { productPagination } from "./adminFunctions/adminProductList/productPagination";
+import { productPageButton } from "./adminFunctions/adminProductList/productPageFunc";
+import { renderEditDetailPage } from "./adminFunctions/adminEditProduct/editProduct.js";
+import { renderDetailPage } from "./adminFunctions/adminDetailProduct/renderDetailProduct.js";
 
-import { renderDetailPage } from "./adminDetailProducd/renderDetailProduct.js";
-import { renderEditDetailPage } from "./adminEditProduct/editProduct.js";
-import { renderAddPage } from "./adminAddProduct/addPodouct.js";
-import { transactionPagination } from "./adminTransactionList/transactionPagination.js";
-import { renderDetailTransactionPage } from "./adminDetailTransaction/renderDetailTransaction.js";
-import { renderReportStatus } from "./adminReport/renderStoreStatus.js";
+import { renderAddPage } from "./adminFunctions/adminAddProduct/addPodouct.js";
+import { transactionPagination } from "./adminFunctions/adminTransactionList/transactionPagination.js";
+import { renderDetailTransactionPage } from "./adminFunctions/adminDetailTransaction/renderDetailTransaction.js";
+import { renderReportStatus } from "./adminFunctions/adminReport/renderStoreStatus.js";
 import { requestLogout } from "./api/requestLogout";
-import { searchTransaction } from "./adminTransactionList/searchTransaction";
+import { searchTransaction } from "./adminFunctions/adminTransactionList/searchTransaction";
 import { pickr } from "./library/pickr";
 import { getProduct, memoizedGetProduct } from "./api/getProduct";
-import { productFilterList } from "./adminProductList/productFilter";
+import { productFilterList } from "./adminFunctions/adminProductList/productFilter";
 import { getTransactions, memoizedGetTransactions } from "./api/getTransactions";
-import { transctionFilterList } from "./adminTransactionList/transctionFilter";
+import { transctionFilterList } from "./adminFunctions/adminTransactionList/transctionFilter";
 
-import { getLocalStorageData } from "./localStorage/getLocalStorageData.js";
-import { productCount, transactionsCount } from "./adminReport/getCountData.js";
+import { getLocalStorageData } from "./utils/localStorage/getLocalStorageData.js";
+import { productCount, transactionsCount } from "./adminFunctions/adminReport/getCountData.js";
 
 const mainRouter = new Navigo("/");
 const body = document.querySelector("body");
@@ -153,6 +153,7 @@ mainRouter
     login: async () => {
       document.querySelector("#main").innerHTML = userLoginPage;
       loginEvent(mainRouter);
+      setSidebarStyle(0);
     },
     signup: () => {
       document.querySelector("#main").innerHTML = userSignupPage;
@@ -206,15 +207,18 @@ mainRouter
       document.querySelector("#main").innerHTML = userModifyPage;
       setProfile();
       setModifyPage(mainRouter);
+      setSidebarStyle(500);
     },
     payment: () => {
       document.querySelector("#main").innerHTML = userPaymentPage;
       setPaymentPage(mainRouter);
       swiperAction();
+      setSidebarStyle(100);
     },
     paymentComplete: () => {
       document.querySelector("#main").innerHTML = paymentCompletePage;
       setPaymentCompletePage();
+      setSidebarStyle(100);
     },
     admin: () => {
       // localhost:1234/admin

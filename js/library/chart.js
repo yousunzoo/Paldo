@@ -1,5 +1,3 @@
-import { productCount, transactionsCount } from "../adminFunctions/adminReport/getCountData";
-
 export const chartFn = async (barCountArr, pieCountArr) => {
   const bar = document.getElementById("bar-chart").getContext("2d");
   Chart.defaults.font.size = 11;
