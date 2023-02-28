@@ -2,38 +2,36 @@ import setSidebar from "../userSidebar/setSidebar";
 import moveToDetail from "../utils/movetoProductDetail";
 import addCart from "../utils/addCart";
 
-export default function setProductList(prdList, sort, originResult, router) {
+export default function setProductList(productList, sort, originResult, router) {
   let newArr;
   switch (sort) {
     case "최신순":
       newArr = originResult;
       break;
     case "낮은 가격순":
-      newArr = prdList.sort((a, b) => {
+      newArr = productList.sort((a, b) => {
         return a.price - b.price;
       });
       break;
     case "높은 가격순":
-      newArr = prdList.sort((a, b) => {
+      newArr = productList.sort((a, b) => {
         return b.price - a.price;
       });
       break;
     case "할인율순":
-      newArr = prdList.sort((a, b) => {
+      newArr = productList.sort((a, b) => {
         return b.discountRate - a.discountRate;
       });
       break;
   }
   const productWrapperDiv = document.querySelector(".product-wrapper");
-  const productListUi = productWrapperDiv.querySelector(".product-list");
+  const productListUl = productWrapperDiv.querySelector(".product-list");
 
   const productEls = newArr.map((item) => {
     const productEl = document.createElement("li");
 
     const discountRate = item.discountRate > 0;
-    const originPrice = Math.floor(
-      (item.price * 100) / (100 - item.discountRate)
-    );
+    const originPrice = Math.floor((item.price * 100) / (100 - item.discountRate));
 
     productEl.innerHTML = /*html */ `
       <a href="productDetail/${item.id}" data-id="${item.id}">
@@ -48,19 +46,11 @@ export default function setProductList(prdList, sort, originResult, router) {
                     <p class="product-name">${item.title}</p>
                     <div class="product-price">
                       <div>
-                        ${
-                          discountRate
-                            ? `<span class="discount-rate">${item.discountRate}%</span>`
-                            : ""
-                        }
+                        ${discountRate ? `<span class="discount-rate">${item.discountRate}%</span>` : ""}
                         <span class="sales-price">${item.price.toLocaleString()}원</span>
                       </div>
                       <div>
-                      ${
-                        discountRate
-                          ? `<span class="dimmed-price">${originPrice.toLocaleString()}원</span>`
-                          : ""
-                      }
+                      ${discountRate ? `<span class="dimmed-price">${originPrice.toLocaleString()}원</span>` : ""}
                       </div>
                     </div>
                   </div>
@@ -80,6 +70,6 @@ export default function setProductList(prdList, sort, originResult, router) {
     });
     return productEl;
   });
-  productListUi.innerHTML = "";
-  productListUi.append(...productEls);
+  productListUl.innerHTML = "";
+  productListUl.append(...productEls);
 }

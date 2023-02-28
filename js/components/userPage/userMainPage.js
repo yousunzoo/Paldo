@@ -23,7 +23,7 @@ export default /* html */ `
 </div>
 </div>
 <div class="inner-wrapper">
-<section class="prd-list1">
+<section class="product-list1">
   <h2 class="main-title">이 상품 어때요?</h2>
   <!-- product swiper -->
   <div class="main-product-swiper">
@@ -69,7 +69,7 @@ export default /* html */ `
     </div>
   </div>
 </section>
-<section class="prd-list2">
+<section class="product-list2">
   <h2 class="main-title">이 상품 어때요?</h2>
   <!-- product swiper -->
   <div class="main-product-swiper">

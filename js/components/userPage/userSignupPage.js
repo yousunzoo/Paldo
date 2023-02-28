@@ -1,5 +1,5 @@
 export default /* html */ `
-<div class="inner-wrapper">
+<div class="inner-signup-wrapper">
 <div class="signup-form">
   <h3 class="main_title">회원가입</h3>
   <p class="sub">
