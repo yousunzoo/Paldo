@@ -90,7 +90,7 @@
               &:hover {
                 background-color: $color_item_bg_hover;
               }
-              .title-info {
+              .title-information {
                 display: flex;
                 flex-direction: column;
                 gap: 7px;
@@ -130,7 +130,7 @@
                   display: flex;
                   justify-content: space-between;
                   padding: 14px 20px 16px 20px;
-                  .info {
+                  .information {
                     display: flex;
                     flex-direction: row;
                     align-items: center;
@@ -139,7 +139,7 @@
                       margin-right: 20px;
                       background-color: $color_white;
                     }
-                    .info-list {
+                    .information-list {
                       display: flex;
                       flex-direction: column;
                       dl {
@@ -169,7 +169,7 @@
                       }
                     }
                   }
-                  .side-info {
+                  .side-information {
                     display: flex;
                     align-items: center;
                     > span {

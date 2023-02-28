@@ -18,7 +18,7 @@
         margin-top: 60px;
       }
       &:nth-child(6) {
-        .delivery-info-tab {
+        .delivery-information-tab {
           display: flex;
           justify-content: space-between;
           position: relative;
@@ -157,11 +157,11 @@
     }
     .orderer-area {
       padding: 10px 0px;
-      .info {
+      .information {
         display: flex;
         justify-content: space-between;
         padding: 8px 0px;
-        .info-title {
+        .information-title {
           line-height: 24px;
         }
         .content-wrapper {
@@ -171,7 +171,7 @@
             align-items: center;
             line-height: 24px;
           }
-          .additional-info {
+          .additional-information {
             margin-top: 10px;
             p {
               font-size: 12px;
@@ -186,7 +186,7 @@
       .destination-wrapper {
         display: flex;
         padding: 20px 0px;
-        .info-title {
+        .information-title {
           display: inline-block;
           width: 160px;
           margin-right: 30px;
@@ -349,7 +349,7 @@
                   padding: 30px 70px;
                   background-color: $color_item_bg;
                   border: 1px solid $color_item_border;
-                  .account-info {
+                  .account-information {
                     display: flex;
                     flex-direction: column;
                     gap: 4px;
@@ -545,7 +545,7 @@
         }
       }
     }
-    .private-info-consent {
+    .private-information-consent {
       padding: 20px 0;
       div {
         display: flex;
@@ -580,7 +580,7 @@
         stroke: $color_primary;
       }
     }
-    .sub-info {
+    .sub-information {
       padding: 20px 0px 0px 16px;
       font-size: 12px;
       line-height: 16px;
@@ -644,7 +644,7 @@
           }
         }
       }
-      .pay-sub-info {
+      .pay-sub-information {
         font-size: 14px;
         line-height: 20px;
         color: $color_sub_information;
@@ -652,7 +652,7 @@
     }
 
     /* COMMON */
-    .info-title {
+    .information-title {
       display: inline-block;
       width: 160px;
       margin-right: 30px;

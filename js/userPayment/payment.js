@@ -22,7 +22,7 @@ export async function setPaymentPage(router) {
   /* DOM */
   const toggleOrderListEl = document.querySelector("#toggleOrderList");
   const toggleCouponListEl = document.querySelector("#toggleCouponList");
-  const deliveryInfoTabEl = document.querySelector(".delivery-info-tab");
+  const deliveryInfoTabEl = document.querySelector(".delivery-information-tab");
   const transactionButton = document.querySelector(".pay-button-area > button");
 
   /* EVENT LISTENER */
@@ -213,7 +213,7 @@ export async function setPaymentPage(router) {
 
       templateEl.innerHTML += /* html */ `
         <div class="swiper-slide">
-          <div class="account-info" id="accountId" data-account-id=${id}>
+          <div class="account-information" id="accountId" data-account-id=${id}>
             <h4 id="bankName">${bankName}</h4>
             <p id="accountNumber">${accountNumber}</p>
             <span id="balance">${balance.toLocaleString("ko-KR")}</span>

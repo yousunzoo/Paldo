@@ -131,7 +131,7 @@ function createOrderListUls(groups) {
     const orderListUl = makeDOMwithProperties("div", { className: "list-group" });
     orderListUl.innerHTML = /* html */ `
       <div class='list-title' id=${index}>
-        <div class='title-info'>
+        <div class='title-information'>
           <span class='transaction-date'>${time} 결제</span>
           <span class='transaction-name'>${group[0].product.title} 포함 총 ${group.length}건</span>
           <span class='transaction-price'>${totalPrice.toLocaleString("ko-KR")}원</span>
@@ -166,9 +166,9 @@ function createOrderListLis(group) {
     const liEl = makeDOMwithProperties("li", { className: "item" });
     liEl.innerHTML = /* html */ `
       <div class='order-area'>
-        <div class='info'>
+        <div class='information'>
           <img class='thumbnail' src=${product.thumbnail} alt='감자깡' height='60px' />
-          <div class='info-list'>
+          <div class='information-list'>
             <dl>
               <dt>상품명</dt>
               <dd id='name'>${product.title}</dd>
@@ -187,7 +187,7 @@ function createOrderListLis(group) {
             </dl>
           </div>
         </div>
-        <div class='side-info'>
+        <div class='side-information'>
           <span>상품 준비중</span>
           <div class='buttons' data-id=${JSON.stringify(detailId)}>
             <button class='order-cancel-button ${done ? "inactive" : ""}' ${done ? "disabled" : ""}>주문 취소</button>

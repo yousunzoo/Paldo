@@ -1,33 +1,33 @@
 export default /* html */ `
-  <!-- USER INFO -->
-  <section class="user-info">
+  <!-- USER INFORMATION -->
+  <section class="user-information">
     <div class="inner-wrapper">
-      <div class="info">
+      <div class="information">
         <div class="wrapper">
           <div class="profile-image"></div>
           <div class="title" id="displayName"></div>
         </div>
         <p class="sub-link"><a href="/mypage/modify" data-navigo>프로필 사진 변경하러 가기</a></p>
       </div>
-      <div class="info">
+      <div class="information">
         <a class="title" href="javascript:void(0)">
           <span>적립금</span>
           <p class="content">0 p</p>
         </a>
-        <p class="sub-info">※ 100,000 포인트 <br /> 이상부터 사용 가능합니다.</p>
+        <p class="sub-information">※ 100,000 포인트 <br /> 이상부터 사용 가능합니다.</p>
       </div>
-      <div class="info">
+      <div class="information">
         <a class="title" href="/coupon" data-navigo>
           <span>쿠폰</span>
           <p class="content" id="couponAmount"></p>
         </a>
-        <p class="sub-info">※ 팔도, 삼양 제품에 한해 쿠폰을 사용할 수 있습니다.</p>
+        <p class="sub-information">※ 팔도, 삼양 제품에 한해 쿠폰을 사용할 수 있습니다.</p>
       </div>
-      <div class="info">
+      <div class="information">
         <a class="title" href="/mypage/modify" data-navigo>
           <span>회원 정보 수정</span>
         </a>
-        <p class="sub-info">※ 마이페이지>개인정보 <br />수정에서 변경 가능합니다.</p>
+        <p class="sub-information">※ 마이페이지>개인정보 <br />수정에서 변경 가능합니다.</p>
       </div>
       <a class="banner" href="javascript:void(0)">
         <div class="banner-image"></div>
@@ -98,7 +98,7 @@ export default /* html */ `
             <p class="no-list">등록된 계좌가 없습니다.</p>
           </div> -->
           <!-- <li class="item">
-            <div class="account-info">
+            <div class="account-information">
               <span id="accountBank">NH농협은행</span>
               <span id="accountNumber">123-XXXX-XXXX-XX</span>
               <span id="accountBalance">3,000,000</span>
@@ -106,7 +106,7 @@ export default /* html */ `
             <button class="account-delete-button">삭제</button>
           </li>
           <li class="item">
-            <div class="account-info">
+            <div class="account-information">
               <span class="accountBank">KB국민은행</span>
               <span class="accountNumber">123-XXXX-XXXX-XX</span>
               <span class="accountBalance">3,000,000</span>
@@ -157,7 +157,7 @@ export default /* html */ `
                 <input type="text" id="phoneNumber" required placeholder="사용자 전화번호를 입력해주세요." minlength="11"
                   maxlength="11" />
               </div>
-              <div class="account-info">
+              <div class="account-information">
                 <p>은행 옆의 []안의 숫자를 더하면 각 은행의 유효한 계좌번호 길이가 됩니다.</p>
                 <p>은행 당 한 계좌만 등록 가능합니다. 동일 은행의 다른 계좌를 등록하려면 기존 계좌를 삭제 후 등록하세요.</p>
                 <p>계좌번호와 전화번호에는 ' - ' 구분이 없어야 합니다.</p>

@@ -132,7 +132,7 @@ export async function setAccountPage() {
       const formattedBalance = balance.toLocaleString("ko-KR"); // 통화 표기법으로 변경
 
       const liEl = makeDOMwithProperties("li", { className: "item" });
-      const accountInfoEl = makeDOMwithProperties("div", { className: "account-info" });
+      const accountInformationEl = makeDOMwithProperties("div", { className: "account-information" });
       const accountBankEl = makeDOMwithProperties("span", { id: "accountBank", innerText: bankName });
       const accountNumberEl = makeDOMwithProperties("span", { id: "accountNumber", innerText: accountNumber });
       const accountBalanceEl = makeDOMwithProperties("span", { id: "accountBalance", innerText: formattedBalance });
@@ -171,8 +171,8 @@ export async function setAccountPage() {
         });
       });
 
-      accountInfoEl.append(accountBankEl, accountNumberEl, accountBalanceEl);
-      liEl.append(accountInfoEl, buttonEl);
+      accountInformationEl.append(accountBankEl, accountNumberEl, accountBalanceEl);
+      liEl.append(accountInformationEl, buttonEl);
       fragmentEl.append(liEl);
     });
     return fragmentEl;
@@ -180,7 +180,7 @@ export async function setAccountPage() {
     // 렌더링 구조 참고
     /* html */ `
       <li class="item">
-        <div class="account-info">
+        <div class="account-information">
           <span id="accountBank">NH농협은행</span>
           <span id="accountNumber">123-XXXX-XXXX-XX</span>
           <span id="accountBalance">3,000,000</span>

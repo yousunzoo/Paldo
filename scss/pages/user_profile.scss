@@ -1,6 +1,6 @@
 #main {
   /* USER INFO SECTION */
-  .user-info {
+  .user-information {
     width: 100%;
     padding: 50px 0px;
     margin-bottom: -20px;
@@ -10,7 +10,7 @@
       display: flex;
       gap: 4px;
       height: 300px;
-      .info {
+      .information {
         box-sizing: border-box;
         height: 140px;
         background: $color-white;
@@ -56,7 +56,7 @@
           color: $color_sub_information;
           text-decoration: underline;
         }
-        .sub-info {
+        .sub-information {
           font-size: 15px;
           line-height: 20px;
           margin-top: 30px;
