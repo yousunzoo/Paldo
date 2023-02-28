@@ -33,4 +33,6 @@ export const transactionPagination = async (filterRes, router) => {
     renderTransactionsList(router, arr[currentPage - 1]);
     isRendered = true;
   }
+  const loader = document.querySelector(".loader-wrapper");
+  loader.style.display = "none";
 };

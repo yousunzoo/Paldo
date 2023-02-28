@@ -1,8 +1,8 @@
 import { memoizedGetProduct } from "../api/getProduct";
-import { getTransactions } from "../api/getTransactions";
+import { memoizedGetTransactions } from "../api/getTransactions";
 
 export const renderReportStatus = async () => {
-  const transaction = await getTransactions();
+  const transaction = await memoizedGetTransactions();
   const products = await memoizedGetProduct();
 
   const all = products.length;

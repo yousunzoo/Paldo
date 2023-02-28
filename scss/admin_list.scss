@@ -5,7 +5,7 @@
   width: 1100px;
   min-width: 300px;
   background-color: #e8ecef;
-  .goods-list-wrapper {
+  .product-list-wrapper {
     width: 1085px;
     height: 100%;
     background-color: $color_white;
@@ -18,7 +18,7 @@
         font-size: 20px;
         font-weight: 600;
       }
-      .search-goods {
+      .search-product {
         padding: 10px 20px;
         display: flex;
         .search-username {
@@ -141,6 +141,13 @@
         }
         .item-confirm {
           width: 60px;
+        }
+      }
+      .item-transaction:hover {
+        font-weight: 800;
+        img {
+          width: 63px;
+          height: 63px;
         }
       }
     }

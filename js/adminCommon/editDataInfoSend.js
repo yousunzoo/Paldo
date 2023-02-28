@@ -1,6 +1,6 @@
 import { addSwal } from "../adminAddProduct/btnAlert.js";
 export const editDataInfoSend = async (callback, id) => {
-  let addGoods = {
+  let addproduct = {
     title: null,
     price: null,
     description: "0",
@@ -8,35 +8,35 @@ export const editDataInfoSend = async (callback, id) => {
     discountRate: null,
     isSoldOut: false,
   };
-  addGoods.title = document.querySelector(".goods-name").value;
-  addGoods.price = Number(document.querySelector(".goods-price").value);
-  let tagsArr = document.querySelector(".goods-tag").value.trim();
-  addGoods.tags = tagsArr.split(",");
-  addGoods.discountRate = Number(document.querySelector(".goods-sale").value);
+  addproduct.title = document.querySelector(".product-name").value;
+  addproduct.price = Number(document.querySelector(".product-price").value);
+  let tagsArr = document.querySelector(".product-tag").value.trim();
+  addproduct.tags = tagsArr.split(",");
+  addproduct.discountRate = Number(document.querySelector(".product-sale").value);
 
   let soldOutValue = document.querySelector('input[name="soldout"]:checked').value;
   let isSoldOut = soldOutValue === "inStock" ? false : true;
-  addGoods.isSoldOut = isSoldOut;
+  addproduct.isSoldOut = isSoldOut;
 
-  const thumbnailInput = document.querySelector(".goods-thumbnail");
+  const thumbnailInput = document.querySelector(".product-thumbnail");
   const thumbnailFile = thumbnailInput.files[0];
   const thumbnailReader = new FileReader();
   if (thumbnailFile) {
     thumbnailReader.addEventListener("load", () => {
-      addGoods.thumbnailBase64 = thumbnailReader.result;
+      addproduct.thumbnailBase64 = thumbnailReader.result;
 
-      const detailInput = document.querySelector(".goods-detail");
+      const detailInput = document.querySelector(".product-detail");
       const detailFile = detailInput.files[0];
       const detailReader = new FileReader();
 
       if (detailFile) {
         detailReader.addEventListener("load", () => {
-          addGoods.photoBase64 = detailReader.result;
+          addproduct.photoBase64 = detailReader.result;
           Promise.all([thumbnailReader.result, detailReader.result])
             .then(([thumbnailBase64, photoBase64]) => {
-              addGoods.thumbnailBase64 = thumbnailBase64;
-              addGoods.photoBase64 = photoBase64;
-              callback(addGoods, id);
+              addproduct.thumbnailBase64 = thumbnailBase64;
+              addproduct.photoBase64 = photoBase64;
+              callback(addproduct, id);
             })
             .then(() => {
               addSwal();
@@ -48,6 +48,6 @@ export const editDataInfoSend = async (callback, id) => {
     thumbnailReader.readAsDataURL(thumbnailFile);
   } else {
     addSwal();
-    callback(addGoods, id);
+    callback(addproduct, id);
   }
 };

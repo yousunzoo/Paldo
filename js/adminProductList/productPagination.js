@@ -1,12 +1,12 @@
 import { addCheckboxFunctionality, checkAll, checkDelete } from "./checkDelete.js";
-import { renderGoodsList } from "./renderGoodsList.js";
+import { renderProductList } from "./renderProductList.js";
 
 // 페이지네이션
 export const productPagination = (filterRes, router) => {
   let isRendered = false;
   if (filterRes === undefined) return;
   let { arr, totalCount } = filterRes;
-  const ulEl = document.querySelector(".goods-list");
+  const ulEl = document.querySelector(".product-list");
   const paginationEl = document.querySelector(".pagination");
   let limit = 10;
   let currentPage = 1;
@@ -27,7 +27,7 @@ export const productPagination = (filterRes, router) => {
     button.addEventListener("click", () => {
       currentPage = button.innerText;
       ulEl.innerHTML = "";
-      renderGoodsList(router, arr[currentPage - 1], (currentPage - 1) * 10 + 1);
+      renderProductList(router, arr[currentPage - 1], (currentPage - 1) * 10 + 1);
       itemCheck = document.querySelectorAll(".item-check input");
       addCheckboxFunctionality();
       checkAll(allCheck, itemCheck);
@@ -36,7 +36,7 @@ export const productPagination = (filterRes, router) => {
   });
 
   if (isRendered === false) {
-    renderGoodsList(router, arr[currentPage - 1]);
+    renderProductList(router, arr[currentPage - 1]);
     isRendered = true;
   }
 

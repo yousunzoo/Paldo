@@ -1,8 +1,8 @@
 import { addDataInfoSend } from "../adminCommon/addDataInfoSend";
 import { addProduct } from "../api/addProduct";
 export const renderAddPage = (router) => {
-  const inputPrice = document.querySelector(".goods-price");
-  const inputSale = document.querySelector(".goods-sale");
+  const inputPrice = document.querySelector(".product-price");
+  const inputSale = document.querySelector(".product-sale");
   const cost = document.querySelector(".sale-cost");
   const thumbnailImg = document.querySelector(".thumbnail");
   const detailIng = document.querySelector(".detail");
@@ -20,7 +20,7 @@ export const renderAddPage = (router) => {
     }
   });
 
-  const salebutton = document.querySelector(".goods-sale");
+  const salebutton = document.querySelector(".product-sale");
   salebutton.addEventListener("input", function () {
     if (this.value > 100) {
       this.value = this.value.slice(0, -1);
@@ -37,7 +37,7 @@ export const renderAddPage = (router) => {
   });
 
   // 할인가 입력시 1이상 100이하 입력 가능
-  const saleButtons = document.querySelector(".goods-sale");
+  const saleButtons = document.querySelector(".product-sale");
   saleButtons.addEventListener("input", function () {
     if (this.value > 100) {
       this.value = this.value.slice(0, -1);
@@ -45,7 +45,7 @@ export const renderAddPage = (router) => {
   });
 
   //
-  const inputThumb = document.querySelector(".goods-thumbnail");
+  const inputThumb = document.querySelector(".product-thumbnail");
   inputThumb.addEventListener("change", () => {
     const maxSize = 1 * 1024 * 1024;
     const fileSize = inputThumb.files[0].size;
@@ -61,7 +61,7 @@ export const renderAddPage = (router) => {
     });
   });
 
-  const inputDetail = document.querySelector(".goods-detail");
+  const inputDetail = document.querySelector(".product-detail");
   inputDetail.addEventListener("change", () => {
     const maxSize = 4 * 1024 * 1024;
     const fileSize = inputDetail.files[0].size;

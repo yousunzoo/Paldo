@@ -61,12 +61,13 @@ import { renderReportStatus } from "./adminReport/renderStoreStatus.js";
 import { requestLogout } from "./api/requestLogout";
 import { searchTransaction } from "./adminTransactionList/searchTransaction";
 import { pickr } from "./library/pickr";
-import { memoizedGetProduct } from "./api/getProduct";
+import { getProduct, memoizedGetProduct } from "./api/getProduct";
 import { productFilterList } from "./adminProductList/productFilter";
-import { memoizedGetTransactions } from "./api/getTransactions";
+import { getTransactions, memoizedGetTransactions } from "./api/getTransactions";
 import { transctionFilterList } from "./adminTransactionList/transctionFilter";
 
 import { getLocalStorageData } from "./localStorage/getLocalStorageData.js";
+import { productCount, transactionsCount } from "./adminReport/getCountData.js";
 
 const mainRouter = new Navigo("/");
 const body = document.querySelector("body");
@@ -95,7 +96,14 @@ const body = document.querySelector("body");
 mainRouter.hooks({
   async before(done, match) {
     window.scrollTo(0, 0);
-    const requiredLogInPaths = ["cart", "mypage/orderList", "mypage/account", "mypage/modify", "mypage/like", "payment"];
+    const requiredLogInPaths = [
+      "cart",
+      "mypage/orderList",
+      "mypage/account",
+      "mypage/modify",
+      "mypage/like",
+      "payment",
+    ];
     if (requiredLogInPaths.includes(match.url)) {
       const isLogin = await checkAuthorization();
       if (!isLogin) {
@@ -225,13 +233,20 @@ mainRouter
           },
           report: async () => {
             document.querySelector("#content").innerHTML = adminReportPage;
-            chartFn();
+            const loader = document.querySelector(".loader-wrapper");
+            loader.style.display = "flex";
+            const transaction = await memoizedGetTransactions();
+            const products = await memoizedGetProduct();
+            const bar = productCount(products);
+            const pie = transactionsCount(transaction);
+            renderReportStatus();
+            chartFn(bar, pie);
             renderReportStatus();
           },
           "product/": async () => {
             document.querySelector("#content").innerHTML = adminProductListPage;
             let search;
-            const listEls = await memoizedGetProduct();
+            const listEls = await getProduct();
             const listTag = document.querySelector(".search-wrapper");
             listTag.addEventListener("click", (e) => {
               if (e.target.className !== "list-tag") return;
@@ -257,8 +272,10 @@ mainRouter
           },
           transaction: async () => {
             document.querySelector("#content").innerHTML = adminTransactionPage;
+            const loader = document.querySelector(".loader-wrapper");
+            loader.style.display = "flex";
             let search;
-            const listEls = await memoizedGetTransactions();
+            const listEls = await getTransactions();
             const filterRes = transctionFilterList(listEls, search);
             transactionPagination(filterRes, router);
             searchTransaction(filterRes, router);

@@ -14,6 +14,7 @@ $color_primary: #414141;
   align-items: center;
   font-family: "VitroCore";
   color: $color_primary;
+  margin-bottom: -170px;
   .top-wrapper {
     font-size: 100px;
     font-weight: 600;
@@ -44,5 +45,4 @@ $color_primary: #414141;
   }
 }
 #userWrapper #main {
-  padding-bottom: 0;
 }

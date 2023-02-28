@@ -1,7 +1,7 @@
 import { deleteSwal } from "../adminAddProduct/btnAlert";
 import { deleteProduct } from "../api/deleteProduct";
 import { getProduct } from "../api/getProduct";
-import { filterList } from "./productFilter";
+import { productFilterList } from "./productFilter";
 import { productPagination } from "./productPagination";
 // 선택삭제
 export const checkDelete = (ulEl, deleteButton, itemCheck, router) => {
@@ -20,14 +20,13 @@ export const checkDelete = (ulEl, deleteButton, itemCheck, router) => {
       return;
     } else {
       for (let item of checkList) {
-        deleteSwal(count);
         deleteProduct(item.closest(".item").getAttribute("data-id"));
       }
+      deleteSwal(count);
       ulEl.innerHTML = "";
-      setTimeout(() => {}, 2000);
       let search;
       const listEls = await getProduct();
-      const filterRes = filterList(listEls, search);
+      const filterRes = productFilterList(listEls, search);
       productPagination(filterRes, router);
       count = 0;
       checkList = [];

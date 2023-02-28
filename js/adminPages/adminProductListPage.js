@@ -1,4 +1,4 @@
-export default /* html */ `<div class="goods-list-wrapper">
+export default /* html */ `<div class="product-list-wrapper">
 <div class="title-header">
   <div class="title">상품 관리</div>
   <div class="search-wrapper">
@@ -25,7 +25,7 @@ export default /* html */ `<div class="goods-list-wrapper">
         </ul>
       </ul>
     </div>
-    <input type="text" class="search-goodsname" placeholder="상품명을 입력해 주세요." />
+    <input type="text" class="search-productname" placeholder="상품명을 입력해 주세요." />
     <div class="search-button-wrapper">
       <button class="search">검색</button>
     </div>
@@ -45,7 +45,7 @@ export default /* html */ `<div class="goods-list-wrapper">
   <div class="info item-sale">할인율</div>
   <div class="info item-outstock">품절여부</div>
 </div>
-<ul class="goods-list"></ul>
+<ul class="product-list"></ul>
 <div class="pagination"></div>
 <div class="button-wrapper">
   <button class="delete-button button">삭제</button>

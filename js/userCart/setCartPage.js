@@ -42,11 +42,15 @@ export default async function setCartPage(router) {
       <button class="up-button">+</button>
     </div>
     <div class="product-price">
-      <p class="product-total-price"><span>${(item.price * item.quantity).toLocaleString()}</span>원</p>
+      <p class="product-total-price"><span>${(
+        item.price * item.quantity
+      ).toLocaleString()}</span>원</p>
       ${
         item.discountRate
           ? `<p class="product-origin-price">
-            <span>${Math.floor((item.price * 100) / (100 - item.discountRate)).toLocaleString()}</span>원
+            <span>${Math.floor(
+              (item.price * 100) / (100 - item.discountRate)
+            ).toLocaleString()}</span>원
           </p>`
           : ""
       }
@@ -69,8 +73,8 @@ export default async function setCartPage(router) {
       Swal.fire({
         title: "삭제하시겠습니까?",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
+        confirmButtonColor: "#424242",
+        cancelButtonColor: "#424242",
         cancelBUttonText: "취소",
         confirmButtonText: "확인",
       }).then((result) => {

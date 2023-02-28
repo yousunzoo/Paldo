@@ -1,32 +1,29 @@
 // 변수
 /* Color styles */
-$color_product_tag: #999999;
-$color_black: #333333;
+$color_product_tag: #999;
+$color_black: #333;
 $color_discount_rate: #fa622f;
 $color_original_price: #b5b5b5;
 $color_primary: #414141;
-$color_btn_border: rgb(221, 221, 221);
+$color_btn_border: #ddd;
 $color_incorrect: #f03f40;
 $color_white: #ffffff;
-$color_copyright: rgb(247, 247, 247);
+$color_copyright: #f7f7f7;
 $color_banner_btn: #fbcd57;
-$color_please_login: rgb(19, 0, 232);
-$bg_sidebar: rgb(250, 250, 250);
-$color_devide_line: rgb(244, 244, 244);
+$color_please_login: #1300e8;
+$bg_sidebar: #fafafa;
+$color_devide_line: #f4f4f4;
 $color_account: #f3f3f3;
-$color_gradient: linear-gradient(
-  120deg,
-  #e5e5e5 30%,
-  #f0f0f0 38%,
-  #f0f0f0 40%,
-  #e5e5e5 48%
-);
+$color_gradient: linear-gradient(120deg, #e5e5e5 30%, #f0f0f0 38%, #f0f0f0 40%, #e5e5e5 48%);
 $color_thumbnail: #eee;
 $color_quantity_button: #b5b5b5;
 $color_bills_border: #f2f2f2;
 $color_bills_background: #fafafa;
 $color_payment_background: #ddd;
 $color_description: #666;
-$color_text_border: rgb(51, 51, 51);
+$color_text_border: #333;
 $color_sub_title: #aaa;
-$color_sold_out: rgba(255, 255, 255, 0.8);
+$color_sold_out: #ffffffcc;
+$color_focus_border: #626262;
+$color_input_border: #dfdfdf;
+$color_input_background: #f3f3f4;

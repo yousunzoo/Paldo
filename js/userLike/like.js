@@ -36,34 +36,60 @@ export async function setLikePage() {
       const costPrice = discountRate ? Math.floor((price * 100) / (100 - discountRate)) : price;
 
       /* product-list-container > thumbnailImage + product-detail-section */
-      const productListContainerEl = makeDOMwithProperties("div", { className: "product-list-container" });
-      const thumbnailImageEl = makeDOMwithProperties("img", { alt: "썸네일 이미지", src: thumbnail });
+      const productListContainerEl = makeDOMwithProperties("div", {
+        className: "product-list-container",
+      });
+      const thumbnailImageEl = makeDOMwithProperties("img", {
+        alt: "썸네일 이미지",
+        src: thumbnail,
+      });
 
       /* product-detail-section > product-text-container + product-button-section */
-      const productDetailSectionEl = makeDOMwithProperties("div", { className: "product-detail-section" });
+      const productDetailSectionEl = makeDOMwithProperties("div", {
+        className: "product-detail-section",
+      });
 
       /* product-text-container > product-title + product-price */
-      const productTextContainerEl = makeDOMwithProperties("div", { className: "product-text-container" });
+      const productTextContainerEl = makeDOMwithProperties("div", {
+        className: "product-text-container",
+      });
       // product-title
       const productTitleEl = makeDOMwithProperties("div", { className: "product-title" });
-      const productLinkEl = makeDOMwithProperties("a", { href: "javascript:void(0)", className: "product-name", textContent: title });
+      const productLinkEl = makeDOMwithProperties("a", {
+        href: "javascript:void(0)",
+        className: "product-name",
+        textContent: title,
+      });
       productTitleEl.append(productLinkEl);
       // product-price
       const productPriceEl = makeDOMwithProperties("div", { className: "product-price" });
-      const productDiscountRateEl = makeDOMwithProperties("div", { className: "product-discount-rate" });
+      const productDiscountRateEl = makeDOMwithProperties("div", {
+        className: "product-discount-rate",
+      });
       if (discountRate) {
         productDiscountRateEl.textContent = `${discountRate}%`;
       }
-      const productDiscountPriceEl = makeDOMwithProperties("div", { className: "product-discount-price", textContent: `${price.toLocaleString("ko-KR")}원` });
-      const productCostPriceEl = makeDOMwithProperties("div", { className: "product-cost-price", textContent: "" });
+      const productDiscountPriceEl = makeDOMwithProperties("div", {
+        className: "product-discount-price",
+        textContent: `${price.toLocaleString("ko-KR")}원`,
+      });
+      const productCostPriceEl = makeDOMwithProperties("div", {
+        className: "product-cost-price",
+        textContent: "",
+      });
       productCostPriceEl.textContent = discountRate ? `${costPrice.toLocaleString("ko-KR")}원` : "";
       productPriceEl.append(productDiscountRateEl, productDiscountPriceEl, productCostPriceEl);
 
       /* product-button-section > delete-button + take-button */
-      const productButtonSectionEl = makeDOMwithProperties("div", { className: "product-button-section" });
+      const productButtonSectionEl = makeDOMwithProperties("div", {
+        className: "product-button-section",
+      });
       productButtonSectionEl.dataset.id = id;
       // delete-button
-      const deleteButtonEl = makeDOMwithProperties("button", { className: "delete-button", textContent: "삭제" });
+      const deleteButtonEl = makeDOMwithProperties("button", {
+        className: "delete-button",
+        textContent: "삭제",
+      });
       deleteButtonEl.addEventListener("click", function () {
         const id = deleteButtonEl.closest(".product-button-section").dataset.id;
         const wishList = getLocalStorageData(WISH_LIST);
@@ -76,7 +102,10 @@ export async function setLikePage() {
         initPage();
       });
       // take-button
-      const takeButtonEl = makeDOMwithProperties("button", { className: "take-button", textContent: "담기" });
+      const takeButtonEl = makeDOMwithProperties("button", {
+        className: "take-button",
+        textContent: "담기",
+      });
       takeButtonEl.addEventListener("click", function () {
         const id = takeButtonEl.closest(".product-button-section").dataset.id;
         // 추가할 wish
@@ -102,7 +131,7 @@ export async function setLikePage() {
     // 하단 렌더링 구조 참고
     /* html */ `
       <div class="product-list-container">
-        <img alt="" src="https://img-cf.kurly.com/shop/data/goods/1648206780555l0.jpeg" />
+        <img alt="" src="https://img-cf.kurly.com/shop/data/product/1648206780555l0.jpeg" />
         <div class="product-detail-section">
           <div class="product-text-container">
             <div class="product-title">
@@ -131,10 +160,31 @@ export async function setLikePage() {
 function setMockData() {
   // 제품명, 가격, 수량, 썸네일이미지
   const wishList = [
-    { id: "xr14ikmurlABzuizuDge", title: "이토엔쟈스민티(500ml*24)", price: 37950, thumbnailImage: "/images/product/이토엔쟈스민티.png" },
-    { id: "sm9RXKb3hpHe3MfEZyjb", title: "카프리썬 오렌지(200ml*10)", price: 6050, discountRate: 15, thumbnailImage: "/images/product/카프리썬오렌지.png" },
-    { id: "sWpLAtpN52bmwkhqiq1S", title: "파워오투 복숭아자몽(500ml*24)", price: 35200, thumbnailImage: "/images/product/파워오투복숭아자몽.png" },
-    { id: "sCTHoWGOEdROxEuiMb4v", title: "오이오차녹차(525ml*24)", price: 38060, thumbnailImage: "/images/product/오이오차녹차.png" },
+    {
+      id: "xr14ikmurlABzuizuDge",
+      title: "이토엔쟈스민티(500ml*24)",
+      price: 37950,
+      thumbnailImage: "/images/product/이토엔쟈스민티.png",
+    },
+    {
+      id: "sm9RXKb3hpHe3MfEZyjb",
+      title: "카프리썬 오렌지(200ml*10)",
+      price: 6050,
+      discountRate: 15,
+      thumbnailImage: "/images/product/카프리썬오렌지.png",
+    },
+    {
+      id: "sWpLAtpN52bmwkhqiq1S",
+      title: "파워오투 복숭아자몽(500ml*24)",
+      price: 35200,
+      thumbnailImage: "/images/product/파워오투복숭아자몽.png",
+    },
+    {
+      id: "sCTHoWGOEdROxEuiMb4v",
+      title: "오이오차녹차(525ml*24)",
+      price: 38060,
+      thumbnailImage: "/images/product/오이오차녹차.png",
+    },
   ];
   const loginId = JSON.parse(localStorage.getItem("loginInfo")).loginId;
   const userData = JSON.parse(localStorage.getItem(loginId));

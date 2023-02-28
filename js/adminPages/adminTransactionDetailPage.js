@@ -1,6 +1,6 @@
 export default /* html */ `
-<div class="goods-list-wrapper">
-  <div class="goods-title-wrapper">
+<div class="product-list-wrapper">
+  <div class="product-title-wrapper">
     <div class="title-header">
       <div class="title">개별 거래 내역 관리</div>
     </div>
@@ -14,16 +14,16 @@ export default /* html */ `
     </div>
   </div>
   <div class="bar"></div>
-  <div class="goods-info skeleton-loading">
-    <div class="goods-info-left">
-      <div class="goods-thumbnail">
+  <div class="product-info skeleton-loading">
+    <div class="product-info-left">
+      <div class="product-thumbnail">
       </div>
-      <div class="goods-info-title">상품정보</div>
-      <div class="goods-id"></div>
-      <div class="goods-name"></div>
-      <div class="goods-price"></div>
+      <div class="product-info-title">상품정보</div>
+      <div class="product-id"></div>
+      <div class="product-name"></div>
+      <div class="product-price"></div>
     </div>
-    <div class="goods-info-right">
+    <div class="product-info-right">
       <div class="info-customer">
         <div class="info-customer-title">구매자 정보</div>
         <div class="customer-email"></div>

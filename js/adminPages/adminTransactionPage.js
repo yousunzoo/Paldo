@@ -1,8 +1,8 @@
 export default /* html */ `
-      <div class="goods-list-wrapper">
+      <div class="product-list-wrapper">
       <div class="title-header">
         <div class="title">거래 내역 관리</div>
-          <div class="search-goods">
+          <div class="search-product">
             <input type="text" class="search-username" placeholder="구매자명을 입력해 주세요." />
             <div class="search-button-wrapper">
               <button class="search">검색</button>

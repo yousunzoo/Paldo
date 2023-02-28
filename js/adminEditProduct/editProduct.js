@@ -5,10 +5,10 @@ import { getDetailProduct } from "../api/getDetailProduct";
 export const renderEditDetailPage = async (id, router) => {
   const productInfo = await getDetailProduct(id);
 
-  const inputName = document.querySelector(".goods-name");
-  const inputPrice = document.querySelector(".goods-price");
-  const inputSale = document.querySelector(".goods-sale");
-  const inputTag = document.querySelector(".goods-tag");
+  const inputName = document.querySelector(".product-name");
+  const inputPrice = document.querySelector(".product-price");
+  const inputSale = document.querySelector(".product-sale");
+  const inputTag = document.querySelector(".product-tag");
   const thumbnailImg = document.querySelector(".thumbnail");
   const detailIng = document.querySelector(".detail");
   const cost = document.querySelector(".sale-cost");
@@ -53,7 +53,7 @@ export const renderEditDetailPage = async (id, router) => {
   });
 
   // 할인가 입력시 1이상 100이하 입력 가능
-  const saleButtons = document.querySelector(".goods-sale");
+  const saleButtons = document.querySelector(".product-sale");
   saleButtons.addEventListener("input", function () {
     if (this.value > 100) {
       this.value = this.value.slice(0, -1);
@@ -68,7 +68,7 @@ export const renderEditDetailPage = async (id, router) => {
   });
 
   //
-  const inputThumb = document.querySelector(".goods-thumbnail");
+  const inputThumb = document.querySelector(".product-thumbnail");
   inputThumb.addEventListener("change", () => {
     const file = inputThumb.files[0];
     const reader = new FileReader();
@@ -78,7 +78,7 @@ export const renderEditDetailPage = async (id, router) => {
     });
   });
 
-  const inputDetail = document.querySelector(".goods-detail");
+  const inputDetail = document.querySelector(".product-detail");
   inputDetail.addEventListener("change", () => {
     const file = inputDetail.files[0];
     const reader = new FileReader();

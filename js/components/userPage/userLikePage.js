@@ -95,7 +95,7 @@ export default /* html */ `
           <!-- <p class="no-list">찜한 상품이 없습니다.</p>
 
           <div class="product-list-container">
-            <img alt="" src="https://img-cf.kurly.com/shop/data/goods/1648206780555l0.jpeg" />
+            <img alt="" src="https://img-cf.kurly.com/shop/data/product/1648206780555l0.jpeg" />
             <div class="product-detail-section">
               <div class="product-text-container">
                 <div class="product-title">

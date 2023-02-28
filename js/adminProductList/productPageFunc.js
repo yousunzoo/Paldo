@@ -21,14 +21,22 @@ export const productPageButton = (router) => {
   toggleClass(soldoutButton, soldoutList);
 
   // 검색 버튼 입력 했을때
+  let timer;
   const inputbuttonEl = document.querySelector(".search");
-  const inputEl = document.querySelector(".search-goodsname");
+  const inputEl = document.querySelector(".search-productname");
   inputEl.addEventListener("keyup", async (event) => {
-    const listEls = await memoizedGetProduct();
-    if (event.key === "Enter" && !event.isComposing) {
-      const filterRes = productFilterList(listEls, inputEl.value);
-      productPagination(filterRes, router);
+    if (timer) {
+      clearTimeout(timer);
     }
+    timer = setTimeout(async function () {
+      if (event.isComposing) return;
+      if (event.key === "Enter") {
+        const listEls = await memoizedGetProduct();
+        const filterRes = productFilterList(listEls, inputEl.value);
+        inputEl.value = "";
+        productPagination(filterRes, router);
+      }
+    }, 200);
   });
 
   inputbuttonEl.addEventListener("click", async () => {

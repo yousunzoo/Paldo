@@ -1,6 +1,6 @@
 export default /* html */ `
     <div class="all-wrapper">
-      <div class="goods-title-wrapper">
+      <div class="product-title-wrapper">
         <div class="title-header">
           <div class="title">상품 상세페이지</div>
         </div>
@@ -13,13 +13,13 @@ export default /* html */ `
           </div>
         </div>
       </div>
-      <div class="goods-item-wrapper">
+      <div class="product-item-wrapper">
         <div class="bar"></div>
-        <div class="goods-info skeleton-loading">
-          <div class="goods-info-wrapper">
-            <div class="goods-thumbnail">
+        <div class="product-info skeleton-loading">
+          <div class="product-info-wrapper">
+            <div class="product-thumbnail">
             </div>
-            <div class="goods-info-text">
+            <div class="product-info-text">
               <div class="category">
                 <div class="title"></div>
               </div>

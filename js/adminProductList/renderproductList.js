@@ -1,10 +1,17 @@
 import { makeDOMwithProperties } from "../utils/dom.js";
-export const renderGoodsList = async (router, itemListData, no) => {
-  const ulEl = document.querySelector(".goods-list");
+export const renderProductList = async (router, itemListData, no) => {
+  const ulEl = document.querySelector(".product-list");
   if (no === undefined) {
     no = 1;
   } else {
     no = no;
+  }
+  if (itemListData === undefined) {
+    Swal.fire({
+      icon: "error",
+      text: "품절된 상품이 없습니다.",
+    });
+    return;
   }
   const itemEls = itemListData.map((item) => {
     const itemEl = makeDOMwithProperties("a", {
@@ -57,7 +64,17 @@ export const renderGoodsList = async (router, itemListData, no) => {
     itemCheck.append(inputCheck);
     itemThum.append(itemImg);
 
-    itemEl.append(itemCheck, itemNo, itemId, itemThum, itemName, itemCategory, itemPrice, itemSale, itemOutstock);
+    itemEl.append(
+      itemCheck,
+      itemNo,
+      itemId,
+      itemThum,
+      itemName,
+      itemCategory,
+      itemPrice,
+      itemSale,
+      itemOutstock
+    );
     itemEl.addEventListener("click", (event) => {
       if (event.target === inputCheck) {
         return;

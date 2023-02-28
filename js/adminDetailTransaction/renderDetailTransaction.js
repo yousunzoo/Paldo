@@ -4,12 +4,11 @@ import { makeDOMwithProperties } from "../utils/dom";
 
 export const renderDetailTransactionPage = async (id) => {
   const productInfo = await getTransactions();
-
   const [renderItem] = productInfo.filter((item) => item.detailId === id.id);
-  const goodsList = document.querySelector(".right-nav-bar");
-  goodsList.innerHTML = /* HTML */ `
-    <div class="goods-list-wrapper">
-      <div class="goods-title-wrapper">
+  const productList = document.querySelector(".right-nav-bar");
+  productList.innerHTML = /* HTML */ `
+    <div class="product-list-wrapper">
+      <div class="product-title-wrapper">
         <div class="title-header">
           <div class="title">개별 거래 내역 관리</div>
         </div>
@@ -19,31 +18,58 @@ export const renderDetailTransactionPage = async (id) => {
         </div>
       </div>
       <div class="bar"></div>
-      <div class="goods-info">
-        <div class="goods-info-left">
-          <div class="goods-thumbnail">
+      <div class="product-info">
+        <div class="product-info-left">
+          <div class="product-thumbnail">
             <img src="${renderItem.product.thumbnail}" alt="" />
           </div>
-          <div class="goods-info-title">상품정보</div>
-          <div class="goods-id"><span class="tag">거래상품 ID : </span><span class="id-val">${renderItem.detailId}</span></div>
-          <div class="goods-name"><span class="tag">상품 이름 : </span><span class="name-val">${renderItem.product.title}</span></div>
-          <div class="goods-price"><span class="tag">상품 가격 : </span><span class="price-val">${renderItem.product.price.toLocaleString()}</span></div>
+          <div class="product-info-title">상품정보</div>
+          <div class="product-id">
+            <span class="tag">거래상품 ID : </span
+            ><span class="id-val">${renderItem.detailId}</span>
+          </div>
+          <div class="product-name">
+            <span class="tag">상품 이름 : </span
+            ><span class="name-val">${renderItem.product.title}</span>
+          </div>
+          <div class="product-price">
+            <span class="tag">상품 가격 : </span
+            ><span class="price-val">${renderItem.product.price.toLocaleString()}</span>
+          </div>
         </div>
-        <div class="goods-info-right">
+        <div class="product-info-right">
           <div class="info-customer">
             <div class="info-customer-title">구매자 정보</div>
-            <div class="customer-email"><span class="tag">고객 메일 : </span><span class="id-val">${renderItem.user.email}</span></div>
-            <div class="customer-name"><span class="tag">고객 이름 : </span><span class="id-val">${renderItem.user.displayName}</span></div>
+            <div class="customer-email">
+              <span class="tag">고객 메일 : </span
+              ><span class="id-val">${renderItem.user.email}</span>
+            </div>
+            <div class="customer-name">
+              <span class="tag">고객 이름 : </span
+              ><span class="id-val">${renderItem.user.displayName}</span>
+            </div>
           </div>
           <div class="info-account">
             <div class="account-title">계좌 정보</div>
-            <div class="customer-account"><span class="tag">계좌 은행 : </span><span class="id-val">${renderItem.account.bankName}</span></div>
-            <div class="customer-bankcode"><span class="tag">은행 코드 : </span><span class="id-val">${renderItem.account.bankCode}</span></div>
-            <div class="customer-accountnum"><span class="tag">계좌 번호 : </span><span class="id-val">${renderItem.account.accountNumber}</span></div>
+            <div class="customer-account">
+              <span class="tag">계좌 은행 : </span
+              ><span class="id-val">${renderItem.account.bankName}</span>
+            </div>
+            <div class="customer-bankcode">
+              <span class="tag">은행 코드 : </span
+              ><span class="id-val">${renderItem.account.bankCode}</span>
+            </div>
+            <div class="customer-accountnum">
+              <span class="tag">계좌 번호 : </span
+              ><span class="id-val">${renderItem.account.accountNumber}</span>
+            </div>
           </div>
           <div class="info-transaction">
             <div class="transaction-title">거래 정보</div>
-            <div class="transaction-time"><span class="tag">거래 일시 : </span><span class="id-val">${renderItem.timePaid}</span></div>
+            <div class="transaction-time">
+              <span class="tag">거래 일시 : </span
+              ><span class="id-val">${renderItem.timePaid}</span>
+            </div>
             <div class="transaction-calcel">
               <span class="tag">취소 여부 : </span>
             </div>
@@ -79,7 +105,11 @@ export const renderDetailTransactionPage = async (id) => {
   confirmInfo.append(confirmInfoText);
   confirmButtonEl.addEventListener("click", () => {
     if (cancelButtonEl.textContent === "거래취소해제") {
-      Swal.fire("거래상태를 확인해주세요.", "거래취소된 상품은 거래완료를 할 수 없습니다.", "error");
+      Swal.fire(
+        "거래상태를 확인해주세요.",
+        "거래취소된 상품은 거래완료를 할 수 없습니다.",
+        "error"
+      );
       return;
     }
     let reservation = {
@@ -112,7 +142,11 @@ export const renderDetailTransactionPage = async (id) => {
   cancelInfo.append(cancelInfoText);
   cancelButtonEl.addEventListener("click", () => {
     if (confirmButtonEl.textContent === "거래완료해제") {
-      Swal.fire("거래완료상태를 확인해주세요.", "거래완료된 상품은 거래취소를 할 수 없습니다.", "error");
+      Swal.fire(
+        "거래완료상태를 확인해주세요.",
+        "거래완료된 상품은 거래취소를 할 수 없습니다.",
+        "error"
+      );
       return;
     }
     let reservation = {
