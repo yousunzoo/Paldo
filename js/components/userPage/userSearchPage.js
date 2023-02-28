@@ -1,7 +1,9 @@
 export default /* html */ `
-<div class="inner-wrapper">
+<div class="product-wrapper inner-wrapper">
+          <div class="spinner-wrapper">
+            <div class="spinner"></div>
+          </div>
           <h3 class="product-page-title"></h3>
-          <div class="product-wrapper">
             <div class="product-tab">
               <p class="total-count">총 <span class="count"></span>건</p>
               <ul class="sort-tab">

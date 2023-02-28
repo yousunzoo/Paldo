@@ -1,7 +1,7 @@
 export function swiperAction() {
   const mainbanner = document.querySelector(".main-banner .swiper");
-  const prdList1 = document.querySelector(".prd-list1 .swiper");
-  const prdList2 = document.querySelector(".prd-list2 .swiper");
+  const productList1 = document.querySelector(".product-list1 .swiper");
+  const productList2 = document.querySelector(".product-list2 .swiper");
   const accountListEl = document.querySelector(".account-list.swiper");
 
   new Swiper(mainbanner, {
@@ -15,23 +15,23 @@ export function swiperAction() {
     },
   });
 
-  new Swiper(prdList1, {
+  new Swiper(productList1, {
     slidesPerView: 4,
     spaceBetween: 18,
     navigation: {
       // 버튼
-      nextEl: ".prd-list1 .swiper-buttons .swiper-button-next",
-      prevEl: ".prd-list1 .swiper-buttons .swiper-button-prev",
+      nextEl: ".product-list1 .swiper-buttons .swiper-button-next",
+      prevEl: ".product-list1 .swiper-buttons .swiper-button-prev",
     },
   });
 
-  new Swiper(prdList2, {
+  new Swiper(productList2, {
     slidesPerView: 4,
     spaceBetween: 18,
     navigation: {
       // 버튼
-      nextEl: ".prd-list2 .swiper-buttons .swiper-button-next",
-      prevEl: ".prd-list2 .swiper-buttons .swiper-button-prev",
+      nextEl: ".product-list2 .swiper-buttons .swiper-button-next",
+      prevEl: ".product-list2 .swiper-buttons .swiper-button-prev",
     },
   });
 

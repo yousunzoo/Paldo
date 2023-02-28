@@ -2,13 +2,7 @@ import addCart from "../utils/addCart";
 import setSidebar from "../userSidebar/setSidebar";
 import moveToDetail from "../utils/movetoProductDetail";
 
-export default function setSearchProductList(
-  productList,
-  sort,
-  originResult,
-  router
-) {
-  const productWrapperDiv = document.querySelector(".product-wrapper");
+export default function setSearchProductList(productList, sort, originResult, router) {
   let newArr;
   switch (sort) {
     case "최신순":
@@ -30,15 +24,13 @@ export default function setSearchProductList(
       });
       break;
   }
-  const productListUi = productWrapperDiv.querySelector(".product-list");
+  const productListUl = document.querySelector(".product-list");
 
   const productEls = newArr.map((item) => {
     const productEl = document.createElement("li");
 
     const discountRate = item.discountRate > 0;
-    const originPrice = Math.floor(
-      (item.price * 100) / (100 - item.discountRate)
-    );
+    const originPrice = Math.floor((item.price * 100) / (100 - item.discountRate));
 
     productEl.innerHTML = /*html */ `
       <a href="productDetail/${item.id}" data-id="${item.id}">
@@ -53,19 +45,11 @@ export default function setSearchProductList(
                     <p class="product-name">${item.title}</p>
                     <div class="product-price">
                       <div>
-                        ${
-                          discountRate
-                            ? `<span class="discount-rate">${item.discountRate}%</span>`
-                            : ""
-                        }
+                        ${discountRate ? `<span class="discount-rate">${item.discountRate}%</span>` : ""}
                         <span class="sales-price">${item.price.toLocaleString()}원</span>
                       </div>
                       <div>
-                      ${
-                        discountRate
-                          ? `<span class="dimmed-price">${originPrice.toLocaleString()}원</span>`
-                          : ""
-                      }
+                      ${discountRate ? `<span class="dimmed-price">${originPrice.toLocaleString()}원</span>` : ""}
                       </div>
                     </div>
                   </div>
@@ -83,6 +67,8 @@ export default function setSearchProductList(
     });
     return productEl;
   });
-  productListUi.innerHTML = "";
-  productListUi.append(...productEls);
+  productListUl.innerHTML = "";
+  productListUl.append(...productEls);
+  const loadingDiv = document.querySelector(".spinner-wrapper");
+  loadingDiv.style.display = "none";
 }

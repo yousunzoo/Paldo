@@ -38,7 +38,7 @@ body {
 
   a {
     text-decoration: none;
-    color: inherit;
+    color: $color_primary;
   }
 
   min-width: 1440px;
@@ -47,7 +47,7 @@ body {
   header {
     padding-top: 42px;
     background-color: $color_white;
-    border-bottom: 1px solid $color_btn_border;
+    border-bottom: 1px solid $color_button_border;
     .header-top {
       position: relative;
       height: 100px;
@@ -73,7 +73,7 @@ body {
               position: absolute;
               top: 0;
               right: -1px;
-              background-color: $color_btn_border;
+              background-color: $color_button_border;
               width: 1px;
               height: 13px;
             }
@@ -208,11 +208,11 @@ body {
       margin: auto;
       width: 100px;
       box-sizing: border-box;
-      border: 1px solid $color_btn_border;
+      border: 1px solid $color_button_border;
       color: $color_primary;
       p {
         text-align: center;
-        border-bottom: 1px solid $color_btn_border;
+        border-bottom: 1px solid $color_button_border;
         padding: 4px 0;
       }
       .swiper {
@@ -235,7 +235,7 @@ body {
           margin: auto;
           width: 80px;
           height: 80px;
-          background-color: $color_btn_border;
+          background-color: $color_button_border;
           a {
             width: 80px;
             height: 80px;
@@ -267,13 +267,13 @@ body {
     }
   }
   footer {
-    border-top: 1px solid $color_btn_border;
+    border-top: 1px solid $color_button_border;
     padding-top: 40px;
     .inner-wrapper {
       display: flex;
       justify-content: space-between;
       padding-bottom: 30px;
-      .footer-team-info1 {
+      .footer-team-information1 {
         width: 50%;
         .team-name {
           display: flex;
@@ -283,7 +283,7 @@ body {
             height: 100px;
             margin-right: 20px;
           }
-          .team-name-desc {
+          .team-name-description {
             padding-top: 20px;
             .team-title-area {
               display: flex;
@@ -295,7 +295,7 @@ body {
                 border-radius: 4px;
                 font-size: 18px;
               }
-              .team-desc {
+              .team-description {
                 font-size: 20px;
                 padding-left: 10px;
               }
@@ -333,11 +333,11 @@ body {
               background-repeat: no-repeat;
               background-position: center;
             }
-            .profile-info {
+            .profile-information {
               display: flex;
               flex-direction: column;
               justify-content: center;
-              .profile-info-title {
+              .profile-information-title {
                 display: flex;
                 .profile-tag {
                   width: 30px;
@@ -365,7 +365,7 @@ body {
           }
         }
       }
-      .footer-team-info2 {
+      .footer-team-information2 {
         width: 45%;
         .footer-title {
           font-size: 20px;
@@ -385,14 +385,14 @@ body {
           padding-top: 30px;
           .inquiry-area {
             display: flex;
-            .inquiry-btn {
+            .inquiry-button {
               display: inline-block;
               width: 140px;
               height: 40px;
               margin-right: 12px;
               text-align: center;
               line-height: 40px;
-              border: 1px solid $color_btn_border;
+              border: 1px solid $color_button_border;
             }
             .inquiry-text {
               line-height: 20px;
@@ -434,7 +434,7 @@ body {
     width: 60px;
     height: 60px;
     border-radius: 100%;
-    border: 1px solid $color_btn_border;
+    border: 1px solid $color_button_border;
     span {
       color: $color_primary;
       font-size: 36px;
