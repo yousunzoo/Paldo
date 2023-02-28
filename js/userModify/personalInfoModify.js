@@ -9,7 +9,7 @@ export async function setModifyPage() {
   if (!isLogin) return;
 
   /* GLOBAL VARIABLES */
-  const { USER_INFO, USER_ADDRESS, USER_DATA } = SORT_TYPES;
+  const { USER_INFORMATION, USER_ADDRESS, USER_DATA } = SORT_TYPES;
   const userInformation = {
     oldPassword: "",
     newPassword: "",
@@ -105,7 +105,7 @@ export async function setModifyPage() {
     newPasswordCheckInputEl.value = "";
 
     // userName
-    const userName = getLocalStorageData(USER_INFO).displayName || "";
+    const userName = getLocalStorageData(USER_INFORMATION).displayName || "";
     const userNameEl = document.querySelector("#userName");
     userNameEl.value = userName;
 

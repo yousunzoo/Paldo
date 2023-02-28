@@ -10,7 +10,7 @@ export async function setPaymentPage(router) {
   const isLogin = await checkAuthorization();
   if (!isLogin) return;
   /* GLOBAL VARIABLES */
-  const { USER_INFO, USER_ADDRESS, COUPONS, CART_LIST } = SORT_TYPES;
+  const { USER_INFORMATION, USER_ADDRESS, COUPONS, CART_LIST } = SORT_TYPES;
   const payInformation = {
     orderAmount: 0,
     originAmount: 0,
@@ -246,19 +246,19 @@ export async function setPaymentPage(router) {
     const areaAmountEl = document.querySelector(".area-amount > ul");
 
     const orderAmountEl = areaAmountEl.querySelector("#orderAmount");
-    payInformation.orderAmount = paymentList.reduce((acc, product) => {
+    payInformation.orderAmount = paymentList.reduce((accumulator, product) => {
       const { price, quantity } = product;
-      acc += price * quantity;
-      return acc;
+      accumulator += price * quantity;
+      return accumulator;
     }, 0);
     orderAmountEl.textContent = payInformation.orderAmount.toLocaleString("ko-KR");
 
     const originAmountEl = areaAmountEl.querySelector("#originAmount");
-    payInformation.originAmount = paymentList.reduce((acc, product) => {
+    payInformation.originAmount = paymentList.reduce((accumulator, product) => {
       const { price, quantity, discountRate } = product;
       // 할인율이 있으면 원가를 계산하여 누적(DB에 저장된 상품 가격은 할인율이 적용된 가격)
-      acc += (discountRate ? Math.floor((price * 100) / (100 - discountRate)) : price) * quantity;
-      return acc;
+      accumulator += (discountRate ? Math.floor((price * 100) / (100 - discountRate)) : price) * quantity;
+      return accumulator;
     }, 0);
     originAmountEl.textContent = payInformation.originAmount.toLocaleString("ko-KR");
 
@@ -309,7 +309,7 @@ export async function setPaymentPage(router) {
     }
   }
   function renderOrdererInformation() {
-    const userInformation = getLocalStorageData(USER_INFO);
+    const userInformation = getLocalStorageData(USER_INFORMATION);
 
     const senderEl = document.querySelector(".orderer-area .sender");
     senderEl.textContent = userInformation.displayName;

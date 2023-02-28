@@ -68,8 +68,8 @@ export async function setAccountPage() {
       if (event.target.matches('input[type="radio"]')) {
         const str = event.target.labels[0].innerText;
         const matches = str.match(/\d+/g) || [];
-        totalDigits = matches.reduce((acc, digit) => {
-          return acc + Number(digit);
+        totalDigits = matches.reduce((accumulator, digit) => {
+          return accumulator + Number(digit);
         }, 0);
       }
     }

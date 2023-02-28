@@ -91,14 +91,14 @@ export function analyzeOrderList(orderlist) {
   const newGroupsArray = [];
   groupsArray.forEach((group) => {
     // group 내부의 거래 건수를 분석
-    const parsedObj = group.reduce((acc, transaction) => {
-      if (acc[transaction.product.productId]) {
+    const parsedObj = group.reduce((accumulator, transaction) => {
+      if (accumulator[transaction.product.productId]) {
         // 동일한 productId가 존재하면, detailId를 추가하고, quantity를 1 더해준다.
-        acc[transaction.product.productId].detailId.push(transaction.detailId);
-        acc[transaction.product.productId].quantity += 1;
+        accumulator[transaction.product.productId].detailId.push(transaction.detailId);
+        accumulator[transaction.product.productId].quantity += 1;
       } else {
         // 새로운 productId라면, 새롭게 data를 추가.
-        acc[transaction.product.productId] = {
+        accumulator[transaction.product.productId] = {
           detailId: [transaction.detailId],
           done: transaction.done,
           isCanceled: transaction.isCanceled,
@@ -107,7 +107,7 @@ export function analyzeOrderList(orderlist) {
           quantity: 1,
         };
       }
-      return acc;
+      return accumulator;
     }, {});
     const newGroup = Object.values(parsedObj);
     newGroupsArray.push(newGroup);
@@ -117,10 +117,10 @@ export function analyzeOrderList(orderlist) {
 function createOrderListUls(groups) {
   return groups.map((group, index) => {
     // 총 상품 금액
-    const totalPrice = group.reduce((acc, transaction) => {
+    const totalPrice = group.reduce((accumulator, transaction) => {
       const { product, quantity } = transaction;
-      acc += product.price * quantity;
-      return acc;
+      accumulator += product.price * quantity;
+      return accumulator;
     }, 0);
 
     // timePaid 한국 시간으로 변환
