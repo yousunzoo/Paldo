@@ -10,16 +10,9 @@ export async function setModifyPage() {
 
   /* GLOBAL VARIABLES */
   const { USER_INFORMATION, USER_ADDRESS, USER_DATA } = SORT_TYPES;
-  const userInformation = {
-    oldPassword: "",
-    newPassword: "",
-    displayName: "",
-  };
+  const userInformation = {};
   const userAddress = {};
-  const validCheck = {
-    newPassword: false,
-    newPasswordCheck: false,
-  };
+  const validCheck = {};
 
   /* DOM */
   const findAddresssButton = document.querySelector(".find-address");
@@ -52,7 +45,10 @@ export async function setModifyPage() {
 
     // 서버에 회원정보 수정 요청
     const result = await requestPersonalInfoModify(userInformation, userAddress);
-    if (!result) return;
+    if (!result) {
+      spinnerEl.classList.remove("active");
+      return;
+    }
     Swal.fire("수정 성공!", "개인 정보가 수정되었습니다.", "success");
     // localStorage 세팅
     const userData = getLocalStorageData(USER_DATA);
@@ -124,6 +120,11 @@ export async function setModifyPage() {
     detailAddressEl.value = detailAddress;
   }
   function validPasswordCheck(password) {
+    if (!password) {
+      delete validCheck.newPassword;
+      return;
+    }
+    validCheck.newPassword = false;
     const oldPassword = passwordInput.value;
     const num = password.search(/[0-9]/g);
     const eng = password.search(/[a-z]/gi);
@@ -158,6 +159,11 @@ export async function setModifyPage() {
     }
   }
   function samePasswordCheck(password) {
+    if (!password) {
+      delete validCheck.newPasswordCheck;
+      return;
+    }
+    validCheck.newPasswordCheck = false;
     const enteredPassword = newPasswordInputEl.value;
     const samePasswordCheckSpan = newPasswordCheckInputEl.parentElement.querySelector(".error-message");
 
