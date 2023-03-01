@@ -1,5 +1,8 @@
 export default /* html */ `
 <div id="adminWrapper">
+  <div class="loader-wrapper">
+    <div class="loader"></div>
+  </div>
   <header class="admin-header">
     <div class="header-wrapper">
       <a class="logo" href="report" data-navigo></a>

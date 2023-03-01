@@ -1,5 +1,5 @@
 import { checkAuthorization } from "../api/checkAuthorization";
-import { getLocalStorageData } from "../localStorage/getLocalStorageData";
+import { getLocalStorageData } from "./localStorage/getLocalStorageData";
 
 export default async function addCart(product, quantity, router) {
   const isLogined = await checkAuthorization();

@@ -3,7 +3,7 @@
   width: 1100px;
   min-width: 300px;
   background-color: #e8ecef;
-  .goods-list-wrapper {
+  .product-list-wrapper {
     width: 1085px;
     height: 100%;
     background-color: $color_white;
@@ -16,13 +16,13 @@
         font-size: 20px;
         font-weight: 600;
       }
-      .search-goods {
+      .search-product {
         padding: 10px 20px;
         display: flex;
         .search-username {
           width: 300px;
           height: 40px;
-          border: 1px solid #b5b5b5;
+          border: 1px solid $color_original_price;
           padding-left: 10px;
         }
         .search {
@@ -42,7 +42,7 @@
         }
         .flatpickr-input {
           width: 120px;
-          border: 1px solid #b5b5b5;
+          border: 1px solid $color_original_price;
           padding: 10px;
           text-align: end;
           font-size: 12px;
@@ -65,13 +65,13 @@
         align-items: center;
         line-height: 12px;
         padding: 5px;
-        border-top: 2px solid #cdcdcd;
-        border-bottom: 2px solid #cdcdcd;
-        border-right: 1px solid #e7e6e6;
+        border-top: 2px solid $color_product_tag;
+        border-bottom: 2px solid $color_product_tag;
+        border-right: 1px solid $color_border_line;
       }
       .item-no {
         width: 30px;
-        border-left: 1px solid #e7e6e6;
+        border-left: 1px solid $color_border_line;
       }
       .item-name {
         width: 330px;
@@ -112,12 +112,12 @@
           align-items: center;
           line-height: 12px;
           padding: 5px;
-          border-bottom: 1px solid #e7e6e6;
-          border-right: 1px solid #e7e6e6;
+          border-bottom: 1px solid $color_border_line;
+          border-right: 1px solid $color_border_line;
         }
         .item-no {
           width: 30px;
-          border-left: 1px solid #e7e6e6;
+          border-left: 1px solid $color_border_line;
         }
         .item-name {
           width: 330px;
@@ -139,6 +139,13 @@
         }
         .item-confirm {
           width: 60px;
+        }
+      }
+      .item-transaction:hover {
+        font-weight: 800;
+        img {
+          width: 63px;
+          height: 63px;
         }
       }
     }
@@ -164,7 +171,7 @@
     .prev,
     .next {
       width: 50px;
-      background-color: #414141;
+      background-color: $color_primary;
       color: $color_white;
       font-size: 14px;
       text-align: center;

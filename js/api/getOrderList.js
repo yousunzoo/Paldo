@@ -1,4 +1,4 @@
-import { SORT_TYPES, getLocalStorageData } from "../localStorage/getLocalStorageData";
+import { SORT_TYPES, getLocalStorageData } from "../utils/localStorage/getLocalStorageData";
 import { headers, url } from "../api/headers";
 
 const { ACCESS_TOKEN } = SORT_TYPES;
@@ -36,7 +36,6 @@ export default async function () {
     const json = await res.json();
     return json;
   } catch (error) {
-    console.error(error);
     Swal.fire({
       icon: "error",
       title: "Oops...",

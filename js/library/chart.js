@@ -1,6 +1,4 @@
-import { productCount, transactionsCount } from "../adminReport/getCountData";
-
-export function chartFn() {
+export const chartFn = async (barCountArr, pieCountArr) => {
   const bar = document.getElementById("bar-chart").getContext("2d");
   Chart.defaults.font.size = 11;
   const barChart = new Chart(bar, {
@@ -36,10 +34,8 @@ export function chartFn() {
       ],
     },
   });
-  productCount().then((countArr) => {
-    barChart.config._config.data.datasets[0].data = countArr;
-    barChart.update();
-  });
+  barChart.config._config.data.datasets[0].data = await barCountArr;
+  barChart.update();
   const pie = document.getElementById("pie-chart").getContext("2d");
   const pieChart = new Chart(pie, {
     type: "pie",
@@ -83,8 +79,8 @@ export function chartFn() {
       },
     },
   });
-  transactionsCount().then((countArr) => {
-    pieChart.config._config.data.datasets[0].data = countArr;
-    pieChart.update();
-  });
-}
+  pieChart.config._config.data.datasets[0].data = await pieCountArr;
+  pieChart.update();
+  const loader = document.querySelector(".loader-wrapper");
+  loader.style.display = "none";
+};
