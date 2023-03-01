@@ -7,27 +7,13 @@ import toggleCountButton from "./toggleCountButton";
 
 export async function setProductDetailPage(id, router) {
   const productInformation = await getDetailProduct(id);
-<<<<<<< HEAD:js/userProduct/setProductDetailPage.js
-  if (!productInfo) {
-=======
   if (!productInformation) {
->>>>>>> 0c8932f43665eead887530fe594f9fcd0a43b439:js/userFunctions/userProduct/setProductDetailPage.js
     let sidebarData = getLocalStorageData("sidebarData");
     sidebarData = sidebarData.filter((item) => item.id !== id);
     localStorage.setItem("sidebarData", JSON.stringify(sidebarData));
     setSidebarSwiper(router);
-<<<<<<< HEAD:js/userProduct/setProductDetailPage.js
-    history.back();
-  }
-
-  // 상품이 품절 상태일 때 품절 div 띄우기
-  if (productInformation.isSoldOut) {
-    const soldOutDiv = document.querySelector(".sold-out");
-    soldOutDiv.style.display = "flex";
-=======
     alert("없는 상품입니다. 메인페이지로 이동합니다.");
     router.navigate("/");
->>>>>>> 0c8932f43665eead887530fe594f9fcd0a43b439:js/userFunctions/userProduct/setProductDetailPage.js
   }
 
   // 상품 정보 뿌리기
@@ -48,12 +34,8 @@ export async function setProductDetailPage(id, router) {
   const discountRate = document.querySelector(".discount-rate");
   const originPrice = document.querySelector(".origin-price");
   if (productInformation.discountRate) {
-<<<<<<< HEAD:js/userProduct/setProductDetailPage.js
     discountRate.querySelector("span").textContent =
       productInformation.discountRate;
-=======
-    discountRate.querySelector("span").textContent = productInformation.discountRate;
->>>>>>> 0c8932f43665eead887530fe594f9fcd0a43b439:js/userFunctions/userProduct/setProductDetailPage.js
     originPrice.querySelector("span").textContent = parseInt(
       (productInformation.price * 100) / (100 - productInformation.discountRate)
     ).toLocaleString();
