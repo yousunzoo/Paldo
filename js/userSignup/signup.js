@@ -52,7 +52,12 @@ export default function signUpEvent() {
       });
     } else {
       setUserInfo(result, userInfo.email, userAddress);
-      history.back();
+      Swal.fire({
+        icon: "check",
+        text: "회원가입이 성공적으로 완료되었습니다!",
+      }).then(() => {
+        history.back();
+      });
     }
   });
 

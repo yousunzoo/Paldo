@@ -13,5 +13,6 @@ export const getDetailProduct = async (id) => {
       icon: "error",
       text: "요청이 실패했습니다!",
     });
+    return false;
   }
 };

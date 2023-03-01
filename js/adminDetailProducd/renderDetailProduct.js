@@ -44,7 +44,11 @@ export const renderDetailPage = async (id, router) => {
             </div>
             <div class="tag">
               <div class="title">할인가</div>
-              <div class="val">${parseInt(productInfo.price * (1 - productInfo.discountRate / 100))}원</div>
+              <div class="val">
+                ${parseInt(
+                  productInfo.price * (1 - productInfo.discountRate / 100)
+                )}원
+              </div>
             </div>
           </div>
         </div>

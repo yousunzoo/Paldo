@@ -7,6 +7,14 @@ import toggleCountButton from "./toggleCountButton";
 
 export async function setProductDetailPage(id, router) {
   const productInformation = await getDetailProduct(id);
+  if (!productInfo) {
+    let sidebarData = getLocalStorageData("sidebarData");
+    sidebarData = sidebarData.filter((item) => item.id !== id);
+    localStorage.setItem("sidebarData", JSON.stringify(sidebarData));
+    setSidebarSwiper(router);
+    history.back();
+  }
+
   // 상품이 품절 상태일 때 품절 div 띄우기
   if (productInformation.isSoldOut) {
     const soldOutDiv = document.querySelector(".sold-out");
@@ -30,8 +38,11 @@ export async function setProductDetailPage(id, router) {
   const discountRate = document.querySelector(".discount-rate");
   const originPrice = document.querySelector(".origin-price");
   if (productInformation.discountRate) {
-    discountRate.querySelector("span").textContent = productInformation.discountRate;
-    originPrice.querySelector("span").textContent = parseInt((productInformation.price * 100) / (100 - productInformation.discountRate)).toLocaleString();
+    discountRate.querySelector("span").textContent =
+      productInformation.discountRate;
+    originPrice.querySelector("span").textContent = parseInt(
+      (productInformation.price * 100) / (100 - productInformation.discountRate)
+    ).toLocaleString();
   } else {
     discountRate.innerHTML = "";
     originPrice.innerHTML = "";
@@ -104,7 +115,9 @@ export async function setProductDetailPage(id, router) {
   // 장바구니에 담기 기능
   const cartButton = document.querySelector(".cart-button");
   cartButton.addEventListener("click", async () => {
-    const quantity = document.querySelector(".product-quantity .count").textContent;
+    const quantity = document.querySelector(
+      ".product-quantity .count"
+    ).textContent;
 
     addCart(productInformation, quantity, router);
   });
