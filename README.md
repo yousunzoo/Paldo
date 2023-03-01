@@ -72,10 +72,11 @@
 <br/><br/><br/>
 ### 💻 프로젝트 실행 방법
 ```bash
-$ git clone https://github.com/KDT4-team6/Paldo.git
-$ cd Paldo
-$ npm i
-$ npm run dev
+1. $ git clone https://github.com/KDT4-team6/Paldo.git
+2. $ cd Paldo
+3. $ npm i
+4. root경로에 .env 파일 생성 후, api관련 정보(API_KEY, API_URL, USER_NAME) 입력 ex) API_KEY=123456
+5. $ npm run dev
 ``` 
 <br/><br/><br/>
  ## ⏱ 타임라인
