@@ -2,11 +2,9 @@
   "name": "paldo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "parcel index.html",
-    "build": "parcel build index.html"
+    "dev_main": "parcel admin_main.html"
   },
   "repository": {
     "type": "git",
@@ -20,9 +18,24 @@
   },
   "homepage": "https://github.com/KDT4-team6/Paldo#readme",
   "devDependencies": {
-    "parcel-bundler": "^1.12.5",
+    "node-sass": "^8.0.0",
+    "parcel-bundler": "^1.8.1",
     "parcel-plugin-static-files-copy": "^2.6.0",
     "postcss": "^8.4.21",
     "sass": "^1.58.0"
+  },
+  "staticFiles": {
+    "staticPath": "static"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 version"
+  ],
+  "dependencies": {
+    "idb": "^7.1.1",
+    "js": "^0.1.0",
+    "navigo": "^8.11.1",
+    "static": "^2.0.0",
+    "utils": "^0.3.1"
   }
 }
