@@ -9,7 +9,7 @@
 :--: | :--: | :--: | :--: 
 <img src="https://user-images.githubusercontent.com/102499959/217551283-17667e31-d531-484e-803f-fc77d9c4e2a2.png" style="zoom: 20%;" /> | <img src="https://user-images.githubusercontent.com/102499959/217551787-88fa9a6a-45c0-4247-9958-48e10ea2501a.png" style="zoom: 20%;" /> | <img src="https://user-images.githubusercontent.com/102499959/217551950-8ede2ed8-16d9-4643-9acc-aff59e92bb66.png" style="zoom: 20%;" /> | <img src="https://user-images.githubusercontent.com/102499959/217569300-a231ec7a-c0e7-4e3a-b936-cd152a0f7673.png" style="zoom: 20%;" /> 
 [kjungit](https://github.com/kjungit) | [bongsee](https://github.com/bongsee) | [yousunzoo](https://github.com/yousunzoo) | [FranzCho](https://github.com/FranzCho) 
-[관리자 페이지]<br>- 메인 페이지<br>- 상품 관리 페이지<br>- 상품 개별 페이지<br>- 상품 등록 페이지<br>- 상품 수정 페이지<br>- 거래내역 관리 페이지<br>- 거래내역 상세 페이지|[마이 페이지]<br>- 찜한 상품 페이지<br>- 주문 내역 페이지<br>- 회원정보 수정 페이지<br>- 계좌 관리 페이지<br>[주문 페이지]<br>- 주문서 페이지<br>- 결제 완료 페이지|[사용자용 페이지]<br>- 상품 페이지<br>- 상품 검색 페이지<br>- 장바구니 페이지<br>- 쿠폰 페이지<br>- 로그인/아웃 시 헤더 변경<br>- 사이드바|- 회원가입 페이지 퍼블리싱<br>- 장바구니 페이지 퍼블리싱<br>- 찜한 상품 페이지 퍼블리싱<br>- 제품 상세 페이지 퍼블리싱
+[관리자 페이지]<br>- 메인 페이지<br>- 상품 관리 페이지<br>- 상품 개별 페이지<br>- 상품 등록 페이지<br>- 상품 수정 페이지<br>- 거래내역 관리 페이지<br>- 거래내역 상세 페이지|[마이 페이지]<br>- 찜한 상품 페이지<br>- 주문 내역 페이지<br>- 회원정보 수정 페이지<br>- 계좌 관리 페이지<br>[주문 페이지]<br>- 주문서 페이지<br>- 결제 완료 페이지|[사용자용 페이지]<br>- 메인 페이지<br>- 상품 페이지<br>- 상품 검색 페이지<br>- 장바구니 페이지<br>- 쿠폰 페이지<br>- 로그인/아웃 시 헤더 변경<br>- 사이드바|- 회원가입 페이지 퍼블리싱<br>- 장바구니 페이지 퍼블리싱<br>- 찜한 상품 페이지 퍼블리싱<br>- 제품 상세 페이지 퍼블리싱
 
 <br /><br /><br />
  ## 🛒 프로젝트 소개
