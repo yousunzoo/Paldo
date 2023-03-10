@@ -75,9 +75,9 @@ export default /* html */ `
               <p class="team-description">JeonGukPaldo</p>
             </div>
             <a
-              href="https://github.com/KDT4-team6/Ottogi"
+              href="https://github.com/KDT4-team6/Paldo"
               class="github-link"
-              >https://github.com/KDT4-team6/Ottogi</a
+              >https://github.com/KDT4-team6/Paldo</a
             >
             <p class="github-link">
               안녕하세요 여러분 모두 반가워요. 여기까지 살펴본 당신은 멋쟁이<br>
@@ -160,7 +160,7 @@ export default /* html */ `
           <div class="inquiry-area">
             <a
               class="inquiry-button"
-              href="https://github.com/KDT4-team6/Ottogi"
+              href="https://github.com/KDT4-team6/Paldo"
               >문의하기</a
             >
             <p class="inquiry-text">

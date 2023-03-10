@@ -68,6 +68,10 @@ import { transctionFilterList } from "./adminFunctions/adminTransactionList/tran
 
 import { getLocalStorageData } from "./utils/localStorage/getLocalStorageData.js";
 import { productCount, transactionsCount } from "./adminFunctions/adminReport/getCountData.js";
+import dotenv from "dotenv";
+
+// 환경변수 로드
+dotenv.config("/");
 
 const mainRouter = new Navigo("/");
 const body = document.querySelector("body");
@@ -96,14 +100,7 @@ const body = document.querySelector("body");
 mainRouter.hooks({
   async before(done, match) {
     window.scrollTo(0, 0);
-    const requiredLogInPaths = [
-      "cart",
-      "mypage/orderList",
-      "mypage/account",
-      "mypage/modify",
-      "mypage/like",
-      "payment",
-    ];
+    const requiredLogInPaths = ["cart", "mypage/orderList", "mypage/account", "mypage/modify", "mypage/like", "payment"];
     if (requiredLogInPaths.includes(match.url)) {
       const isLogin = await checkAuthorization();
       if (!isLogin) {

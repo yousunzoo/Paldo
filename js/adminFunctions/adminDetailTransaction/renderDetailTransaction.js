@@ -6,6 +6,7 @@ export const renderDetailTransactionPage = async (id) => {
   const productInfo = await getTransactions();
   const [renderItem] = productInfo.filter((item) => item.detailId === id.id);
   const productList = document.querySelector(".right-nav-bar");
+  let koreaTime = new Date(renderItem.timePaid);
   productList.innerHTML = /* HTML */ `
     <div class="product-list-wrapper">
       <div class="product-title-wrapper">
@@ -67,8 +68,12 @@ export const renderDetailTransactionPage = async (id) => {
           <div class="info-transaction">
             <div class="transaction-title">거래 정보</div>
             <div class="transaction-time">
-              <span class="tag">거래 일시 : </span
-              ><span class="id-val">${renderItem.timePaid}</span>
+               <span class="tag">거래 일시 : </span
+              ><span class="id-val"
+                >${koreaTime.toLocaleString("ko-KR", {
+                  timeZone: "Asia/Seoul",
+                })}</span
+              >
             </div>
             <div class="transaction-calcel">
               <span class="tag">취소 여부 : </span>
